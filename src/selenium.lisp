@@ -1,12 +1,18 @@
 (in-package :cl-selenium)
 
 (defun (setf url) (url &key (session *session*))
+  "The command causes the user agent to navigate the current top-level browsing context to a new location. 
+See: https://www.w3.org/TR/webdriver1/#dfn-navigate-to."
   (http-post-value (session-path session "/url") `(:url ,url)))
 
 (defun url (&key (session *session*))
+  "Get the current url in session.
+See: https://www.w3.org/TR/webdriver1/#dfn-get-current-url."
   (http-get-value (session-path session "/url")))
 
 (defun back (&key (session *session*))
+  "This command causes the browser to traverse one step backward in the joint session history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.
+See: https://www.w3.org/TR/webdriver1/#dfn-back."
   (http-post-check (session-path session "/back")))
 
 (defclass element ()
@@ -22,6 +28,7 @@
             (element-attribute element "id"))))
 
 (defun handle-find-error (err &key value by)
+  "Signal the correct type of error depending on PROTOCOL-ERROR-STATUS."
   (error
    (case (protocol-error-status err)
      (7 (make-instance 'no-such-element-error :value value :by by))
@@ -29,6 +36,25 @@
      (t err))))
 
 (defun find-element (value &key (by :css-selector) (session *session*))
+  "The Find Element command is used to find an element in the current browsing context that can be used as the web element context for future element-centric commands.
+
+For example, consider this pseudo code which retrieves an element with the #toremove ID and uses this as the argument for a script it injects to remove it from the HTML document:
+
+let body = session.find.css(\"#toremove\");
+session.execute(\"arguments[0].remove()\", [body]);
+
+The BY parameter represents the element location strategy.
+
+It can be one of:
+- :css-selector : Returns element that matches css selector.
+- :link-text : Returns element that matches 'a' link text.
+- :partial-link-text: Returns element that matches 'a' link text partially.
+- :tag-name: Returns element that matches tag name.
+- :xpath: Returns element that matches the XPath expression.
+
+If result is empty, a HANDLE-FIND-ERROR is signaled.
+
+See: https://www.w3.org/TR/webdriver1/#dfn-find-element."
   (handler-case
       (let ((response (http-post (session-path session "/element") `(:value ,value :using ,(by by)))))
         ;; TODO: find/write json -> clos
