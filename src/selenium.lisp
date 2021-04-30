@@ -71,7 +71,17 @@ See: https://www.w3.org/TR/webdriver1/#dfn-find-element."
            collect (make-instance 'element :id id)))
     (protocol-error (err) (handle-find-error err :value value :by by))))
 
+(deftype element-location-strategy ()
+  "An element location strategy is an enumerated attribute deciding what technique should be used to search for elements in the current browsing context.
+See: https://www.w3.org/TR/webdriver1/#dfn-strategy."
+  `(member :id :xpath :link-text
+	       :partial-link-text :name :tag-name
+	   :class-name
+	       :css-selector))
+
 (defun by (type)
+  "An element location strategy is an enumerated attribute deciding what technique should be used to search for elements in the current browsing context.
+See: https://www.w3.org/TR/webdriver1/#dfn-strategy."
   (ecase type
     (:id "id")
     (:xpath "xpath")
