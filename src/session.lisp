@@ -3,9 +3,12 @@
 (defclass session ()
   ((id :initarg :id
        :initform (error "Must supply an id")
-       :reader session-id)))
+       :reader session-id))
+  (:documentation "A Selenium Webdriver session.
 
-(defvar *session* nil)
+The server should maintain one browser per session. Commands sent to a session will be directed to the corresponding browser."))
+
+(defvar *session* nil "The current Selenium WebDriver session.")
 
 (defun make-session (&key
                        (browser-name :chrome) ; TODO: autodetect?
@@ -14,6 +17,7 @@
                        platform-version
                        accept-ssl-certs
                        additional-capabilities)
+  "Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned."
   (let ((response (http-post "/session"
                              `(:session-id nil
                                :desired-capabilities ((browser-name . ,browser-name)
@@ -27,13 +31,15 @@
                    :id (assoc-value response :session-id))))
 
 (defun delete-session (session)
+  "Delete the WebDriver SESSION."
   (http-delete-check (session-path session "")))
 
-;; TODO: make eldoc-friendly
-(defun use-session(session)
+(defun use-session (session)
+  "Make SESSION the current session."
   (setf *session* session))
 
 (defmacro with-session ((&rest capabilities) &body body)
+  "Execute BODY inside a Selenium session."
   (with-gensyms (session)
     `(let (,session)
        (unwind-protect
@@ -45,11 +51,13 @@
            (delete-session ,session))))))
 
 (defun start-interactive-session (&rest capabilities)
+  "Start an interactive session. Use this to interact with Selenium driver from a REPL."
   (when *session*
     (delete-session *session*))
   (setf *session* (apply #'make-session  capabilities)))
 
 (defun stop-interactive-session ()
+  "Stop an interactive session."
   (when *session*
     (delete-session *session*)
     (setf *session* nil)))

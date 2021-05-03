@@ -48,7 +48,12 @@
            :no-such-element-error)
   (:import-from :alexandria
                 :with-gensyms
-                :assoc-value))
+                :assoc-value)
+  (:documentation "This package exports functions for working with Selenium WebDriver.
+
+For documentation see:
+- https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe
+- https://www.w3.org/TR/webdriver1."))
 
 (defpackage cl-selenium-utils
   (:use :cl :cl-selenium)

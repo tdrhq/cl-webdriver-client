@@ -24,7 +24,8 @@
   ()
   (:report (lambda (condition stream)
              (with-slots (value by) condition
-               (format stream "No such element: ~a (by ~a)" value by)))))
+               (format stream "No such element: ~a (by ~a)" value by))))
+  (:documentation "Error signaled when no such element is found."))
 
 (define-condition stale-element-reference (find-error)
   ()

@@ -210,19 +210,39 @@ See: https://www.w3.org/TR/webdriver2/#screen-capture."
   (http-post-check (session-path session "/cookie") `(:cookie ,cookie)))
 
 (defun cookie (&key (session *session*))
+  "Retrieve all cookies visible to the current page.
+
+See: https://www.w3.org/TR/webdriver1/#get-all-cookies.
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie."
   (http-get-value (session-path session "/cookie")))
 
 (defun refresh (&key (session *session*))
+  "Refresh the current page."
   (http-post (session-path session "/refresh")))
 
 (defun switch-to-frame (id &key (session *session*))
+  "Change focus to another frame on the page. If the frame id is null, the server
+should switch to the page's default content.
+
+In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.
+
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe.
+See: https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)."
   (http-post-check (session-path session "/frame")
                    `(:id ,id)))
 
 (defun close-current-window (&key (session *session*))
+  "Close the current window."
   (http-delete (session-path session "/window")))
 
 (defun execute-script (script args &key (session *session*))
+  "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed script is assumed to be synchronous and the result of evaluating the script is returned to the client.
+
+The script argument defines the script to execute in the form of a function body. The value returned by that function will be returned to the client. The function will be invoked with the provided args array and the values may be accessed via the arguments object in the order specified.
+
+Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the script result will be returned to the client as WebElement JSON objects.
+
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute."
   (check-type script string)
   (check-type args list)
   (http-post-value (session-path session "/execute")
