@@ -46,9 +46,11 @@ session.execute(\"arguments[0].remove()\", [body]);
 The BY parameter represents the element location strategy.
 
 It can be one of:
+- :id : Finds element by id.
+- :class-name : Finds element by class name.
 - :css-selector : Returns element that matches css selector.
-- :link-text : Returns element that matches 'a' link text.
-- :partial-link-text: Returns element that matches 'a' link text partially.
+- :link-text : Returns element that matches <a> element text.
+- :partial-link-text: Returns element that matches <a> element text partially.
 - :tag-name: Returns element that matches tag name.
 - :xpath: Returns element that matches the XPath expression.
 
@@ -93,6 +95,8 @@ See: https://www.w3.org/TR/webdriver1/#dfn-strategy."
     (:css-selector "css selector")))
 
 (defun active-element (&key (session *session*))
+  "Return the active element of the current browsing context’s document element. 
+See: https://www.w3.org/TR/webdriver2/#get-active-element."
   (make-instance 'element
                  :id (cdadr (assoc :value (http-post (session-path session "/element/active"))))))
 
@@ -133,6 +137,8 @@ See: https://www.w3.org/TR/webdriver1/#dfn-strategy."
   (http-post-value (session-path session "/log") `(:type ,type)))
 
 (defun screenshot (&key (session *session*))
+  "Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewport’s framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string. 
+See: https://www.w3.org/TR/webdriver2/#screen-capture."
   (http-get-value (session-path session "/screenshot")))
 
 (defclass cookie ()
