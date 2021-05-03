@@ -17,7 +17,10 @@ The server should maintain one browser per session. Commands sent to a session w
                        platform-version
                        accept-ssl-certs
                        additional-capabilities)
-  "Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned."
+  "Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.
+
+See: https://www.w3.org/TR/webdriver1/#new-session.
+See: https://www.w3.org/TR/webdriver1/#capabilities."
   (let ((response (http-post "/session"
                              `(:session-id nil
                                :desired-capabilities ((browser-name . ,browser-name)
