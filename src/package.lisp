@@ -15,7 +15,8 @@
            :url
            :back
            :refresh
-
+	   :page-title
+	   
            :find-element
            :find-elements
            :active-element

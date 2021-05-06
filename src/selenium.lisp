@@ -15,6 +15,11 @@ See: https://www.w3.org/TR/webdriver1/#dfn-get-current-url."
 See: https://www.w3.org/TR/webdriver1/#dfn-back."
   (http-post-check (session-path session "/back")))
 
+(defun page-title (&key (session *session*))
+  "This command returns the document title of the current top-level browsing context, equivalent to calling document.title. 
+See: https://www.w3.org/TR/webdriver2/#get-title."
+  (http-get-value (session-path session "/title")))
+
 (defclass element ()
   ((id :initarg :id
        :initform (error "Must supply :id")
