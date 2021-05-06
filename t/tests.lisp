@@ -55,5 +55,29 @@
       (let ((result (find-element "result" :by :id)))
 	(ok (search "press:" (element-text result) :test 'string=))))))
 
+
+(subtest "Writable text input should clear"
+  (with-test-session ()
+    (setf (url) (test-file-url "readOnlyPage.html"))
+    (let ((element (find-element "writableTextInput" :by :id)))
+      (element-clear element)
+      (ok (string= (element-attribute element "value") "")))))
+
+(subtest "Text input should not clear when disabled"
+  (with-test-session ()
+    (setf (url) (test-file-url "readOnlyPage.html"))
+    (let ((element (find-element "textInputnotenabled" :by :id)))
+      ;; assert element is enabled here
+      (is-error (element-clear element) 'error))))
+
+;; Click
+
+(subtest "Can click on a link that overflows and follows it"
+  (with-test-session ()
+    (setf (url) (test-file-url "clicks.html"))
+    (element-click (find-element "overflowLink" :by :id))
+    (sleep 2)
+    (ok (string= (page-title) "XHTML Test Page"))))
+
 (finalize)
 
