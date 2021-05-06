@@ -18,10 +18,14 @@
   `(with-session (:additional-capabilities *headless*)
      ,@body))
 
+(plan nil)
+
 (subtest "Basic test"
   (with-test-session ()
     (setf (url) (test-file-url "xhtmlTest.html"))
     (ok (find-element "[name='someForm']"))))
+
+;; Visibility tests
 
 (subtest "Visibility test 1"
   (with-test-session ()
@@ -39,5 +43,17 @@
 	  (hidden-link (find-element "hiddenlink" :by :id)))
       (ok (not (element-displayed child-div)))
       (ok (not (element-displayed hidden-link)))
-    )))
+      )))
+
+;; Typing
+
+(subtest "Should fire key press events"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (let ((key-reporter (find-element "keyReporter" :by :id)))
+      (element-send-keys key-reporter "a")
+      (let ((result (find-element "result" :by :id)))
+	(ok (search "press:" (element-text result) :test 'string=))))))
+
+(finalize)
 
