@@ -1,2 +1,4 @@
 *.fasl
 *~
+/t/web/
+/t/testpages.tar.gz
