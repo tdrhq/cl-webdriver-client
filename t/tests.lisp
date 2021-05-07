@@ -1,14 +1,18 @@
 (in-package :cl-selenium-test)
 
+(defparameter +test-pages-filepath+ (asdf:system-relative-pathname :cl-selenium-test "t/testpages.tar.gz"))
+
 (defun download-test-pages ()
+  (format t "Downloading test pages...~%")
   (uiop:run-program (list "curl" "-L" "https://github.com/copyleft/cl-selenium-webdriver/files/6430883/testpages.tar.gz"
 		    "--output"
-		    (princ-to-string (asdf:system-relative-pathname :cl-selenium-test "t/testpages.tar.gz")))))
+		    (princ-to-string +test-pages-filepath+))))
 
 (defun uncompress-test-pages ()
+  (format t "Uncompressing test pages...~%")
   (uiop:run-program
    (format nil "tar xzf ~a -C ~a"
-	   (asdf:system-relative-pathname :cl-selenium-test "t/testpages.tar.gz")
+	   +test-pages-filepath+
 	   (asdf:system-relative-pathname :cl-selenium-test "t/"))))  
 
 (defun test-file-url (name)
@@ -17,6 +21,11 @@
 (defmacro with-test-session (&body body)
   `(with-session (:additional-capabilities *headless*)
      ,@body))
+
+(unless (probe-file (asdf:system-relative-pathname :cl-selenium-test (format nil "t/web/")))
+  (unless (probe-file +test-pages-filepath+)
+    (download-test-pages))
+  (uncompress-test-pages))
 
 (plan nil)
 
