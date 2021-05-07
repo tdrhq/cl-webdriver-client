@@ -29,6 +29,8 @@
 
 (plan nil)
 
+;; This tests were taken from https://github.com/SeleniumHQ/selenium/blob/trunk/py/test/selenium/webdriver/common/
+
 (subtest "Basic test"
   (with-test-session ()
     (setf (url) (test-file-url "xhtmlTest.html"))
@@ -88,5 +90,24 @@
     (sleep 2)
     (ok (string= (page-title) "XHTML Test Page"))))
 
-(finalize)
+;; Form handling
 
+(subtest "Should click on submit input elements"
+  (with-test-session ()
+    (setf (url) (test-file-url "formPage.html"))
+    (element-click (find-element "submitButton" :by :id))
+    (sleep 3)
+    (ok (string= (page-title) "We Arrive Here"))))
+
+
+(subtest "Find elements test"
+  (with-test-session ()
+    (setf (url) (test-file-url "formPage.html"))
+    ;; find-elements does not error
+    (ok (null (find-elements "foo")))
+    ;; find-element errors
+    (is-error (find-element "foo") 'error)
+    (ok (find-element "body"))
+    ))
+
+(finalize)
