@@ -38,7 +38,7 @@
 
 ;; Visibility tests
 
-(subtest "Visibility test 1"
+(subtest "Should allow the user to tell if an element is displayed or not"
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
     (ok (element-displayed (find-element "displayed" :by :id)))
@@ -47,7 +47,7 @@
     (ok (not (element-displayed (find-element "hidden" :by :id))))
     ))
 
-(subtest "Visibility test 2"
+(subtest "Visibility should take into account parent visibility"
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
     (let ((child-div (find-element "hiddenchild" :by :id))
