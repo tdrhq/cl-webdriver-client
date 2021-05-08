@@ -53,7 +53,7 @@
   (:documentation "This package exports functions for working with Selenium WebDriver.
 
 For documentation see:
-- https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe
+- https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol
 - https://www.w3.org/TR/webdriver1."))
 
 (defpackage cl-selenium-utils
@@ -74,4 +74,5 @@ For documentation see:
            :click)
   (:import-from :alexandria
                 :assoc-value
-                :rcurry))
+                :rcurry)
+  (:documentation "Package with the purpose of reducing boilerplate."))

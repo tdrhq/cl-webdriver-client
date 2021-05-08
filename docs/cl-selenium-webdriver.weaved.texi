@@ -203,12 +203,15 @@ sh
 @node API
 @chapter API
 
+@node CL-SELENIUM package
+@section CL-SELENIUM package
+
 @deftp PACKAGE CL-SELENIUM
 
 This package exports functions for working with Selenium WebDriver.
 
 For documentation see:
-- https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe
+- https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol
 - https://www.w3.org/TR/webdriver1.
 
 @end deftp
@@ -417,7 +420,7 @@ The approach recommended to implementors to ascertain an @var{element}'s visibil
 @*
 The @var{element} displayed algorithm is a boolean state where true signifies that the @var{element} is displayed and false signifies that the @var{element} is not displayed. To compute the state on @var{element}, invoke the Call(bot.dom.isShown, null, @var{element}). If doing so does not produce an error, return the return value from this function call. Otherwise return an error with error code unknown error.@*
 @*
-This function is typically exposed to @clref{COMMON-LISP, GET, function} requests with a URI Template of /session/session id/element/element id/displayed.@*
+This function is typically exposed to @clref{COMMON-LISP, GET, function} requests with a URI Template of /session/@{session id@}/element/@{element id@}/displayed.@*
 @*
 See: https://www.w3.org/TR/webdriver1/#element-displayedness.
 @endcldefun
@@ -463,6 +466,94 @@ See: https://www.w3.org/TR/webdriver1/#dfn-back.
 
 Error signaled when no such element is found.
 @endcldefclass
+
+
+
+@node CL-SELENIUM-UTILS package
+@section CL-SELENIUM-UTILS package
+
+@deftp PACKAGE CL-SELENIUM-UTILS
+
+Package with the purpose of reducing boilerplate.
+
+@end deftp
+
+@heading External definitions
+
+@heading Variables
+@cldefvar {CL-SELENIUM-UTILS, *TIMEOUT*}
+
+Default timeout value to use in selenium-utils functions.
+@endcldefvar
+
+@cldefvar {CL-SELENIUM-UTILS, *DEFAULT-ELEMENT-FUNC*}
+
+Function used to get the 'default element' by selenium-utils functions.@*
+It is @clref{CL-SELENIUM, ACTIVE-ELEMENT, function} function by default.
+@endcldefvar
+
+@heading Functions
+@cldefun {CL-SELENIUM-UTILS, ID, (&optional selector)}
+
+Get active element id.
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, GET-COOKIE, (cookie name)}
+
+Get value of @var{COOKIE} at @var{NAME}.
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, FIND-ELEM, (selector &key (by :css-selector))}
+
+Find element @var{by} @var{SELECTOR}. Returns NIL if the element is not found.
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, WAIT-FOR, (selector &key (timeout *timeout*))}
+
+Wait for an element that matches @var{SELECTOR} to appear on the screen.@*
+@var{TIMEOUT} indicates how much time to wait (default is @var{*TIMEOUT*}).
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, CLASSNAME, (&optional selector)}
+
+Get active element classname.
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, TEXT, (&optional selector)}
+
+Get active element's text.
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, SEND-KEY, (key &optional selector)}
+
+Send a @var{key} to active element.
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, CLASSLIST, (&optional selector)}
+
+Get active element class list.
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, ATTR, (name &optional selector)}
+
+Get acttive element attribute.
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, SEND-KEYS, (keys &optional selector)}
+
+Send @var{keys} to active element.
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, ELEM, (&optional selector)}
+
+If @var{SELECTOR} is given, wait for an element that matches the @var{selector} to appear.@*
+Otherwise, call @clref{CL-SELENIUM-UTILS, *DEFAULT-ELEMENT-FUNC*, variable} (the active element is returned by default).
+@endcldefun
+
+@cldefun {CL-SELENIUM-UTILS, CLICK, (&optional selector)}
+
+Click on active element.
+@endcldefun
 
 
 

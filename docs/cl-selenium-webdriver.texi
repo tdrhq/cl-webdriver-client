@@ -203,7 +203,15 @@ sh
 @node API
 @chapter API
 
+@node CL-SELENIUM package
+@section CL-SELENIUM package
+
 (@clpackage :cl-selenium :include-external-definitions t)
+
+@node CL-SELENIUM-UTILS package
+@section CL-SELENIUM-UTILS package
+
+(@clpackage :cl-selenium-utils :include-external-definitions t)
 
 @node Index
 @chapter Index
