@@ -208,11 +208,11 @@ sh
 
 @deftp PACKAGE CL-SELENIUM
 
-This package exports functions for working with Selenium WebDriver.
-
-For documentation see:
-- https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol
-- https://www.w3.org/TR/webdriver1.
+This package exports functions for working with Selenium WebDriver.@*
+@*
+For documentation see:@*
+- @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol}@*
+- @url{https://www.w3.org/TR/webdriver1.}
 
 @end deftp
 
@@ -228,21 +228,21 @@ Close the current window.
 
 Retrieve all cookies visible to the current page.@*
 @*
-See: https://www.w3.org/TR/webdriver1/#get-all-cookies.@*
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie.
+See: @url{https://www.w3.org/TR/webdriver1/#get-all-cookies.}@*
+See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, URL, (&key (session *session*))}
 
 Get the current url in @var{session}.@*
-See: https://www.w3.org/TR/webdriver1/#dfn-get-current-url.
+See: @url{https://www.w3.org/TR/webdriver1/#dfn-get-current-url.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, ELEMENT-SEND-KEYS, (element keys &key (session *session*))}
 
 The @var{Element} Send @var{Keys} command scrolls into view the form control @var{element} and then sends the provided @var{keys} to the @var{element}. In case the @var{element} is not keyboard-interactable, an @var{element} not interactable error is returned.@*
 @*
-See: https://www.w3.org/TR/webdriver1/#element-send-keys.
+See: @url{https://www.w3.org/TR/webdriver1/#element-send-keys.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, ELEMENT-CLICK, (element &key (session *session*))}
@@ -251,7 +251,7 @@ The @var{Element} Click command scrolls into view the @var{element} if it is not
 @*
 If the @var{element}’s center point is obscured by another @var{element}, an @var{element} click intercepted error is returned. If the @var{element} is outside the viewport, an @var{element} not interactable error is returned.@*
 @*
-See: https://www.w3.org/TR/webdriver1/#element-click.
+See: @url{https://www.w3.org/TR/webdriver1/#element-click.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, LOG-TYPES, (&key (session *session*))}
@@ -264,21 +264,21 @@ Return the types of logs supported by the WebDriver.@*
 - performance: Logs relating to the performance characteristics of the page under test (e.g. resource load timings).@*
 - server: Logs from within the selenium server.@*
 @*
-See: https://github.com/SeleniumHQ/selenium/wiki/Logging.
+See: @url{https://github.com/SeleniumHQ/selenium/wiki/Logging.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, FIND-ELEMENTS, (value &key (by :css-selector) (session *session*))}
 
 Find elements that match @var{VALUE} using location strategy in @var{BY}.@*
 See @clref{CL-SELENIUM, FIND-ELEMENT, function}.@*
-See https://www.w3.org/TR/webdriver1/#find-elements.
+See @url{https://www.w3.org/TR/webdriver1/#find-elements.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, MOUSE-MOVE-TO, (x y &key element (session *session*))}
 
 Move the mouse by an offset of the specificed @var{element}. If no @var{element} is specified, the move is relative to the current mouse cursor. If an @var{element} is provided but no offset, the mouse will be moved to the center of the @var{element}. If the @var{element} is not visible, it will be scrolled into view.@*
 @*
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto
+See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto}
 @endcldefun
 
 @cldefun {CL-SELENIUM, ELEMENT-ATTRIBUTE, (element name &key (session *session*))}
@@ -293,8 +293,8 @@ should switch to the page's default content.@*
 @*
 In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.@*
 @*
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe.@*
-See: https://en.wikipedia.org/wiki/Frame_(World_Wide_Web).
+See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe.}@*
+See: @url{https://en.wikipedia.org/wiki/Frame_(World_Wide_Web).}
 @endcldefun
 
 @cldefun {CL-SELENIUM, EXECUTE-SCRIPT, (script args &key (session *session*))}
@@ -305,7 +305,7 @@ The @var{script} argument defines the @var{script} to execute in the form of a f
 @*
 Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the @var{script} result will be returned to the client as WebElement JSON objects.@*
 @*
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute.
+See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, START-INTERACTIVE-SESSION, (&rest capabilities)}
@@ -316,7 +316,7 @@ Start an interactive session. Use this to interact with Selenium driver from a R
 @cldefun {CL-SELENIUM, SCREENSHOT, (&key (session *session*))}
 
 Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewport’s framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.@*
-See: https://www.w3.org/TR/webdriver2/#screen-capture.
+See: @url{https://www.w3.org/TR/webdriver2/#screen-capture.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, FIND-ELEMENT, (value &key (by :css-selector) (session *session*))}
@@ -341,14 +341,14 @@ It can be one of:@*
 @*
 If result is empty, a @clref{CL-SELENIUM, HANDLE-FIND-ERROR, function} is signaled.@*
 @*
-See: https://www.w3.org/TR/webdriver1/#dfn-find-element.
+See: @url{https://www.w3.org/TR/webdriver1/#dfn-find-element.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, MOUSE-CLICK, (button &key (session *session*))}
 
 Click any mouse @var{button} (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling @var{button} up (or any out-of-order interactions sequence) will yield undefined behaviour).@*
 @*
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick
+See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick}
 @endcldefun
 
 @cldefun {CL-SELENIUM, USE-SESSION, (session)}
@@ -359,7 +359,7 @@ Make @var{SESSION} the current @var{session}.
 @cldefun {CL-SELENIUM, PAGE-TITLE, (&key (session *session*))}
 
 This command returns the document title of the current top-level browsing context, equivalent to calling document.title. @*
-See: https://www.w3.org/TR/webdriver2/#get-title.
+See: @url{https://www.w3.org/TR/webdriver2/#get-title.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, LOGS, (type &key (session *session*))}
@@ -377,7 +377,7 @@ Return the @var{ELEMENT}'s location.
 
 The Get @var{Element} Text command intends to return an @var{element}’s text “as rendered”. An @var{element}’s rendered text is also used for locating a elements by their link text and partial link text.@*
 @*
-See: https://www.w3.org/TR/webdriver1/#get-element-text.
+See: @url{https://www.w3.org/TR/webdriver1/#get-element-text.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, ACTIVE-ELEMENT, (&key (session *session*))}
@@ -386,8 +386,8 @@ Return the active element of the current browsing context’s document.@*
 The active element is the Element within the DOM that currently has focus.@*
 If there's no active element, an error is signaled.@*
 @*
-See: https://www.w3.org/TR/webdriver2/#get-active-element.@*
-See: https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.
+See: @url{https://www.w3.org/TR/webdriver2/#get-active-element.}@*
+See: @url{https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, MAKE-COOKIE, (name value &key path domain secure expiry)}
@@ -414,7 +414,7 @@ Refresh the current page.
 
 Returns  if @var{ELEMENT} is visible.@*
 @*
-See: https://www.w3.org/TR/webdriver1/#element-displayedness.
+See: @url{https://www.w3.org/TR/webdriver1/#element-displayedness.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, DELETE-SESSION, (session)}
@@ -426,8 +426,8 @@ Delete the WebDriver @var{SESSION}.
 
 Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.@*
 @*
-See: https://www.w3.org/TR/webdriver1/#new-session.@*
-See: https://www.w3.org/TR/webdriver1/#capabilities.
+See: @url{https://www.w3.org/TR/webdriver1/#new-session.}@*
+See: @url{https://www.w3.org/TR/webdriver1/#capabilities.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, KEY, (key)}
@@ -439,13 +439,13 @@ See: https://www.w3.org/TR/webdriver1/#capabilities.
 
 Clear the contents of @var{ELEMENT} (for example, a form field @var{element}).@*
 @*
-See: https://www.w3.org/TR/webdriver1/#dfn-element-clear.
+See: @url{https://www.w3.org/TR/webdriver1/#dfn-element-clear.}
 @endcldefun
 
 @cldefun {CL-SELENIUM, BACK, (&key (session *session*))}
 
 This command causes the browser to traverse one step backward in the joint @var{session} history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.@*
-See: https://www.w3.org/TR/webdriver1/#dfn-back.
+See: @url{https://www.w3.org/TR/webdriver1/#dfn-back.}
 @endcldefun
 
 @heading Classes

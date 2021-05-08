@@ -216,9 +216,9 @@ File: cl-selenium-webdriver.info,  Node: CL-SELENIUM package,  Next: CL-SELENIUM
 
      This package exports functions for working with Selenium WebDriver.
 
-     For documentation see: -
-     https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol -
-     https://www.w3.org/TR/webdriver1.
+     For documentation see:
+     - <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol>
+     - <https://www.w3.org/TR/webdriver1.>
 
 External definitions
 ====================
@@ -234,14 +234,14 @@ Functions
 
      Retrieve all cookies visible to the current page.
 
-     See: https://www.w3.org/TR/webdriver1/#get-all-cookies.
+     See: <https://www.w3.org/TR/webdriver1/#get-all-cookies.>
      See:
-     https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie.
+     <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie.>
 
  -- CL-SELENIUM: URL (&key (session *session*))
 
      Get the current url in SESSION.
-     See: https://www.w3.org/TR/webdriver1/#dfn-get-current-url.
+     See: <https://www.w3.org/TR/webdriver1/#dfn-get-current-url.>
 
  -- CL-SELENIUM: ELEMENT-SEND-KEYS (element keys &key (session
           *session*))
@@ -251,7 +251,7 @@ Functions
      the ELEMENT is not keyboard-interactable, an ELEMENT not
      interactable error is returned.
 
-     See: https://www.w3.org/TR/webdriver1/#element-send-keys.
+     See: <https://www.w3.org/TR/webdriver1/#element-send-keys.>
 
  -- CL-SELENIUM: ELEMENT-CLICK (element &key (session *session*))
 
@@ -264,7 +264,7 @@ Functions
      outside the viewport, an ELEMENT not interactable error is
      returned.
 
-     See: https://www.w3.org/TR/webdriver1/#element-click.
+     See: <https://www.w3.org/TR/webdriver1/#element-click.>
 
  -- CL-SELENIUM: LOG-TYPES (&key (session *session*))
 
@@ -279,14 +279,14 @@ Functions
      the page under test (e.g.  resource load timings).
      - server: Logs from within the selenium server.
 
-     See: https://github.com/SeleniumHQ/selenium/wiki/Logging.
+     See: <https://github.com/SeleniumHQ/selenium/wiki/Logging.>
 
  -- CL-SELENIUM: FIND-ELEMENTS (value &key (by :css-selector) (session
           *session*))
 
      Find elements that match VALUE using location strategy in BY.
      See *Note FIND-ELEMENT: CL-SELENIUM:FIND-ELEMENT function.
-     See https://www.w3.org/TR/webdriver1/#find-elements.
+     See <https://www.w3.org/TR/webdriver1/#find-elements.>
 
  -- CL-SELENIUM: MOUSE-MOVE-TO (x y &key element (session *session*))
 
@@ -297,7 +297,7 @@ Functions
      it will be scrolled into view.
 
      See:
-     https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto
+     <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto>
 
  -- CL-SELENIUM: ELEMENT-ATTRIBUTE (element name &key (session
           *session*))
@@ -315,8 +315,8 @@ Functions
      with the ability to load content independently.
 
      See:
-     https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe.
-     See: https://en.wikipedia.org/wiki/Frame_(World_Wide_Web).
+     <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe.>
+     See: <https://en.wikipedia.org/wiki/Frame_(World_Wide_Web).>
 
  -- CL-SELENIUM: EXECUTE-SCRIPT (script args &key (session *session*))
 
@@ -337,7 +337,7 @@ Functions
      result will be returned to the client as WebElement JSON objects.
 
      See:
-     https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute.
+     <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute.>
 
  -- CL-SELENIUM: START-INTERACTIVE-SESSION (&rest capabilities)
 
@@ -350,7 +350,7 @@ Functions
      diagnostic information.  They work by dumping a snapshot of the
      initial viewport’s framebuffer as a lossless PNG image.  It is
      returned to the local end as a Base64 encoded string.
-     See: https://www.w3.org/TR/webdriver2/#screen-capture.
+     See: <https://www.w3.org/TR/webdriver2/#screen-capture.>
 
  -- CL-SELENIUM: FIND-ELEMENT (value &key (by :css-selector) (session
           *session*))
@@ -382,7 +382,7 @@ Functions
      If result is empty, a *Note HANDLE-FIND-ERROR:
      CL-SELENIUM:HANDLE-FIND-ERROR function. is signaled.
 
-     See: https://www.w3.org/TR/webdriver1/#dfn-find-element.
+     See: <https://www.w3.org/TR/webdriver1/#dfn-find-element.>
 
  -- CL-SELENIUM: MOUSE-CLICK (button &key (session *session*))
 
@@ -392,7 +392,7 @@ Functions
      sequence) will yield undefined behaviour).
 
      See:
-     https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick
+     <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick>
 
  -- CL-SELENIUM: USE-SESSION (session)
 
@@ -402,7 +402,7 @@ Functions
 
      This command returns the document title of the current top-level
      browsing context, equivalent to calling document.title.
-     See: https://www.w3.org/TR/webdriver2/#get-title.
+     See: <https://www.w3.org/TR/webdriver2/#get-title.>
 
  -- CL-SELENIUM: LOGS (type &key (session *session*))
 
@@ -419,7 +419,7 @@ Functions
      “as rendered”.  An ELEMENT’s rendered text is also used for
      locating a elements by their link text and partial link text.
 
-     See: https://www.w3.org/TR/webdriver1/#get-element-text.
+     See: <https://www.w3.org/TR/webdriver1/#get-element-text.>
 
  -- CL-SELENIUM: ACTIVE-ELEMENT (&key (session *session*))
 
@@ -429,9 +429,9 @@ Functions
      focus.
      If there's no active element, an error is signaled.
 
-     See: https://www.w3.org/TR/webdriver2/#get-active-element.
+     See: <https://www.w3.org/TR/webdriver2/#get-active-element.>
      See:
-     https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.
+     <https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.>
 
  -- CL-SELENIUM: MAKE-COOKIE (name value &key path domain secure expiry)
 
@@ -451,7 +451,7 @@ Functions
 
      Returns if ELEMENT is visible.
 
-     See: https://www.w3.org/TR/webdriver1/#element-displayedness.
+     See: <https://www.w3.org/TR/webdriver1/#element-displayedness.>
 
  -- CL-SELENIUM: DELETE-SESSION (session)
 
@@ -464,8 +464,8 @@ Functions
      Creates a new WebDriver session with the endpoint node.  If the
      creation fails, a session not created error is returned.
 
-     See: https://www.w3.org/TR/webdriver1/#new-session.
-     See: https://www.w3.org/TR/webdriver1/#capabilities.
+     See: <https://www.w3.org/TR/webdriver1/#new-session.>
+     See: <https://www.w3.org/TR/webdriver1/#capabilities.>
 
  -- CL-SELENIUM: KEY (key)
 
@@ -473,7 +473,7 @@ Functions
 
      Clear the contents of ELEMENT (for example, a form field ELEMENT).
 
-     See: https://www.w3.org/TR/webdriver1/#dfn-element-clear.
+     See: <https://www.w3.org/TR/webdriver1/#dfn-element-clear.>
 
  -- CL-SELENIUM: BACK (&key (session *session*))
 
@@ -481,7 +481,7 @@ Functions
      the joint SESSION history of the current top-level browsing
      context.  This is equivalent to pressing the back button in the
      browser chrome or invoking window.history.back.
-     See: https://www.w3.org/TR/webdriver1/#dfn-back.
+     See: <https://www.w3.org/TR/webdriver1/#dfn-back.>
 
 Classes
 =======
@@ -727,54 +727,54 @@ Node: Waiting for the reaction4120
 Node: Running tests4639
 Node: API4944
 Node: CL-SELENIUM package5107
-Ref: CL-SELENIUM:CLOSE-CURRENT-WINDOW function5566
-Ref: CL-SELENIUM:COOKIE function5664
-Ref: CL-SELENIUM:URL function5934
-Ref: CL-SELENIUM:ELEMENT-SEND-KEYS function6086
-Ref: CL-SELENIUM:ELEMENT-CLICK function6477
-Ref: CL-SELENIUM:LOG-TYPES function6977
-Ref: CL-SELENIUM:FIND-ELEMENTS function7599
-Ref: CL-SELENIUM:MOUSE-MOVE-TO function7883
-Ref: CL-SELENIUM:ELEMENT-ATTRIBUTE function8373
-Ref: CL-SELENIUM:SWITCH-TO-FRAME function8508
-Ref: CL-SELENIUM:EXECUTE-SCRIPT function9077
-Ref: CL-SELENIUM:START-INTERACTIVE-SESSION function10101
-Ref: CL-SELENIUM:SCREENSHOT function10263
-Ref: CL-SELENIUM:FIND-ELEMENT function10643
-Ref: CL-SELENIUM:MOUSE-CLICK function11943
-Ref: CL-SELENIUM:USE-SESSION function12366
-Ref: CL-SELENIUM:PAGE-TITLE function12446
-Ref: CL-SELENIUM:LOGS function12689
-Ref: CL-SELENIUM:ELEMENT-LOCATION function12847
-Ref: CL-SELENIUM:ELEMENT-TEXT function12954
-Ref: CL-SELENIUM:ACTIVE-ELEMENT function13294
-Ref: CL-SELENIUM:MAKE-COOKIE function13732
-Ref: CL-SELENIUM:STOP-INTERACTIVE-SESSION function13806
-Ref: CL-SELENIUM:ELEMENT-TAGNAME function13888
-Ref: CL-SELENIUM:REFRESH function13994
-Ref: CL-SELENIUM:ELEMENT-DISPLAYED function14079
-Ref: CL-SELENIUM:DELETE-SESSION function14255
-Ref: CL-SELENIUM:MAKE-SESSION function14334
-Ref: CL-SELENIUM:KEY function14751
-Ref: CL-SELENIUM:ELEMENT-CLEAR function14779
-Ref: CL-SELENIUM:BACK function14983
-Ref: CL-SELENIUM:COOKIE class15362
-Ref: CL-SELENIUM:NO-SUCH-ELEMENT-ERROR class15387
-Node: CL-SELENIUM-UTILS package15479
-Ref: CL-SELENIUM-UTILS:*TIMEOUT* variable15800
-Ref: CL-SELENIUM-UTILS:*DEFAULT-ELEMENT-FUNC* variable15898
-Ref: CL-SELENIUM-UTILS:ID function16145
-Ref: CL-SELENIUM-UTILS:GET-COOKIE function16222
-Ref: CL-SELENIUM-UTILS:FIND-ELEM function16306
-Ref: CL-SELENIUM-UTILS:WAIT-FOR function16449
-Ref: CL-SELENIUM-UTILS:CLASSNAME function16660
-Ref: CL-SELENIUM-UTILS:TEXT function16751
-Ref: CL-SELENIUM-UTILS:SEND-KEY function16834
-Ref: CL-SELENIUM-UTILS:CLASSLIST function16928
-Ref: CL-SELENIUM-UTILS:ATTR function17020
-Ref: CL-SELENIUM-UTILS:SEND-KEYS function17112
-Ref: CL-SELENIUM-UTILS:ELEM function17207
-Ref: CL-SELENIUM-UTILS:CLICK function17504
-Node: Index17586
+Ref: CL-SELENIUM:CLOSE-CURRENT-WINDOW function5570
+Ref: CL-SELENIUM:COOKIE function5668
+Ref: CL-SELENIUM:URL function5942
+Ref: CL-SELENIUM:ELEMENT-SEND-KEYS function6096
+Ref: CL-SELENIUM:ELEMENT-CLICK function6489
+Ref: CL-SELENIUM:LOG-TYPES function6991
+Ref: CL-SELENIUM:FIND-ELEMENTS function7615
+Ref: CL-SELENIUM:MOUSE-MOVE-TO function7901
+Ref: CL-SELENIUM:ELEMENT-ATTRIBUTE function8393
+Ref: CL-SELENIUM:SWITCH-TO-FRAME function8528
+Ref: CL-SELENIUM:EXECUTE-SCRIPT function9101
+Ref: CL-SELENIUM:START-INTERACTIVE-SESSION function10127
+Ref: CL-SELENIUM:SCREENSHOT function10289
+Ref: CL-SELENIUM:FIND-ELEMENT function10671
+Ref: CL-SELENIUM:MOUSE-CLICK function11973
+Ref: CL-SELENIUM:USE-SESSION function12398
+Ref: CL-SELENIUM:PAGE-TITLE function12478
+Ref: CL-SELENIUM:LOGS function12723
+Ref: CL-SELENIUM:ELEMENT-LOCATION function12881
+Ref: CL-SELENIUM:ELEMENT-TEXT function12988
+Ref: CL-SELENIUM:ACTIVE-ELEMENT function13330
+Ref: CL-SELENIUM:MAKE-COOKIE function13772
+Ref: CL-SELENIUM:STOP-INTERACTIVE-SESSION function13846
+Ref: CL-SELENIUM:ELEMENT-TAGNAME function13928
+Ref: CL-SELENIUM:REFRESH function14034
+Ref: CL-SELENIUM:ELEMENT-DISPLAYED function14119
+Ref: CL-SELENIUM:DELETE-SESSION function14297
+Ref: CL-SELENIUM:MAKE-SESSION function14376
+Ref: CL-SELENIUM:KEY function14797
+Ref: CL-SELENIUM:ELEMENT-CLEAR function14825
+Ref: CL-SELENIUM:BACK function15031
+Ref: CL-SELENIUM:COOKIE class15412
+Ref: CL-SELENIUM:NO-SUCH-ELEMENT-ERROR class15437
+Node: CL-SELENIUM-UTILS package15529
+Ref: CL-SELENIUM-UTILS:*TIMEOUT* variable15850
+Ref: CL-SELENIUM-UTILS:*DEFAULT-ELEMENT-FUNC* variable15948
+Ref: CL-SELENIUM-UTILS:ID function16195
+Ref: CL-SELENIUM-UTILS:GET-COOKIE function16272
+Ref: CL-SELENIUM-UTILS:FIND-ELEM function16356
+Ref: CL-SELENIUM-UTILS:WAIT-FOR function16499
+Ref: CL-SELENIUM-UTILS:CLASSNAME function16710
+Ref: CL-SELENIUM-UTILS:TEXT function16801
+Ref: CL-SELENIUM-UTILS:SEND-KEY function16884
+Ref: CL-SELENIUM-UTILS:CLASSLIST function16978
+Ref: CL-SELENIUM-UTILS:ATTR function17070
+Ref: CL-SELENIUM-UTILS:SEND-KEYS function17162
+Ref: CL-SELENIUM-UTILS:ELEM function17257
+Ref: CL-SELENIUM-UTILS:CLICK function17554
+Node: Index17636
 
 End Tag Table
