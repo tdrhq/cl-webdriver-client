@@ -273,7 +273,9 @@ See https://www.w3.org/TR/webdriver1/#find-elements.
 
 @cldefun {CL-SELENIUM, MOUSE-MOVE-TO, (x y &key element (session *session*))}
 
-
+Move the mouse by an offset of the specificed @var{element}. If no @var{element} is specified, the move is relative to the current mouse cursor. If an @var{element} is provided but no offset, the mouse will be moved to the center of the @var{element}. If the @var{element} is not visible, it will be scrolled into view.@*
+@*
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto
 @endcldefun
 
 @cldefun {CL-SELENIUM, ELEMENT-ATTRIBUTE, (element name &key (session *session*))}
@@ -341,7 +343,9 @@ See: https://www.w3.org/TR/webdriver1/#dfn-find-element.
 
 @cldefun {CL-SELENIUM, MOUSE-CLICK, (button &key (session *session*))}
 
-
+Click any mouse @var{button} (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling @var{button} up (or any out-of-order interactions sequence) will yield undefined behaviour).@*
+@*
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick
 @endcldefun
 
 @cldefun {CL-SELENIUM, USE-SESSION, (session)}

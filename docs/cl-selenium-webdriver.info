@@ -279,6 +279,15 @@ Functions
 
  -- CL-SELENIUM: MOUSE-MOVE-TO (x y &key element (session *session*))
 
+     Move the mouse by an offset of the specificed ELEMENT.  If no
+     ELEMENT is specified, the move is relative to the current mouse
+     cursor.  If an ELEMENT is provided but no offset, the mouse will be
+     moved to the center of the ELEMENT.  If the ELEMENT is not visible,
+     it will be scrolled into view.
+
+     See:
+     https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto
+
  -- CL-SELENIUM: ELEMENT-ATTRIBUTE (element name &key (session
           *session*))
 
@@ -365,6 +374,14 @@ Functions
      See: https://www.w3.org/TR/webdriver1/#dfn-find-element.
 
  -- CL-SELENIUM: MOUSE-CLICK (button &key (session *session*))
+
+     Click any mouse BUTTON (at the coordinates set by the last moveto
+     command).  Note that calling this command after calling buttondown
+     and before calling BUTTON up (or any out-of-order interactions
+     sequence) will yield undefined behaviour).
+
+     See:
+     https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick
 
  -- CL-SELENIUM: USE-SESSION (session)
 
@@ -507,68 +524,68 @@ File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
  [index ]
 * Menu:
 
-* ACTIVE-ELEMENT:                        API.                 (line 198)
-* BACK:                                  API.                 (line 280)
-* CL-SELENIUM:ACTIVE-ELEMENT:            API.                 (line 198)
-* CL-SELENIUM:BACK:                      API.                 (line 280)
+* ACTIVE-ELEMENT:                        API.                 (line 215)
+* BACK:                                  API.                 (line 297)
+* CL-SELENIUM:ACTIVE-ELEMENT:            API.                 (line 215)
+* CL-SELENIUM:BACK:                      API.                 (line 297)
 * CL-SELENIUM:CLOSE-CURRENT-WINDOW:      API.                 (line  20)
 * CL-SELENIUM:COOKIE:                    API.                 (line  24)
-* CL-SELENIUM:DELETE-SESSION:            API.                 (line 258)
-* CL-SELENIUM:ELEMENT-ATTRIBUTE:         API.                 (line  84)
-* CL-SELENIUM:ELEMENT-CLEAR:             API.                 (line 274)
+* CL-SELENIUM:DELETE-SESSION:            API.                 (line 275)
+* CL-SELENIUM:ELEMENT-ATTRIBUTE:         API.                 (line  93)
+* CL-SELENIUM:ELEMENT-CLEAR:             API.                 (line 291)
 * CL-SELENIUM:ELEMENT-CLICK:             API.                 (line  47)
-* CL-SELENIUM:ELEMENT-DISPLAYED:         API.                 (line 224)
-* CL-SELENIUM:ELEMENT-LOCATION:          API.                 (line 186)
+* CL-SELENIUM:ELEMENT-DISPLAYED:         API.                 (line 241)
+* CL-SELENIUM:ELEMENT-LOCATION:          API.                 (line 203)
 * CL-SELENIUM:ELEMENT-SEND-KEYS:         API.                 (line  37)
-* CL-SELENIUM:ELEMENT-TAGNAME:           API.                 (line 216)
-* CL-SELENIUM:ELEMENT-TEXT:              API.                 (line 190)
-* CL-SELENIUM:EXECUTE-SCRIPT:            API.                 (line 103)
-* CL-SELENIUM:FIND-ELEMENT:              API.                 (line 137)
+* CL-SELENIUM:ELEMENT-TAGNAME:           API.                 (line 233)
+* CL-SELENIUM:ELEMENT-TEXT:              API.                 (line 207)
+* CL-SELENIUM:EXECUTE-SCRIPT:            API.                 (line 112)
+* CL-SELENIUM:FIND-ELEMENT:              API.                 (line 146)
 * CL-SELENIUM:FIND-ELEMENTS:             API.                 (line  75)
-* CL-SELENIUM:KEY:                       API.                 (line 272)
+* CL-SELENIUM:KEY:                       API.                 (line 289)
 * CL-SELENIUM:LOG-TYPES:                 API.                 (line  60)
-* CL-SELENIUM:LOGS:                      API.                 (line 181)
-* CL-SELENIUM:MAKE-COOKIE:               API.                 (line 210)
-* CL-SELENIUM:MAKE-SESSION:              API.                 (line 262)
-* CL-SELENIUM:MOUSE-CLICK:               API.                 (line 169)
+* CL-SELENIUM:LOGS:                      API.                 (line 198)
+* CL-SELENIUM:MAKE-COOKIE:               API.                 (line 227)
+* CL-SELENIUM:MAKE-SESSION:              API.                 (line 279)
+* CL-SELENIUM:MOUSE-CLICK:               API.                 (line 178)
 * CL-SELENIUM:MOUSE-MOVE-TO:             API.                 (line  82)
-* CL-SELENIUM:PAGE-TITLE:                API.                 (line 175)
-* CL-SELENIUM:REFRESH:                   API.                 (line 220)
-* CL-SELENIUM:SCREENSHOT:                API.                 (line 129)
-* CL-SELENIUM:START-INTERACTIVE-SESSION: API.                 (line 124)
-* CL-SELENIUM:STOP-INTERACTIVE-SESSION:  API.                 (line 212)
-* CL-SELENIUM:SWITCH-TO-FRAME:           API.                 (line  89)
+* CL-SELENIUM:PAGE-TITLE:                API.                 (line 192)
+* CL-SELENIUM:REFRESH:                   API.                 (line 237)
+* CL-SELENIUM:SCREENSHOT:                API.                 (line 138)
+* CL-SELENIUM:START-INTERACTIVE-SESSION: API.                 (line 133)
+* CL-SELENIUM:STOP-INTERACTIVE-SESSION:  API.                 (line 229)
+* CL-SELENIUM:SWITCH-TO-FRAME:           API.                 (line  98)
 * CL-SELENIUM:URL:                       API.                 (line  32)
-* CL-SELENIUM:USE-SESSION:               API.                 (line 171)
+* CL-SELENIUM:USE-SESSION:               API.                 (line 188)
 * CLOSE-CURRENT-WINDOW:                  API.                 (line  20)
 * COOKIE:                                API.                 (line  24)
-* DELETE-SESSION:                        API.                 (line 258)
-* ELEMENT-ATTRIBUTE:                     API.                 (line  84)
-* ELEMENT-CLEAR:                         API.                 (line 274)
+* DELETE-SESSION:                        API.                 (line 275)
+* ELEMENT-ATTRIBUTE:                     API.                 (line  93)
+* ELEMENT-CLEAR:                         API.                 (line 291)
 * ELEMENT-CLICK:                         API.                 (line  47)
-* ELEMENT-DISPLAYED:                     API.                 (line 224)
-* ELEMENT-LOCATION:                      API.                 (line 186)
+* ELEMENT-DISPLAYED:                     API.                 (line 241)
+* ELEMENT-LOCATION:                      API.                 (line 203)
 * ELEMENT-SEND-KEYS:                     API.                 (line  37)
-* ELEMENT-TAGNAME:                       API.                 (line 216)
-* ELEMENT-TEXT:                          API.                 (line 190)
-* EXECUTE-SCRIPT:                        API.                 (line 103)
-* FIND-ELEMENT:                          API.                 (line 137)
+* ELEMENT-TAGNAME:                       API.                 (line 233)
+* ELEMENT-TEXT:                          API.                 (line 207)
+* EXECUTE-SCRIPT:                        API.                 (line 112)
+* FIND-ELEMENT:                          API.                 (line 146)
 * FIND-ELEMENTS:                         API.                 (line  75)
-* KEY:                                   API.                 (line 272)
+* KEY:                                   API.                 (line 289)
 * LOG-TYPES:                             API.                 (line  60)
-* LOGS:                                  API.                 (line 181)
-* MAKE-COOKIE:                           API.                 (line 210)
-* MAKE-SESSION:                          API.                 (line 262)
-* MOUSE-CLICK:                           API.                 (line 169)
+* LOGS:                                  API.                 (line 198)
+* MAKE-COOKIE:                           API.                 (line 227)
+* MAKE-SESSION:                          API.                 (line 279)
+* MOUSE-CLICK:                           API.                 (line 178)
 * MOUSE-MOVE-TO:                         API.                 (line  82)
-* PAGE-TITLE:                            API.                 (line 175)
-* REFRESH:                               API.                 (line 220)
-* SCREENSHOT:                            API.                 (line 129)
-* START-INTERACTIVE-SESSION:             API.                 (line 124)
-* STOP-INTERACTIVE-SESSION:              API.                 (line 212)
-* SWITCH-TO-FRAME:                       API.                 (line  89)
+* PAGE-TITLE:                            API.                 (line 192)
+* REFRESH:                               API.                 (line 237)
+* SCREENSHOT:                            API.                 (line 138)
+* START-INTERACTIVE-SESSION:             API.                 (line 133)
+* STOP-INTERACTIVE-SESSION:              API.                 (line 229)
+* SWITCH-TO-FRAME:                       API.                 (line  98)
 * URL:                                   API.                 (line  32)
-* USE-SESSION:                           API.                 (line 171)
+* USE-SESSION:                           API.                 (line 188)
 
 
 
@@ -591,31 +608,31 @@ Ref: CL-SELENIUM:ELEMENT-CLICK function6278
 Ref: CL-SELENIUM:LOG-TYPES function6778
 Ref: CL-SELENIUM:FIND-ELEMENTS function7400
 Ref: CL-SELENIUM:MOUSE-MOVE-TO function7684
-Ref: CL-SELENIUM:ELEMENT-ATTRIBUTE function7755
-Ref: CL-SELENIUM:SWITCH-TO-FRAME function7890
-Ref: CL-SELENIUM:EXECUTE-SCRIPT function8459
-Ref: CL-SELENIUM:START-INTERACTIVE-SESSION function9483
-Ref: CL-SELENIUM:SCREENSHOT function9645
-Ref: CL-SELENIUM:FIND-ELEMENT function10025
-Ref: CL-SELENIUM:MOUSE-CLICK function11325
-Ref: CL-SELENIUM:USE-SESSION function11389
-Ref: CL-SELENIUM:PAGE-TITLE function11469
-Ref: CL-SELENIUM:LOGS function11712
-Ref: CL-SELENIUM:ELEMENT-LOCATION function11870
-Ref: CL-SELENIUM:ELEMENT-TEXT function11977
-Ref: CL-SELENIUM:ACTIVE-ELEMENT function12317
-Ref: CL-SELENIUM:MAKE-COOKIE function12755
-Ref: CL-SELENIUM:STOP-INTERACTIVE-SESSION function12829
-Ref: CL-SELENIUM:ELEMENT-TAGNAME function12911
-Ref: CL-SELENIUM:REFRESH function13017
-Ref: CL-SELENIUM:ELEMENT-DISPLAYED function13102
-Ref: CL-SELENIUM:DELETE-SESSION function14848
-Ref: CL-SELENIUM:MAKE-SESSION function14927
-Ref: CL-SELENIUM:KEY function15344
-Ref: CL-SELENIUM:ELEMENT-CLEAR function15372
-Ref: CL-SELENIUM:BACK function15576
-Ref: CL-SELENIUM:COOKIE class15955
-Ref: CL-SELENIUM:NO-SUCH-ELEMENT-ERROR class15980
-Node: Index16072
+Ref: CL-SELENIUM:ELEMENT-ATTRIBUTE function8174
+Ref: CL-SELENIUM:SWITCH-TO-FRAME function8309
+Ref: CL-SELENIUM:EXECUTE-SCRIPT function8878
+Ref: CL-SELENIUM:START-INTERACTIVE-SESSION function9902
+Ref: CL-SELENIUM:SCREENSHOT function10064
+Ref: CL-SELENIUM:FIND-ELEMENT function10444
+Ref: CL-SELENIUM:MOUSE-CLICK function11744
+Ref: CL-SELENIUM:USE-SESSION function12167
+Ref: CL-SELENIUM:PAGE-TITLE function12247
+Ref: CL-SELENIUM:LOGS function12490
+Ref: CL-SELENIUM:ELEMENT-LOCATION function12648
+Ref: CL-SELENIUM:ELEMENT-TEXT function12755
+Ref: CL-SELENIUM:ACTIVE-ELEMENT function13095
+Ref: CL-SELENIUM:MAKE-COOKIE function13533
+Ref: CL-SELENIUM:STOP-INTERACTIVE-SESSION function13607
+Ref: CL-SELENIUM:ELEMENT-TAGNAME function13689
+Ref: CL-SELENIUM:REFRESH function13795
+Ref: CL-SELENIUM:ELEMENT-DISPLAYED function13880
+Ref: CL-SELENIUM:DELETE-SESSION function15626
+Ref: CL-SELENIUM:MAKE-SESSION function15705
+Ref: CL-SELENIUM:KEY function16122
+Ref: CL-SELENIUM:ELEMENT-CLEAR function16150
+Ref: CL-SELENIUM:BACK function16354
+Ref: CL-SELENIUM:COOKIE class16733
+Ref: CL-SELENIUM:NO-SUCH-ELEMENT-ERROR class16758
+Node: Index16850
 
 End Tag Table

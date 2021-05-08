@@ -399,7 +399,11 @@ See https://www.w3.org/TR/webdriver1/#find-elements.
 <span id="index-CL_002dSELENIUM_003aMOUSE_002dMOVE_002dTO"></span>
 <span id="CL_002dSELENIUM_003aMOUSE_002dMOVE_002dTO-function"></span><dl>
 <dt id="index-MOUSE_002dMOVE_002dTO">CL-SELENIUM: <strong>MOUSE-MOVE-TO</strong> <em>(x y &amp;key element (session *session*))</em></dt>
-</dl>
+<dd>
+<p>Move the mouse by an offset of the specificed <var>element</var>. If no <var>element</var> is specified, the move is relative to the current mouse cursor. If an <var>element</var> is provided but no offset, the mouse will be moved to the center of the <var>element</var>. If the <var>element</var> is not visible, it will be scrolled into view.<br>
+<br>
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto
+</p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aELEMENT_002dATTRIBUTE"></span>
 <span id="CL_002dSELENIUM_003aELEMENT_002dATTRIBUTE-function"></span><dl>
@@ -479,7 +483,11 @@ See: https://www.w3.org/TR/webdriver1/#dfn-find-element.
 <span id="index-CL_002dSELENIUM_003aMOUSE_002dCLICK"></span>
 <span id="CL_002dSELENIUM_003aMOUSE_002dCLICK-function"></span><dl>
 <dt id="index-MOUSE_002dCLICK">CL-SELENIUM: <strong>MOUSE-CLICK</strong> <em>(button &amp;key (session *session*))</em></dt>
-</dl>
+<dd>
+<p>Click any mouse <var>button</var> (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling <var>button</var> up (or any out-of-order interactions sequence) will yield undefined behaviour).<br>
+<br>
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick
+</p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aUSE_002dSESSION"></span>
 <span id="CL_002dSELENIUM_003aUSE_002dSESSION-function"></span><dl>
