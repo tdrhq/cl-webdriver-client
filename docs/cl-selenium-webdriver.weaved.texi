@@ -1,0 +1,472 @@
+\input texinfo   @c -*-texinfo-*-
+@comment $Id@w{$}
+@comment %**start of header
+@settitle Common Lisp Selenium Webdriver
+@syncodeindex pg cp
+@setfilename cl-selenium-webdriver.info
+@comment %**end of header
+@include common-lisp.texi
+
+@dircategory Common Lisp
+@direntry
+* cl-selenium-webdriver: (cl-selenium-webdriver)Common Lisp Selenium Webdriver.
+@end direntry
+
+@titlepage
+@title Common Lisp Selenium Webdriver
+
+@author A.U. Thor <@email{bug-sample@@gnu.org}>
+@page
+@vskip 0pt plus 1filll
+@end titlepage
+
+@contents
+
+@node Top
+@top Top
+@cindex cl-selenium-webdriver
+@cindex cl-selenium-webdriver
+
+CL Selenium WebDriver is a binding library to the Selenium 2.0
+
+@menu
+* Introduction::
+* Usage::
+* Installation::
+* Utils::
+* API::
+* Index::
+@end menu
+
+
+@node Introduction
+@chapter Introduction
+
+CL Selenium WebDriver is a binding library to the Selenium 2.0
+
+This software is in development. The APIs will be likely to change.
+
+@node Usage
+@chapter Usage
+
+@lisp
+;; see examples/*.lisp and t/*.lisp
+(in-package :cl-user)
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (ql:quickload :cl-selenium))
+
+(defpackage go-test
+  (:use :cl :cl-selenium))
+
+(in-package :go-test)
+
+(defparameter *code* "
+package main
+import \"fmt\"
+
+func main() @{
+    fmt.Print(\"Hello WebDriver!\")
+@}")
+
+(with-session ()
+  (setf (url) "http://play.golang.org/?simple=1")
+  (let ((elem (find-element "#code" :by :css-selector)))
+    (element-clear elem)
+    (element-send-keys elem *code*))
+  (let ((btn (find-element "#run")))
+    (element-click btn))
+
+  (loop
+     with div = (find-element "#output")
+     for ouput = (element-text div)
+     while (equal ouput "Waiting for remote server...")
+     do (sleep 0.1)
+     finally (print ouput)))
+@end lisp
+
+@node Installation
+@chapter Installation
+
+@example
+git clone https://github.com/TatriX/cl-selenium-webdriver ~/quicklisp/local-projects/
+(ql:quickload :cl-selenium)
+@end example
+
+You need a running instance of selenium-server-standalone.
+
+[Download](http://www.seleniumhq.org/download/) it and run:
+
+@example
+curl -L0 https://goo.gl/SP94ZB -o selenium-server-standalone.jar
+java -jar selenium-server-standalone.jar
+@end example
+
+@node Utils
+@chapter Utils
+
+There is a @code{:cl-selenium-utils} package which should reduce boilerplate. For example:
+
+@lisp
+(defpackage my-test
+  (:use :cl :cl-selenium)
+  (:import-from :cl-selenium-utils
+                :send-keys
+                :click
+                :wait-for
+                :classlist))
+
+(in-package :my-test)
+
+(with-session ()
+  (setf (url) "http://google.com")
+  (send-keys "cl-selenium-webdriver")
+  (click "[name=btnK]")
+  (wait-for "#resultStats"))
+
+@end lisp
+
+@node Interactive session
+@section Interactive session
+
+You can just start the session and control it from your repl:
+
+@lisp
+(in-package :my-test)
+
+(start-interactive-session)
+
+(setf (url) "http://google.com")
+(send-keys "cl-selenium-webdriver")
+(send-keys (key :enter))
+(classlist "#slim_appbar") ; prints ("ab_tnav_wrp")
+
+(stop-interactive-session)
+@end lisp
+
+@node Utils API conventions
+@section Utils API conventions
+
+If utility function needs an element to work on it defaults to `(active-element)`.
+@lisp
+(click) ; click on the current active element.
+@end lisp
+
+You can also pass a css selector as a last parameter.
+
+@lisp
+(print (id "#submit")) ; print id the of matched element
+
+(assert (= (first (classlist "div")) "first-div-ever"))
+@end lisp
+
+To change default element you can:
+
+@lisp
+(setf cl-selenium-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
+@end lisp
+
+@node Waiting for the reaction
+@section Waiting for the reaction
+
+Often you need to wait for some action to be done. For example if you
+do a @code{(click)} on the button to load search results, you need to wait
+them to load.
+
+@lisp
+(wait-for ".search-result" :timeout 10) ; wait 10 seconds
+@end lisp
+
+Timeout defaults to 30 seconds. You can globally change it:
+@lisp
+(setf cl-selenium-utils:*timeout* 3)
+@end lisp
+
+@node Running tests
+@section Running tests
+
+@heading REPL
+
+@lisp
+(ql:quickload '(:cl-selenium :prove))
+(setf prove:*enable-colors* nil)
+(prove:run :cl-selenium-test)
+@end lisp
+
+@heading Shell
+
+@example
+sh
+./test.sh
+@end example
+
+@node API
+@chapter API
+
+@deftp PACKAGE CL-SELENIUM
+
+This package exports functions for working with Selenium WebDriver.
+
+For documentation see:
+- https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe
+- https://www.w3.org/TR/webdriver1.
+
+@end deftp
+
+@heading External definitions
+
+@heading Functions
+@cldefun {CL-SELENIUM, CLOSE-CURRENT-WINDOW, (&key (session *session*))}
+
+Close the current window.
+@endcldefun
+
+@cldefun {CL-SELENIUM, COOKIE, (&key (session *session*))}
+
+Retrieve all cookies visible to the current page.@*
+@*
+See: https://www.w3.org/TR/webdriver1/#get-all-cookies.@*
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie.
+@endcldefun
+
+@cldefun {CL-SELENIUM, URL, (&key (session *session*))}
+
+Get the current url in @var{session}.@*
+See: https://www.w3.org/TR/webdriver1/#dfn-get-current-url.
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-SEND-KEYS, (element keys &key (session *session*))}
+
+The @var{Element} Send @var{Keys} command scrolls into view the form control @var{element} and then sends the provided @var{keys} to the @var{element}. In case the @var{element} is not keyboard-interactable, an @var{element} not interactable error is returned.@*
+@*
+See: https://www.w3.org/TR/webdriver1/#element-send-keys.
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-CLICK, (element &key (session *session*))}
+
+The @var{Element} Click command scrolls into view the @var{element} if it is not already pointer-interactable, and clicks its in-view center point.@*
+@*
+If the @var{element}’s center point is obscured by another @var{element}, an @var{element} click intercepted error is returned. If the @var{element} is outside the viewport, an @var{element} not interactable error is returned.@*
+@*
+See: https://www.w3.org/TR/webdriver1/#element-click.
+@endcldefun
+
+@cldefun {CL-SELENIUM, LOG-TYPES, (&key (session *session*))}
+
+Return the types of logs supported by the WebDriver.@*
+@*
+- browser: Javascript console logs from the browser.@*
+- client: Logs from the client side implementation of the WebDriver protocol (e.g. the Java bindings).@*
+- driver: Logs from the internals of the driver (e.g. FirefoxDriver internals).@*
+- performance: Logs relating to the performance characteristics of the page under test (e.g. resource load timings).@*
+- server: Logs from within the selenium server.@*
+@*
+See: https://github.com/SeleniumHQ/selenium/wiki/Logging.
+@endcldefun
+
+@cldefun {CL-SELENIUM, FIND-ELEMENTS, (value &key (by :css-selector) (session *session*))}
+
+Find elements that match @var{VALUE} using location strategy in @var{BY}.@*
+See @clref{CL-SELENIUM, FIND-ELEMENT, function}.@*
+See https://www.w3.org/TR/webdriver1/#find-elements.
+@endcldefun
+
+@cldefun {CL-SELENIUM, MOUSE-MOVE-TO, (x y &key element (session *session*))}
+
+
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-ATTRIBUTE, (element name &key (session *session*))}
+
+Return the @var{ELEMENT}'s attribute named @var{NAME}.
+@endcldefun
+
+@cldefun {CL-SELENIUM, SWITCH-TO-FRAME, (id &key (session *session*))}
+
+Change focus to another frame on the page. If the frame @var{id} is null, the server@*
+should switch to the page's default content.@*
+@*
+In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.@*
+@*
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe.@*
+See: https://en.wikipedia.org/wiki/Frame_(World_Wide_Web).
+@endcldefun
+
+@cldefun {CL-SELENIUM, EXECUTE-SCRIPT, (script args &key (session *session*))}
+
+Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed @var{script} is assumed to be synchronous and the result of evaluating the @var{script} is returned to the client.@*
+@*
+The @var{script} argument defines the @var{script} to execute in the form of a function body. The value returned by that function will be returned to the client. The function will be invoked with the provided @var{args} array and the values may be accessed via the arguments object in the order specified.@*
+@*
+Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the @var{script} result will be returned to the client as WebElement JSON objects.@*
+@*
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute.
+@endcldefun
+
+@cldefun {CL-SELENIUM, START-INTERACTIVE-SESSION, (&rest capabilities)}
+
+Start an interactive session. Use this to interact with Selenium driver from a REPL.
+@endcldefun
+
+@cldefun {CL-SELENIUM, SCREENSHOT, (&key (session *session*))}
+
+Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewport’s framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.@*
+See: https://www.w3.org/TR/webdriver2/#screen-capture.
+@endcldefun
+
+@cldefun {CL-SELENIUM, FIND-ELEMENT, (value &key (by :css-selector) (session *session*))}
+
+The Find Element command is used to find an element in the current browsing context that can be used as the web element context for future element-centric commands.@*
+@*
+For example, consider this pseudo code which retrieves an element with the #toremove ID and uses this as the argument for a script it injects to remove it from the HTML document:@*
+@*
+let body @clref{COMMON-LISP, =, function} @var{session}.find.css("#toremove");@*
+@var{session}.execute("arguments[0].remove()", [body]);@*
+@*
+The @var{BY} parameter represents the element location strategy.@*
+@*
+It can be one of:@*
+- @var{:id} @var{:} Finds element @var{by} id.@*
+- @var{:class-name} @var{:} Finds element @var{by} class name.@*
+- @var{:css-selector} @var{:} Returns element that matches css selector.@*
+- @var{:link-text} @var{:} Returns element that matches <a> element text.@*
+- @var{:partial-link-text:} Returns element that matches <a> element text partially.@*
+- @var{:tag-name:} Returns element that matches tag name.@*
+- @var{:xpath:} Returns element that matches the XPath expression.@*
+@*
+If result is empty, a @clref{CL-SELENIUM, HANDLE-FIND-ERROR, function} is signaled.@*
+@*
+See: https://www.w3.org/TR/webdriver1/#dfn-find-element.
+@endcldefun
+
+@cldefun {CL-SELENIUM, MOUSE-CLICK, (button &key (session *session*))}
+
+
+@endcldefun
+
+@cldefun {CL-SELENIUM, USE-SESSION, (session)}
+
+Make @var{SESSION} the current @var{session}.
+@endcldefun
+
+@cldefun {CL-SELENIUM, PAGE-TITLE, (&key (session *session*))}
+
+This command returns the document title of the current top-level browsing context, equivalent to calling document.title. @*
+See: https://www.w3.org/TR/webdriver2/#get-title.
+@endcldefun
+
+@cldefun {CL-SELENIUM, LOGS, (type &key (session *session*))}
+
+Return the logs of a particular @var{TYPE}.@*
+See: @clref{CL-SELENIUM, LOG-TYPES, function}.
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-LOCATION, (element &key (session *session*))}
+
+Return the @var{ELEMENT}'s location.
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-TEXT, (element &key (session *session*))}
+
+The Get @var{Element} Text command intends to return an @var{element}’s text “as rendered”. An @var{element}’s rendered text is also used for locating a elements by their link text and partial link text.@*
+@*
+See: https://www.w3.org/TR/webdriver1/#get-element-text.
+@endcldefun
+
+@cldefun {CL-SELENIUM, ACTIVE-ELEMENT, (&key (session *session*))}
+
+Return the active element of the current browsing context’s document.@*
+The active element is the Element within the DOM that currently has focus.@*
+If there's no active element, an error is signaled.@*
+@*
+See: https://www.w3.org/TR/webdriver2/#get-active-element.@*
+See: https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.
+@endcldefun
+
+@cldefun {CL-SELENIUM, MAKE-COOKIE, (name value &key path domain secure expiry)}
+
+
+@endcldefun
+
+@cldefun {CL-SELENIUM, STOP-INTERACTIVE-SESSION, nil}
+
+Stop an interactive session.
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-TAGNAME, (element &key (session *session*))}
+
+Return the @var{ELEMENT}'s tag name.
+@endcldefun
+
+@cldefun {CL-SELENIUM, REFRESH, (&key (session *session*))}
+
+Refresh the current page.
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-DISPLAYED, (element &key (session *session*))}
+
+Although WebDriver does not define a primitive to ascertain the visibility of an @var{element} in the viewport, we acknowledge that it is an important feature for many users. Here we include a recommended approach which will give a simplified approximation of an @var{element}’s visibility, but please note that it relies only on tree-traversal, and only covers a subset of visibility checks.@*
+@*
+The visibility of an @var{element} is guided by what is perceptually visible to the human eye. In this context, an @var{element}'s displayedness does not relate to the visibility or display style properties.@*
+@*
+The approach recommended to implementors to ascertain an @var{element}'s visibility was originally developed by the Selenium project, and is based on crude approximations about an @var{element}'s nature and relationship in the tree. An @var{element} is in general to be considered visible if any part of it is drawn on the canvas within the boundaries of the viewport.@*
+@*
+The @var{element} displayed algorithm is a boolean state where true signifies that the @var{element} is displayed and false signifies that the @var{element} is not displayed. To compute the state on @var{element}, invoke the Call(bot.dom.isShown, null, @var{element}). If doing so does not produce an error, return the return value from this function call. Otherwise return an error with error code unknown error.@*
+@*
+This function is typically exposed to @clref{COMMON-LISP, GET, function} requests with a URI Template of /session/session id/element/element id/displayed.@*
+@*
+See: https://www.w3.org/TR/webdriver1/#element-displayedness.
+@endcldefun
+
+@cldefun {CL-SELENIUM, DELETE-SESSION, (session)}
+
+Delete the WebDriver @var{SESSION}.
+@endcldefun
+
+@cldefun {CL-SELENIUM, MAKE-SESSION, (&key (browser-name :chrome) browser-version platform-name platform-version accept-ssl-certs additional-capabilities)}
+
+Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.@*
+@*
+See: https://www.w3.org/TR/webdriver1/#new-session.@*
+See: https://www.w3.org/TR/webdriver1/#capabilities.
+@endcldefun
+
+@cldefun {CL-SELENIUM, KEY, (key)}
+
+
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-CLEAR, (element &key (session *session*))}
+
+Clear the contents of @var{ELEMENT} (for example, a form field @var{element}).@*
+@*
+See: https://www.w3.org/TR/webdriver1/#dfn-element-clear.
+@endcldefun
+
+@cldefun {CL-SELENIUM, BACK, (&key (session *session*))}
+
+This command causes the browser to traverse one step backward in the joint @var{session} history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.@*
+See: https://www.w3.org/TR/webdriver1/#dfn-back.
+@endcldefun
+
+@heading Classes
+@cldefclass {CL-SELENIUM, COOKIE}
+
+
+@endcldefclass
+
+@cldefclass {CL-SELENIUM, NO-SUCH-ELEMENT-ERROR}
+
+Error signaled when no such element is found.
+@endcldefclass
+
+
+
+@node Index
+@chapter Index
+
+@printindex cp
+@printindex vr
+@printindex fn
+
+@bye

@@ -1,0 +1,60 @@
+@c Macros for Common Lisp definitions
+
+@c Variable definition
+@macro cldefvar{package, name}
+@vindex \package\:\name\
+@anchor{\package\:\name\ variable}
+@defvr \package\ \name\
+@end macro
+
+@macro endcldefvar
+@end defvr
+@end macro
+
+@c Function definition
+@macro cldefun{package, name, args}
+@findex \package\:\name\
+@anchor{\package\:\name\ function}
+@deffn \package\ \name\ \args\
+@end macro
+
+@macro endcldefun
+@end deffn
+@end macro
+
+@c Example:
+@c @cldefun {alexandria, flatten, (x y z)}
+@c This is alexandria flatten function
+@c @endcldefun
+
+@c Class definition
+@macro cldefclass{package, name}
+@tindex \package\:\name\
+@anchor{\package\:\name\ class}
+@deftp \package\ \name\
+@end macro
+
+@macro endcldefclass
+@end deftp
+@end macro
+
+@c References
+@macro clref{package, name, type}
+@xref{\package\:\name\ \type\,\name\}
+@end macro
+
+@c Source references
+@macro clsourceref{type,package,name}
+@end macro
+
+@c Use @clref{package, name} to reference cl definitions
+
+@c Weave Common Lisp function definition
+@macro clfunction{package, name}
+@end macro
+
+@macro clsourcecode{system,path}
+@end macro
+
+@macro setup{things}
+@end macro

@@ -1,0 +1,215 @@
+\input texinfo   @c -*-texinfo-*-
+@comment $Id@w{$}
+@comment %**start of header
+@settitle Common Lisp Selenium Webdriver
+@syncodeindex pg cp
+@setfilename cl-selenium-webdriver.info
+@comment %**end of header
+@include common-lisp.texi
+
+@dircategory Common Lisp
+@direntry
+* cl-selenium-webdriver: (cl-selenium-webdriver)Common Lisp Selenium Webdriver.
+@end direntry
+
+@titlepage
+@title Common Lisp Selenium Webdriver
+
+@author A.U. Thor <@email{bug-sample@@gnu.org}>
+@page
+@vskip 0pt plus 1filll
+@end titlepage
+
+@contents
+
+@node Top
+@top Top
+@cindex cl-selenium-webdriver
+@cindex cl-selenium-webdriver
+
+CL Selenium WebDriver is a binding library to the Selenium 2.0
+
+@menu
+* Introduction::
+* Usage::
+* Installation::
+* Utils::
+* API::
+* Index::
+@end menu
+
+
+@node Introduction
+@chapter Introduction
+
+CL Selenium WebDriver is a binding library to the Selenium 2.0
+
+This software is in development. The APIs will be likely to change.
+
+@node Usage
+@chapter Usage
+
+@lisp
+;; see examples/*.lisp and t/*.lisp
+(in-package :cl-user)
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (ql:quickload :cl-selenium))
+
+(defpackage go-test
+  (:use :cl :cl-selenium))
+
+(in-package :go-test)
+
+(defparameter *code* "
+package main
+import \"fmt\"
+
+func main() @{
+    fmt.Print(\"Hello WebDriver!\")
+@}")
+
+(with-session ()
+  (setf (url) "http://play.golang.org/?simple=1")
+  (let ((elem (find-element "#code" :by :css-selector)))
+    (element-clear elem)
+    (element-send-keys elem *code*))
+  (let ((btn (find-element "#run")))
+    (element-click btn))
+
+  (loop
+     with div = (find-element "#output")
+     for ouput = (element-text div)
+     while (equal ouput "Waiting for remote server...")
+     do (sleep 0.1)
+     finally (print ouput)))
+@end lisp
+
+@node Installation
+@chapter Installation
+
+@example
+git clone https://github.com/TatriX/cl-selenium-webdriver ~/quicklisp/local-projects/
+(ql:quickload :cl-selenium)
+@end example
+
+You need a running instance of selenium-server-standalone.
+
+[Download](http://www.seleniumhq.org/download/) it and run:
+
+@example
+curl -L0 https://goo.gl/SP94ZB -o selenium-server-standalone.jar
+java -jar selenium-server-standalone.jar
+@end example
+
+@node Utils
+@chapter Utils
+
+There is a @code{:cl-selenium-utils} package which should reduce boilerplate. For example:
+
+@lisp
+(defpackage my-test
+  (:use :cl :cl-selenium)
+  (:import-from :cl-selenium-utils
+                :send-keys
+                :click
+                :wait-for
+                :classlist))
+
+(in-package :my-test)
+
+(with-session ()
+  (setf (url) "http://google.com")
+  (send-keys "cl-selenium-webdriver")
+  (click "[name=btnK]")
+  (wait-for "#resultStats"))
+
+@end lisp
+
+@node Interactive session
+@section Interactive session
+
+You can just start the session and control it from your repl:
+
+@lisp
+(in-package :my-test)
+
+(start-interactive-session)
+
+(setf (url) "http://google.com")
+(send-keys "cl-selenium-webdriver")
+(send-keys (key :enter))
+(classlist "#slim_appbar") ; prints ("ab_tnav_wrp")
+
+(stop-interactive-session)
+@end lisp
+
+@node Utils API conventions
+@section Utils API conventions
+
+If utility function needs an element to work on it defaults to `(active-element)`.
+@lisp
+(click) ; click on the current active element.
+@end lisp
+
+You can also pass a css selector as a last parameter.
+
+@lisp
+(print (id "#submit")) ; print id the of matched element
+
+(assert (= (first (classlist "div")) "first-div-ever"))
+@end lisp
+
+To change default element you can:
+
+@lisp
+(setf cl-selenium-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
+@end lisp
+
+@node Waiting for the reaction
+@section Waiting for the reaction
+
+Often you need to wait for some action to be done. For example if you
+do a @code{(click)} on the button to load search results, you need to wait
+them to load.
+
+@lisp
+(wait-for ".search-result" :timeout 10) ; wait 10 seconds
+@end lisp
+
+Timeout defaults to 30 seconds. You can globally change it:
+@lisp
+(setf cl-selenium-utils:*timeout* 3)
+@end lisp
+
+@node Running tests
+@section Running tests
+
+@heading REPL
+
+@lisp
+(ql:quickload '(:cl-selenium :prove))
+(setf prove:*enable-colors* nil)
+(prove:run :cl-selenium-test)
+@end lisp
+
+@heading Shell
+
+@example
+sh
+./test.sh
+@end example
+
+@node API
+@chapter API
+
+(@clpackage :cl-selenium :include-external-definitions t)
+
+@node Index
+@chapter Index
+
+@printindex cp
+@printindex vr
+@printindex fn
+
+@bye

@@ -1,0 +1,805 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Common Lisp Selenium Webdriver</title>
+
+<meta name="description" content="Common Lisp Selenium Webdriver">
+<meta name="keywords" content="Common Lisp Selenium Webdriver">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2any">
+<link href="#Top" rel="start" title="Top">
+<link href="#Index" rel="index" title="Index">
+<link href="#SEC_Contents" rel="contents" title="Table of Contents">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="texinfo-klare.css">
+
+
+</head>
+
+<body lang="en">
+<h1 class="settitle" align="center">Common Lisp Selenium Webdriver</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span id="SEC_Contents"></span>
+<h2 class="contents-heading">Table of Contents</h2>
+
+<div class="contents">
+
+<ul class="no-bullet">
+  <li><a id="toc-Introduction-1" href="#Introduction">1 Introduction</a></li>
+  <li><a id="toc-Usage-1" href="#Usage">2 Usage</a></li>
+  <li><a id="toc-Installation-1" href="#Installation">3 Installation</a></li>
+  <li><a id="toc-Utils-1" href="#Utils">4 Utils</a>
+  <ul class="no-bullet">
+    <li><a id="toc-Interactive-session-1" href="#Interactive-session">4.1 Interactive session</a></li>
+    <li><a id="toc-Utils-API-conventions-1" href="#Utils-API-conventions">4.2 Utils API conventions</a></li>
+    <li><a id="toc-Waiting-for-the-reaction-1" href="#Waiting-for-the-reaction">4.3 Waiting for the reaction</a></li>
+    <li><a id="toc-Running-tests-1" href="#Running-tests">4.4 Running tests</a></li>
+  </ul></li>
+  <li><a id="toc-API-1" href="#API">5 API</a></li>
+  <li><a id="toc-Index-1" href="#Index" rel="index">6 Index</a></li>
+</ul>
+</div>
+
+
+<span id="Top"></span><div class="header">
+<p>
+Next: <a href="#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Top-1"></span><h1 class="top">Top</h1>
+<span id="index-cl_002dselenium_002dwebdriver"></span>
+<span id="index-cl_002dselenium_002dwebdriver-1"></span>
+
+<p>CL Selenium WebDriver is a binding library to the Selenium 2.0
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#Introduction" accesskey="1">Introduction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Usage" accesskey="2">Usage</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Installation" accesskey="3">Installation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Utils" accesskey="4">Utils</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#API" accesskey="5">API</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Index" rel="index" accesskey="6">Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+
+<hr>
+<span id="Introduction"></span><div class="header">
+<p>
+Next: <a href="#Usage" accesskey="n" rel="next">Usage</a>, Previous: <a href="#Top" accesskey="p" rel="prev">Top</a>, Up: <a href="#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Introduction-1"></span><h2 class="chapter">1 Introduction</h2>
+
+<p>CL Selenium WebDriver is a binding library to the Selenium 2.0
+</p>
+<p>This software is in development. The APIs will be likely to change.
+</p>
+<hr>
+<span id="Usage"></span><div class="header">
+<p>
+Next: <a href="#Installation" accesskey="n" rel="next">Installation</a>, Previous: <a href="#Introduction" accesskey="p" rel="prev">Introduction</a>, Up: <a href="#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Usage-1"></span><h2 class="chapter">2 Usage</h2>
+
+<div class="lisp">
+<pre class="lisp">;; see examples/*.lisp and t/*.lisp
+(in-package :cl-user)
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (ql:quickload :cl-selenium))
+
+(defpackage go-test
+  (:use :cl :cl-selenium))
+
+(in-package :go-test)
+
+(defparameter *code* &quot;
+package main
+import \&quot;fmt\&quot;
+
+func main() {
+    fmt.Print(\&quot;Hello WebDriver!\&quot;)
+}&quot;)
+
+(with-session ()
+  (setf (url) &quot;http://play.golang.org/?simple=1&quot;)
+  (let ((elem (find-element &quot;#code&quot; :by :css-selector)))
+    (element-clear elem)
+    (element-send-keys elem *code*))
+  (let ((btn (find-element &quot;#run&quot;)))
+    (element-click btn))
+
+  (loop
+     with div = (find-element &quot;#output&quot;)
+     for ouput = (element-text div)
+     while (equal ouput &quot;Waiting for remote server...&quot;)
+     do (sleep 0.1)
+     finally (print ouput)))
+</pre></div>
+
+<hr>
+<span id="Installation"></span><div class="header">
+<p>
+Next: <a href="#Utils" accesskey="n" rel="next">Utils</a>, Previous: <a href="#Usage" accesskey="p" rel="prev">Usage</a>, Up: <a href="#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Installation-1"></span><h2 class="chapter">3 Installation</h2>
+
+<div class="example">
+<pre class="example">git clone https://github.com/TatriX/cl-selenium-webdriver ~/quicklisp/local-projects/
+(ql:quickload :cl-selenium)
+</pre></div>
+
+<p>You need a running instance of selenium-server-standalone.
+</p>
+<p>[Download](http://www.seleniumhq.org/download/) it and run:
+</p>
+<div class="example">
+<pre class="example">curl -L0 https://goo.gl/SP94ZB -o selenium-server-standalone.jar
+java -jar selenium-server-standalone.jar
+</pre></div>
+
+<hr>
+<span id="Utils"></span><div class="header">
+<p>
+Next: <a href="#API" accesskey="n" rel="next">API</a>, Previous: <a href="#Installation" accesskey="p" rel="prev">Installation</a>, Up: <a href="#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Utils-1"></span><h2 class="chapter">4 Utils</h2>
+
+<p>There is a <code>:cl-selenium-utils</code> package which should reduce boilerplate. For example:
+</p>
+<div class="lisp">
+<pre class="lisp">(defpackage my-test
+  (:use :cl :cl-selenium)
+  (:import-from :cl-selenium-utils
+                :send-keys
+                :click
+                :wait-for
+                :classlist))
+
+(in-package :my-test)
+
+(with-session ()
+  (setf (url) &quot;http://google.com&quot;)
+  (send-keys &quot;cl-selenium-webdriver&quot;)
+  (click &quot;[name=btnK]&quot;)
+  (wait-for &quot;#resultStats&quot;))
+
+</pre></div>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#Interactive-session" accesskey="1">Interactive session</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Utils-API-conventions" accesskey="2">Utils API conventions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Waiting-for-the-reaction" accesskey="3">Waiting for the reaction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Running-tests" accesskey="4">Running tests</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+<hr>
+<span id="Interactive-session"></span><div class="header">
+<p>
+Next: <a href="#Utils-API-conventions" accesskey="n" rel="next">Utils API conventions</a>, Up: <a href="#Utils" accesskey="u" rel="up">Utils</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Interactive-session-1"></span><h3 class="section">4.1 Interactive session</h3>
+
+<p>You can just start the session and control it from your repl:
+</p>
+<div class="lisp">
+<pre class="lisp">(in-package :my-test)
+
+(start-interactive-session)
+
+(setf (url) &quot;http://google.com&quot;)
+(send-keys &quot;cl-selenium-webdriver&quot;)
+(send-keys (key :enter))
+(classlist &quot;#slim_appbar&quot;) ; prints (&quot;ab_tnav_wrp&quot;)
+
+(stop-interactive-session)
+</pre></div>
+
+<hr>
+<span id="Utils-API-conventions"></span><div class="header">
+<p>
+Next: <a href="#Waiting-for-the-reaction" accesskey="n" rel="next">Waiting for the reaction</a>, Previous: <a href="#Interactive-session" accesskey="p" rel="prev">Interactive session</a>, Up: <a href="#Utils" accesskey="u" rel="up">Utils</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Utils-API-conventions-1"></span><h3 class="section">4.2 Utils API conventions</h3>
+
+<p>If utility function needs an element to work on it defaults to &lsquo;(active-element)&lsquo;.
+</p><div class="lisp">
+<pre class="lisp">(click) ; click on the current active element.
+</pre></div>
+
+<p>You can also pass a css selector as a last parameter.
+</p>
+<div class="lisp">
+<pre class="lisp">(print (id &quot;#submit&quot;)) ; print id the of matched element
+
+(assert (= (first (classlist &quot;div&quot;)) &quot;first-div-ever&quot;))
+</pre></div>
+
+<p>To change default element you can:
+</p>
+<div class="lisp">
+<pre class="lisp">(setf cl-selenium-utils:*default-element-func* (lambda () (find-element &quot;input[type=submit]&quot;))
+</pre></div>
+
+<hr>
+<span id="Waiting-for-the-reaction"></span><div class="header">
+<p>
+Next: <a href="#Running-tests" accesskey="n" rel="next">Running tests</a>, Previous: <a href="#Utils-API-conventions" accesskey="p" rel="prev">Utils API conventions</a>, Up: <a href="#Utils" accesskey="u" rel="up">Utils</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Waiting-for-the-reaction-1"></span><h3 class="section">4.3 Waiting for the reaction</h3>
+
+<p>Often you need to wait for some action to be done. For example if you
+do a <code>(click)</code> on the button to load search results, you need to wait
+them to load.
+</p>
+<div class="lisp">
+<pre class="lisp">(wait-for &quot;.search-result&quot; :timeout 10) ; wait 10 seconds
+</pre></div>
+
+<p>Timeout defaults to 30 seconds. You can globally change it:
+</p><div class="lisp">
+<pre class="lisp">(setf cl-selenium-utils:*timeout* 3)
+</pre></div>
+
+<hr>
+<span id="Running-tests"></span><div class="header">
+<p>
+Previous: <a href="#Waiting-for-the-reaction" accesskey="p" rel="prev">Waiting for the reaction</a>, Up: <a href="#Utils" accesskey="u" rel="up">Utils</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Running-tests-1"></span><h3 class="section">4.4 Running tests</h3>
+
+<span id="REPL"></span><h3 class="heading">REPL</h3>
+
+<div class="lisp">
+<pre class="lisp">(ql:quickload '(:cl-selenium :prove))
+(setf prove:*enable-colors* nil)
+(prove:run :cl-selenium-test)
+</pre></div>
+
+<span id="Shell"></span><h3 class="heading">Shell</h3>
+
+<div class="example">
+<pre class="example">sh
+./test.sh
+</pre></div>
+
+<hr>
+<span id="API"></span><div class="header">
+<p>
+Next: <a href="#Index" accesskey="n" rel="next">Index</a>, Previous: <a href="#Utils" accesskey="p" rel="prev">Utils</a>, Up: <a href="#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="API-1"></span><h2 class="chapter">5 API</h2>
+
+<dl>
+<dt id="index-CL_002dSELENIUM">PACKAGE: <strong>CL-SELENIUM</strong></dt>
+<dd>
+<p>This package exports functions for working with Selenium WebDriver.
+</p>
+<p>For documentation see:
+- https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe
+- https://www.w3.org/TR/webdriver1.
+</p>
+</dd></dl>
+
+<span id="External-definitions"></span><h3 class="heading">External definitions</h3>
+
+<span id="Functions"></span><h3 class="heading">Functions</h3>
+<span id="index-CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW"></span>
+<span id="CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW-function"></span><dl>
+<dt id="index-CLOSE_002dCURRENT_002dWINDOW">CL-SELENIUM: <strong>CLOSE-CURRENT-WINDOW</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Close the current window.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aCOOKIE"></span>
+<span id="CL_002dSELENIUM_003aCOOKIE-function"></span><dl>
+<dt id="index-COOKIE">CL-SELENIUM: <strong>COOKIE</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Retrieve all cookies visible to the current page.<br>
+<br>
+See: https://www.w3.org/TR/webdriver1/#get-all-cookies.<br>
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aURL"></span>
+<span id="CL_002dSELENIUM_003aURL-function"></span><dl>
+<dt id="index-URL">CL-SELENIUM: <strong>URL</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Get the current url in <var>session</var>.<br>
+See: https://www.w3.org/TR/webdriver1/#dfn-get-current-url.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS-function"></span><dl>
+<dt id="index-ELEMENT_002dSEND_002dKEYS">CL-SELENIUM: <strong>ELEMENT-SEND-KEYS</strong> <em>(element keys &amp;key (session *session*))</em></dt>
+<dd>
+<p>The <var>Element</var> Send <var>Keys</var> command scrolls into view the form control <var>element</var> and then sends the provided <var>keys</var> to the <var>element</var>. In case the <var>element</var> is not keyboard-interactable, an <var>element</var> not interactable error is returned.<br>
+<br>
+See: https://www.w3.org/TR/webdriver1/#element-send-keys.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLICK"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dCLICK-function"></span><dl>
+<dt id="index-ELEMENT_002dCLICK">CL-SELENIUM: <strong>ELEMENT-CLICK</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>The <var>Element</var> Click command scrolls into view the <var>element</var> if it is not already pointer-interactable, and clicks its in-view center point.<br>
+<br>
+If the <var>element</var>âs center point is obscured by another <var>element</var>, an <var>element</var> click intercepted error is returned. If the <var>element</var> is outside the viewport, an <var>element</var> not interactable error is returned.<br>
+<br>
+See: https://www.w3.org/TR/webdriver1/#element-click.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aLOG_002dTYPES"></span>
+<span id="CL_002dSELENIUM_003aLOG_002dTYPES-function"></span><dl>
+<dt id="index-LOG_002dTYPES">CL-SELENIUM: <strong>LOG-TYPES</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the types of logs supported by the WebDriver.<br>
+<br>
+- browser: Javascript console logs from the browser.<br>
+- client: Logs from the client side implementation of the WebDriver protocol (e.g. the Java bindings).<br>
+- driver: Logs from the internals of the driver (e.g. FirefoxDriver internals).<br>
+- performance: Logs relating to the performance characteristics of the page under test (e.g. resource load timings).<br>
+- server: Logs from within the selenium server.<br>
+<br>
+See: https://github.com/SeleniumHQ/selenium/wiki/Logging.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aFIND_002dELEMENTS"></span>
+<span id="CL_002dSELENIUM_003aFIND_002dELEMENTS-function"></span><dl>
+<dt id="index-FIND_002dELEMENTS">CL-SELENIUM: <strong>FIND-ELEMENTS</strong> <em>(value &amp;key (by :css-selector) (session *session*))</em></dt>
+<dd>
+<p>Find elements that match <var>VALUE</var> using location strategy in <var>BY</var>.<br>
+See See <a href="#CL_002dSELENIUM_003aFIND_002dELEMENT-function">FIND-ELEMENT</a>.<br>
+See https://www.w3.org/TR/webdriver1/#find-elements.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aMOUSE_002dMOVE_002dTO"></span>
+<span id="CL_002dSELENIUM_003aMOUSE_002dMOVE_002dTO-function"></span><dl>
+<dt id="index-MOUSE_002dMOVE_002dTO">CL-SELENIUM: <strong>MOUSE-MOVE-TO</strong> <em>(x y &amp;key element (session *session*))</em></dt>
+</dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dATTRIBUTE"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dATTRIBUTE-function"></span><dl>
+<dt id="index-ELEMENT_002dATTRIBUTE">CL-SELENIUM: <strong>ELEMENT-ATTRIBUTE</strong> <em>(element name &amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the <var>ELEMENT</var>&rsquo;s attribute named <var>NAME</var>.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aSWITCH_002dTO_002dFRAME"></span>
+<span id="CL_002dSELENIUM_003aSWITCH_002dTO_002dFRAME-function"></span><dl>
+<dt id="index-SWITCH_002dTO_002dFRAME">CL-SELENIUM: <strong>SWITCH-TO-FRAME</strong> <em>(id &amp;key (session *session*))</em></dt>
+<dd>
+<p>Change focus to another frame on the page. If the frame <var>id</var> is null, the server<br>
+should switch to the page&rsquo;s default content.<br>
+<br>
+In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.<br>
+<br>
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe.<br>
+See: https://en.wikipedia.org/wiki/Frame_(World_Wide_Web).
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aEXECUTE_002dSCRIPT"></span>
+<span id="CL_002dSELENIUM_003aEXECUTE_002dSCRIPT-function"></span><dl>
+<dt id="index-EXECUTE_002dSCRIPT">CL-SELENIUM: <strong>EXECUTE-SCRIPT</strong> <em>(script args &amp;key (session *session*))</em></dt>
+<dd>
+<p>Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed <var>script</var> is assumed to be synchronous and the result of evaluating the <var>script</var> is returned to the client.<br>
+<br>
+The <var>script</var> argument defines the <var>script</var> to execute in the form of a function body. The value returned by that function will be returned to the client. The function will be invoked with the provided <var>args</var> array and the values may be accessed via the arguments object in the order specified.<br>
+<br>
+Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the <var>script</var> result will be returned to the client as WebElement JSON objects.<br>
+<br>
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION-function"></span><dl>
+<dt id="index-START_002dINTERACTIVE_002dSESSION">CL-SELENIUM: <strong>START-INTERACTIVE-SESSION</strong> <em>(&amp;rest capabilities)</em></dt>
+<dd>
+<p>Start an interactive session. Use this to interact with Selenium driver from a REPL.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aSCREENSHOT"></span>
+<span id="CL_002dSELENIUM_003aSCREENSHOT-function"></span><dl>
+<dt id="index-SCREENSHOT">CL-SELENIUM: <strong>SCREENSHOT</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewportâs framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.<br>
+See: https://www.w3.org/TR/webdriver2/#screen-capture.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aFIND_002dELEMENT"></span>
+<span id="CL_002dSELENIUM_003aFIND_002dELEMENT-function"></span><dl>
+<dt id="index-FIND_002dELEMENT">CL-SELENIUM: <strong>FIND-ELEMENT</strong> <em>(value &amp;key (by :css-selector) (session *session*))</em></dt>
+<dd>
+<p>The Find Element command is used to find an element in the current browsing context that can be used as the web element context for future element-centric commands.<br>
+<br>
+For example, consider this pseudo code which retrieves an element with the #toremove ID and uses this as the argument for a script it injects to remove it from the HTML document:<br>
+<br>
+let body See &lsquo;=&rsquo; <var>session</var>.find.css(&quot;#toremove&quot;);<br>
+<var>session</var>.execute(&quot;arguments[0].remove()&quot;, [body]);<br>
+<br>
+The <var>BY</var> parameter represents the element location strategy.<br>
+<br>
+It can be one of:<br>
+- <var>:id</var> <var>:</var> Finds element <var>by</var> id.<br>
+- <var>:class-name</var> <var>:</var> Finds element <var>by</var> class name.<br>
+- <var>:css-selector</var> <var>:</var> Returns element that matches css selector.<br>
+- <var>:link-text</var> <var>:</var> Returns element that matches &lt;a&gt; element text.<br>
+- <var>:partial-link-text:</var> Returns element that matches &lt;a&gt; element text partially.<br>
+- <var>:tag-name:</var> Returns element that matches tag name.<br>
+- <var>:xpath:</var> Returns element that matches the XPath expression.<br>
+<br>
+If result is empty, a See &lsquo;HANDLE-FIND-ERROR&rsquo; is signaled.<br>
+<br>
+See: https://www.w3.org/TR/webdriver1/#dfn-find-element.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aMOUSE_002dCLICK"></span>
+<span id="CL_002dSELENIUM_003aMOUSE_002dCLICK-function"></span><dl>
+<dt id="index-MOUSE_002dCLICK">CL-SELENIUM: <strong>MOUSE-CLICK</strong> <em>(button &amp;key (session *session*))</em></dt>
+</dl>
+
+<span id="index-CL_002dSELENIUM_003aUSE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aUSE_002dSESSION-function"></span><dl>
+<dt id="index-USE_002dSESSION">CL-SELENIUM: <strong>USE-SESSION</strong> <em>(session)</em></dt>
+<dd>
+<p>Make <var>SESSION</var> the current <var>session</var>.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aPAGE_002dTITLE"></span>
+<span id="CL_002dSELENIUM_003aPAGE_002dTITLE-function"></span><dl>
+<dt id="index-PAGE_002dTITLE">CL-SELENIUM: <strong>PAGE-TITLE</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>This command returns the document title of the current top-level browsing context, equivalent to calling document.title. <br>
+See: https://www.w3.org/TR/webdriver2/#get-title.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aLOGS"></span>
+<span id="CL_002dSELENIUM_003aLOGS-function"></span><dl>
+<dt id="index-LOGS">CL-SELENIUM: <strong>LOGS</strong> <em>(type &amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the logs of a particular <var>TYPE</var>.<br>
+See: See <a href="#CL_002dSELENIUM_003aLOG_002dTYPES-function">LOG-TYPES</a>.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dLOCATION"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dLOCATION-function"></span><dl>
+<dt id="index-ELEMENT_002dLOCATION">CL-SELENIUM: <strong>ELEMENT-LOCATION</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the <var>ELEMENT</var>&rsquo;s location.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dTEXT"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dTEXT-function"></span><dl>
+<dt id="index-ELEMENT_002dTEXT">CL-SELENIUM: <strong>ELEMENT-TEXT</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>The Get <var>Element</var> Text command intends to return an <var>element</var>âs text âas renderedâ. An <var>element</var>âs rendered text is also used for locating a elements by their link text and partial link text.<br>
+<br>
+See: https://www.w3.org/TR/webdriver1/#get-element-text.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aACTIVE_002dELEMENT"></span>
+<span id="CL_002dSELENIUM_003aACTIVE_002dELEMENT-function"></span><dl>
+<dt id="index-ACTIVE_002dELEMENT">CL-SELENIUM: <strong>ACTIVE-ELEMENT</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the active element of the current browsing contextâs document.<br>
+The active element is the Element within the DOM that currently has focus.<br>
+If there&rsquo;s no active element, an error is signaled.<br>
+<br>
+See: https://www.w3.org/TR/webdriver2/#get-active-element.<br>
+See: https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aMAKE_002dCOOKIE"></span>
+<span id="CL_002dSELENIUM_003aMAKE_002dCOOKIE-function"></span><dl>
+<dt id="index-MAKE_002dCOOKIE">CL-SELENIUM: <strong>MAKE-COOKIE</strong> <em>(name value &amp;key path domain secure expiry)</em></dt>
+</dl>
+
+<span id="index-CL_002dSELENIUM_003aSTOP_002dINTERACTIVE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aSTOP_002dINTERACTIVE_002dSESSION-function"></span><dl>
+<dt id="index-STOP_002dINTERACTIVE_002dSESSION">CL-SELENIUM: <strong>STOP-INTERACTIVE-SESSION</strong> <em>nil</em></dt>
+<dd>
+<p>Stop an interactive session.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dTAGNAME"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dTAGNAME-function"></span><dl>
+<dt id="index-ELEMENT_002dTAGNAME">CL-SELENIUM: <strong>ELEMENT-TAGNAME</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the <var>ELEMENT</var>&rsquo;s tag name.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aREFRESH"></span>
+<span id="CL_002dSELENIUM_003aREFRESH-function"></span><dl>
+<dt id="index-REFRESH">CL-SELENIUM: <strong>REFRESH</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Refresh the current page.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dDISPLAYED"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dDISPLAYED-function"></span><dl>
+<dt id="index-ELEMENT_002dDISPLAYED">CL-SELENIUM: <strong>ELEMENT-DISPLAYED</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Although WebDriver does not define a primitive to ascertain the visibility of an <var>element</var> in the viewport, we acknowledge that it is an important feature for many users. Here we include a recommended approach which will give a simplified approximation of an <var>element</var>âs visibility, but please note that it relies only on tree-traversal, and only covers a subset of visibility checks.<br>
+<br>
+The visibility of an <var>element</var> is guided by what is perceptually visible to the human eye. In this context, an <var>element</var>&rsquo;s displayedness does not relate to the visibility or display style properties.<br>
+<br>
+The approach recommended to implementors to ascertain an <var>element</var>&rsquo;s visibility was originally developed by the Selenium project, and is based on crude approximations about an <var>element</var>&rsquo;s nature and relationship in the tree. An <var>element</var> is in general to be considered visible if any part of it is drawn on the canvas within the boundaries of the viewport.<br>
+<br>
+The <var>element</var> displayed algorithm is a boolean state where true signifies that the <var>element</var> is displayed and false signifies that the <var>element</var> is not displayed. To compute the state on <var>element</var>, invoke the Call(bot.dom.isShown, null, <var>element</var>). If doing so does not produce an error, return the return value from this function call. Otherwise return an error with error code unknown error.<br>
+<br>
+This function is typically exposed to See &lsquo;GET&rsquo; requests with a URI Template of /session/session id/element/element id/displayed.<br>
+<br>
+See: https://www.w3.org/TR/webdriver1/#element-displayedness.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aDELETE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aDELETE_002dSESSION-function"></span><dl>
+<dt id="index-DELETE_002dSESSION">CL-SELENIUM: <strong>DELETE-SESSION</strong> <em>(session)</em></dt>
+<dd>
+<p>Delete the WebDriver <var>SESSION</var>.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aMAKE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aMAKE_002dSESSION-function"></span><dl>
+<dt id="index-MAKE_002dSESSION">CL-SELENIUM: <strong>MAKE-SESSION</strong> <em>(&amp;key (browser-name :chrome) browser-version platform-name platform-version accept-ssl-certs additional-capabilities)</em></dt>
+<dd>
+<p>Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.<br>
+<br>
+See: https://www.w3.org/TR/webdriver1/#new-session.<br>
+See: https://www.w3.org/TR/webdriver1/#capabilities.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aKEY"></span>
+<span id="CL_002dSELENIUM_003aKEY-function"></span><dl>
+<dt id="index-KEY">CL-SELENIUM: <strong>KEY</strong> <em>(key)</em></dt>
+</dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLEAR"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dCLEAR-function"></span><dl>
+<dt id="index-ELEMENT_002dCLEAR">CL-SELENIUM: <strong>ELEMENT-CLEAR</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Clear the contents of <var>ELEMENT</var> (for example, a form field <var>element</var>).<br>
+<br>
+See: https://www.w3.org/TR/webdriver1/#dfn-element-clear.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aBACK"></span>
+<span id="CL_002dSELENIUM_003aBACK-function"></span><dl>
+<dt id="index-BACK">CL-SELENIUM: <strong>BACK</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>This command causes the browser to traverse one step backward in the joint <var>session</var> history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.<br>
+See: https://www.w3.org/TR/webdriver1/#dfn-back.
+</p></dd></dl>
+
+<span id="Classes"></span><h3 class="heading">Classes</h3>
+<span id="index-CL_002dSELENIUM_003aCOOKIE-1"></span>
+<span id="CL_002dSELENIUM_003aCOOKIE-class"></span><dl>
+<dt id="index-COOKIE-1">CL-SELENIUM: <strong>COOKIE</strong></dt>
+</dl>
+
+<span id="index-CL_002dSELENIUM_003aNO_002dSUCH_002dELEMENT_002dERROR"></span>
+<span id="CL_002dSELENIUM_003aNO_002dSUCH_002dELEMENT_002dERROR-class"></span><dl>
+<dt id="index-NO_002dSUCH_002dELEMENT_002dERROR">CL-SELENIUM: <strong>NO-SUCH-ELEMENT-ERROR</strong></dt>
+<dd>
+<p>Error signaled when no such element is found.
+</p></dd></dl>
+
+
+
+<hr>
+<span id="Index"></span><div class="header">
+<p>
+Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Index-1"></span><h2 class="chapter">6 Index</h2>
+
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Index_cp_letter-C"><b>C</b></a>
+ &nbsp; 
+</td></tr></table>
+<table class="index-cp" border="0">
+<tr><td></td><th align="left">Index Entry</th><td>&nbsp;</td><th align="left"> Section</th></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_cp_letter-C">C</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-cl_002dselenium_002dwebdriver">cl-selenium-webdriver</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Top">Top</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-cl_002dselenium_002dwebdriver-1">cl-selenium-webdriver</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Top">Top</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+</table>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Index_cp_letter-C"><b>C</b></a>
+ &nbsp; 
+</td></tr></table>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Index_fn_letter-A"><b>A</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-B"><b>B</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-C"><b>C</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-D"><b>D</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-E"><b>E</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-F"><b>F</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-K"><b>K</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-L"><b>L</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-M"><b>M</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-P"><b>P</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-R"><b>R</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-S"><b>S</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-U"><b>U</b></a>
+ &nbsp; 
+</td></tr></table>
+<table class="index-fn" border="0">
+<tr><td></td><th align="left">Index Entry</th><td>&nbsp;</td><th align="left"> Section</th></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-A">A</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ACTIVE_002dELEMENT"><code>ACTIVE-ELEMENT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-B">B</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-BACK"><code>BACK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-C">C</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aACTIVE_002dELEMENT"><code>CL-SELENIUM:ACTIVE-ELEMENT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aBACK"><code>CL-SELENIUM:BACK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW"><code>CL-SELENIUM:CLOSE-CURRENT-WINDOW</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aCOOKIE"><code>CL-SELENIUM:COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aDELETE_002dSESSION"><code>CL-SELENIUM:DELETE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dATTRIBUTE"><code>CL-SELENIUM:ELEMENT-ATTRIBUTE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dCLEAR"><code>CL-SELENIUM:ELEMENT-CLEAR</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dCLICK"><code>CL-SELENIUM:ELEMENT-CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dDISPLAYED"><code>CL-SELENIUM:ELEMENT-DISPLAYED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dLOCATION"><code>CL-SELENIUM:ELEMENT-LOCATION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS"><code>CL-SELENIUM:ELEMENT-SEND-KEYS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dTAGNAME"><code>CL-SELENIUM:ELEMENT-TAGNAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dTEXT"><code>CL-SELENIUM:ELEMENT-TEXT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aEXECUTE_002dSCRIPT"><code>CL-SELENIUM:EXECUTE-SCRIPT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aFIND_002dELEMENT"><code>CL-SELENIUM:FIND-ELEMENT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aFIND_002dELEMENTS"><code>CL-SELENIUM:FIND-ELEMENTS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aKEY"><code>CL-SELENIUM:KEY</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aLOG_002dTYPES"><code>CL-SELENIUM:LOG-TYPES</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aLOGS"><code>CL-SELENIUM:LOGS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aMAKE_002dCOOKIE"><code>CL-SELENIUM:MAKE-COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aMAKE_002dSESSION"><code>CL-SELENIUM:MAKE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aMOUSE_002dCLICK"><code>CL-SELENIUM:MOUSE-CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aMOUSE_002dMOVE_002dTO"><code>CL-SELENIUM:MOUSE-MOVE-TO</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aPAGE_002dTITLE"><code>CL-SELENIUM:PAGE-TITLE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aREFRESH"><code>CL-SELENIUM:REFRESH</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSCREENSHOT"><code>CL-SELENIUM:SCREENSHOT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION"><code>CL-SELENIUM:START-INTERACTIVE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSTOP_002dINTERACTIVE_002dSESSION"><code>CL-SELENIUM:STOP-INTERACTIVE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSWITCH_002dTO_002dFRAME"><code>CL-SELENIUM:SWITCH-TO-FRAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aURL"><code>CL-SELENIUM:URL</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aUSE_002dSESSION"><code>CL-SELENIUM:USE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CLOSE_002dCURRENT_002dWINDOW"><code>CLOSE-CURRENT-WINDOW</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-COOKIE"><code>COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-D">D</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-DELETE_002dSESSION"><code>DELETE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-E">E</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dATTRIBUTE"><code>ELEMENT-ATTRIBUTE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dCLEAR"><code>ELEMENT-CLEAR</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dCLICK"><code>ELEMENT-CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dDISPLAYED"><code>ELEMENT-DISPLAYED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dLOCATION"><code>ELEMENT-LOCATION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dSEND_002dKEYS"><code>ELEMENT-SEND-KEYS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dTAGNAME"><code>ELEMENT-TAGNAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dTEXT"><code>ELEMENT-TEXT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-EXECUTE_002dSCRIPT"><code>EXECUTE-SCRIPT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-F">F</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-FIND_002dELEMENT"><code>FIND-ELEMENT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-FIND_002dELEMENTS"><code>FIND-ELEMENTS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-K">K</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-KEY"><code>KEY</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-L">L</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-LOG_002dTYPES"><code>LOG-TYPES</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-LOGS"><code>LOGS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-M">M</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-MAKE_002dCOOKIE"><code>MAKE-COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-MAKE_002dSESSION"><code>MAKE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-MOUSE_002dCLICK"><code>MOUSE-CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-MOUSE_002dMOVE_002dTO"><code>MOUSE-MOVE-TO</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-P">P</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-PAGE_002dTITLE"><code>PAGE-TITLE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-R">R</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-REFRESH"><code>REFRESH</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-S">S</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-SCREENSHOT"><code>SCREENSHOT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-START_002dINTERACTIVE_002dSESSION"><code>START-INTERACTIVE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-STOP_002dINTERACTIVE_002dSESSION"><code>STOP-INTERACTIVE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-SWITCH_002dTO_002dFRAME"><code>SWITCH-TO-FRAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_fn_letter-U">U</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-URL"><code>URL</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-USE_002dSESSION"><code>USE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#API">API</a></td></tr>
+<tr><td colspan="4"> <hr></td></tr>
+</table>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Index_fn_letter-A"><b>A</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-B"><b>B</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-C"><b>C</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-D"><b>D</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-E"><b>E</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-F"><b>F</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-K"><b>K</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-L"><b>L</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-M"><b>M</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-P"><b>P</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-R"><b>R</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-S"><b>S</b></a>
+ &nbsp; 
+<a class="summary-letter" href="#Index_fn_letter-U"><b>U</b></a>
+ &nbsp; 
+</td></tr></table>
+
+<hr>
+
+
+
+</body>
+</html>
