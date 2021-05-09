@@ -2,22 +2,22 @@
 
 (defun (setf url) (url &key (session *session*))
   "The command causes the user agent to navigate the current top-level browsing context to a new location.
-See: https://www.w3.org/TR/webdriver1/#dfn-navigate-to."
+See: https://www.w3.org/TR/webdriver1/#dfn-navigate-to ."
   (http-post-value (session-path session "/url") `(:url ,url)))
 
 (defun url (&key (session *session*))
   "Get the current url in session.
-See: https://www.w3.org/TR/webdriver1/#dfn-get-current-url."
+See: https://www.w3.org/TR/webdriver1/#dfn-get-current-url ."
   (http-get-value (session-path session "/url")))
 
 (defun back (&key (session *session*))
   "This command causes the browser to traverse one step backward in the joint session history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.
-See: https://www.w3.org/TR/webdriver1/#dfn-back."
+See: https://www.w3.org/TR/webdriver1/#dfn-back ."
   (http-post-check (session-path session "/back")))
 
 (defun page-title (&key (session *session*))
   "This command returns the document title of the current top-level browsing context, equivalent to calling document.title. 
-See: https://www.w3.org/TR/webdriver2/#get-title."
+See: https://www.w3.org/TR/webdriver2/#get-title ."
   (http-get-value (session-path session "/title")))
 
 (defclass element ()
@@ -61,7 +61,7 @@ It can be one of:
 
 If result is empty, a HANDLE-FIND-ERROR is signaled.
 
-See: https://www.w3.org/TR/webdriver1/#dfn-find-element."
+See: https://www.w3.org/TR/webdriver1/#dfn-find-element ."
   (handler-case
       (let ((response (http-post (session-path session "/element") `(:value ,value :using ,(by by)))))
         ;; TODO: find/write json -> clos
@@ -74,7 +74,7 @@ See: https://www.w3.org/TR/webdriver1/#dfn-find-element."
 (defun find-elements (value &key (by :css-selector) (session *session*))
   "Find elements that match VALUE using location strategy in BY.
 See FIND-ELEMENT.
-See https://www.w3.org/TR/webdriver1/#find-elements."
+See https://www.w3.org/TR/webdriver1/#find-elements ."
   (handler-case
       (let ((response (http-post (session-path session "/elements") `(:value ,value :using ,(by by)))))
         (loop for ((nil . id)) in (cdr (assoc :value response))
@@ -83,7 +83,7 @@ See https://www.w3.org/TR/webdriver1/#find-elements."
 
 (deftype element-location-strategy ()
   "An element location strategy is an enumerated attribute deciding what technique should be used to search for elements in the current browsing context.
-See: https://www.w3.org/TR/webdriver1/#dfn-strategy."
+See: https://www.w3.org/TR/webdriver1/#dfn-strategy ."
   `(member
     :id
     :xpath :link-text
@@ -92,7 +92,7 @@ See: https://www.w3.org/TR/webdriver1/#dfn-strategy."
 
 (defun by (type)
   "An element location strategy is an enumerated attribute deciding what technique should be used to search for elements in the current browsing context.
-See: https://www.w3.org/TR/webdriver1/#dfn-strategy."
+See: https://www.w3.org/TR/webdriver1/#dfn-strategy ."
   (ecase type
     (:id "id")
     (:xpath "xpath")
@@ -122,7 +122,7 @@ See: https://www.w3.org/TR/webdriver1/#dfn-element-clear."
 (defun element-send-keys (element keys &key (session *session*))
   "The Element Send Keys command scrolls into view the form control element and then sends the provided keys to the element. In case the element is not keyboard-interactable, an element not interactable error is returned.
 
-See: https://www.w3.org/TR/webdriver1/#element-send-keys."
+See: https://www.w3.org/TR/webdriver1/#element-send-keys ."
   (check-type keys (string))
   (http-post-check (session-path session "/element/~a/value"
                                  (element-id element))
@@ -133,7 +133,7 @@ See: https://www.w3.org/TR/webdriver1/#element-send-keys."
 
 If the element’s center point is obscured by another element, an element click intercepted error is returned. If the element is outside the viewport, an element not interactable error is returned.
 
-See: https://www.w3.org/TR/webdriver1/#element-click."
+See: https://www.w3.org/TR/webdriver1/#element-click ."
   
   (http-post-check (session-path session "/element/~a/click"
                                  (element-id element))))
@@ -141,14 +141,14 @@ See: https://www.w3.org/TR/webdriver1/#element-click."
 (defun element-text (element &key (session *session*))
   "The Get Element Text command intends to return an element’s text “as rendered”. An element’s rendered text is also used for locating a elements by their link text and partial link text.
 
-See: https://www.w3.org/TR/webdriver1/#get-element-text."
+See: https://www.w3.org/TR/webdriver1/#get-element-text ."
   
   (http-get-value (session-path session "/element/~a/text" (element-id element))))
 
 (defun element-displayed (element &key (session *session*))
   "Returns T if ELEMENT is visible.
 
-See: https://www.w3.org/TR/webdriver1/#element-displayedness."
+See: https://www.w3.org/TR/webdriver1/#element-displayedness ."
   (http-get-value (session-path session "/element/~a/displayed" (element-id element))))
 
 (defun element-location (element &key (session *session*))
@@ -172,7 +172,7 @@ See: https://www.w3.org/TR/webdriver1/#element-displayedness."
 - performance: Logs relating to the performance characteristics of the page under test (e.g. resource load timings).
 - server: Logs from within the selenium server.
 
-See: https://github.com/SeleniumHQ/selenium/wiki/Logging."
+See: https://github.com/SeleniumHQ/selenium/wiki/Logging ."
   (http-get-value (session-path session "/log/types")))
 
 (defun logs (type &key (session *session*))
@@ -182,7 +182,8 @@ See: LOG-TYPES."
 
 (defun screenshot (&key (session *session*))
   "Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewport’s framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.
-See: https://www.w3.org/TR/webdriver2/#screen-capture."
+
+See: https://www.w3.org/TR/webdriver2/#screen-capture ."
   (http-get-value (session-path session "/screenshot")))
 
 (defclass cookie ()
@@ -209,8 +210,8 @@ See: https://www.w3.org/TR/webdriver2/#screen-capture."
 (defun cookie (&key (session *session*))
   "Retrieve all cookies visible to the current page.
 
-See: https://www.w3.org/TR/webdriver1/#get-all-cookies.
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie."
+See: https://www.w3.org/TR/webdriver1/#get-all-cookies .
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie ."
   (http-get-value (session-path session "/cookie")))
 
 (defun refresh (&key (session *session*))
@@ -223,8 +224,8 @@ should switch to the page's default content.
 
 In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.
 
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe.
-See: https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)."
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe .
+See: https://en.wikipedia.org/wiki/Frame_(World_Wide_Web) ."
   (http-post-check (session-path session "/frame")
                    `(:id ,id)))
 
@@ -239,7 +240,7 @@ The script argument defines the script to execute in the form of a function body
 
 Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the script result will be returned to the client as WebElement JSON objects.
 
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute."
+See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute ."
   (check-type script string)
   (check-type args list)
   (http-post-value (session-path session "/execute")
