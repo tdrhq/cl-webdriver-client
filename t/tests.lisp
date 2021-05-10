@@ -106,8 +106,47 @@
     ;; find-elements does not error
     (ok (null (find-elements "foo")))
     ;; find-element errors
-    (is-error (find-element "foo") 'error)
+    (is-error (find-element "foo") 'cl-selenium:no-such-element-error)
     (ok (find-element "body"))
     ))
+
+(subtest "element-text"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (is (element-text (find-element "Change" :by :partial-link-text)) "Change the page title!")))
+
+(subtest "element-location"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (let ((location (element-location (find-element "Change" :by :partial-link-text))))
+      (ok (assoc :x location))
+      (ok (assoc :y location)))))
+
+(subtest "element-tagname"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (is (element-tagname (find-element "[name=changeable]")) "input")))
+
+(subtest "element-attribute"
+  (with-test-session ()
+    (setf (url) (test-file-url "formPage.html"))
+    (let ((input (find-element "[name=id-name1]")))
+      (element-clear input)
+      (element-send-keys input "cl-cl-selenium-webdriver")
+      (is (element-attribute input "value") "cl-cl-selenium-webdriver"))))
+
+(subtest "active-element"
+  (with-test-session ()
+    (setf (url) (test-file-url "formPage.html"))
+    (let ((input (find-element "[name=id-name1]")))
+      (element-send-keys input "foo")
+      (ok (element-id (active-element)))
+      (is (element-attribute (active-element) "name") "id-name1"))))
+
+(subtest "cookie"
+  (with-test-session ()
+    (setf (url) "https://www.google.com?hl=en")
+    (ok (setf (cookie) (make-cookie "foo" "bar")))
+    (is (get-cookie (cookie) "foo") "bar")))
 
 (finalize)

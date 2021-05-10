@@ -11,6 +11,9 @@
 
 ;; json
 
+(defmethod json:encode-json ((object (eql :false)) &optional (stream json:*json-output*))
+  (write-string "false" stream))
+
 (defun encode (plist)
   (cl-json:encode-json-plist-to-string plist))
 

@@ -194,6 +194,20 @@ See: https://www.w3.org/TR/webdriver2/#screen-capture ."
    (secure :initarg :secure)
    (expiry :initarg :expiry)))
 
+(defmethod json:encode-json ((cookie cookie) &optional (stream json:*json-output*))
+  (with-slots (name value path domain secure expiry) cookie
+    (json:with-object (stream)
+      (json:encode-object-member "name" name stream)
+      (json:encode-object-member "value" value stream)
+      (when domain
+	(json:encode-object-member "domain" domain stream))
+      (when path
+	(json:encode-object-member "path" path stream))
+      (when secure
+	(json:encode-object-member "secure" secure stream))
+      (when expiry
+	(json:encode-object-member "expiry" expiry stream)))))
+
 (defun make-cookie (name value &key path domain secure expiry)
   (make-instance 'cookie
                  :name name
