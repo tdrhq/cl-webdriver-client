@@ -204,6 +204,11 @@ See: https://www.w3.org/TR/webdriver2/#screen-capture ."
                  :expiry expiry))
 
 (defun (setf cookie) (cookie &key (session *session*))
+  "Create a cookie in the cookie store associated with the active document’s address using cookie name name, cookie value value, and an attribute-value list of the following cookie concepts listed in the table for cookie conversion from data:
+
+If there is an error during this step, return error with error code unable to set cookie. 
+
+See: https://www.w3.org/TR/webdriver1/#dfn-adding-a-cookie ."
   (check-type cookie cookie)
   (http-post-check (session-path session "/cookie") `(:cookie ,cookie)))
 
