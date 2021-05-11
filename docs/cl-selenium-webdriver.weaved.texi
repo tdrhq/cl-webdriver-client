@@ -226,6 +226,12 @@ Execute @var{BODY} inside a Selenium session.@*
 See: @clref{CL-SELENIUM, MAKE-SESSION, function}
 @endcldefmacro
 
+@heading Generic functions
+@cldefgeneric {CL-SELENIUM, ELEMENT-ID, (sb-pcl::object)}
+
+
+@endcldefgeneric
+
 @heading Functions
 @cldefun {CL-SELENIUM, CLOSE-CURRENT-WINDOW, (&key (session *session*))}
 
