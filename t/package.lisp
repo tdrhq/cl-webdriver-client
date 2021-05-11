@@ -4,8 +4,7 @@
 (in-package :cl-selenium-test)
 
 ;; slime detection
-(setf prove:*enable-colors*
-      (string/= (package-name (symbol-package (synonym-stream-symbol *standard-output*))) "SWANK"))
+(setf prove:*enable-colors* (interactive-stream-p *standard-input*))
 
 (defparameter *headless* '((:chrome-options . ((:args . #("--headless"))))))
 (setf *timeout* 5)
