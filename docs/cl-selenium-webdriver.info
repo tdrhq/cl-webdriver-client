@@ -223,6 +223,15 @@ File: cl-selenium-webdriver.info,  Node: CL-SELENIUM package,  Next: CL-SELENIUM
 External definitions
 ====================
 
+Macros
+======
+
+ -- CL-SELENIUM: WITH-SESSION ((&rest capabilities) &body body)
+
+     Execute BODY inside a Selenium session.
+
+     See: *Note MAKE-SESSION: CL-SELENIUM:MAKE-SESSION function.
+
 Functions
 =========
 
@@ -346,6 +355,8 @@ Functions
 
      Start an interactive session.  Use this to interact with Selenium
      driver from a REPL.
+
+     See: *Note MAKE-SESSION: CL-SELENIUM:MAKE-SESSION function.
 
  -- CL-SELENIUM: SCREENSHOT (&key (session *session*))
 
@@ -492,9 +503,14 @@ Classes
 
  -- CL-SELENIUM: COOKIE
 
+     Class precedence list: 'cookie, standard-object, t'
+
  -- CL-SELENIUM: NO-SUCH-ELEMENT-ERROR
 
      Error signaled when no such element is found.
+
+     Class precedence list: 'no-such-element-error, find-error, error,
+     serious-condition, condition, t'
 
 
 File: cl-selenium-webdriver.info,  Node: CL-SELENIUM-UTILS package,  Prev: CL-SELENIUM package,  Up: API
@@ -606,10 +622,10 @@ File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
  [index ]
 * Menu:
 
-* ACTIVE-ELEMENT:                        CL-SELENIUM package. (line 219)
+* ACTIVE-ELEMENT:                        CL-SELENIUM package. (line 230)
 * ATTR:                                  CL-SELENIUM-UTILS package.
                                                               (line  63)
-* BACK:                                  CL-SELENIUM package. (line 273)
+* BACK:                                  CL-SELENIUM package. (line 284)
 * CL-SELENIUM-UTILS:ATTR:                CL-SELENIUM-UTILS package.
                                                               (line  63)
 * CL-SELENIUM-UTILS:CLASSLIST:           CL-SELENIUM-UTILS package.
@@ -634,88 +650,90 @@ File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
                                                               (line  51)
 * CL-SELENIUM-UTILS:WAIT-FOR:            CL-SELENIUM-UTILS package.
                                                               (line  42)
-* CL-SELENIUM:ACTIVE-ELEMENT:            CL-SELENIUM package. (line 219)
-* CL-SELENIUM:BACK:                      CL-SELENIUM package. (line 273)
-* CL-SELENIUM:CLOSE-CURRENT-WINDOW:      CL-SELENIUM package. (line  20)
-* CL-SELENIUM:COOKIE:                    CL-SELENIUM package. (line  24)
-* CL-SELENIUM:DELETE-SESSION:            CL-SELENIUM package. (line 251)
-* CL-SELENIUM:ELEMENT-ATTRIBUTE:         CL-SELENIUM package. (line  94)
-* CL-SELENIUM:ELEMENT-CLEAR:             CL-SELENIUM package. (line 267)
-* CL-SELENIUM:ELEMENT-CLICK:             CL-SELENIUM package. (line  48)
-* CL-SELENIUM:ELEMENT-DISPLAYED:         CL-SELENIUM package. (line 245)
-* CL-SELENIUM:ELEMENT-LOCATION:          CL-SELENIUM package. (line 207)
-* CL-SELENIUM:ELEMENT-SEND-KEYS:         CL-SELENIUM package. (line  38)
-* CL-SELENIUM:ELEMENT-TAGNAME:           CL-SELENIUM package. (line 237)
-* CL-SELENIUM:ELEMENT-TEXT:              CL-SELENIUM package. (line 211)
-* CL-SELENIUM:EXECUTE-SCRIPT:            CL-SELENIUM package. (line 114)
-* CL-SELENIUM:FIND-ELEMENT:              CL-SELENIUM package. (line 150)
-* CL-SELENIUM:FIND-ELEMENTS:             CL-SELENIUM package. (line  76)
-* CL-SELENIUM:KEY:                       CL-SELENIUM package. (line 265)
-* CL-SELENIUM:LOG-TYPES:                 CL-SELENIUM package. (line  61)
-* CL-SELENIUM:LOGS:                      CL-SELENIUM package. (line 202)
-* CL-SELENIUM:MAKE-COOKIE:               CL-SELENIUM package. (line 231)
-* CL-SELENIUM:MAKE-SESSION:              CL-SELENIUM package. (line 255)
-* CL-SELENIUM:MOUSE-CLICK:               CL-SELENIUM package. (line 182)
-* CL-SELENIUM:MOUSE-MOVE-TO:             CL-SELENIUM package. (line  83)
-* CL-SELENIUM:PAGE-TITLE:                CL-SELENIUM package. (line 196)
-* CL-SELENIUM:REFRESH:                   CL-SELENIUM package. (line 241)
-* CL-SELENIUM:SCREENSHOT:                CL-SELENIUM package. (line 141)
-* CL-SELENIUM:START-INTERACTIVE-SESSION: CL-SELENIUM package. (line 136)
-* CL-SELENIUM:STOP-INTERACTIVE-SESSION:  CL-SELENIUM package. (line 233)
-* CL-SELENIUM:SWITCH-TO-FRAME:           CL-SELENIUM package. (line  99)
-* CL-SELENIUM:URL:                       CL-SELENIUM package. (line  33)
-* CL-SELENIUM:USE-SESSION:               CL-SELENIUM package. (line 192)
+* CL-SELENIUM:ACTIVE-ELEMENT:            CL-SELENIUM package. (line 230)
+* CL-SELENIUM:BACK:                      CL-SELENIUM package. (line 284)
+* CL-SELENIUM:CLOSE-CURRENT-WINDOW:      CL-SELENIUM package. (line  29)
+* CL-SELENIUM:COOKIE:                    CL-SELENIUM package. (line  33)
+* CL-SELENIUM:DELETE-SESSION:            CL-SELENIUM package. (line 262)
+* CL-SELENIUM:ELEMENT-ATTRIBUTE:         CL-SELENIUM package. (line 103)
+* CL-SELENIUM:ELEMENT-CLEAR:             CL-SELENIUM package. (line 278)
+* CL-SELENIUM:ELEMENT-CLICK:             CL-SELENIUM package. (line  57)
+* CL-SELENIUM:ELEMENT-DISPLAYED:         CL-SELENIUM package. (line 256)
+* CL-SELENIUM:ELEMENT-LOCATION:          CL-SELENIUM package. (line 218)
+* CL-SELENIUM:ELEMENT-SEND-KEYS:         CL-SELENIUM package. (line  47)
+* CL-SELENIUM:ELEMENT-TAGNAME:           CL-SELENIUM package. (line 248)
+* CL-SELENIUM:ELEMENT-TEXT:              CL-SELENIUM package. (line 222)
+* CL-SELENIUM:EXECUTE-SCRIPT:            CL-SELENIUM package. (line 123)
+* CL-SELENIUM:FIND-ELEMENT:              CL-SELENIUM package. (line 161)
+* CL-SELENIUM:FIND-ELEMENTS:             CL-SELENIUM package. (line  85)
+* CL-SELENIUM:KEY:                       CL-SELENIUM package. (line 276)
+* CL-SELENIUM:LOG-TYPES:                 CL-SELENIUM package. (line  70)
+* CL-SELENIUM:LOGS:                      CL-SELENIUM package. (line 213)
+* CL-SELENIUM:MAKE-COOKIE:               CL-SELENIUM package. (line 242)
+* CL-SELENIUM:MAKE-SESSION:              CL-SELENIUM package. (line 266)
+* CL-SELENIUM:MOUSE-CLICK:               CL-SELENIUM package. (line 193)
+* CL-SELENIUM:MOUSE-MOVE-TO:             CL-SELENIUM package. (line  92)
+* CL-SELENIUM:PAGE-TITLE:                CL-SELENIUM package. (line 207)
+* CL-SELENIUM:REFRESH:                   CL-SELENIUM package. (line 252)
+* CL-SELENIUM:SCREENSHOT:                CL-SELENIUM package. (line 152)
+* CL-SELENIUM:START-INTERACTIVE-SESSION: CL-SELENIUM package. (line 145)
+* CL-SELENIUM:STOP-INTERACTIVE-SESSION:  CL-SELENIUM package. (line 244)
+* CL-SELENIUM:SWITCH-TO-FRAME:           CL-SELENIUM package. (line 108)
+* CL-SELENIUM:URL:                       CL-SELENIUM package. (line  42)
+* CL-SELENIUM:USE-SESSION:               CL-SELENIUM package. (line 203)
+* CL-SELENIUM:WITH-SESSION:              CL-SELENIUM package. (line  20)
 * CLASSLIST:                             CL-SELENIUM-UTILS package.
                                                               (line  59)
 * CLASSNAME:                             CL-SELENIUM-UTILS package.
                                                               (line  47)
 * CLICK:                                 CL-SELENIUM-UTILS package.
                                                               (line  79)
-* CLOSE-CURRENT-WINDOW:                  CL-SELENIUM package. (line  20)
-* COOKIE:                                CL-SELENIUM package. (line  24)
-* DELETE-SESSION:                        CL-SELENIUM package. (line 251)
+* CLOSE-CURRENT-WINDOW:                  CL-SELENIUM package. (line  29)
+* COOKIE:                                CL-SELENIUM package. (line  33)
+* DELETE-SESSION:                        CL-SELENIUM package. (line 262)
 * ELEM:                                  CL-SELENIUM-UTILS package.
                                                               (line  71)
-* ELEMENT-ATTRIBUTE:                     CL-SELENIUM package. (line  94)
-* ELEMENT-CLEAR:                         CL-SELENIUM package. (line 267)
-* ELEMENT-CLICK:                         CL-SELENIUM package. (line  48)
-* ELEMENT-DISPLAYED:                     CL-SELENIUM package. (line 245)
-* ELEMENT-LOCATION:                      CL-SELENIUM package. (line 207)
-* ELEMENT-SEND-KEYS:                     CL-SELENIUM package. (line  38)
-* ELEMENT-TAGNAME:                       CL-SELENIUM package. (line 237)
-* ELEMENT-TEXT:                          CL-SELENIUM package. (line 211)
-* EXECUTE-SCRIPT:                        CL-SELENIUM package. (line 114)
+* ELEMENT-ATTRIBUTE:                     CL-SELENIUM package. (line 103)
+* ELEMENT-CLEAR:                         CL-SELENIUM package. (line 278)
+* ELEMENT-CLICK:                         CL-SELENIUM package. (line  57)
+* ELEMENT-DISPLAYED:                     CL-SELENIUM package. (line 256)
+* ELEMENT-LOCATION:                      CL-SELENIUM package. (line 218)
+* ELEMENT-SEND-KEYS:                     CL-SELENIUM package. (line  47)
+* ELEMENT-TAGNAME:                       CL-SELENIUM package. (line 248)
+* ELEMENT-TEXT:                          CL-SELENIUM package. (line 222)
+* EXECUTE-SCRIPT:                        CL-SELENIUM package. (line 123)
 * FIND-ELEM:                             CL-SELENIUM-UTILS package.
                                                               (line  38)
-* FIND-ELEMENT:                          CL-SELENIUM package. (line 150)
-* FIND-ELEMENTS:                         CL-SELENIUM package. (line  76)
+* FIND-ELEMENT:                          CL-SELENIUM package. (line 161)
+* FIND-ELEMENTS:                         CL-SELENIUM package. (line  85)
 * GET-COOKIE:                            CL-SELENIUM-UTILS package.
                                                               (line  34)
 * ID:                                    CL-SELENIUM-UTILS package.
                                                               (line  30)
-* KEY:                                   CL-SELENIUM package. (line 265)
-* LOG-TYPES:                             CL-SELENIUM package. (line  61)
-* LOGS:                                  CL-SELENIUM package. (line 202)
-* MAKE-COOKIE:                           CL-SELENIUM package. (line 231)
-* MAKE-SESSION:                          CL-SELENIUM package. (line 255)
-* MOUSE-CLICK:                           CL-SELENIUM package. (line 182)
-* MOUSE-MOVE-TO:                         CL-SELENIUM package. (line  83)
-* PAGE-TITLE:                            CL-SELENIUM package. (line 196)
-* REFRESH:                               CL-SELENIUM package. (line 241)
-* SCREENSHOT:                            CL-SELENIUM package. (line 141)
+* KEY:                                   CL-SELENIUM package. (line 276)
+* LOG-TYPES:                             CL-SELENIUM package. (line  70)
+* LOGS:                                  CL-SELENIUM package. (line 213)
+* MAKE-COOKIE:                           CL-SELENIUM package. (line 242)
+* MAKE-SESSION:                          CL-SELENIUM package. (line 266)
+* MOUSE-CLICK:                           CL-SELENIUM package. (line 193)
+* MOUSE-MOVE-TO:                         CL-SELENIUM package. (line  92)
+* PAGE-TITLE:                            CL-SELENIUM package. (line 207)
+* REFRESH:                               CL-SELENIUM package. (line 252)
+* SCREENSHOT:                            CL-SELENIUM package. (line 152)
 * SEND-KEY:                              CL-SELENIUM-UTILS package.
                                                               (line  55)
 * SEND-KEYS:                             CL-SELENIUM-UTILS package.
                                                               (line  67)
-* START-INTERACTIVE-SESSION:             CL-SELENIUM package. (line 136)
-* STOP-INTERACTIVE-SESSION:              CL-SELENIUM package. (line 233)
-* SWITCH-TO-FRAME:                       CL-SELENIUM package. (line  99)
+* START-INTERACTIVE-SESSION:             CL-SELENIUM package. (line 145)
+* STOP-INTERACTIVE-SESSION:              CL-SELENIUM package. (line 244)
+* SWITCH-TO-FRAME:                       CL-SELENIUM package. (line 108)
 * TEXT:                                  CL-SELENIUM-UTILS package.
                                                               (line  51)
-* URL:                                   CL-SELENIUM package. (line  33)
-* USE-SESSION:                           CL-SELENIUM package. (line 192)
+* URL:                                   CL-SELENIUM package. (line  42)
+* USE-SESSION:                           CL-SELENIUM package. (line 203)
 * WAIT-FOR:                              CL-SELENIUM-UTILS package.
                                                               (line  42)
+* WITH-SESSION:                          CL-SELENIUM package. (line  20)
 
 
 
@@ -731,54 +749,55 @@ Node: Waiting for the reaction4120
 Node: Running tests4639
 Node: API4944
 Node: CL-SELENIUM package5107
-Ref: CL-SELENIUM:CLOSE-CURRENT-WINDOW function5570
-Ref: CL-SELENIUM:COOKIE function5668
-Ref: CL-SELENIUM:URL function5949
-Ref: CL-SELENIUM:ELEMENT-SEND-KEYS function6104
-Ref: CL-SELENIUM:ELEMENT-CLICK function6498
-Ref: CL-SELENIUM:LOG-TYPES function7001
-Ref: CL-SELENIUM:FIND-ELEMENTS function7626
-Ref: CL-SELENIUM:MOUSE-MOVE-TO function7913
-Ref: CL-SELENIUM:ELEMENT-ATTRIBUTE function8405
-Ref: CL-SELENIUM:SWITCH-TO-FRAME function8540
-Ref: CL-SELENIUM:EXECUTE-SCRIPT function9120
-Ref: CL-SELENIUM:START-INTERACTIVE-SESSION function10152
-Ref: CL-SELENIUM:SCREENSHOT function10314
-Ref: CL-SELENIUM:FIND-ELEMENT function10698
-Ref: CL-SELENIUM:MOUSE-CLICK function12001
-Ref: CL-SELENIUM:USE-SESSION function12426
-Ref: CL-SELENIUM:PAGE-TITLE function12506
-Ref: CL-SELENIUM:LOGS function12752
-Ref: CL-SELENIUM:ELEMENT-LOCATION function12910
-Ref: CL-SELENIUM:ELEMENT-TEXT function13017
-Ref: CL-SELENIUM:ACTIVE-ELEMENT function13360
-Ref: CL-SELENIUM:MAKE-COOKIE function13802
-Ref: CL-SELENIUM:STOP-INTERACTIVE-SESSION function13876
-Ref: CL-SELENIUM:ELEMENT-TAGNAME function13958
-Ref: CL-SELENIUM:REFRESH function14064
-Ref: CL-SELENIUM:ELEMENT-DISPLAYED function14149
-Ref: CL-SELENIUM:DELETE-SESSION function14328
-Ref: CL-SELENIUM:MAKE-SESSION function14407
-Ref: CL-SELENIUM:KEY function14830
-Ref: CL-SELENIUM:ELEMENT-CLEAR function14858
-Ref: CL-SELENIUM:BACK function15064
-Ref: CL-SELENIUM:COOKIE class15446
-Ref: CL-SELENIUM:NO-SUCH-ELEMENT-ERROR class15471
-Node: CL-SELENIUM-UTILS package15563
-Ref: CL-SELENIUM-UTILS:*TIMEOUT* variable15884
-Ref: CL-SELENIUM-UTILS:*DEFAULT-ELEMENT-FUNC* variable15982
-Ref: CL-SELENIUM-UTILS:ID function16229
-Ref: CL-SELENIUM-UTILS:GET-COOKIE function16306
-Ref: CL-SELENIUM-UTILS:FIND-ELEM function16390
-Ref: CL-SELENIUM-UTILS:WAIT-FOR function16533
-Ref: CL-SELENIUM-UTILS:CLASSNAME function16744
-Ref: CL-SELENIUM-UTILS:TEXT function16835
-Ref: CL-SELENIUM-UTILS:SEND-KEY function16918
-Ref: CL-SELENIUM-UTILS:CLASSLIST function17012
-Ref: CL-SELENIUM-UTILS:ATTR function17104
-Ref: CL-SELENIUM-UTILS:SEND-KEYS function17196
-Ref: CL-SELENIUM-UTILS:ELEM function17291
-Ref: CL-SELENIUM-UTILS:CLICK function17588
-Node: Index17670
+Ref: CL-SELENIUM:WITH-SESSION macro5564
+Ref: CL-SELENIUM:CLOSE-CURRENT-WINDOW function5762
+Ref: CL-SELENIUM:COOKIE function5860
+Ref: CL-SELENIUM:URL function6141
+Ref: CL-SELENIUM:ELEMENT-SEND-KEYS function6296
+Ref: CL-SELENIUM:ELEMENT-CLICK function6690
+Ref: CL-SELENIUM:LOG-TYPES function7193
+Ref: CL-SELENIUM:FIND-ELEMENTS function7818
+Ref: CL-SELENIUM:MOUSE-MOVE-TO function8105
+Ref: CL-SELENIUM:ELEMENT-ATTRIBUTE function8597
+Ref: CL-SELENIUM:SWITCH-TO-FRAME function8732
+Ref: CL-SELENIUM:EXECUTE-SCRIPT function9312
+Ref: CL-SELENIUM:START-INTERACTIVE-SESSION function10344
+Ref: CL-SELENIUM:SCREENSHOT function10572
+Ref: CL-SELENIUM:FIND-ELEMENT function10956
+Ref: CL-SELENIUM:MOUSE-CLICK function12259
+Ref: CL-SELENIUM:USE-SESSION function12684
+Ref: CL-SELENIUM:PAGE-TITLE function12764
+Ref: CL-SELENIUM:LOGS function13010
+Ref: CL-SELENIUM:ELEMENT-LOCATION function13168
+Ref: CL-SELENIUM:ELEMENT-TEXT function13275
+Ref: CL-SELENIUM:ACTIVE-ELEMENT function13618
+Ref: CL-SELENIUM:MAKE-COOKIE function14060
+Ref: CL-SELENIUM:STOP-INTERACTIVE-SESSION function14134
+Ref: CL-SELENIUM:ELEMENT-TAGNAME function14216
+Ref: CL-SELENIUM:REFRESH function14322
+Ref: CL-SELENIUM:ELEMENT-DISPLAYED function14407
+Ref: CL-SELENIUM:DELETE-SESSION function14586
+Ref: CL-SELENIUM:MAKE-SESSION function14665
+Ref: CL-SELENIUM:KEY function15088
+Ref: CL-SELENIUM:ELEMENT-CLEAR function15116
+Ref: CL-SELENIUM:BACK function15322
+Ref: CL-SELENIUM:COOKIE class15704
+Ref: CL-SELENIUM:NO-SUCH-ELEMENT-ERROR class15787
+Node: CL-SELENIUM-UTILS package15989
+Ref: CL-SELENIUM-UTILS:*TIMEOUT* variable16310
+Ref: CL-SELENIUM-UTILS:*DEFAULT-ELEMENT-FUNC* variable16408
+Ref: CL-SELENIUM-UTILS:ID function16655
+Ref: CL-SELENIUM-UTILS:GET-COOKIE function16732
+Ref: CL-SELENIUM-UTILS:FIND-ELEM function16816
+Ref: CL-SELENIUM-UTILS:WAIT-FOR function16959
+Ref: CL-SELENIUM-UTILS:CLASSNAME function17170
+Ref: CL-SELENIUM-UTILS:TEXT function17261
+Ref: CL-SELENIUM-UTILS:SEND-KEY function17344
+Ref: CL-SELENIUM-UTILS:CLASSLIST function17438
+Ref: CL-SELENIUM-UTILS:ATTR function17530
+Ref: CL-SELENIUM-UTILS:SEND-KEYS function17622
+Ref: CL-SELENIUM-UTILS:ELEM function17717
+Ref: CL-SELENIUM-UTILS:CLICK function18014
+Node: Index18096
 
 End Tag Table

@@ -42,7 +42,9 @@ See: https://www.w3.org/TR/webdriver1/#capabilities ."
   (setf *session* session))
 
 (defmacro with-session ((&rest capabilities) &body body)
-  "Execute BODY inside a Selenium session."
+  "Execute BODY inside a Selenium session.
+
+See: MAKE-SESSION"
   (with-gensyms (session)
     `(let (,session)
        (unwind-protect
@@ -54,7 +56,9 @@ See: https://www.w3.org/TR/webdriver1/#capabilities ."
            (delete-session ,session))))))
 
 (defun start-interactive-session (&rest capabilities)
-  "Start an interactive session. Use this to interact with Selenium driver from a REPL."
+  "Start an interactive session. Use this to interact with Selenium driver from a REPL.
+
+See: MAKE-SESSION"
   (when *session*
     (delete-session *session*))
   (setf *session* (apply #'make-session  capabilities)))

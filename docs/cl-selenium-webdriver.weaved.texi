@@ -218,6 +218,14 @@ For documentation see:@*
 
 @heading External definitions
 
+@heading Macros
+@cldefmacro {CL-SELENIUM, WITH-SESSION, ((&rest capabilities) &body body)}
+
+Execute @var{BODY} inside a Selenium session.@*
+@*
+See: @clref{CL-SELENIUM, MAKE-SESSION, function}
+@endcldefmacro
+
 @heading Functions
 @cldefun {CL-SELENIUM, CLOSE-CURRENT-WINDOW, (&key (session *session*))}
 
@@ -310,7 +318,9 @@ See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionse
 
 @cldefun {CL-SELENIUM, START-INTERACTIVE-SESSION, (&rest capabilities)}
 
-Start an interactive session. Use this to interact with Selenium driver from a REPL.
+Start an interactive session. Use this to interact with Selenium driver from a REPL.@*
+@*
+See: @clref{CL-SELENIUM, MAKE-SESSION, function}
 @endcldefun
 
 @cldefun {CL-SELENIUM, SCREENSHOT, (&key (session *session*))}
@@ -453,11 +463,17 @@ See: @url{https://www.w3.org/TR/webdriver1/#dfn-back} .
 @cldefclass {CL-SELENIUM, COOKIE}
 
 
+
+Class precedence list: @code{cookie, standard-object, t}
+
 @endcldefclass
 
 @cldefclass {CL-SELENIUM, NO-SUCH-ELEMENT-ERROR}
 
 Error signaled when no such element is found.
+
+Class precedence list: @code{no-such-element-error, find-error, error, serious-condition, condition, t}
+
 @endcldefclass
 
 

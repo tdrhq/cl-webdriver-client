@@ -54,6 +54,9 @@ ul.no-bullet {list-style: none}
 
 
 
+
+
+
 <span id="SEC_Contents"></span>
 <h2 class="contents-heading">Table of Contents</h2>
 
@@ -344,6 +347,16 @@ For documentation see:<br>
 
 <span id="External-definitions"></span><h3 class="heading">External definitions</h3>
 
+<span id="Macros"></span><h3 class="heading">Macros</h3>
+<span id="index-CL_002dSELENIUM_003aWITH_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aWITH_002dSESSION-macro"></span><dl>
+<dt id="index-WITH_002dSESSION">CL-SELENIUM: <strong>WITH-SESSION</strong> <em>((&amp;rest capabilities) &amp;body body)</em></dt>
+<dd>
+<p>Execute <var>BODY</var> inside a Selenium session.<br>
+<br>
+See: See <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
+</p></dd></dl>
+
 <span id="Functions"></span><h3 class="heading">Functions</h3>
 <span id="index-CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW"></span>
 <span id="CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW-function"></span><dl>
@@ -460,7 +473,9 @@ See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessi
 <span id="CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION-function"></span><dl>
 <dt id="index-START_002dINTERACTIVE_002dSESSION">CL-SELENIUM: <strong>START-INTERACTIVE-SESSION</strong> <em>(&amp;rest capabilities)</em></dt>
 <dd>
-<p>Start an interactive session. Use this to interact with Selenium driver from a REPL.
+<p>Start an interactive session. Use this to interact with Selenium driver from a REPL.<br>
+<br>
+See: See <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aSCREENSHOT"></span>
@@ -637,14 +652,22 @@ See: <a href="https://www.w3.org/TR/webdriver1/#dfn-back">https://www.w3.org/TR/
 <span id="index-CL_002dSELENIUM_003aCOOKIE-1"></span>
 <span id="CL_002dSELENIUM_003aCOOKIE-class"></span><dl>
 <dt id="index-COOKIE-1">CL-SELENIUM: <strong>COOKIE</strong></dt>
-</dl>
+<dd>
+
+
+<p>Class precedence list: <code>cookie, standard-object, t</code>
+</p>
+</dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aNO_002dSUCH_002dELEMENT_002dERROR"></span>
 <span id="CL_002dSELENIUM_003aNO_002dSUCH_002dELEMENT_002dERROR-class"></span><dl>
 <dt id="index-NO_002dSUCH_002dELEMENT_002dERROR">CL-SELENIUM: <strong>NO-SUCH-ELEMENT-ERROR</strong></dt>
 <dd>
 <p>Error signaled when no such element is found.
-</p></dd></dl>
+</p>
+<p>Class precedence list: <code>no-such-element-error, find-error, error, serious-condition, condition, t</code>
+</p>
+</dd></dl>
 
 
 
@@ -903,6 +926,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSWITCH_002dTO_002dFRAME"><code>CL-SELENIUM:SWITCH-TO-FRAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aURL"><code>CL-SELENIUM:URL</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aUSE_002dSESSION"><code>CL-SELENIUM:USE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aWITH_002dSESSION"><code>CL-SELENIUM:WITH-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CLASSLIST"><code>CLASSLIST</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM_002dUTILS-package">CL-SELENIUM-UTILS package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CLASSNAME"><code>CLASSNAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM_002dUTILS-package">CL-SELENIUM-UTILS package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CLICK"><code>CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM_002dUTILS-package">CL-SELENIUM-UTILS package</a></td></tr>
@@ -971,6 +995,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_fn_letter-W">W</th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WAIT_002dFOR"><code>WAIT-FOR</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM_002dUTILS-package">CL-SELENIUM-UTILS package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-WITH_002dSESSION"><code>WITH-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 </table>
 <table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Index_fn_letter-A"><b>A</b></a>
