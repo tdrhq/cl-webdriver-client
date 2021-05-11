@@ -230,7 +230,7 @@ Macros
 
      Execute BODY inside a Selenium session.
 
-     See: *Note MAKE-SESSION: CL-SELENIUM:MAKE-SESSION function.
+     See: *note MAKE-SESSION: CL-SELENIUM:MAKE-SESSION function.
 
 Functions
 =========
@@ -295,7 +295,7 @@ Functions
           *session*))
 
      Find elements that match VALUE using location strategy in BY.
-     See *Note FIND-ELEMENT: CL-SELENIUM:FIND-ELEMENT function.
+     See *note FIND-ELEMENT: CL-SELENIUM:FIND-ELEMENT function.
      See <https://www.w3.org/TR/webdriver1/#find-elements> .
 
  -- CL-SELENIUM: MOUSE-MOVE-TO (x y &key element (session *session*))
@@ -356,7 +356,7 @@ Functions
      Start an interactive session.  Use this to interact with Selenium
      driver from a REPL.
 
-     See: *Note MAKE-SESSION: CL-SELENIUM:MAKE-SESSION function.
+     See: *note MAKE-SESSION: CL-SELENIUM:MAKE-SESSION function.
 
  -- CL-SELENIUM: SCREENSHOT (&key (session *session*))
 
@@ -378,7 +378,7 @@ Functions
      with the #toremove ID and uses this as the argument for a script it
      injects to remove it from the HTML document:
 
-     let body *Note =: COMMON-LISP:= function.
+     let body *note =: COMMON-LISP:= function.
      SESSION.find.css("#toremove");
      SESSION.execute("arguments[0].remove()", [body]);
 
@@ -394,7 +394,7 @@ Functions
      - :TAG-NAME: Returns element that matches tag name.
      - :XPATH: Returns element that matches the XPath expression.
 
-     If result is empty, a *Note HANDLE-FIND-ERROR:
+     If result is empty, a *note HANDLE-FIND-ERROR:
      CL-SELENIUM:HANDLE-FIND-ERROR function. is signaled.
 
      See: <https://www.w3.org/TR/webdriver1/#dfn-find-element> .
@@ -422,7 +422,7 @@ Functions
  -- CL-SELENIUM: LOGS (type &key (session *session*))
 
      Return the logs of a particular TYPE.
-     See: *Note LOG-TYPES: CL-SELENIUM:LOG-TYPES function.
+     See: *note LOG-TYPES: CL-SELENIUM:LOG-TYPES function.
 
  -- CL-SELENIUM: ELEMENT-LOCATION (element &key (session *session*))
 
@@ -536,7 +536,7 @@ Variables
 
      Function used to get the 'default element' by selenium-utils
      functions.
-     It is *Note ACTIVE-ELEMENT: CL-SELENIUM:ACTIVE-ELEMENT function.
+     It is *note ACTIVE-ELEMENT: CL-SELENIUM:ACTIVE-ELEMENT function.
      function by default.
 
 Functions
@@ -587,7 +587,7 @@ Functions
 
      If SELECTOR is given, wait for an element that matches the SELECTOR
      to appear.
-     Otherwise, call *Note *DEFAULT-ELEMENT-FUNC*:
+     Otherwise, call *note *DEFAULT-ELEMENT-FUNC*:
      CL-SELENIUM-UTILS:*DEFAULT-ELEMENT-FUNC* variable. (the active
      element is returned by default).
 

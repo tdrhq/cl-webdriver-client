@@ -354,7 +354,7 @@ For documentation see:<br>
 <dd>
 <p>Execute <var>BODY</var> inside a Selenium session.<br>
 <br>
-See: See <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
+See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
 </p></dd></dl>
 
 <span id="Functions"></span><h3 class="heading">Functions</h3>
@@ -423,7 +423,7 @@ See: <a href="https://github.com/SeleniumHQ/selenium/wiki/Logging">https://githu
 <dt id="index-FIND_002dELEMENTS">CL-SELENIUM: <strong>FIND-ELEMENTS</strong> <em>(value &amp;key (by :css-selector) (session *session*))</em></dt>
 <dd>
 <p>Find elements that match <var>VALUE</var> using location strategy in <var>BY</var>.<br>
-See See <a href="#CL_002dSELENIUM_003aFIND_002dELEMENT-function">FIND-ELEMENT</a>.<br>
+See <a href="#CL_002dSELENIUM_003aFIND_002dELEMENT-function">FIND-ELEMENT</a>.<br>
 See <a href="https://www.w3.org/TR/webdriver1/#find-elements">https://www.w3.org/TR/webdriver1/#find-elements</a> .
 </p></dd></dl>
 
@@ -475,7 +475,7 @@ See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessi
 <dd>
 <p>Start an interactive session. Use this to interact with Selenium driver from a REPL.<br>
 <br>
-See: See <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
+See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aSCREENSHOT"></span>
@@ -495,7 +495,7 @@ See: <a href="https://www.w3.org/TR/webdriver2/#screen-capture">https://www.w3.o
 <br>
 For example, consider this pseudo code which retrieves an element with the #toremove ID and uses this as the argument for a script it injects to remove it from the HTML document:<br>
 <br>
-let body See &lsquo;=&rsquo; <var>session</var>.find.css(&quot;#toremove&quot;);<br>
+let body &lsquo;=&rsquo; <var>session</var>.find.css(&quot;#toremove&quot;);<br>
 <var>session</var>.execute(&quot;arguments[0].remove()&quot;, [body]);<br>
 <br>
 The <var>BY</var> parameter represents the element location strategy.<br>
@@ -509,7 +509,7 @@ It can be one of:<br>
 - <var>:tag-name:</var> Returns element that matches tag name.<br>
 - <var>:xpath:</var> Returns element that matches the XPath expression.<br>
 <br>
-If result is empty, a See &lsquo;HANDLE-FIND-ERROR&rsquo; is signaled.<br>
+If result is empty, a &lsquo;HANDLE-FIND-ERROR&rsquo; is signaled.<br>
 <br>
 See: <a href="https://www.w3.org/TR/webdriver1/#dfn-find-element">https://www.w3.org/TR/webdriver1/#dfn-find-element</a> .
 </p></dd></dl>
@@ -543,7 +543,7 @@ See: <a href="https://www.w3.org/TR/webdriver2/#get-title">https://www.w3.org/TR
 <dt id="index-LOGS">CL-SELENIUM: <strong>LOGS</strong> <em>(type &amp;key (session *session*))</em></dt>
 <dd>
 <p>Return the logs of a particular <var>TYPE</var>.<br>
-See: See <a href="#CL_002dSELENIUM_003aLOG_002dTYPES-function">LOG-TYPES</a>.
+See: <a href="#CL_002dSELENIUM_003aLOG_002dTYPES-function">LOG-TYPES</a>.
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aELEMENT_002dLOCATION"></span>
@@ -700,7 +700,7 @@ Previous: <a href="#CL_002dSELENIUM-package" accesskey="p" rel="prev">CL-SELENIU
 <dt id="index-_002aDEFAULT_002dELEMENT_002dFUNC_002a">CL-SELENIUM-UTILS: <strong>*DEFAULT-ELEMENT-FUNC*</strong></dt>
 <dd>
 <p>Function used to get the &rsquo;default element&rsquo; by selenium-utils functions.<br>
-It is See <a href="#CL_002dSELENIUM_003aACTIVE_002dELEMENT-function">ACTIVE-ELEMENT</a> function by default.
+It is <a href="#CL_002dSELENIUM_003aACTIVE_002dELEMENT-function">ACTIVE-ELEMENT</a> function by default.
 </p></dd></dl>
 
 <span id="Functions-1"></span><h3 class="heading">Functions</h3>
@@ -780,7 +780,7 @@ It is See <a href="#CL_002dSELENIUM_003aACTIVE_002dELEMENT-function">ACTIVE-ELEM
 <dt id="index-ELEM">CL-SELENIUM-UTILS: <strong>ELEM</strong> <em>(&amp;optional selector)</em></dt>
 <dd>
 <p>If <var>SELECTOR</var> is given, wait for an element that matches the <var>selector</var> to appear.<br>
-Otherwise, call See <a href="#CL_002dSELENIUM_002dUTILS_003a_002aDEFAULT_002dELEMENT_002dFUNC_002a-variable">*DEFAULT-ELEMENT-FUNC*</a> (the active element is returned by default).
+Otherwise, call <a href="#CL_002dSELENIUM_002dUTILS_003a_002aDEFAULT_002dELEMENT_002dFUNC_002a-variable">*DEFAULT-ELEMENT-FUNC*</a> (the active element is returned by default).
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_002dUTILS_003aCLICK"></span>
