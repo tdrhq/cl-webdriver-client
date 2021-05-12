@@ -54,7 +54,7 @@
 
 For documentation see:
 - https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol
-- https://www.w3.org/TR/webdriver1."))
+- https://www.w3.org/TR/webdriver1"))
 
 (defpackage cl-selenium-utils
   (:use :cl :cl-selenium)

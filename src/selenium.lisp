@@ -186,53 +186,6 @@ See: LOG-TYPES."
 See: https://www.w3.org/TR/webdriver2/#screen-capture ."
   (http-get-value (session-path session "/screenshot")))
 
-(defclass cookie ()
-  ((name :initarg :name)
-   (value :initarg :value)
-   (path :initarg :path)
-   (domain :initarg :domain)
-   (secure :initarg :secure)
-   (expiry :initarg :expiry)))
-
-(defmethod json:encode-json ((cookie cookie) &optional (stream json:*json-output*))
-  (with-slots (name value path domain secure expiry) cookie
-    (json:with-object (stream)
-      (json:encode-object-member "name" name stream)
-      (json:encode-object-member "value" value stream)
-      (when domain
-	(json:encode-object-member "domain" domain stream))
-      (when path
-	(json:encode-object-member "path" path stream))
-      (when secure
-	(json:encode-object-member "secure" secure stream))
-      (when expiry
-	(json:encode-object-member "expiry" expiry stream)))))
-
-(defun make-cookie (name value &key path domain secure expiry)
-  (make-instance 'cookie
-                 :name name
-                 :value value
-                 :path path
-                 :domain domain
-                 :secure secure
-                 :expiry expiry))
-
-(defun (setf cookie) (cookie &key (session *session*))
-  "Create a cookie in the cookie store associated with the active document’s address using cookie name name, cookie value value, and an attribute-value list of the following cookie concepts listed in the table for cookie conversion from data:
-
-If there is an error during this step, return error with error code unable to set cookie. 
-
-See: https://www.w3.org/TR/webdriver1/#dfn-adding-a-cookie ."
-  (check-type cookie cookie)
-  (http-post-check (session-path session "/cookie") `(:cookie ,cookie)))
-
-(defun cookie (&key (session *session*))
-  "Retrieve all cookies visible to the current page.
-
-See: https://www.w3.org/TR/webdriver1/#get-all-cookies .
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie ."
-  (http-get-value (session-path session "/cookie")))
-
 (defun refresh (&key (session *session*))
   "Refresh the current page."
   (http-post (session-path session "/refresh")))
