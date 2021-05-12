@@ -212,7 +212,7 @@ This package exports functions for working with Selenium WebDriver.@*
 @*
 For documentation see:@*
 - @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol}@*
-- @url{https://www.w3.org/TR/webdriver1.}
+- @url{https://www.w3.org/TR/webdriver1}
 
 @end deftp
 
@@ -468,9 +468,27 @@ See: @url{https://www.w3.org/TR/webdriver1/#dfn-back} .
 @heading Classes
 @cldefclass {CL-SELENIUM, COOKIE}
 
-
+A cookie is described in [RFC6265] by a name-value pair holding the cookie’s data, followed by zero or more attribute-value pairs describing its characteristics.
 
 Class precedence list: @code{cookie, standard-object, t}
+
+Slots:
+@itemize
+@item @code{name} --- initarg: @code{@w{:name}}
+
+The name of the cookie@item @code{value} --- initarg: @code{@w{:value}}
+
+The cookie value@item @code{path} --- initarg: @code{@w{:path}}
+
+The cookie path. Defaults to '/' if omitted when adding a cookie. @item @code{domain} --- initarg: @code{@w{:domain}}
+
+The domain the cookie is visible to. Defaults to the current browsing context’s active document’s URL domain if omitted when adding a cookie.@item @code{secure} --- initarg: @code{@w{:secure}}
+
+Whether the cookie is a secure cookie. Defaults to false if omitted when adding a cookie.@item @code{http-only} --- initarg: @code{@w{:http-only}}
+
+Whether the cookie is an HTTP only cookie. Defaults to false if omitted when adding a cookie.@item @code{expiry} --- initarg: @code{@w{:expiry}}
+
+When the cookie expires, specified in seconds since Unix Epoch. Must not be set if omitted when adding a cookie.@end itemize
 
 @endcldefclass
 

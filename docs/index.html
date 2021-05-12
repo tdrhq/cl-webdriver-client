@@ -343,7 +343,7 @@ Next: <a href="#CL_002dSELENIUM_002dUTILS-package" accesskey="n" rel="next">CL-S
 <br>
 For documentation see:<br>
 - <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol</a><br>
-- <a href="https://www.w3.org/TR/webdriver1.">https://www.w3.org/TR/webdriver1.</a>
+- <a href="https://www.w3.org/TR/webdriver1">https://www.w3.org/TR/webdriver1</a>
 </p>
 </dd></dl>
 
@@ -661,10 +661,28 @@ See: <a href="https://www.w3.org/TR/webdriver1/#dfn-back">https://www.w3.org/TR/
 <span id="CL_002dSELENIUM_003aCOOKIE-class"></span><dl>
 <dt id="index-COOKIE-1">CL-SELENIUM: <strong>COOKIE</strong></dt>
 <dd>
-
-
+<p>A cookie is described in [RFC6265] by a name-value pair holding the cookieâs data, followed by zero or more attribute-value pairs describing its characteristics.
+</p>
 <p>Class precedence list: <code>cookie, standard-object, t</code>
 </p>
+<p>Slots:
+</p><ul>
+<li> <code>name</code> &mdash; initarg: <code>:name<!-- /@w --></code>
+
+<p>The name of the cookie</p></li><li> <code>value</code> &mdash; initarg: <code>:value<!-- /@w --></code>
+
+<p>The cookie value</p></li><li> <code>path</code> &mdash; initarg: <code>:path<!-- /@w --></code>
+
+<p>The cookie path. Defaults to &rsquo;/&rsquo; if omitted when adding a cookie. </p></li><li> <code>domain</code> &mdash; initarg: <code>:domain<!-- /@w --></code>
+
+<p>The domain the cookie is visible to. Defaults to the current browsing contextâs active documentâs URL domain if omitted when adding a cookie.</p></li><li> <code>secure</code> &mdash; initarg: <code>:secure<!-- /@w --></code>
+
+<p>Whether the cookie is a secure cookie. Defaults to false if omitted when adding a cookie.</p></li><li> <code>http-only</code> &mdash; initarg: <code><span class="nolinebreak">:http-only</span><!-- /@w --></code>
+
+<p>Whether the cookie is an HTTP only cookie. Defaults to false if omitted when adding a cookie.</p></li><li> <code>expiry</code> &mdash; initarg: <code>:expiry<!-- /@w --></code>
+
+<p>When the cookie expires, specified in seconds since Unix Epoch. Must not be set if omitted when adding a cookie.</p></li></ul>
+
 </dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aNO_002dSUCH_002dELEMENT_002dERROR"></span>

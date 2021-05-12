@@ -218,7 +218,7 @@ File: cl-selenium-webdriver.info,  Node: CL-SELENIUM package,  Next: CL-SELENIUM
 
      For documentation see:
      - <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol>
-     - <https://www.w3.org/TR/webdriver1.>
+     - <https://www.w3.org/TR/webdriver1>
 
 External definitions
 ====================
@@ -508,7 +508,40 @@ Classes
 
  -- CL-SELENIUM: COOKIE
 
+     A cookie is described in [RFC6265] by a name-value pair holding the
+     cookie’s data, followed by zero or more attribute-value pairs
+     describing its characteristics.
+
      Class precedence list: 'cookie, standard-object, t'
+
+     Slots:
+        * 'name' -- initarg: ':name'
+
+          The name of the cookie
+        * 'value' -- initarg: ':value'
+
+          The cookie value
+        * 'path' -- initarg: ':path'
+
+          The cookie path.  Defaults to '/' if omitted when adding a
+          cookie.
+        * 'domain' -- initarg: ':domain'
+
+          The domain the cookie is visible to.  Defaults to the current
+          browsing context’s active document’s URL domain if omitted
+          when adding a cookie.
+        * 'secure' -- initarg: ':secure'
+
+          Whether the cookie is a secure cookie.  Defaults to false if
+          omitted when adding a cookie.
+        * 'http-only' -- initarg: ':http-only'
+
+          Whether the cookie is an HTTP only cookie.  Defaults to false
+          if omitted when adding a cookie.
+        * 'expiry' -- initarg: ':expiry'
+
+          When the cookie expires, specified in seconds since Unix
+          Epoch.  Must not be set if omitted when adding a cookie.
 
  -- CL-SELENIUM: NO-SUCH-ELEMENT-ERROR
 
@@ -756,56 +789,56 @@ Node: Waiting for the reaction4120
 Node: Running tests4639
 Node: API4944
 Node: CL-SELENIUM package5107
-Ref: CL-SELENIUM:WITH-SESSION macro5564
-Ref: CL-SELENIUM:ELEMENT-ID function5778
-Ref: CL-SELENIUM:CLOSE-CURRENT-WINDOW function5845
-Ref: CL-SELENIUM:COOKIE function5943
-Ref: CL-SELENIUM:URL function6224
-Ref: CL-SELENIUM:ELEMENT-SEND-KEYS function6379
-Ref: CL-SELENIUM:ELEMENT-CLICK function6773
-Ref: CL-SELENIUM:LOG-TYPES function7276
-Ref: CL-SELENIUM:FIND-ELEMENTS function7901
-Ref: CL-SELENIUM:MOUSE-MOVE-TO function8188
-Ref: CL-SELENIUM:ELEMENT-ATTRIBUTE function8680
-Ref: CL-SELENIUM:SWITCH-TO-FRAME function8815
-Ref: CL-SELENIUM:EXECUTE-SCRIPT function9395
-Ref: CL-SELENIUM:START-INTERACTIVE-SESSION function10427
-Ref: CL-SELENIUM:SCREENSHOT function10655
-Ref: CL-SELENIUM:FIND-ELEMENT function11039
-Ref: CL-SELENIUM:MOUSE-CLICK function12342
-Ref: CL-SELENIUM:USE-SESSION function12767
-Ref: CL-SELENIUM:PAGE-TITLE function12847
-Ref: CL-SELENIUM:LOGS function13093
-Ref: CL-SELENIUM:ELEMENT-LOCATION function13251
-Ref: CL-SELENIUM:ELEMENT-TEXT function13358
-Ref: CL-SELENIUM:ACTIVE-ELEMENT function13701
-Ref: CL-SELENIUM:MAKE-COOKIE function14143
-Ref: CL-SELENIUM:STOP-INTERACTIVE-SESSION function14217
-Ref: CL-SELENIUM:ELEMENT-TAGNAME function14299
-Ref: CL-SELENIUM:REFRESH function14405
-Ref: CL-SELENIUM:ELEMENT-DISPLAYED function14490
-Ref: CL-SELENIUM:DELETE-SESSION function14669
-Ref: CL-SELENIUM:MAKE-SESSION function14748
-Ref: CL-SELENIUM:KEY function15171
-Ref: CL-SELENIUM:ELEMENT-CLEAR function15199
-Ref: CL-SELENIUM:BACK function15405
-Ref: CL-SELENIUM:COOKIE class15787
-Ref: CL-SELENIUM:NO-SUCH-ELEMENT-ERROR class15870
-Node: CL-SELENIUM-UTILS package16072
-Ref: CL-SELENIUM-UTILS:*TIMEOUT* variable16393
-Ref: CL-SELENIUM-UTILS:*DEFAULT-ELEMENT-FUNC* variable16491
-Ref: CL-SELENIUM-UTILS:ID function16738
-Ref: CL-SELENIUM-UTILS:GET-COOKIE function16815
-Ref: CL-SELENIUM-UTILS:FIND-ELEM function16899
-Ref: CL-SELENIUM-UTILS:WAIT-FOR function17042
-Ref: CL-SELENIUM-UTILS:CLASSNAME function17253
-Ref: CL-SELENIUM-UTILS:TEXT function17344
-Ref: CL-SELENIUM-UTILS:SEND-KEY function17427
-Ref: CL-SELENIUM-UTILS:CLASSLIST function17521
-Ref: CL-SELENIUM-UTILS:ATTR function17613
-Ref: CL-SELENIUM-UTILS:SEND-KEYS function17705
-Ref: CL-SELENIUM-UTILS:ELEM function17800
-Ref: CL-SELENIUM-UTILS:CLICK function18097
-Node: Index18179
+Ref: CL-SELENIUM:WITH-SESSION macro5563
+Ref: CL-SELENIUM:ELEMENT-ID function5777
+Ref: CL-SELENIUM:CLOSE-CURRENT-WINDOW function5844
+Ref: CL-SELENIUM:COOKIE function5942
+Ref: CL-SELENIUM:URL function6223
+Ref: CL-SELENIUM:ELEMENT-SEND-KEYS function6378
+Ref: CL-SELENIUM:ELEMENT-CLICK function6772
+Ref: CL-SELENIUM:LOG-TYPES function7275
+Ref: CL-SELENIUM:FIND-ELEMENTS function7900
+Ref: CL-SELENIUM:MOUSE-MOVE-TO function8187
+Ref: CL-SELENIUM:ELEMENT-ATTRIBUTE function8679
+Ref: CL-SELENIUM:SWITCH-TO-FRAME function8814
+Ref: CL-SELENIUM:EXECUTE-SCRIPT function9394
+Ref: CL-SELENIUM:START-INTERACTIVE-SESSION function10426
+Ref: CL-SELENIUM:SCREENSHOT function10654
+Ref: CL-SELENIUM:FIND-ELEMENT function11038
+Ref: CL-SELENIUM:MOUSE-CLICK function12341
+Ref: CL-SELENIUM:USE-SESSION function12766
+Ref: CL-SELENIUM:PAGE-TITLE function12846
+Ref: CL-SELENIUM:LOGS function13092
+Ref: CL-SELENIUM:ELEMENT-LOCATION function13250
+Ref: CL-SELENIUM:ELEMENT-TEXT function13357
+Ref: CL-SELENIUM:ACTIVE-ELEMENT function13700
+Ref: CL-SELENIUM:MAKE-COOKIE function14142
+Ref: CL-SELENIUM:STOP-INTERACTIVE-SESSION function14216
+Ref: CL-SELENIUM:ELEMENT-TAGNAME function14298
+Ref: CL-SELENIUM:REFRESH function14404
+Ref: CL-SELENIUM:ELEMENT-DISPLAYED function14489
+Ref: CL-SELENIUM:DELETE-SESSION function14668
+Ref: CL-SELENIUM:MAKE-SESSION function14747
+Ref: CL-SELENIUM:KEY function15170
+Ref: CL-SELENIUM:ELEMENT-CLEAR function15198
+Ref: CL-SELENIUM:BACK function15404
+Ref: CL-SELENIUM:COOKIE class15786
+Ref: CL-SELENIUM:NO-SUCH-ELEMENT-ERROR class17036
+Node: CL-SELENIUM-UTILS package17238
+Ref: CL-SELENIUM-UTILS:*TIMEOUT* variable17559
+Ref: CL-SELENIUM-UTILS:*DEFAULT-ELEMENT-FUNC* variable17657
+Ref: CL-SELENIUM-UTILS:ID function17904
+Ref: CL-SELENIUM-UTILS:GET-COOKIE function17981
+Ref: CL-SELENIUM-UTILS:FIND-ELEM function18065
+Ref: CL-SELENIUM-UTILS:WAIT-FOR function18208
+Ref: CL-SELENIUM-UTILS:CLASSNAME function18419
+Ref: CL-SELENIUM-UTILS:TEXT function18510
+Ref: CL-SELENIUM-UTILS:SEND-KEY function18593
+Ref: CL-SELENIUM-UTILS:CLASSLIST function18687
+Ref: CL-SELENIUM-UTILS:ATTR function18779
+Ref: CL-SELENIUM-UTILS:SEND-KEYS function18871
+Ref: CL-SELENIUM-UTILS:ELEM function18966
+Ref: CL-SELENIUM-UTILS:CLICK function19263
+Node: Index19345
 
 End Tag Table
