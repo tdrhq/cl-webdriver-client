@@ -60,3 +60,21 @@ See: https://www.w3.org/TR/webdriver1/#dfn-adding-a-cookie ."
 See: https://www.w3.org/TR/webdriver1/#get-all-cookies .
 See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie ."
   (http-get-value (session-path session "/cookie")))
+
+(defun find-cookie (cookie-name &key (session *session*))
+  "Retrieve the cookie with name COOKIE-NAME.
+
+See: https://www.w3.org/TR/webdriver1/#get-named-cookie"
+  (http-get-value (session-path session "/cookie/~a" cookie-name)))
+
+(defun delete-cookie (cookie-name &key (session *session*))
+  "Delete the cookie with name COOKIE-NAME.
+
+See: https://www.w3.org/TR/webdriver1/#delete-cookie"
+  (http-delete (session-path session "/cookie/~a" cookie-name)))
+
+(defun delete-all-cookies (&key (session *session*))
+  "Deletes all cookies
+
+See: https://www.w3.org/TR/webdriver1/#delete-all-cookies"
+  (http-delete (session-path session "/cookie")))

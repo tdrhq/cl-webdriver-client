@@ -38,7 +38,10 @@
 
            :make-cookie
            :cookie
-
+           :delete-cookie
+           :delete-all-cookies
+           :find-cookie
+   
            :log-types
            :logs
 

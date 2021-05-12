@@ -366,38 +366,100 @@ See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
 </dl>
 
 <span id="Functions"></span><h3 class="heading">Functions</h3>
-<span id="index-CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW"></span>
-<span id="CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW-function"></span><dl>
-<dt id="index-CLOSE_002dCURRENT_002dWINDOW">CL-SELENIUM: <strong>CLOSE-CURRENT-WINDOW</strong> <em>(&amp;key (session *session*))</em></dt>
+<span id="index-CL_002dSELENIUM_003aMAKE_002dCOOKIE"></span>
+<span id="CL_002dSELENIUM_003aMAKE_002dCOOKIE-function"></span><dl>
+<dt id="index-MAKE_002dCOOKIE">CL-SELENIUM: <strong>MAKE-COOKIE</strong> <em>(name value &amp;key path domain secure expiry)</em></dt>
+</dl>
+
+<span id="index-CL_002dSELENIUM_003aSTOP_002dINTERACTIVE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aSTOP_002dINTERACTIVE_002dSESSION-function"></span><dl>
+<dt id="index-STOP_002dINTERACTIVE_002dSESSION">CL-SELENIUM: <strong>STOP-INTERACTIVE-SESSION</strong> <em>nil</em></dt>
 <dd>
-<p>Close the current window.
+<p>Stop an interactive session.
 </p></dd></dl>
 
-<span id="index-CL_002dSELENIUM_003aCOOKIE"></span>
-<span id="CL_002dSELENIUM_003aCOOKIE-function"></span><dl>
-<dt id="index-COOKIE">CL-SELENIUM: <strong>COOKIE</strong> <em>(&amp;key (session *session*))</em></dt>
+<span id="index-CL_002dSELENIUM_003aFIND_002dELEMENTS"></span>
+<span id="CL_002dSELENIUM_003aFIND_002dELEMENTS-function"></span><dl>
+<dt id="index-FIND_002dELEMENTS">CL-SELENIUM: <strong>FIND-ELEMENTS</strong> <em>(value &amp;key (by :css-selector) (session *session*))</em></dt>
 <dd>
-<p>Retrieve all cookies visible to the current page.<br>
+<p>Find elements that match <var>VALUE</var> using location strategy in <var>BY</var>.<br>
+See <a href="#CL_002dSELENIUM_003aFIND_002dELEMENT-function">FIND-ELEMENT</a>.<br>
+See <a href="https://www.w3.org/TR/webdriver1/#find-elements">https://www.w3.org/TR/webdriver1/#find-elements</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dLOCATION"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dLOCATION-function"></span><dl>
+<dt id="index-ELEMENT_002dLOCATION">CL-SELENIUM: <strong>ELEMENT-LOCATION</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the <var>ELEMENT</var>&rsquo;s location.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aDELETE_002dCOOKIE"></span>
+<span id="CL_002dSELENIUM_003aDELETE_002dCOOKIE-function"></span><dl>
+<dt id="index-DELETE_002dCOOKIE">CL-SELENIUM: <strong>DELETE-COOKIE</strong> <em>(cookie-name &amp;key (session *session*))</em></dt>
+<dd>
+<p>Delete the cookie with name <var>COOKIE-NAME</var>.<br>
 <br>
-See: <a href="https://www.w3.org/TR/webdriver1/#get-all-cookies">https://www.w3.org/TR/webdriver1/#get-all-cookies</a> .<br>
-See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie</a> .
+See: <a href="https://www.w3.org/TR/webdriver1/#delete-cookie">https://www.w3.org/TR/webdriver1/#delete-cookie</a>
 </p></dd></dl>
 
-<span id="index-CL_002dSELENIUM_003aURL"></span>
-<span id="CL_002dSELENIUM_003aURL-function"></span><dl>
-<dt id="index-URL">CL-SELENIUM: <strong>URL</strong> <em>(&amp;key (session *session*))</em></dt>
+<span id="index-CL_002dSELENIUM_003aDELETE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aDELETE_002dSESSION-function"></span><dl>
+<dt id="index-DELETE_002dSESSION">CL-SELENIUM: <strong>DELETE-SESSION</strong> <em>(session)</em></dt>
 <dd>
-<p>Get the current url in <var>session</var>.<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#dfn-get-current-url">https://www.w3.org/TR/webdriver1/#dfn-get-current-url</a> .
+<p>Delete the WebDriver <var>SESSION</var>.
 </p></dd></dl>
 
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS-function"></span><dl>
-<dt id="index-ELEMENT_002dSEND_002dKEYS">CL-SELENIUM: <strong>ELEMENT-SEND-KEYS</strong> <em>(element keys &amp;key (session *session*))</em></dt>
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dTEXT"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dTEXT-function"></span><dl>
+<dt id="index-ELEMENT_002dTEXT">CL-SELENIUM: <strong>ELEMENT-TEXT</strong> <em>(element &amp;key (session *session*))</em></dt>
 <dd>
-<p>The <var>Element</var> Send <var>Keys</var> command scrolls into view the form control <var>element</var> and then sends the provided <var>keys</var> to the <var>element</var>. In case the <var>element</var> is not keyboard-interactable, an <var>element</var> not interactable error is returned.<br>
+<p>The Get <var>Element</var> Text command intends to return an <var>element</var>âs text âas renderedâ. An <var>element</var>âs rendered text is also used for locating a elements by their link text and partial link text.<br>
 <br>
-See: <a href="https://www.w3.org/TR/webdriver1/#element-send-keys">https://www.w3.org/TR/webdriver1/#element-send-keys</a> .
+See: <a href="https://www.w3.org/TR/webdriver1/#get-element-text">https://www.w3.org/TR/webdriver1/#get-element-text</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aSWITCH_002dTO_002dFRAME"></span>
+<span id="CL_002dSELENIUM_003aSWITCH_002dTO_002dFRAME-function"></span><dl>
+<dt id="index-SWITCH_002dTO_002dFRAME">CL-SELENIUM: <strong>SWITCH-TO-FRAME</strong> <em>(id &amp;key (session *session*))</em></dt>
+<dd>
+<p>Change focus to another frame on the page. If the frame <var>id</var> is null, the server<br>
+should switch to the page&rsquo;s default content.<br>
+<br>
+In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.<br>
+<br>
+See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe</a> .<br>
+See: <a href="https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)">https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION-function"></span><dl>
+<dt id="index-START_002dINTERACTIVE_002dSESSION">CL-SELENIUM: <strong>START-INTERACTIVE-SESSION</strong> <em>(&amp;rest capabilities)</em></dt>
+<dd>
+<p>Start an interactive session. Use this to interact with Selenium driver from a REPL.<br>
+<br>
+See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aPAGE_002dTITLE"></span>
+<span id="CL_002dSELENIUM_003aPAGE_002dTITLE-function"></span><dl>
+<dt id="index-PAGE_002dTITLE">CL-SELENIUM: <strong>PAGE-TITLE</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>This command returns the document title of the current top-level browsing context, equivalent to calling document.title. <br>
+See: <a href="https://www.w3.org/TR/webdriver2/#get-title">https://www.w3.org/TR/webdriver2/#get-title</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aEXECUTE_002dSCRIPT"></span>
+<span id="CL_002dSELENIUM_003aEXECUTE_002dSCRIPT-function"></span><dl>
+<dt id="index-EXECUTE_002dSCRIPT">CL-SELENIUM: <strong>EXECUTE-SCRIPT</strong> <em>(script args &amp;key (session *session*))</em></dt>
+<dd>
+<p>Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed <var>script</var> is assumed to be synchronous and the result of evaluating the <var>script</var> is returned to the client.<br>
+<br>
+The <var>script</var> argument defines the <var>script</var> to execute in the form of a function body. The value returned by that function will be returned to the client. The function will be invoked with the provided <var>args</var> array and the values may be accessed via the arguments object in the order specified.<br>
+<br>
+Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the <var>script</var> result will be returned to the client as WebElement JSON objects.<br>
+<br>
+See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute</a> .
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aELEMENT_002dCLICK"></span>
@@ -409,6 +471,112 @@ See: <a href="https://www.w3.org/TR/webdriver1/#element-send-keys">https://www.w
 If the <var>element</var>âs center point is obscured by another <var>element</var>, an <var>element</var> click intercepted error is returned. If the <var>element</var> is outside the viewport, an <var>element</var> not interactable error is returned.<br>
 <br>
 See: <a href="https://www.w3.org/TR/webdriver1/#element-click">https://www.w3.org/TR/webdriver1/#element-click</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aREFRESH"></span>
+<span id="CL_002dSELENIUM_003aREFRESH-function"></span><dl>
+<dt id="index-REFRESH">CL-SELENIUM: <strong>REFRESH</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Refresh the current page.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aURL"></span>
+<span id="CL_002dSELENIUM_003aURL-function"></span><dl>
+<dt id="index-URL">CL-SELENIUM: <strong>URL</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Get the current url in <var>session</var>.<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#dfn-get-current-url">https://www.w3.org/TR/webdriver1/#dfn-get-current-url</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aACTIVE_002dELEMENT"></span>
+<span id="CL_002dSELENIUM_003aACTIVE_002dELEMENT-function"></span><dl>
+<dt id="index-ACTIVE_002dELEMENT">CL-SELENIUM: <strong>ACTIVE-ELEMENT</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the active element of the current browsing contextâs document.<br>
+The active element is the Element within the DOM that currently has focus.<br>
+If there&rsquo;s no active element, an error is signaled.<br>
+<br>
+See: <a href="https://www.w3.org/TR/webdriver2/#get-active-element.">https://www.w3.org/TR/webdriver2/#get-active-element.</a><br>
+See: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.">https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.</a>
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dDISPLAYED"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dDISPLAYED-function"></span><dl>
+<dt id="index-ELEMENT_002dDISPLAYED">CL-SELENIUM: <strong>ELEMENT-DISPLAYED</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Returns  if <var>ELEMENT</var> is visible.<br>
+<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#element-displayedness">https://www.w3.org/TR/webdriver1/#element-displayedness</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aFIND_002dCOOKIE"></span>
+<span id="CL_002dSELENIUM_003aFIND_002dCOOKIE-function"></span><dl>
+<dt id="index-FIND_002dCOOKIE">CL-SELENIUM: <strong>FIND-COOKIE</strong> <em>(cookie-name &amp;key (session *session*))</em></dt>
+<dd>
+<p>Retrieve the cookie with name <var>COOKIE-NAME</var>.<br>
+<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#get-named-cookie">https://www.w3.org/TR/webdriver1/#get-named-cookie</a>
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS-function"></span><dl>
+<dt id="index-ELEMENT_002dSEND_002dKEYS">CL-SELENIUM: <strong>ELEMENT-SEND-KEYS</strong> <em>(element keys &amp;key (session *session*))</em></dt>
+<dd>
+<p>The <var>Element</var> Send <var>Keys</var> command scrolls into view the form control <var>element</var> and then sends the provided <var>keys</var> to the <var>element</var>. In case the <var>element</var> is not keyboard-interactable, an <var>element</var> not interactable error is returned.<br>
+<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#element-send-keys">https://www.w3.org/TR/webdriver1/#element-send-keys</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aUSE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aUSE_002dSESSION-function"></span><dl>
+<dt id="index-USE_002dSESSION">CL-SELENIUM: <strong>USE-SESSION</strong> <em>(session)</em></dt>
+<dd>
+<p>Make <var>SESSION</var> the current <var>session</var>.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aSCREENSHOT"></span>
+<span id="CL_002dSELENIUM_003aSCREENSHOT-function"></span><dl>
+<dt id="index-SCREENSHOT">CL-SELENIUM: <strong>SCREENSHOT</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewportâs framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.<br>
+<br>
+See: <a href="https://www.w3.org/TR/webdriver2/#screen-capture">https://www.w3.org/TR/webdriver2/#screen-capture</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aLOGS"></span>
+<span id="CL_002dSELENIUM_003aLOGS-function"></span><dl>
+<dt id="index-LOGS">CL-SELENIUM: <strong>LOGS</strong> <em>(type &amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the logs of a particular <var>TYPE</var>.<br>
+See: <a href="#CL_002dSELENIUM_003aLOG_002dTYPES-function">LOG-TYPES</a>.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aMAKE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aMAKE_002dSESSION-function"></span><dl>
+<dt id="index-MAKE_002dSESSION">CL-SELENIUM: <strong>MAKE-SESSION</strong> <em>(&amp;key (browser-name :chrome) browser-version platform-name platform-version accept-ssl-certs additional-capabilities)</em></dt>
+<dd>
+<p>Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.<br>
+<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#new-session">https://www.w3.org/TR/webdriver1/#new-session</a> .<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#capabilities">https://www.w3.org/TR/webdriver1/#capabilities</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aBACK"></span>
+<span id="CL_002dSELENIUM_003aBACK-function"></span><dl>
+<dt id="index-BACK">CL-SELENIUM: <strong>BACK</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>This command causes the browser to traverse one step backward in the joint <var>session</var> history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#dfn-back">https://www.w3.org/TR/webdriver1/#dfn-back</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aCOOKIE"></span>
+<span id="CL_002dSELENIUM_003aCOOKIE-function"></span><dl>
+<dt id="index-COOKIE">CL-SELENIUM: <strong>COOKIE</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Retrieve all cookies visible to the current page.<br>
+<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#get-all-cookies">https://www.w3.org/TR/webdriver1/#get-all-cookies</a> .<br>
+See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie</a> .
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aLOG_002dTYPES"></span>
@@ -426,13 +594,11 @@ See: <a href="https://www.w3.org/TR/webdriver1/#element-click">https://www.w3.or
 See: <a href="https://github.com/SeleniumHQ/selenium/wiki/Logging">https://github.com/SeleniumHQ/selenium/wiki/Logging</a> .
 </p></dd></dl>
 
-<span id="index-CL_002dSELENIUM_003aFIND_002dELEMENTS"></span>
-<span id="CL_002dSELENIUM_003aFIND_002dELEMENTS-function"></span><dl>
-<dt id="index-FIND_002dELEMENTS">CL-SELENIUM: <strong>FIND-ELEMENTS</strong> <em>(value &amp;key (by :css-selector) (session *session*))</em></dt>
+<span id="index-CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW"></span>
+<span id="CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW-function"></span><dl>
+<dt id="index-CLOSE_002dCURRENT_002dWINDOW">CL-SELENIUM: <strong>CLOSE-CURRENT-WINDOW</strong> <em>(&amp;key (session *session*))</em></dt>
 <dd>
-<p>Find elements that match <var>VALUE</var> using location strategy in <var>BY</var>.<br>
-See <a href="#CL_002dSELENIUM_003aFIND_002dELEMENT-function">FIND-ELEMENT</a>.<br>
-See <a href="https://www.w3.org/TR/webdriver1/#find-elements">https://www.w3.org/TR/webdriver1/#find-elements</a> .
+<p>Close the current window.
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aMOUSE_002dMOVE_002dTO"></span>
@@ -444,55 +610,50 @@ See <a href="https://www.w3.org/TR/webdriver1/#find-elements">https://www.w3.org
 See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto</a>
 </p></dd></dl>
 
+<span id="index-CL_002dSELENIUM_003aMOUSE_002dCLICK"></span>
+<span id="CL_002dSELENIUM_003aMOUSE_002dCLICK-function"></span><dl>
+<dt id="index-MOUSE_002dCLICK">CL-SELENIUM: <strong>MOUSE-CLICK</strong> <em>(button &amp;key (session *session*))</em></dt>
+<dd>
+<p>Click any mouse <var>button</var> (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling <var>button</var> up (or any out-of-order interactions sequence) will yield undefined behaviour).<br>
+<br>
+See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick</a>
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dTAGNAME"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dTAGNAME-function"></span><dl>
+<dt id="index-ELEMENT_002dTAGNAME">CL-SELENIUM: <strong>ELEMENT-TAGNAME</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the <var>ELEMENT</var>&rsquo;s tag name.
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aKEY"></span>
+<span id="CL_002dSELENIUM_003aKEY-function"></span><dl>
+<dt id="index-KEY">CL-SELENIUM: <strong>KEY</strong> <em>(key)</em></dt>
+</dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLEAR"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dCLEAR-function"></span><dl>
+<dt id="index-ELEMENT_002dCLEAR">CL-SELENIUM: <strong>ELEMENT-CLEAR</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Clear the contents of <var>ELEMENT</var> (for example, a form field <var>element</var>).<br>
+<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#dfn-element-clear.">https://www.w3.org/TR/webdriver1/#dfn-element-clear.</a>
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aDELETE_002dALL_002dCOOKIES"></span>
+<span id="CL_002dSELENIUM_003aDELETE_002dALL_002dCOOKIES-function"></span><dl>
+<dt id="index-DELETE_002dALL_002dCOOKIES">CL-SELENIUM: <strong>DELETE-ALL-COOKIES</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Deletes all cookies<br>
+<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#delete-all-cookies">https://www.w3.org/TR/webdriver1/#delete-all-cookies</a>
+</p></dd></dl>
+
 <span id="index-CL_002dSELENIUM_003aELEMENT_002dATTRIBUTE"></span>
 <span id="CL_002dSELENIUM_003aELEMENT_002dATTRIBUTE-function"></span><dl>
 <dt id="index-ELEMENT_002dATTRIBUTE">CL-SELENIUM: <strong>ELEMENT-ATTRIBUTE</strong> <em>(element name &amp;key (session *session*))</em></dt>
 <dd>
 <p>Return the <var>ELEMENT</var>&rsquo;s attribute named <var>NAME</var>.
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aSWITCH_002dTO_002dFRAME"></span>
-<span id="CL_002dSELENIUM_003aSWITCH_002dTO_002dFRAME-function"></span><dl>
-<dt id="index-SWITCH_002dTO_002dFRAME">CL-SELENIUM: <strong>SWITCH-TO-FRAME</strong> <em>(id &amp;key (session *session*))</em></dt>
-<dd>
-<p>Change focus to another frame on the page. If the frame <var>id</var> is null, the server<br>
-should switch to the page&rsquo;s default content.<br>
-<br>
-In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.<br>
-<br>
-See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe</a> .<br>
-See: <a href="https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)">https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)</a> .
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aEXECUTE_002dSCRIPT"></span>
-<span id="CL_002dSELENIUM_003aEXECUTE_002dSCRIPT-function"></span><dl>
-<dt id="index-EXECUTE_002dSCRIPT">CL-SELENIUM: <strong>EXECUTE-SCRIPT</strong> <em>(script args &amp;key (session *session*))</em></dt>
-<dd>
-<p>Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed <var>script</var> is assumed to be synchronous and the result of evaluating the <var>script</var> is returned to the client.<br>
-<br>
-The <var>script</var> argument defines the <var>script</var> to execute in the form of a function body. The value returned by that function will be returned to the client. The function will be invoked with the provided <var>args</var> array and the values may be accessed via the arguments object in the order specified.<br>
-<br>
-Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the <var>script</var> result will be returned to the client as WebElement JSON objects.<br>
-<br>
-See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute</a> .
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION"></span>
-<span id="CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION-function"></span><dl>
-<dt id="index-START_002dINTERACTIVE_002dSESSION">CL-SELENIUM: <strong>START-INTERACTIVE-SESSION</strong> <em>(&amp;rest capabilities)</em></dt>
-<dd>
-<p>Start an interactive session. Use this to interact with Selenium driver from a REPL.<br>
-<br>
-See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aSCREENSHOT"></span>
-<span id="CL_002dSELENIUM_003aSCREENSHOT-function"></span><dl>
-<dt id="index-SCREENSHOT">CL-SELENIUM: <strong>SCREENSHOT</strong> <em>(&amp;key (session *session*))</em></dt>
-<dd>
-<p>Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewportâs framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.<br>
-<br>
-See: <a href="https://www.w3.org/TR/webdriver2/#screen-capture">https://www.w3.org/TR/webdriver2/#screen-capture</a> .
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aFIND_002dELEMENT"></span>
@@ -520,140 +681,6 @@ It can be one of:<br>
 If result is empty, a &lsquo;HANDLE-FIND-ERROR&rsquo; is signaled.<br>
 <br>
 See: <a href="https://www.w3.org/TR/webdriver1/#dfn-find-element">https://www.w3.org/TR/webdriver1/#dfn-find-element</a> .
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aMOUSE_002dCLICK"></span>
-<span id="CL_002dSELENIUM_003aMOUSE_002dCLICK-function"></span><dl>
-<dt id="index-MOUSE_002dCLICK">CL-SELENIUM: <strong>MOUSE-CLICK</strong> <em>(button &amp;key (session *session*))</em></dt>
-<dd>
-<p>Click any mouse <var>button</var> (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling <var>button</var> up (or any out-of-order interactions sequence) will yield undefined behaviour).<br>
-<br>
-See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick</a>
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aUSE_002dSESSION"></span>
-<span id="CL_002dSELENIUM_003aUSE_002dSESSION-function"></span><dl>
-<dt id="index-USE_002dSESSION">CL-SELENIUM: <strong>USE-SESSION</strong> <em>(session)</em></dt>
-<dd>
-<p>Make <var>SESSION</var> the current <var>session</var>.
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aPAGE_002dTITLE"></span>
-<span id="CL_002dSELENIUM_003aPAGE_002dTITLE-function"></span><dl>
-<dt id="index-PAGE_002dTITLE">CL-SELENIUM: <strong>PAGE-TITLE</strong> <em>(&amp;key (session *session*))</em></dt>
-<dd>
-<p>This command returns the document title of the current top-level browsing context, equivalent to calling document.title. <br>
-See: <a href="https://www.w3.org/TR/webdriver2/#get-title">https://www.w3.org/TR/webdriver2/#get-title</a> .
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aLOGS"></span>
-<span id="CL_002dSELENIUM_003aLOGS-function"></span><dl>
-<dt id="index-LOGS">CL-SELENIUM: <strong>LOGS</strong> <em>(type &amp;key (session *session*))</em></dt>
-<dd>
-<p>Return the logs of a particular <var>TYPE</var>.<br>
-See: <a href="#CL_002dSELENIUM_003aLOG_002dTYPES-function">LOG-TYPES</a>.
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dLOCATION"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dLOCATION-function"></span><dl>
-<dt id="index-ELEMENT_002dLOCATION">CL-SELENIUM: <strong>ELEMENT-LOCATION</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>Return the <var>ELEMENT</var>&rsquo;s location.
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dTEXT"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dTEXT-function"></span><dl>
-<dt id="index-ELEMENT_002dTEXT">CL-SELENIUM: <strong>ELEMENT-TEXT</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>The Get <var>Element</var> Text command intends to return an <var>element</var>âs text âas renderedâ. An <var>element</var>âs rendered text is also used for locating a elements by their link text and partial link text.<br>
-<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#get-element-text">https://www.w3.org/TR/webdriver1/#get-element-text</a> .
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aACTIVE_002dELEMENT"></span>
-<span id="CL_002dSELENIUM_003aACTIVE_002dELEMENT-function"></span><dl>
-<dt id="index-ACTIVE_002dELEMENT">CL-SELENIUM: <strong>ACTIVE-ELEMENT</strong> <em>(&amp;key (session *session*))</em></dt>
-<dd>
-<p>Return the active element of the current browsing contextâs document.<br>
-The active element is the Element within the DOM that currently has focus.<br>
-If there&rsquo;s no active element, an error is signaled.<br>
-<br>
-See: <a href="https://www.w3.org/TR/webdriver2/#get-active-element.">https://www.w3.org/TR/webdriver2/#get-active-element.</a><br>
-See: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.">https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.</a>
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aMAKE_002dCOOKIE"></span>
-<span id="CL_002dSELENIUM_003aMAKE_002dCOOKIE-function"></span><dl>
-<dt id="index-MAKE_002dCOOKIE">CL-SELENIUM: <strong>MAKE-COOKIE</strong> <em>(name value &amp;key path domain secure expiry)</em></dt>
-</dl>
-
-<span id="index-CL_002dSELENIUM_003aSTOP_002dINTERACTIVE_002dSESSION"></span>
-<span id="CL_002dSELENIUM_003aSTOP_002dINTERACTIVE_002dSESSION-function"></span><dl>
-<dt id="index-STOP_002dINTERACTIVE_002dSESSION">CL-SELENIUM: <strong>STOP-INTERACTIVE-SESSION</strong> <em>nil</em></dt>
-<dd>
-<p>Stop an interactive session.
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dTAGNAME"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dTAGNAME-function"></span><dl>
-<dt id="index-ELEMENT_002dTAGNAME">CL-SELENIUM: <strong>ELEMENT-TAGNAME</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>Return the <var>ELEMENT</var>&rsquo;s tag name.
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aREFRESH"></span>
-<span id="CL_002dSELENIUM_003aREFRESH-function"></span><dl>
-<dt id="index-REFRESH">CL-SELENIUM: <strong>REFRESH</strong> <em>(&amp;key (session *session*))</em></dt>
-<dd>
-<p>Refresh the current page.
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dDISPLAYED"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dDISPLAYED-function"></span><dl>
-<dt id="index-ELEMENT_002dDISPLAYED">CL-SELENIUM: <strong>ELEMENT-DISPLAYED</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>Returns  if <var>ELEMENT</var> is visible.<br>
-<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#element-displayedness">https://www.w3.org/TR/webdriver1/#element-displayedness</a> .
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aDELETE_002dSESSION"></span>
-<span id="CL_002dSELENIUM_003aDELETE_002dSESSION-function"></span><dl>
-<dt id="index-DELETE_002dSESSION">CL-SELENIUM: <strong>DELETE-SESSION</strong> <em>(session)</em></dt>
-<dd>
-<p>Delete the WebDriver <var>SESSION</var>.
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aMAKE_002dSESSION"></span>
-<span id="CL_002dSELENIUM_003aMAKE_002dSESSION-function"></span><dl>
-<dt id="index-MAKE_002dSESSION">CL-SELENIUM: <strong>MAKE-SESSION</strong> <em>(&amp;key (browser-name :chrome) browser-version platform-name platform-version accept-ssl-certs additional-capabilities)</em></dt>
-<dd>
-<p>Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.<br>
-<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#new-session">https://www.w3.org/TR/webdriver1/#new-session</a> .<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#capabilities">https://www.w3.org/TR/webdriver1/#capabilities</a> .
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aKEY"></span>
-<span id="CL_002dSELENIUM_003aKEY-function"></span><dl>
-<dt id="index-KEY">CL-SELENIUM: <strong>KEY</strong> <em>(key)</em></dt>
-</dl>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLEAR"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dCLEAR-function"></span><dl>
-<dt id="index-ELEMENT_002dCLEAR">CL-SELENIUM: <strong>ELEMENT-CLEAR</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>Clear the contents of <var>ELEMENT</var> (for example, a form field <var>element</var>).<br>
-<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#dfn-element-clear.">https://www.w3.org/TR/webdriver1/#dfn-element-clear.</a>
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aBACK"></span>
-<span id="CL_002dSELENIUM_003aBACK-function"></span><dl>
-<dt id="index-BACK">CL-SELENIUM: <strong>BACK</strong> <em>(&amp;key (session *session*))</em></dt>
-<dd>
-<p>This command causes the browser to traverse one step backward in the joint <var>session</var> history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#dfn-back">https://www.w3.org/TR/webdriver1/#dfn-back</a> .
 </p></dd></dl>
 
 <span id="Classes"></span><h3 class="heading">Classes</h3>
@@ -925,6 +952,8 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aBACK"><code>CL-SELENIUM:BACK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW"><code>CL-SELENIUM:CLOSE-CURRENT-WINDOW</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aCOOKIE"><code>CL-SELENIUM:COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aDELETE_002dALL_002dCOOKIES"><code>CL-SELENIUM:DELETE-ALL-COOKIES</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aDELETE_002dCOOKIE"><code>CL-SELENIUM:DELETE-COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aDELETE_002dSESSION"><code>CL-SELENIUM:DELETE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dATTRIBUTE"><code>CL-SELENIUM:ELEMENT-ATTRIBUTE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dCLEAR"><code>CL-SELENIUM:ELEMENT-CLEAR</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
@@ -936,6 +965,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dTAGNAME"><code>CL-SELENIUM:ELEMENT-TAGNAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dTEXT"><code>CL-SELENIUM:ELEMENT-TEXT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aEXECUTE_002dSCRIPT"><code>CL-SELENIUM:EXECUTE-SCRIPT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aFIND_002dCOOKIE"><code>CL-SELENIUM:FIND-COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aFIND_002dELEMENT"><code>CL-SELENIUM:FIND-ELEMENT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aFIND_002dELEMENTS"><code>CL-SELENIUM:FIND-ELEMENTS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aKEY"><code>CL-SELENIUM:KEY</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
@@ -961,6 +991,8 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-COOKIE"><code>COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_fn_letter-D">D</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-DELETE_002dALL_002dCOOKIES"><code>DELETE-ALL-COOKIES</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-DELETE_002dCOOKIE"><code>DELETE-COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-DELETE_002dSESSION"><code>DELETE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_fn_letter-E">E</th><td></td><td></td></tr>
@@ -977,6 +1009,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-EXECUTE_002dSCRIPT"><code>EXECUTE-SCRIPT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_fn_letter-F">F</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-FIND_002dCOOKIE"><code>FIND-COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-FIND_002dELEM"><code>FIND-ELEM</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM_002dUTILS-package">CL-SELENIUM-UTILS package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-FIND_002dELEMENT"><code>FIND-ELEMENT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-FIND_002dELEMENTS"><code>FIND-ELEMENTS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
