@@ -20,7 +20,9 @@
    (expiry :initarg :expiry
 	   :initform nil
 	   :documentation "When the cookie expires, specified in seconds since Unix Epoch. Must not be set if omitted when adding a cookie."))
-  (:documentation "A cookie is described in [RFC6265] by a name-value pair holding the cookie’s data, followed by zero or more attribute-value pairs describing its characteristics."))
+  (:documentation "A cookie is described in [RFC6265] by a name-value pair holding the cookie’s data, followed by zero or more attribute-value pairs describing its characteristics.
+
+Category: Cookies"))
 
 (defmethod json:encode-json ((cookie cookie) &optional (stream json:*json-output*))
   (with-slots (name value path domain secure expiry) cookie
@@ -57,6 +59,7 @@ See: https://www.w3.org/TR/webdriver1/#dfn-adding-a-cookie ."
 (defun cookie (&key (session *session*))
   "Retrieve all cookies visible to the current page.
 
+Category: Cookies
 See: https://www.w3.org/TR/webdriver1/#get-all-cookies .
 See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie ."
   (http-get-value (session-path session "/cookie")))
@@ -64,17 +67,20 @@ See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsession
 (defun find-cookie (cookie-name &key (session *session*))
   "Retrieve the cookie with name COOKIE-NAME.
 
+Category: Cookies
 See: https://www.w3.org/TR/webdriver1/#get-named-cookie"
   (http-get-value (session-path session "/cookie/~a" cookie-name)))
 
 (defun delete-cookie (cookie-name &key (session *session*))
   "Delete the cookie with name COOKIE-NAME.
 
+Category: Cookies
 See: https://www.w3.org/TR/webdriver1/#delete-cookie"
   (http-delete (session-path session "/cookie/~a" cookie-name)))
 
 (defun delete-all-cookies (&key (session *session*))
   "Deletes all cookies
 
+Category: Cookies
 See: https://www.w3.org/TR/webdriver1/#delete-all-cookies"
   (http-delete (session-path session "/cookie")))

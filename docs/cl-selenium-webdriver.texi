@@ -206,7 +206,7 @@ sh
 @node CL-SELENIUM package
 @section CL-SELENIUM package
 
-(@clpackage :cl-selenium :include-external-definitions t)
+(@clpackage :cl-selenium :include-external-definitions t :categorized :by-docstring-category)
 
 @node CL-SELENIUM-UTILS package
 @section CL-SELENIUM-UTILS package

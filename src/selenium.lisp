@@ -2,21 +2,29 @@
 
 (defun (setf url) (url &key (session *session*))
   "The command causes the user agent to navigate the current top-level browsing context to a new location.
+
+Category: Navigation
 See: https://www.w3.org/TR/webdriver1/#dfn-navigate-to ."
   (http-post-value (session-path session "/url") `(:url ,url)))
 
 (defun url (&key (session *session*))
   "Get the current url in session.
+
+Category: Navigation
 See: https://www.w3.org/TR/webdriver1/#dfn-get-current-url ."
   (http-get-value (session-path session "/url")))
 
 (defun back (&key (session *session*))
   "This command causes the browser to traverse one step backward in the joint session history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.
+
+Category: Navigation
 See: https://www.w3.org/TR/webdriver1/#dfn-back ."
   (http-post-check (session-path session "/back")))
 
 (defun page-title (&key (session *session*))
   "This command returns the document title of the current top-level browsing context, equivalent to calling document.title. 
+
+Category: Navigation
 See: https://www.w3.org/TR/webdriver2/#get-title ."
   (http-get-value (session-path session "/title")))
 
@@ -61,6 +69,7 @@ It can be one of:
 
 If result is empty, a HANDLE-FIND-ERROR is signaled.
 
+Category: Elements
 See: https://www.w3.org/TR/webdriver1/#dfn-find-element ."
   (handler-case
       (let ((response (http-post (session-path session "/element") `(:value ,value :using ,(by by)))))
@@ -73,6 +82,8 @@ See: https://www.w3.org/TR/webdriver1/#dfn-find-element ."
 
 (defun find-elements (value &key (by :css-selector) (session *session*))
   "Find elements that match VALUE using location strategy in BY.
+
+Category: Elements
 See FIND-ELEMENT.
 See https://www.w3.org/TR/webdriver1/#find-elements ."
   (handler-case
@@ -108,6 +119,7 @@ See: https://www.w3.org/TR/webdriver1/#dfn-strategy ."
 The active element is the Element within the DOM that currently has focus.
 If there's no active element, an error is signaled.
 
+Category: Elements
 See: https://www.w3.org/TR/webdriver2/#get-active-element.
 See: https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement."
   (make-instance 'element
@@ -116,12 +128,14 @@ See: https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement."
 (defun element-clear (element &key (session *session*))
   "Clear the contents of ELEMENT (for example, a form field element).
 
+Category: Element interaction
 See: https://www.w3.org/TR/webdriver1/#dfn-element-clear."
   (http-post-check (session-path session "/element/~a/clear" (element-id element))))
 
 (defun element-send-keys (element keys &key (session *session*))
   "The Element Send Keys command scrolls into view the form control element and then sends the provided keys to the element. In case the element is not keyboard-interactable, an element not interactable error is returned.
 
+Category: Element interaction
 See: https://www.w3.org/TR/webdriver1/#element-send-keys ."
   (check-type keys (string))
   (http-post-check (session-path session "/element/~a/value"
@@ -133,6 +147,7 @@ See: https://www.w3.org/TR/webdriver1/#element-send-keys ."
 
 If the element’s center point is obscured by another element, an element click intercepted error is returned. If the element is outside the viewport, an element not interactable error is returned.
 
+Category: Element interaction
 See: https://www.w3.org/TR/webdriver1/#element-click ."
   
   (http-post-check (session-path session "/element/~a/click"
@@ -141,6 +156,7 @@ See: https://www.w3.org/TR/webdriver1/#element-click ."
 (defun element-text (element &key (session *session*))
   "The Get Element Text command intends to return an element’s text “as rendered”. An element’s rendered text is also used for locating a elements by their link text and partial link text.
 
+Category: Elements
 See: https://www.w3.org/TR/webdriver1/#get-element-text ."
   
   (http-get-value (session-path session "/element/~a/text" (element-id element))))
@@ -148,19 +164,26 @@ See: https://www.w3.org/TR/webdriver1/#get-element-text ."
 (defun element-displayed (element &key (session *session*))
   "Returns T if ELEMENT is visible.
 
+Category: Elements
 See: https://www.w3.org/TR/webdriver1/#element-displayedness ."
   (http-get-value (session-path session "/element/~a/displayed" (element-id element))))
 
 (defun element-location (element &key (session *session*))
-  "Return the ELEMENT's location."
+  "Return the ELEMENT's location.
+
+Category: Elements"
   (http-get-value (session-path session "/element/~a/location" (element-id element))))
 
 (defun element-tagname (element &key (session *session*))
-  "Return the ELEMENT's tag name."
+  "Return the ELEMENT's tag name.
+
+Category: Elements"
   (http-get-value (session-path session "/element/~a/name" (element-id element))))
 
 (defun element-attribute (element name &key (session *session*))
-  "Return the ELEMENT's attribute named NAME."
+  "Return the ELEMENT's attribute named NAME.
+
+Category: Elements"
   (http-get-value (session-path session "/element/~a/attribute/~a" (element-id element) name)))
 
 (defun log-types (&key (session *session*))
@@ -186,8 +209,11 @@ See: LOG-TYPES."
 See: https://www.w3.org/TR/webdriver2/#screen-capture ."
   (http-get-value (session-path session "/screenshot")))
 
+
 (defun refresh (&key (session *session*))
-  "Refresh the current page."
+  "Refresh the current page.
+
+Category: Navigation"
   (http-post (session-path session "/refresh")))
 
 (defun switch-to-frame (id &key (session *session*))
@@ -196,13 +222,16 @@ should switch to the page's default content.
 
 In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.
 
+Category: Navigation
 See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe .
 See: https://en.wikipedia.org/wiki/Frame_(World_Wide_Web) ."
   (http-post-check (session-path session "/frame")
                    `(:id ,id)))
 
 (defun close-current-window (&key (session *session*))
-  "Close the current window."
+  "Close the current window.
+
+Category: Windows"
   (http-delete (session-path session "/window")))
 
 (defun execute-script (script args &key (session *session*))
@@ -212,6 +241,7 @@ The script argument defines the script to execute in the form of a function body
 
 Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the script result will be returned to the client as WebElement JSON objects.
 
+Category: Document handling
 See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute ."
   (check-type script string)
   (check-type args list)

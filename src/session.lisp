@@ -10,6 +10,9 @@ The server should maintain one browser per session. Commands sent to a session w
 
 (defvar *session* nil "The current Selenium WebDriver session.")
 
+(defun session-path (session fmt &rest args)
+  (format nil "/session/~a~a" (session-id session) (apply #'format nil fmt args)))
+
 (defun make-session (&key
                        (browser-name :chrome) ; TODO: autodetect?
                        browser-version
@@ -19,6 +22,7 @@ The server should maintain one browser per session. Commands sent to a session w
                        additional-capabilities)
   "Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.
 
+Category: Session
 See: https://www.w3.org/TR/webdriver1/#new-session .
 See: https://www.w3.org/TR/webdriver1/#capabilities ."
   (let ((response (http-post "/session"
@@ -34,16 +38,21 @@ See: https://www.w3.org/TR/webdriver1/#capabilities ."
                    :id (assoc-value response :session-id))))
 
 (defun delete-session (session)
-  "Delete the WebDriver SESSION."
+  "Delete the WebDriver SESSION.
+
+Category: Session"
   (http-delete-check (session-path session "")))
 
 (defun use-session (session)
-  "Make SESSION the current session."
+  "Make SESSION the current session.
+
+Category: Session"
   (setf *session* session))
 
 (defmacro with-session ((&rest capabilities) &body body)
   "Execute BODY inside a Selenium session.
 
+Category: Session
 See: MAKE-SESSION"
   (with-gensyms (session)
     `(let (,session)
@@ -58,16 +67,16 @@ See: MAKE-SESSION"
 (defun start-interactive-session (&rest capabilities)
   "Start an interactive session. Use this to interact with Selenium driver from a REPL.
 
+Category: Session
 See: MAKE-SESSION"
   (when *session*
     (delete-session *session*))
   (setf *session* (apply #'make-session  capabilities)))
 
 (defun stop-interactive-session ()
-  "Stop an interactive session."
+  "Stop an interactive session.
+
+Category: Session"
   (when *session*
     (delete-session *session*)
     (setf *session* nil)))
-
-(defun session-path (session fmt &rest args)
-  (format nil "/session/~a~a" (session-id session) (apply #'format nil fmt args)))
