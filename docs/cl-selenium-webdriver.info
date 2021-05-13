@@ -224,7 +224,7 @@ External definitions
 ====================
 
 Elements
-========
+--------
 
  -- CL-SELENIUM: FIND-ELEMENTS (value &key (by :css-selector) (session
           *session*))
@@ -317,7 +317,7 @@ Elements
      See: <https://www.w3.org/TR/webdriver1/#dfn-find-element> .
 
 Cookies
-=======
+-------
 
  -- CL-SELENIUM: DELETE-COOKIE (cookie-name &key (session *session*))
 
@@ -390,7 +390,7 @@ Cookies
      See: <https://www.w3.org/TR/webdriver1/#delete-all-cookies>
 
 Element interaction
-===================
+-------------------
 
  -- CL-SELENIUM: ELEMENT-CLICK (element &key (session *session*))
 
@@ -425,7 +425,7 @@ Element interaction
      See: <https://www.w3.org/TR/webdriver1/#dfn-element-clear.>
 
 Uncategorized
-=============
+-------------
 
  -- CL-SELENIUM: MAKE-COOKIE (name value &key path domain secure expiry)
 
@@ -491,7 +491,7 @@ Uncategorized
  -- CL-SELENIUM: KEY (key)
 
 Windows
-=======
+-------
 
  -- CL-SELENIUM: CLOSE-CURRENT-WINDOW (&key (session *session*))
 
@@ -500,7 +500,7 @@ Windows
      Category: Windows
 
 Navigation
-==========
+----------
 
  -- CL-SELENIUM: SWITCH-TO-FRAME (id &key (session *session*))
 
@@ -550,7 +550,7 @@ Navigation
      See: <https://www.w3.org/TR/webdriver1/#dfn-back> .
 
 Session
-=======
+-------
 
  -- CL-SELENIUM: STOP-INTERACTIVE-SESSION nil
 
@@ -597,7 +597,7 @@ Session
      See: <https://www.w3.org/TR/webdriver1/#capabilities> .
 
 Document handling
-=================
+-----------------
 
  -- CL-SELENIUM: EXECUTE-SCRIPT (script args &key (session *session*))
 
@@ -636,7 +636,7 @@ External definitions
 ====================
 
 Variables
-=========
+---------
 
  -- CL-SELENIUM-UTILS: *TIMEOUT*
 
@@ -650,13 +650,13 @@ Variables
      function by default.
 
 Macros
-======
+------
 
 Generic functions
-=================
+-----------------
 
 Functions
-=========
+---------
 
  -- CL-SELENIUM-UTILS: ID (&optional selector)
 
@@ -712,7 +712,7 @@ Functions
      Click on active element.
 
 Classes
-=======
+-------
 
 
 File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top

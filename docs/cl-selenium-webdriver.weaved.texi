@@ -218,7 +218,7 @@ For documentation see:@*
 
 @heading External definitions
 
-@heading Elements
+@subheading Elements
 
 @cldefun {CL-SELENIUM, FIND-ELEMENTS, (value &key (by :css-selector) (session *session*))}
 
@@ -303,7 +303,7 @@ Category: Elements@*
 See: @url{https://www.w3.org/TR/webdriver1/#dfn-find-element} .
 @endcldefun
 
-@heading Cookies
+@subheading Cookies
 
 @cldefun {CL-SELENIUM, DELETE-COOKIE, (cookie-name &key (session *session*))}
 
@@ -366,7 +366,7 @@ Category: Cookies@*
 See: @url{https://www.w3.org/TR/webdriver1/#delete-all-cookies}
 @endcldefun
 
-@heading Element interaction
+@subheading Element interaction
 
 @cldefun {CL-SELENIUM, ELEMENT-CLICK, (element &key (session *session*))}
 
@@ -394,7 +394,7 @@ Category: @var{Element} interaction@*
 See: @url{https://www.w3.org/TR/webdriver1/#dfn-element-clear.}
 @endcldefun
 
-@heading Uncategorized
+@subheading Uncategorized
 
 @cldefun {CL-SELENIUM, MAKE-COOKIE, (name value &key path domain secure expiry)}
 
@@ -459,7 +459,7 @@ See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionse
 
 @endcldefun
 
-@heading Windows
+@subheading Windows
 
 @cldefun {CL-SELENIUM, CLOSE-CURRENT-WINDOW, (&key (session *session*))}
 
@@ -468,7 +468,7 @@ Close the current window.@*
 Category: Windows
 @endcldefun
 
-@heading Navigation
+@subheading Navigation
 
 @cldefun {CL-SELENIUM, SWITCH-TO-FRAME, (id &key (session *session*))}
 
@@ -513,7 +513,7 @@ Category: Navigation@*
 See: @url{https://www.w3.org/TR/webdriver1/#dfn-back} .
 @endcldefun
 
-@heading Session
+@subheading Session
 
 @cldefun {CL-SELENIUM, STOP-INTERACTIVE-SESSION, nil}
 
@@ -561,7 +561,7 @@ See: @url{https://www.w3.org/TR/webdriver1/#new-session} .@*
 See: @url{https://www.w3.org/TR/webdriver1/#capabilities} .
 @endcldefun
 
-@heading Document handling
+@subheading Document handling
 
 @cldefun {CL-SELENIUM, EXECUTE-SCRIPT, (script args &key (session *session*))}
 
@@ -588,7 +588,7 @@ Package with the purpose of reducing boilerplate.
 
 @heading External definitions
 
-@heading Variables
+@subheading Variables
 @cldefvar {CL-SELENIUM-UTILS, *TIMEOUT*}
 
 Default timeout value to use in selenium-utils functions.
@@ -600,9 +600,9 @@ Function used to get the 'default element' by selenium-utils functions.@*
 It is @clref{CL-SELENIUM, ACTIVE-ELEMENT, function} function by default.
 @endcldefvar
 
-@heading Macros
-@heading Generic functions
-@heading Functions
+@subheading Macros
+@subheading Generic functions
+@subheading Functions
 @cldefun {CL-SELENIUM-UTILS, ID, (&optional selector)}
 
 Get active element id.
@@ -665,7 +665,7 @@ Otherwise, call @clref{CL-SELENIUM-UTILS, *DEFAULT-ELEMENT-FUNC*, variable} (the
 Click on active element.
 @endcldefun
 
-@heading Classes
+@subheading Classes
 
 
 @node Index
