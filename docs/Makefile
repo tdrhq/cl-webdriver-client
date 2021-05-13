@@ -9,10 +9,12 @@ cl-selenium-webdriver.pdf: cl-selenium-webdriver.weaved.texi
 	texi2any --force --no-validate --pdf cl-selenium-webdriver.weaved.texi -o cl-selenium-webdriver.pdf
 
 cl-selenium-webdriver.html: cl-selenium-webdriver.weaved.texi
-	texi2any --no-validate --html cl-selenium-webdriver.weaved.texi --css-ref texinfo-klare.css --no-split -o cl-selenium-webdriver.html
+	texi2any --no-validate --html cl-selenium-webdriver.weaved.texi --css-ref texinfo-klare.css --css-ref lisp-coloring.css --no-split -o cl-selenium-webdriver.html
+	sbcl --no-sysinit --no-userinit --load colorize-lisp-examples.lisp cl-selenium-webdriver.html
 
 index.html: cl-selenium-webdriver.weaved.texi
-	texi2any --no-validate --html cl-selenium-webdriver.weaved.texi --css-ref texinfo-klare.css --no-split -o index.html
+	texi2any --no-validate --html cl-selenium-webdriver.weaved.texi --css-ref texinfo-klare.css --css-ref lisp-coloring.css --no-split -o index.html
+	sbcl --no-sysinit --no-userinit --load colorize-lisp-examples.lisp index.html
 
 cl-selenium-webdriver.weaved.texi:
 	sbcl --eval '(ql:quickload :docweaver)' --eval '(docweaver:weave-file "cl-selenium-webdriver.texi" "cl-selenium-webdriver.weaved.texi" :docsystem :texinfo :modules (list :cl-selenium))' --quit

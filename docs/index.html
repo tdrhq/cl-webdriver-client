@@ -32,6 +32,7 @@ ul.no-bullet {list-style: none}
 -->
 </style>
 <link rel="stylesheet" type="text/css" href="texinfo-klare.css">
+<link rel="stylesheet" type="text/css" href="lisp-coloring.css">
 
 
 </head>
@@ -130,39 +131,39 @@ Next: <a href="#Installation" accesskey="n" rel="next">Installation</a>, Previou
 <span id="Usage-1"></span><h2 class="chapter">2 Usage</h2>
 
 <div class="lisp">
-<pre class="lisp">;; see examples/*.lisp and t/*.lisp
-(in-package :cl-user)
-
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (ql:quickload :cl-selenium))
-
-(defpackage go-test
-  (:use :cl :cl-selenium))
-
-(in-package :go-test)
-
-(defparameter *code* &quot;
-package main
-import \&quot;fmt\&quot;
-
-func main() {
-    fmt.Print(\&quot;Hello WebDriver!\&quot;)
-}&quot;)
-
-(with-session ()
-  (setf (url) &quot;http://play.golang.org/?simple=1&quot;)
-  (let ((elem (find-element &quot;#code&quot; :by :css-selector)))
-    (element-clear elem)
-    (element-send-keys elem *code*))
-  (let ((btn (find-element &quot;#run&quot;)))
-    (element-click btn))
-
-  (loop
-     with div = (find-element &quot;#output&quot;)
-     for ouput = (element-text div)
-     while (equal ouput &quot;Waiting for remote server...&quot;)
-     do (sleep 0.1)
-     finally (print ouput)))
+<pre class="lisp">  <span class="comment">;; see examples/*.lisp and t/*.lisp
+  </span><span class="paren1">(<span class="lisp-bg">in-package <span class="keyword">:cl-user</span></span>)</span>
+   
+  <span class="paren1">(<span class="lisp-bg"><i><span class="symbol">eval-when</span></i> <span class="paren2">(<span class="lisp-bg"><span class="keyword">:compile-toplevel</span> <span class="keyword">:load-toplevel</span> <span class="keyword">:execute</span></span>)</span>
+    <span class="paren2">(<span class="lisp-bg">ql:quickload <span class="keyword">:cl-selenium</span></span>)</span></span>)</span>
+   
+  <span class="paren1">(<span class="lisp-bg"><i><span class="symbol">defpackage</span></i> go-test
+    <span class="paren2">(<span class="lisp-bg"><span class="keyword">:use</span> <span class="keyword">:cl</span> <span class="keyword">:cl-selenium</span></span>)</span></span>)</span>
+   
+  <span class="paren1">(<span class="lisp-bg">in-package <span class="keyword">:go-test</span></span>)</span>
+   
+  <span class="paren1">(<span class="lisp-bg"><i><span class="symbol">defparameter</span></i> <span class="special">*code*</span> <span class="string">&quot;
+  package main
+  import </span><span class="string">\&quot;</span><span class="string">fmt</span><span class="string">\&quot;</span><span class="string">
+   
+  func main() {
+      fmt.Print(</span><span class="string">\&quot;</span><span class="string">Hello WebDriver!</span><span class="string">\&quot;</span><span class="string">)
+  }&quot;</span></span>)</span>
+   
+  <span class="paren1">(<span class="lisp-bg"><i><span class="symbol">with-session</span></i> <span class="paren2">(<span class="lisp-bg"></span>)</span>
+    <span class="paren2">(<span class="lisp-bg">setf <span class="paren3">(<span class="lisp-bg">url</span>)</span> <span class="string">&quot;http://play.golang.org/?simple=1&quot;</span></span>)</span>
+    <span class="paren2">(<span class="lisp-bg"><i><span class="symbol">let</span></i> <span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg">elem <span class="paren5">(<span class="lisp-bg">find-element <span class="string">&quot;#code&quot;</span> <span class="keyword">:by</span> <span class="keyword">:css-selector</span></span>)</span></span>)</span></span>)</span>
+      <span class="paren3">(<span class="lisp-bg">element-clear elem</span>)</span>
+      <span class="paren3">(<span class="lisp-bg">element-send-keys elem <span class="special">*code*</span></span>)</span></span>)</span>
+    <span class="paren2">(<span class="lisp-bg"><i><span class="symbol">let</span></i> <span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg">btn <span class="paren5">(<span class="lisp-bg">find-element <span class="string">&quot;#run&quot;</span></span>)</span></span>)</span></span>)</span>
+      <span class="paren3">(<span class="lisp-bg">element-click btn</span>)</span></span>)</span>
+   
+    <span class="paren2">(<span class="lisp-bg"><i><span class="symbol">loop</span></i>
+       with div = <span class="paren3">(<span class="lisp-bg">find-element <span class="string">&quot;#output&quot;</span></span>)</span>
+       for ouput = <span class="paren3">(<span class="lisp-bg">element-text div</span>)</span>
+       while <span class="paren3">(<span class="lisp-bg">equal ouput <span class="string">&quot;Waiting for remote server...&quot;</span></span>)</span>
+       do <span class="paren3">(<span class="lisp-bg">sleep 0.1</span>)</span>
+       finally <span class="paren3">(<span class="lisp-bg">print ouput</span>)</span></span>)</span></span>)</span>
 </pre></div>
 
 <hr>
@@ -196,22 +197,22 @@ Next: <a href="#API" accesskey="n" rel="next">API</a>, Previous: <a href="#Insta
 <p>There is a <code>:cl-selenium-utils</code> package which should reduce boilerplate. For example:
 </p>
 <div class="lisp">
-<pre class="lisp">(defpackage my-test
-  (:use :cl :cl-selenium)
-  (:import-from :cl-selenium-utils
-                :send-keys
-                :click
-                :wait-for
-                :classlist))
-
-(in-package :my-test)
-
-(with-session ()
-  (setf (url) &quot;http://google.com&quot;)
-  (send-keys &quot;cl-selenium-webdriver&quot;)
-  (click &quot;[name=btnK]&quot;)
-  (wait-for &quot;#resultStats&quot;))
-
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg"><i><span class="symbol">defpackage</span></i> my-test
+    <span class="paren2">(<span class="lisp-bg"><span class="keyword">:use</span> <span class="keyword">:cl</span> <span class="keyword">:cl-selenium</span></span>)</span>
+    <span class="paren2">(<span class="lisp-bg"><span class="keyword">:import-from</span> <span class="keyword">:cl-selenium-utils</span>
+                  <span class="keyword">:send-keys</span>
+                  <span class="keyword">:click</span>
+                  <span class="keyword">:wait-for</span>
+                  <span class="keyword">:classlist</span></span>)</span></span>)</span>
+   
+  <span class="paren1">(<span class="lisp-bg">in-package <span class="keyword">:my-test</span></span>)</span>
+   
+  <span class="paren1">(<span class="lisp-bg"><i><span class="symbol">with-session</span></i> <span class="paren2">(<span class="lisp-bg"></span>)</span>
+    <span class="paren2">(<span class="lisp-bg">setf <span class="paren3">(<span class="lisp-bg">url</span>)</span> <span class="string">&quot;http://google.com&quot;</span></span>)</span>
+    <span class="paren2">(<span class="lisp-bg">send-keys <span class="string">&quot;cl-selenium-webdriver&quot;</span></span>)</span>
+    <span class="paren2">(<span class="lisp-bg">click <span class="string">&quot;[name=btnK]&quot;</span></span>)</span>
+    <span class="paren2">(<span class="lisp-bg">wait-for <span class="string">&quot;#resultStats&quot;</span></span>)</span></span>)</span>
+   
 </pre></div>
 
 <table class="menu" border="0" cellspacing="0">
@@ -235,16 +236,16 @@ Next: <a href="#Utils-API-conventions" accesskey="n" rel="next">Utils API conven
 <p>You can just start the session and control it from your repl:
 </p>
 <div class="lisp">
-<pre class="lisp">(in-package :my-test)
-
-(start-interactive-session)
-
-(setf (url) &quot;http://google.com&quot;)
-(send-keys &quot;cl-selenium-webdriver&quot;)
-(send-keys (key :enter))
-(classlist &quot;#slim_appbar&quot;) ; prints (&quot;ab_tnav_wrp&quot;)
-
-(stop-interactive-session)
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">in-package <span class="keyword">:my-test</span></span>)</span>
+   
+  <span class="paren1">(<span class="lisp-bg">start-interactive-session</span>)</span>
+   
+  <span class="paren1">(<span class="lisp-bg">setf <span class="paren2">(<span class="lisp-bg">url</span>)</span> <span class="string">&quot;http://google.com&quot;</span></span>)</span>
+  <span class="paren1">(<span class="lisp-bg">send-keys <span class="string">&quot;cl-selenium-webdriver&quot;</span></span>)</span>
+  <span class="paren1">(<span class="lisp-bg">send-keys <span class="paren2">(<span class="lisp-bg">key <span class="keyword">:enter</span></span>)</span></span>)</span>
+  <span class="paren1">(<span class="lisp-bg">classlist <span class="string">&quot;#slim_appbar&quot;</span></span>)</span> ; prints <span class="paren1">(<span class="lisp-bg"><span class="string">&quot;ab_tnav_wrp&quot;</span></span>)</span>
+   
+  <span class="paren1">(<span class="lisp-bg">stop-interactive-session</span>)</span>
 </pre></div>
 
 <hr>
@@ -256,21 +257,22 @@ Next: <a href="#Waiting-for-the-reaction" accesskey="n" rel="next">Waiting for t
 
 <p>If utility function needs an element to work on it defaults to &lsquo;(active-element)&lsquo;.
 </p><div class="lisp">
-<pre class="lisp">(click) ; click on the current active element.
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">click</span>)</span> ; click on the current active element.
 </pre></div>
 
 <p>You can also pass a css selector as a last parameter.
 </p>
 <div class="lisp">
-<pre class="lisp">(print (id &quot;#submit&quot;)) ; print id the of matched element
-
-(assert (= (first (classlist &quot;div&quot;)) &quot;first-div-ever&quot;))
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">print <span class="paren2">(<span class="lisp-bg">id <span class="string">&quot;#submit&quot;</span></span>)</span></span>)</span> ; print id the of matched element
+   
+  <span class="paren1">(<span class="lisp-bg">assert <span class="paren2">(<span class="lisp-bg">= <span class="paren3">(<span class="lisp-bg">first <span class="paren4">(<span class="lisp-bg">classlist <span class="string">&quot;div&quot;</span></span>)</span></span>)</span> <span class="string">&quot;first-div-ever&quot;</span></span>)</span></span>)</span>
 </pre></div>
 
 <p>To change default element you can:
 </p>
 <div class="lisp">
-<pre class="lisp">(setf cl-selenium-utils:*default-element-func* (lambda () (find-element &quot;input[type=submit]&quot;))
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">setf <span class="special">cl-selenium-utils:*default-element-func*</span> <span class="paren2">(<span class="lisp-bg"><i><span class="symbol">lambda</span></i> <span class="paren3">(<span class="lisp-bg"></span>)</span> <span class="paren3">(<span class="lisp-bg">find-element <span class="string">&quot;input[type=submit]&quot;</span></span>)</span></span>)</span>
+  </span></span>
 </pre></div>
 
 <hr>
@@ -285,12 +287,12 @@ do a <code>(click)</code> on the button to load search results, you need to wait
 them to load.
 </p>
 <div class="lisp">
-<pre class="lisp">(wait-for &quot;.search-result&quot; :timeout 10) ; wait 10 seconds
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">wait-for <span class="string">&quot;.search-result&quot;</span> <span class="keyword">:timeout</span> 10</span>)</span> ; wait 10 seconds
 </pre></div>
 
 <p>Timeout defaults to 30 seconds. You can globally change it:
 </p><div class="lisp">
-<pre class="lisp">(setf cl-selenium-utils:*timeout* 3)
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">setf <span class="special">cl-selenium-utils:*timeout*</span> 3</span>)</span>
 </pre></div>
 
 <hr>
@@ -303,9 +305,9 @@ Previous: <a href="#Waiting-for-the-reaction" accesskey="p" rel="prev">Waiting f
 <span id="REPL"></span><h3 class="heading">REPL</h3>
 
 <div class="lisp">
-<pre class="lisp">(ql:quickload '(:cl-selenium :prove))
-(setf prove:*enable-colors* nil)
-(prove:run :cl-selenium-test)
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">ql:quickload '<span class="paren2">(<span class="lisp-bg"><span class="keyword">:cl-selenium</span> <span class="keyword">:prove</span></span>)</span></span>)</span>
+  <span class="paren1">(<span class="lisp-bg">setf <span class="special">prove:*enable-colors*</span> nil</span>)</span>
+  <span class="paren1">(<span class="lisp-bg">prove:run <span class="keyword">:cl-selenium-test</span></span>)</span>
 </pre></div>
 
 <span id="Shell"></span><h3 class="heading">Shell</h3>
