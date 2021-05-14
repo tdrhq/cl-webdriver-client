@@ -135,6 +135,8 @@ See: https://www.w3.org/TR/webdriver1/#dfn-element-clear."
 (defun element-send-keys (element keys &key (session *session*))
   "The Element Send Keys command scrolls into view the form control element and then sends the provided keys to the element. In case the element is not keyboard-interactable, an element not interactable error is returned.
 
+KEYS should be a string.
+
 Category: Element interaction
 See: https://www.w3.org/TR/webdriver1/#element-send-keys ."
   (check-type keys (string))
@@ -206,9 +208,16 @@ See: LOG-TYPES."
 (defun screenshot (&key (session *session*))
   "Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewport’s framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.
 
+Category: Screen capture
 See: https://www.w3.org/TR/webdriver2/#screen-capture ."
   (http-get-value (session-path session "/screenshot")))
 
+(defun element-screenshot (element &key (session *session*))
+  "The Take Element Screenshot command takes a screenshot of the visible region encompassed by the bounding rectangle of an element. If given a parameter argument scroll that evaluates to false, the element will not be scrolled into view. 
+
+Category: Screen capture
+See: https://www.w3.org/TR/webdriver1/#take-element-screenshot ."
+  (http-get-value (session-path session "/element/" (element-id element) "/screenshot")))
 
 (defun refresh (&key (session *session*))
   "Refresh the current page.
