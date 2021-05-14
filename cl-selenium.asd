@@ -12,6 +12,7 @@
 		 (:file "cookie")
                  (:file "keys")
                  (:file "mouse")
+		 (:file "user-prompts")
                  (:file "http")
                  (:file "selenium")
 		 (:file "utils"))))
