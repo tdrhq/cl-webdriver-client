@@ -10,8 +10,9 @@
 (defmethod print-object ((error protocol-error) stream)
   (with-slots (body) error
     (format stream
-            "[~a]~%status: ~a~%state: ~a~%~%~a~%"
+            "[~a]~%error: ~a~%status: ~a~%state: ~a~%~%~a~%"
             (type-of error)
+	    (assoc-value (assoc-value body :value) :error)
             (assoc-value body :status)
             (assoc-value body :state)
             (assoc-value (assoc-value body :value) :message))))
