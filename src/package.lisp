@@ -46,6 +46,11 @@
            :logs
 
            :screenshot
+           :element-screenshot
+
+           :dismiss-alert
+           :accept-alert
+           :alert-text
 
            :execute-script
 

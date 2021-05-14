@@ -218,64 +218,108 @@ For documentation see:@*
 
 @heading External definitions
 
+@subheading Session
+
+@cldefun {CL-SELENIUM, USE-SESSION, (session)}
+
+Make @var{SESSION} the current @var{session}.@*
+@*
+Category: @var{Session}
+@endcldefun
+
+@cldefun {CL-SELENIUM, START-INTERACTIVE-SESSION, (&rest capabilities)}
+
+Start an interactive session. Use this to interact with Selenium driver from a REPL.@*
+@*
+Category: Session@*
+See: @clref{CL-SELENIUM, MAKE-SESSION, function}
+@endcldefun
+
+@cldefun {CL-SELENIUM, MAKE-SESSION, (&key (browser-name :chrome) browser-version platform-name platform-version accept-ssl-certs additional-capabilities)}
+
+Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.@*
+@*
+Category: Session@*
+See: @url{https://www.w3.org/TR/webdriver1/#new-session} .@*
+See: @url{https://www.w3.org/TR/webdriver1/#capabilities} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, STOP-INTERACTIVE-SESSION, nil}
+
+Stop an interactive session.@*
+@*
+Category: Session
+@endcldefun
+
+@cldefun {CL-SELENIUM, DELETE-SESSION, (session)}
+
+Delete the WebDriver @var{SESSION}.@*
+@*
+Category: @var{Session}
+@endcldefun
+
+@cldefmacro {CL-SELENIUM, WITH-SESSION, ((&rest capabilities) &body body)}
+
+Execute @var{BODY} inside a Selenium session.@*
+@*
+Category: Session@*
+See: @clref{CL-SELENIUM, MAKE-SESSION, function}
+@endcldefmacro
+
+@subheading Uncategorized
+
+@cldefun {CL-SELENIUM, MOUSE-CLICK, (button &key (session *session*))}
+
+Click any mouse @var{button} (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling @var{button} up (or any out-of-order interactions sequence) will yield undefined behaviour).@*
+@*
+See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick}
+@endcldefun
+
+@cldefun {CL-SELENIUM, MOUSE-MOVE-TO, (x y &key element (session *session*))}
+
+Move the mouse by an offset of the specificed @var{element}. If no @var{element} is specified, the move is relative to the current mouse cursor. If an @var{element} is provided but no offset, the mouse will be moved to the center of the @var{element}. If the @var{element} is not visible, it will be scrolled into view.@*
+@*
+See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto}
+@endcldefun
+
+@cldefun {CL-SELENIUM, LOGS, (type &key (session *session*))}
+
+Return the logs of a particular @var{TYPE}.@*
+See: @clref{CL-SELENIUM, LOG-TYPES, function}.
+@endcldefun
+
+@cldefun {CL-SELENIUM, LOG-TYPES, (&key (session *session*))}
+
+Return the types of logs supported by the WebDriver.@*
+@*
+- browser: Javascript console logs from the browser.@*
+- client: Logs from the client side implementation of the WebDriver protocol (e.g. the Java bindings).@*
+- driver: Logs from the internals of the driver (e.g. FirefoxDriver internals).@*
+- performance: Logs relating to the performance characteristics of the page under test (e.g. resource load timings).@*
+- server: Logs from within the selenium server.@*
+@*
+See: @url{https://github.com/SeleniumHQ/selenium/wiki/Logging} .
+@endcldefun
+
+@cldefgeneric {CL-SELENIUM, ELEMENT-ID, (sb-pcl::object)}
+
+
+@endcldefgeneric
+
+@cldefclass {CL-SELENIUM, NO-SUCH-ELEMENT-ERROR}
+
+Error signaled when no such element is found.
+
+Class precedence list: @code{no-such-element-error, find-error, error, serious-condition, condition, t}
+
+@endcldefclass
+
+@cldefun {CL-SELENIUM, KEY, (key)}
+
+Returns a string with @var{KEY}'s codepoint.
+@endcldefun
+
 @subheading Elements
-
-@cldefun {CL-SELENIUM, FIND-ELEMENTS, (value &key (by :css-selector) (session *session*))}
-
-Find elements that match @var{VALUE} using location strategy in @var{BY}.@*
-@*
-Category: Elements@*
-See @clref{CL-SELENIUM, FIND-ELEMENT, function}.@*
-See @url{https://www.w3.org/TR/webdriver1/#find-elements} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, ELEMENT-LOCATION, (element &key (session *session*))}
-
-Return the @var{ELEMENT}'s location.@*
-@*
-Category: Elements
-@endcldefun
-
-@cldefun {CL-SELENIUM, ELEMENT-TEXT, (element &key (session *session*))}
-
-The Get @var{Element} Text command intends to return an @var{element}’s text “as rendered”. An @var{element}’s rendered text is also used for locating a elements by their link text and partial link text.@*
-@*
-Category: Elements@*
-See: @url{https://www.w3.org/TR/webdriver1/#get-element-text} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, ACTIVE-ELEMENT, (&key (session *session*))}
-
-Return the active element of the current browsing context’s document.@*
-The active element is the Element within the DOM that currently has focus.@*
-If there's no active element, an error is signaled.@*
-@*
-Category: Elements@*
-See: @url{https://www.w3.org/TR/webdriver2/#get-active-element.}@*
-See: @url{https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.}
-@endcldefun
-
-@cldefun {CL-SELENIUM, ELEMENT-DISPLAYED, (element &key (session *session*))}
-
-Returns  if @var{ELEMENT} is visible.@*
-@*
-Category: Elements@*
-See: @url{https://www.w3.org/TR/webdriver1/#element-displayedness} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, ELEMENT-TAGNAME, (element &key (session *session*))}
-
-Return the @var{ELEMENT}'s tag name.@*
-@*
-Category: Elements
-@endcldefun
-
-@cldefun {CL-SELENIUM, ELEMENT-ATTRIBUTE, (element name &key (session *session*))}
-
-Return the @var{ELEMENT}'s attribute named @var{NAME}.@*
-@*
-Category: Elements
-@endcldefun
 
 @cldefun {CL-SELENIUM, FIND-ELEMENT, (value &key (by :css-selector) (session *session*))}
 
@@ -303,23 +347,136 @@ Category: Elements@*
 See: @url{https://www.w3.org/TR/webdriver1/#dfn-find-element} .
 @endcldefun
 
+@cldefun {CL-SELENIUM, ELEMENT-TEXT, (element &key (session *session*))}
+
+The Get @var{Element} Text command intends to return an @var{element}’s text “as rendered”. An @var{element}’s rendered text is also used for locating a elements by their link text and partial link text.@*
+@*
+Category: Elements@*
+See: @url{https://www.w3.org/TR/webdriver1/#get-element-text} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-TAGNAME, (element &key (session *session*))}
+
+Return the @var{ELEMENT}'s tag name.@*
+@*
+Category: Elements
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-ATTRIBUTE, (element name &key (session *session*))}
+
+Return the @var{ELEMENT}'s attribute named @var{NAME}.@*
+@*
+Category: Elements
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-DISPLAYED, (element &key (session *session*))}
+
+Returns  if @var{ELEMENT} is visible.@*
+@*
+Category: Elements@*
+See: @url{https://www.w3.org/TR/webdriver1/#element-displayedness} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-LOCATION, (element &key (session *session*))}
+
+Return the @var{ELEMENT}'s location.@*
+@*
+Category: Elements
+@endcldefun
+
+@cldefun {CL-SELENIUM, FIND-ELEMENTS, (value &key (by :css-selector) (session *session*))}
+
+Find elements that match @var{VALUE} using location strategy in @var{BY}.@*
+@*
+Category: Elements@*
+See @clref{CL-SELENIUM, FIND-ELEMENT, function}.@*
+See @url{https://www.w3.org/TR/webdriver1/#find-elements} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, ACTIVE-ELEMENT, (&key (session *session*))}
+
+Return the active element of the current browsing context’s document.@*
+The active element is the Element within the DOM that currently has focus.@*
+If there's no active element, an error is signaled.@*
+@*
+Category: Elements@*
+See: @url{https://www.w3.org/TR/webdriver2/#get-active-element.}@*
+See: @url{https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.}
+@endcldefun
+
+@subheading Windows
+
+@cldefun {CL-SELENIUM, CLOSE-CURRENT-WINDOW, (&key (session *session*))}
+
+Close the current window.@*
+@*
+Category: Windows
+@endcldefun
+
+@subheading Navigation
+
+@cldefun {CL-SELENIUM, URL, (&key (session *session*))}
+
+Get the current url in @var{session}.@*
+@*
+Category: Navigation@*
+See: @url{https://www.w3.org/TR/webdriver1/#dfn-get-current-url} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, SWITCH-TO-FRAME, (id &key (session *session*))}
+
+Change focus to another frame on the page. If the frame @var{id} is null, the server@*
+should switch to the page's default content.@*
+@*
+In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.@*
+@*
+Category: Navigation@*
+See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe} .@*
+See: @url{https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, PAGE-TITLE, (&key (session *session*))}
+
+This command returns the document title of the current top-level browsing context, equivalent to calling document.title. @*
+@*
+Category: Navigation@*
+See: @url{https://www.w3.org/TR/webdriver2/#get-title} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, REFRESH, (&key (session *session*))}
+
+Refresh the current page.@*
+@*
+Category: Navigation
+@endcldefun
+
+@cldefun {CL-SELENIUM, BACK, (&key (session *session*))}
+
+This command causes the browser to traverse one step backward in the joint @var{session} history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.@*
+@*
+Category: Navigation@*
+See: @url{https://www.w3.org/TR/webdriver1/#dfn-back} .
+@endcldefun
+
+@subheading Screen capture
+
+@cldefun {CL-SELENIUM, ELEMENT-SCREENSHOT, (element &key (session *session*))}
+
+The Take @var{Element} Screenshot command takes a screenshot of the visible region encompassed by the bounding rectangle of an @var{element}. If given a parameter argument scroll that evaluates to false, the @var{element} will not be scrolled into view. @*
+@*
+Category: Screen capture@*
+See: @url{https://www.w3.org/TR/webdriver1/#take-element-screenshot} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, SCREENSHOT, (&key (session *session*))}
+
+Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewport’s framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.@*
+@*
+Category: Screen capture@*
+See: @url{https://www.w3.org/TR/webdriver2/#screen-capture} .
+@endcldefun
+
 @subheading Cookies
-
-@cldefun {CL-SELENIUM, DELETE-COOKIE, (cookie-name &key (session *session*))}
-
-Delete the cookie with name @var{COOKIE-NAME}.@*
-@*
-Category: Cookies@*
-See: @url{https://www.w3.org/TR/webdriver1/#delete-cookie}
-@endcldefun
-
-@cldefun {CL-SELENIUM, FIND-COOKIE, (cookie-name &key (session *session*))}
-
-Retrieve the cookie with name @var{COOKIE-NAME}.@*
-@*
-Category: Cookies@*
-See: @url{https://www.w3.org/TR/webdriver1/#get-named-cookie}
-@endcldefun
 
 @cldefclass {CL-SELENIUM, COOKIE}
 
@@ -366,21 +523,55 @@ Category: Cookies@*
 See: @url{https://www.w3.org/TR/webdriver1/#delete-all-cookies}
 @endcldefun
 
-@subheading Element interaction
+@cldefun {CL-SELENIUM, DELETE-COOKIE, (cookie-name &key (session *session*))}
 
-@cldefun {CL-SELENIUM, ELEMENT-CLICK, (element &key (session *session*))}
-
-The @var{Element} Click command scrolls into view the @var{element} if it is not already pointer-interactable, and clicks its in-view center point.@*
+Delete the cookie with name @var{COOKIE-NAME}.@*
 @*
-If the @var{element}’s center point is obscured by another @var{element}, an @var{element} click intercepted error is returned. If the @var{element} is outside the viewport, an @var{element} not interactable error is returned.@*
-@*
-Category: @var{Element} interaction@*
-See: @url{https://www.w3.org/TR/webdriver1/#element-click} .
+Category: Cookies@*
+See: @url{https://www.w3.org/TR/webdriver1/#delete-cookie}
 @endcldefun
+
+@cldefun {CL-SELENIUM, FIND-COOKIE, (cookie-name &key (session *session*))}
+
+Retrieve the cookie with name @var{COOKIE-NAME}.@*
+@*
+Category: Cookies@*
+See: @url{https://www.w3.org/TR/webdriver1/#get-named-cookie}
+@endcldefun
+
+@subheading User prompts
+
+@cldefun {CL-SELENIUM, DISMISS-ALERT, (&key (session *session*))}
+
+Dismiss Alert.@*
+@*
+Category: User prompts@*
+See: @url{https://www.w3.org/TR/webdriver1/#dismiss-alert}
+@endcldefun
+
+@cldefun {CL-SELENIUM, ACCEPT-ALERT, (&key (session *session*))}
+
+Accept Alert.@*
+@*
+Category: User prompts@*
+See: @url{https://www.w3.org/TR/webdriver1/#dfn-accept-alert}
+@endcldefun
+
+@cldefun {CL-SELENIUM, ALERT-TEXT, (&key (session *session*))}
+
+Get Alert Text.@*
+@*
+Category: User prompts@*
+See: @url{https://www.w3.org/TR/webdriver1/#get-alert-text}
+@endcldefun
+
+@subheading Element interaction
 
 @cldefun {CL-SELENIUM, ELEMENT-SEND-KEYS, (element keys &key (session *session*))}
 
 The @var{Element} Send @var{Keys} command scrolls into view the form control @var{element} and then sends the provided @var{keys} to the @var{element}. In case the @var{element} is not keyboard-interactable, an @var{element} not interactable error is returned.@*
+@*
+@var{KEYS} should be a string.@*
 @*
 Category: @var{Element} interaction@*
 See: @url{https://www.w3.org/TR/webdriver1/#element-send-keys} .
@@ -394,171 +585,23 @@ Category: @var{Element} interaction@*
 See: @url{https://www.w3.org/TR/webdriver1/#dfn-element-clear.}
 @endcldefun
 
-@subheading Uncategorized
+@cldefun {CL-SELENIUM, ELEMENT-CLICK, (element &key (session *session*))}
+
+The @var{Element} Click command scrolls into view the @var{element} if it is not already pointer-interactable, and clicks its in-view center point.@*
+@*
+If the @var{element}’s center point is obscured by another @var{element}, an @var{element} click intercepted error is returned. If the @var{element} is outside the viewport, an @var{element} not interactable error is returned.@*
+@*
+Category: @var{Element} interaction@*
+See: @url{https://www.w3.org/TR/webdriver1/#element-click} .
+@endcldefun
+
+@subheading Cookie
 
 @cldefun {CL-SELENIUM, MAKE-COOKIE, (name value &key path domain secure expiry)}
 
-
-@endcldefun
-
-@cldefgeneric {CL-SELENIUM, ELEMENT-ID, (sb-pcl::object)}
-
-
-@endcldefgeneric
-
-@cldefun {CL-SELENIUM, SCREENSHOT, (&key (session *session*))}
-
-Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewport’s framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.@*
+Create a cookie object.@*
 @*
-See: @url{https://www.w3.org/TR/webdriver2/#screen-capture} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, LOGS, (type &key (session *session*))}
-
-Return the logs of a particular @var{TYPE}.@*
-See: @clref{CL-SELENIUM, LOG-TYPES, function}.
-@endcldefun
-
-@cldefun {CL-SELENIUM, LOG-TYPES, (&key (session *session*))}
-
-Return the types of logs supported by the WebDriver.@*
-@*
-- browser: Javascript console logs from the browser.@*
-- client: Logs from the client side implementation of the WebDriver protocol (e.g. the Java bindings).@*
-- driver: Logs from the internals of the driver (e.g. FirefoxDriver internals).@*
-- performance: Logs relating to the performance characteristics of the page under test (e.g. resource load timings).@*
-- server: Logs from within the selenium server.@*
-@*
-See: @url{https://github.com/SeleniumHQ/selenium/wiki/Logging} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, MOUSE-MOVE-TO, (x y &key element (session *session*))}
-
-Move the mouse by an offset of the specificed @var{element}. If no @var{element} is specified, the move is relative to the current mouse cursor. If an @var{element} is provided but no offset, the mouse will be moved to the center of the @var{element}. If the @var{element} is not visible, it will be scrolled into view.@*
-@*
-See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto}
-@endcldefun
-
-@cldefclass {CL-SELENIUM, NO-SUCH-ELEMENT-ERROR}
-
-Error signaled when no such element is found.
-
-Class precedence list: @code{no-such-element-error, find-error, error, serious-condition, condition, t}
-
-@endcldefclass
-
-@cldefun {CL-SELENIUM, MOUSE-CLICK, (button &key (session *session*))}
-
-Click any mouse @var{button} (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling @var{button} up (or any out-of-order interactions sequence) will yield undefined behaviour).@*
-@*
-See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick}
-@endcldefun
-
-@cldefun {CL-SELENIUM, KEY, (key)}
-
-
-@endcldefun
-
-@subheading Windows
-
-@cldefun {CL-SELENIUM, CLOSE-CURRENT-WINDOW, (&key (session *session*))}
-
-Close the current window.@*
-@*
-Category: Windows
-@endcldefun
-
-@subheading Navigation
-
-@cldefun {CL-SELENIUM, SWITCH-TO-FRAME, (id &key (session *session*))}
-
-Change focus to another frame on the page. If the frame @var{id} is null, the server@*
-should switch to the page's default content.@*
-@*
-In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.@*
-@*
-Category: Navigation@*
-See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe} .@*
-See: @url{https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, PAGE-TITLE, (&key (session *session*))}
-
-This command returns the document title of the current top-level browsing context, equivalent to calling document.title. @*
-@*
-Category: Navigation@*
-See: @url{https://www.w3.org/TR/webdriver2/#get-title} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, REFRESH, (&key (session *session*))}
-
-Refresh the current page.@*
-@*
-Category: Navigation
-@endcldefun
-
-@cldefun {CL-SELENIUM, URL, (&key (session *session*))}
-
-Get the current url in @var{session}.@*
-@*
-Category: Navigation@*
-See: @url{https://www.w3.org/TR/webdriver1/#dfn-get-current-url} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, BACK, (&key (session *session*))}
-
-This command causes the browser to traverse one step backward in the joint @var{session} history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.@*
-@*
-Category: Navigation@*
-See: @url{https://www.w3.org/TR/webdriver1/#dfn-back} .
-@endcldefun
-
-@subheading Session
-
-@cldefun {CL-SELENIUM, STOP-INTERACTIVE-SESSION, nil}
-
-Stop an interactive session.@*
-@*
-Category: Session
-@endcldefun
-
-@cldefmacro {CL-SELENIUM, WITH-SESSION, ((&rest capabilities) &body body)}
-
-Execute @var{BODY} inside a Selenium session.@*
-@*
-Category: Session@*
-See: @clref{CL-SELENIUM, MAKE-SESSION, function}
-@endcldefmacro
-
-@cldefun {CL-SELENIUM, DELETE-SESSION, (session)}
-
-Delete the WebDriver @var{SESSION}.@*
-@*
-Category: @var{Session}
-@endcldefun
-
-@cldefun {CL-SELENIUM, START-INTERACTIVE-SESSION, (&rest capabilities)}
-
-Start an interactive session. Use this to interact with Selenium driver from a REPL.@*
-@*
-Category: Session@*
-See: @clref{CL-SELENIUM, MAKE-SESSION, function}
-@endcldefun
-
-@cldefun {CL-SELENIUM, USE-SESSION, (session)}
-
-Make @var{SESSION} the current @var{session}.@*
-@*
-Category: @var{Session}
-@endcldefun
-
-@cldefun {CL-SELENIUM, MAKE-SESSION, (&key (browser-name :chrome) browser-version platform-name platform-version accept-ssl-certs additional-capabilities)}
-
-Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.@*
-@*
-Category: Session@*
-See: @url{https://www.w3.org/TR/webdriver1/#new-session} .@*
-See: @url{https://www.w3.org/TR/webdriver1/#capabilities} .
+Category: Cookie
 @endcldefun
 
 @subheading Document handling

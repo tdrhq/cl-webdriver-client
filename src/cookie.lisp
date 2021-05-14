@@ -39,6 +39,9 @@ Category: Cookies"))
 	(json:encode-object-member "expiry" expiry stream)))))
 
 (defun make-cookie (name value &key path domain secure expiry)
+  "Create a cookie object.
+
+Category: Cookie"
   (make-instance 'cookie
                  :name name
                  :value value
