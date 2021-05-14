@@ -149,4 +149,16 @@
     (ok (setf (cookie) (make-cookie "foo" "bar")))
     (is (get-cookie (cookie) "foo") "bar")))
 
+;; alerts
+
+;; I'm getting "unknown command" errors here. I don't know why.
+
+#+nil(subtest "accept alert manually"
+  (with-test-session ()
+    (setf (url) (test-file-url "alerts.html"))
+    (element-click (find-element "alert" :by :id))
+    (sleep 2)
+    (accept-alert)
+    (is (page-title) "Testing Alerts")))
+
 (finalize)

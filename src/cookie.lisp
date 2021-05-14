@@ -41,7 +41,7 @@ Category: Cookies"))
 (defun make-cookie (name value &key path domain secure expiry)
   "Create a cookie object.
 
-Category: Cookie"
+Category: Cookies"
   (make-instance 'cookie
                  :name name
                  :value value
