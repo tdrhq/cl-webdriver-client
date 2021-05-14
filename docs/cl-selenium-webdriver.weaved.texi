@@ -641,8 +641,6 @@ Function used to get the 'default element' by selenium-utils functions.@*
 It is @clref{CL-SELENIUM, ACTIVE-ELEMENT, function} function by default.
 @endcldefvar
 
-@subheading Macros
-@subheading Generic functions
 @subheading Functions
 @cldefun {CL-SELENIUM-UTILS, ID, (&optional selector)}
 
@@ -706,7 +704,6 @@ Otherwise, call @clref{CL-SELENIUM-UTILS, *DEFAULT-ELEMENT-FUNC*, variable} (the
 Click on active element.
 @endcldefun
 
-@subheading Classes
 
 
 @node Index

@@ -697,12 +697,6 @@ Variables
      It is *note ACTIVE-ELEMENT: CL-SELENIUM:ACTIVE-ELEMENT function.
      function by default.
 
-Macros
-------
-
-Generic functions
------------------
-
 Functions
 ---------
 
@@ -759,9 +753,6 @@ Functions
 
      Click on active element.
 
-Classes
--------
-
 
 File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
 
@@ -793,32 +784,32 @@ File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
 * ACTIVE-ELEMENT:                        CL-SELENIUM package. (line 201)
 * ALERT-TEXT:                            CL-SELENIUM package. (line 394)
 * ATTR:                                  CL-SELENIUM-UTILS package.
-                                                              (line  69)
+                                                              (line  63)
 * BACK:                                  CL-SELENIUM package. (line 263)
 * CL-SELENIUM-UTILS:ATTR:                CL-SELENIUM-UTILS package.
-                                                              (line  69)
+                                                              (line  63)
 * CL-SELENIUM-UTILS:CLASSLIST:           CL-SELENIUM-UTILS package.
-                                                              (line  65)
+                                                              (line  59)
 * CL-SELENIUM-UTILS:CLASSNAME:           CL-SELENIUM-UTILS package.
-                                                              (line  53)
+                                                              (line  47)
 * CL-SELENIUM-UTILS:CLICK:               CL-SELENIUM-UTILS package.
-                                                              (line  85)
+                                                              (line  79)
 * CL-SELENIUM-UTILS:ELEM:                CL-SELENIUM-UTILS package.
-                                                              (line  77)
+                                                              (line  71)
 * CL-SELENIUM-UTILS:FIND-ELEM:           CL-SELENIUM-UTILS package.
-                                                              (line  44)
+                                                              (line  38)
 * CL-SELENIUM-UTILS:GET-COOKIE:          CL-SELENIUM-UTILS package.
-                                                              (line  40)
+                                                              (line  34)
 * CL-SELENIUM-UTILS:ID:                  CL-SELENIUM-UTILS package.
-                                                              (line  36)
+                                                              (line  30)
 * CL-SELENIUM-UTILS:SEND-KEY:            CL-SELENIUM-UTILS package.
-                                                              (line  61)
+                                                              (line  55)
 * CL-SELENIUM-UTILS:SEND-KEYS:           CL-SELENIUM-UTILS package.
-                                                              (line  73)
+                                                              (line  67)
 * CL-SELENIUM-UTILS:TEXT:                CL-SELENIUM-UTILS package.
-                                                              (line  57)
+                                                              (line  51)
 * CL-SELENIUM-UTILS:WAIT-FOR:            CL-SELENIUM-UTILS package.
-                                                              (line  48)
+                                                              (line  42)
 * CL-SELENIUM:ACCEPT-ALERT:              CL-SELENIUM package. (line 387)
 * CL-SELENIUM:ACTIVE-ELEMENT:            CL-SELENIUM package. (line 201)
 * CL-SELENIUM:ALERT-TEXT:                CL-SELENIUM package. (line 394)
@@ -860,11 +851,11 @@ File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
 * CL-SELENIUM:USE-SESSION:               CL-SELENIUM package. (line  20)
 * CL-SELENIUM:WITH-SESSION:              CL-SELENIUM package. (line  57)
 * CLASSLIST:                             CL-SELENIUM-UTILS package.
-                                                              (line  65)
+                                                              (line  59)
 * CLASSNAME:                             CL-SELENIUM-UTILS package.
-                                                              (line  53)
+                                                              (line  47)
 * CLICK:                                 CL-SELENIUM-UTILS package.
-                                                              (line  85)
+                                                              (line  79)
 * CLOSE-CURRENT-WINDOW:                  CL-SELENIUM package. (line 217)
 * COOKIE:                                CL-SELENIUM package. (line 338)
 * DELETE-ALL-COOKIES:                    CL-SELENIUM package. (line 348)
@@ -872,7 +863,7 @@ File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
 * DELETE-SESSION:                        CL-SELENIUM package. (line  51)
 * DISMISS-ALERT:                         CL-SELENIUM package. (line 378)
 * ELEM:                                  CL-SELENIUM-UTILS package.
-                                                              (line  77)
+                                                              (line  71)
 * ELEMENT-ATTRIBUTE:                     CL-SELENIUM package. (line 172)
 * ELEMENT-CLEAR:                         CL-SELENIUM package. (line 417)
 * ELEMENT-CLICK:                         CL-SELENIUM package. (line 424)
@@ -886,13 +877,13 @@ File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
 * EXECUTE-SCRIPT:                        CL-SELENIUM package. (line 441)
 * FIND-COOKIE:                           CL-SELENIUM package. (line 368)
 * FIND-ELEM:                             CL-SELENIUM-UTILS package.
-                                                              (line  44)
+                                                              (line  38)
 * FIND-ELEMENT:                          CL-SELENIUM package. (line 124)
 * FIND-ELEMENTS:                         CL-SELENIUM package. (line 192)
 * GET-COOKIE:                            CL-SELENIUM-UTILS package.
-                                                              (line  40)
+                                                              (line  34)
 * ID:                                    CL-SELENIUM-UTILS package.
-                                                              (line  36)
+                                                              (line  30)
 * KEY:                                   CL-SELENIUM package. (line 117)
 * LOG-TYPES:                             CL-SELENIUM package. (line  93)
 * LOGS:                                  CL-SELENIUM package. (line  88)
@@ -904,18 +895,18 @@ File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
 * REFRESH:                               CL-SELENIUM package. (line 257)
 * SCREENSHOT:                            CL-SELENIUM package. (line 286)
 * SEND-KEY:                              CL-SELENIUM-UTILS package.
-                                                              (line  61)
+                                                              (line  55)
 * SEND-KEYS:                             CL-SELENIUM-UTILS package.
-                                                              (line  73)
+                                                              (line  67)
 * START-INTERACTIVE-SESSION:             CL-SELENIUM package. (line  26)
 * STOP-INTERACTIVE-SESSION:              CL-SELENIUM package. (line  45)
 * SWITCH-TO-FRAME:                       CL-SELENIUM package. (line 233)
 * TEXT:                                  CL-SELENIUM-UTILS package.
-                                                              (line  57)
+                                                              (line  51)
 * URL:                                   CL-SELENIUM package. (line 226)
 * USE-SESSION:                           CL-SELENIUM package. (line  20)
 * WAIT-FOR:                              CL-SELENIUM-UTILS package.
-                                                              (line  48)
+                                                              (line  42)
 * WITH-SESSION:                          CL-SELENIUM package. (line  57)
 
 
@@ -977,18 +968,18 @@ Ref: CL-SELENIUM:EXECUTE-SCRIPT function18895
 Node: CL-SELENIUM-UTILS package19960
 Ref: CL-SELENIUM-UTILS:*TIMEOUT* variable20281
 Ref: CL-SELENIUM-UTILS:*DEFAULT-ELEMENT-FUNC* variable20379
-Ref: CL-SELENIUM-UTILS:ID function20678
-Ref: CL-SELENIUM-UTILS:GET-COOKIE function20755
-Ref: CL-SELENIUM-UTILS:FIND-ELEM function20839
-Ref: CL-SELENIUM-UTILS:WAIT-FOR function20982
-Ref: CL-SELENIUM-UTILS:CLASSNAME function21193
-Ref: CL-SELENIUM-UTILS:TEXT function21284
-Ref: CL-SELENIUM-UTILS:SEND-KEY function21367
-Ref: CL-SELENIUM-UTILS:CLASSLIST function21461
-Ref: CL-SELENIUM-UTILS:ATTR function21553
-Ref: CL-SELENIUM-UTILS:SEND-KEYS function21645
-Ref: CL-SELENIUM-UTILS:ELEM function21740
-Ref: CL-SELENIUM-UTILS:CLICK function22037
-Node: Index22136
+Ref: CL-SELENIUM-UTILS:ID function20626
+Ref: CL-SELENIUM-UTILS:GET-COOKIE function20703
+Ref: CL-SELENIUM-UTILS:FIND-ELEM function20787
+Ref: CL-SELENIUM-UTILS:WAIT-FOR function20930
+Ref: CL-SELENIUM-UTILS:CLASSNAME function21141
+Ref: CL-SELENIUM-UTILS:TEXT function21232
+Ref: CL-SELENIUM-UTILS:SEND-KEY function21315
+Ref: CL-SELENIUM-UTILS:CLASSLIST function21409
+Ref: CL-SELENIUM-UTILS:ATTR function21501
+Ref: CL-SELENIUM-UTILS:SEND-KEYS function21593
+Ref: CL-SELENIUM-UTILS:ELEM function21688
+Ref: CL-SELENIUM-UTILS:CLICK function21985
+Node: Index22067
 
 End Tag Table
