@@ -56,8 +56,10 @@
     :f10 #\ue03a
     :f11 #\ue03b
     :f12 #\ue03c
-    :meta #\ue03d))
+    :meta #\ue03d)
+  "See https://www.w3.org/TR/webdriver1/#keyboard-actions")
 
 ;; TODO: prepare all keys on compile
 (defun key (key)
+  "Returns a string with KEY's codepoint."
   (make-string 1 :initial-element (getf *keymap* key)))
