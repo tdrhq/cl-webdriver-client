@@ -523,6 +523,13 @@ Category: Cookies@*
 See: @url{https://www.w3.org/TR/webdriver1/#delete-all-cookies}
 @endcldefun
 
+@cldefun {CL-SELENIUM, MAKE-COOKIE, (name value &key path domain secure expiry)}
+
+Create a cookie object.@*
+@*
+Category: Cookies
+@endcldefun
+
 @cldefun {CL-SELENIUM, DELETE-COOKIE, (cookie-name &key (session *session*))}
 
 Delete the cookie with name @var{COOKIE-NAME}.@*
@@ -543,7 +550,7 @@ See: @url{https://www.w3.org/TR/webdriver1/#get-named-cookie}
 
 @cldefun {CL-SELENIUM, DISMISS-ALERT, (&key (session *session*))}
 
-Dismiss Alert.@*
+The Dismiss Alert command dismisses a simple dialog if present. A request to dismiss an alert user prompt, which may not necessarily have a dismiss button, has the same effect as accepting it.@*
 @*
 Category: User prompts@*
 See: @url{https://www.w3.org/TR/webdriver1/#dismiss-alert}
@@ -593,15 +600,6 @@ If the @var{element}’s center point is obscured by another @var{element}, an @
 @*
 Category: @var{Element} interaction@*
 See: @url{https://www.w3.org/TR/webdriver1/#element-click} .
-@endcldefun
-
-@subheading Cookie
-
-@cldefun {CL-SELENIUM, MAKE-COOKIE, (name value &key path domain secure expiry)}
-
-Create a cookie object.@*
-@*
-Category: Cookie
 @endcldefun
 
 @subheading Document handling

@@ -1,7 +1,7 @@
 (in-package :cl-selenium)
 
 (defun dismiss-alert (&key (session *session*))
-  "Dismiss Alert.
+  "The Dismiss Alert command dismisses a simple dialog if present. A request to dismiss an alert user prompt, which may not necessarily have a dismiss button, has the same effect as accepting it.
 
 Category: User prompts
 See: https://www.w3.org/TR/webdriver1/#dismiss-alert"
@@ -25,7 +25,7 @@ See: https://www.w3.org/TR/webdriver1/#get-alert-text"
   (http-get-value (session-path session "/alert/text")))
 
 (defun (setf alert-text) (text &key (session *session*))
-  "Send Alert Text.
+  "The Send Alert Text command sets the text field of a window.prompt user prompt to the given value.
 
 Category: User prompts
 See: https://www.w3.org/TR/webdriver1/#send-alert-text"
