@@ -27,6 +27,7 @@
      (dex:http-request-failed (err) (error 'protocol-error :body (decode (dex:response-body err))))))
 
 (defun check (response)
+  "Validates the status of Selenium Webdriver response."
   (zerop (assoc-value response :status)))
 
 (defun value (response)
