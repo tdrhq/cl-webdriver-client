@@ -26,13 +26,13 @@ Category: Session
 See: https://www.w3.org/TR/webdriver1/#new-session .
 See: https://www.w3.org/TR/webdriver1/#capabilities ."
   (let ((response (http-post "/session"
-                             `(:session-id nil
-                               :desired-capabilities ((browser-name . ,browser-name)
-                                                      (browser-version . ,browser-version)
-                                                      (platform-name . ,platform-name)
-                                                      (platform-version . ,platform-version)
-                                                      (accept-ssl-certs . ,accept-ssl-certs)
-                                                      ,@additional-capabilities)))))
+                             :session-id nil
+			     :desired-capabilities `((browser-name . ,browser-name)
+						    (browser-version . ,browser-version)
+						    (platform-name . ,platform-name)
+						    (platform-version . ,platform-version)
+						    (accept-ssl-certs . ,accept-ssl-certs)
+						    ,@additional-capabilities))))
     ;; TODO: find/write json -> clos
     (make-instance 'session
                    :id (assoc-value response :session-id))))

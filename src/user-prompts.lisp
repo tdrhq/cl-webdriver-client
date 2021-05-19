@@ -29,4 +29,4 @@ See: https://www.w3.org/TR/webdriver1/#get-alert-text"
 
 Category: User prompts
 See: https://www.w3.org/TR/webdriver1/#send-alert-text"
-  (http-post-value (session-path session "/alert_text") `(:text ,text)))
+  (http-post-value (session-path session "/alert_text") :text text))

@@ -43,7 +43,7 @@
 (defun http-get-check (path)
   (check (http-get path)))
 
-(defun http-post (path &optional params)
+(defun http-post (path &rest params)
   ;; (format t "Sending ~a -> ~a~%" (encode params) path)
   (with-decode-and-handler
       (dex:post (make-uri path)

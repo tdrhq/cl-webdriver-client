@@ -9,7 +9,7 @@
 
 Category: Navigation
 See: https://www.w3.org/TR/webdriver1/#dfn-navigate-to ."
-  (http-post-value (session-path session "/url") `(:url ,url)))
+  (http-post-value (session-path session "/url") :url url))
 
 (defun url (&key (session *session*))
   "Get the current url in session.
@@ -26,7 +26,7 @@ See: https://www.w3.org/TR/webdriver1/#dfn-back ."
   (http-post-check (session-path session "/back")))
 
 (defun page-title (&key (session *session*))
-  "This command returns the document title of the current top-level browsing context, equivalent to calling document.title. 
+  "This command returns the document title of the current top-level browsing context, equivalent to calling document.title.
 
 Category: Navigation
 See: https://www.w3.org/TR/webdriver2/#get-title ."
@@ -76,10 +76,10 @@ If result is empty, a HANDLE-FIND-ERROR is signaled.
 Category: Elements
 See: https://www.w3.org/TR/webdriver1/#dfn-find-element ."
   (handler-case
-      (let ((response (http-post (session-path session "/element") `(:value ,value :using ,(by by)))))
+      (let ((response (http-post (session-path session "/element") :value value :using (by by))))
         ;; TODO: find/write json -> clos
-	(if (or (not (cdr (assoc :status response)))
-		(zerop (cdr (assoc :status response))))
+        (if (or (not (cdr (assoc :status response)))
+                (zerop (cdr (assoc :status response))))
             (make-instance 'element
                            :id (cdadr (assoc :value response)))
             (error 'protocol-error :body response)))
@@ -92,7 +92,7 @@ Category: Elements
 See FIND-ELEMENT.
 See https://www.w3.org/TR/webdriver1/#find-elements ."
   (handler-case
-      (let ((response (http-post (session-path session "/elements") `(:value ,value :using ,(by by)))))
+      (let ((response (http-post (session-path session "/elements") :value value :using (by by))))
         (loop for ((nil . id)) in (cdr (assoc :value response))
               collect (make-instance 'element :id id)))
     (protocol-error (err) (handle-find-error err :value value :by by))))
@@ -147,7 +147,7 @@ See: https://www.w3.org/TR/webdriver1/#element-send-keys ."
   (check-type keys (string))
   (http-post-check (session-path session "/element/~a/value"
                                  (element-id element))
-                   `(:value ,(coerce keys 'list))))
+                   :value (coerce keys 'list)))
 
 (defun element-click (element &key (session *session*))
   "The Element Click command scrolls into view the element if it is not already pointer-interactable, and clicks its in-view center point.
@@ -156,7 +156,7 @@ If the element’s center point is obscured by another element, an element click
 
 Category: Element interaction
 See: https://www.w3.org/TR/webdriver1/#element-click ."
-  
+
   (http-post-check (session-path session "/element/~a/click"
                                  (element-id element))))
 
@@ -165,7 +165,7 @@ See: https://www.w3.org/TR/webdriver1/#element-click ."
 
 Category: Elements
 See: https://www.w3.org/TR/webdriver1/#get-element-text ."
-  
+
   (http-get-value (session-path session "/element/~a/text" (element-id element))))
 
 (defun element-displayed (element &key (session *session*))
@@ -208,7 +208,7 @@ See: https://github.com/SeleniumHQ/selenium/wiki/Logging ."
 (defun logs (type &key (session *session*))
   "Return the logs of a particular TYPE.
 See: LOG-TYPES."
-  (http-post-value (session-path session "/log") `(:type ,type)))
+  (http-post-value (session-path session "/log") :type type))
 
 (defun screenshot (&key (session *session*))
   "Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewport’s framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.
@@ -218,7 +218,7 @@ See: https://www.w3.org/TR/webdriver2/#screen-capture ."
   (http-get-value (session-path session "/screenshot")))
 
 (defun element-screenshot (element &key (session *session*))
-  "The Take Element Screenshot command takes a screenshot of the visible region encompassed by the bounding rectangle of an element. If given a parameter argument scroll that evaluates to false, the element will not be scrolled into view. 
+  "The Take Element Screenshot command takes a screenshot of the visible region encompassed by the bounding rectangle of an element. If given a parameter argument scroll that evaluates to false, the element will not be scrolled into view.
 
 Category: Screen capture
 See: https://www.w3.org/TR/webdriver1/#take-element-screenshot ."
@@ -240,7 +240,7 @@ Category: Navigation
 See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe .
 See: https://en.wikipedia.org/wiki/Frame_(World_Wide_Web) ."
   (http-post-check (session-path session "/frame")
-                   `(:id ,id)))
+                   :id id))
 
 (defun close-current-window (&key (session *session*))
   "Close the current window.
@@ -260,4 +260,4 @@ See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsession
   (check-type script string)
   (check-type args list)
   (http-post-value (session-path session "/execute")
-                   `(:script ,script :args ,(or args #()))))
+                   :script script :args (or args #())))

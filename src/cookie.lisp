@@ -57,7 +57,7 @@ If there is an error during this step, return error with error code unable to se
 
 See: https://www.w3.org/TR/webdriver1/#dfn-adding-a-cookie ."
   (check-type cookie cookie)
-  (http-post-check (session-path session "/cookie") `(:cookie ,cookie)))
+  (http-post-check (session-path session "/cookie") :cookie cookie))
 
 (defun cookie (&key (session *session*))
   "Retrieve all cookies visible to the current page.
