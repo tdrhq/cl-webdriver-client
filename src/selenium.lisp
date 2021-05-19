@@ -1,5 +1,9 @@
 (in-package :cl-selenium)
 
+(defun selenium-status ()
+  "Get Selenium Webdriver status information"
+  (http-get "/status"))
+
 (defun (setf url) (url &key (session *session*))
   "The command causes the user agent to navigate the current top-level browsing context to a new location.
 
