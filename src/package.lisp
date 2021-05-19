@@ -2,7 +2,9 @@
 
 (defpackage cl-selenium
   (:use :cl)
-  (:export :make-session
+  (:export :selenium-status
+	   
+           :make-session
            :delete-session
            :with-session
            :use-session
