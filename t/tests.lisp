@@ -151,9 +151,7 @@
 
 ;; alerts
 
-;; I'm getting "unknown command" errors here. I don't know why.
-
-#+nil(subtest "accept alert manually"
+(subtest "accept alert manually"
   (with-test-session ()
     (setf (url) (test-file-url "alerts.html"))
     (element-click (find-element "alert" :by :id))

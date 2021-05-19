@@ -6,7 +6,7 @@
 Category: User prompts
 See: https://www.w3.org/TR/webdriver1/#dismiss-alert"
 
-  (http-post-check (session-path session "/alert/dismiss")))
+  (http-post-check (session-path session "/dismiss_alert")))
 
 (defun accept-alert (&key (session *session*))
   "Accept Alert.
@@ -14,7 +14,7 @@ See: https://www.w3.org/TR/webdriver1/#dismiss-alert"
 Category: User prompts
 See: https://www.w3.org/TR/webdriver1/#dfn-accept-alert"
 
-  (http-post-check (session-path session "/alert/accept")))
+  (http-post-check (session-path session "/accept_alert")))
 
 (defun alert-text (&key (session *session*))
   "Get Alert Text.
@@ -22,11 +22,11 @@ See: https://www.w3.org/TR/webdriver1/#dfn-accept-alert"
 Category: User prompts
 See: https://www.w3.org/TR/webdriver1/#get-alert-text"
 
-  (http-get-value (session-path session "/alert/text")))
+  (http-get-value (session-path session "/alert_text")))
 
 (defun (setf alert-text) (text &key (session *session*))
   "The Send Alert Text command sets the text field of a window.prompt user prompt to the given value.
 
 Category: User prompts
 See: https://www.w3.org/TR/webdriver1/#send-alert-text"
-  (http-post-value (session-path session "/alert/text") `(:text ,text)))
+  (http-post-value (session-path session "/alert_text") `(:text ,text)))
