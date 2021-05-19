@@ -74,7 +74,8 @@ See: https://www.w3.org/TR/webdriver1/#dfn-find-element ."
   (handler-case
       (let ((response (http-post (session-path session "/element") `(:value ,value :using ,(by by)))))
         ;; TODO: find/write json -> clos
-        (if (= 0 (cdr (assoc :status response)))
+	(if (or (not (cdr (assoc :status response)))
+		(zerop (cdr (assoc :status response))))
             (make-instance 'element
                            :id (cdadr (assoc :value response)))
             (error 'protocol-error :body response)))
