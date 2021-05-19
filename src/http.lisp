@@ -28,7 +28,8 @@
 
 (defun check (response)
   "Validates the status of Selenium Webdriver response."
-  (zerop (assoc-value response :status)))
+  (and (assoc :status response)
+       (zerop (assoc-value response :status))))
 
 (defun value (response)
   (assoc-value response :value))

@@ -10,6 +10,10 @@ The server should maintain one browser per session. Commands sent to a session w
 
 (defvar *session* nil "The current Selenium WebDriver session.")
 
+(defmethod print-object ((session session) stream)
+  (print-unreadable-object (session stream :type t :identity t)
+    (write-string (session-id session) stream)))
+
 (defun session-path (session fmt &rest args)
   (format nil "/session/~a~a" (session-id session) (apply #'format nil fmt args)))
 
@@ -27,15 +31,24 @@ See: https://www.w3.org/TR/webdriver1/#new-session .
 See: https://www.w3.org/TR/webdriver1/#capabilities ."
   (let ((response (http-post "/session"
                              :session-id nil
-			     :desired-capabilities `((browser-name . ,browser-name)
-						    (browser-version . ,browser-version)
-						    (platform-name . ,platform-name)
-						    (platform-version . ,platform-version)
-						    (accept-ssl-certs . ,accept-ssl-certs)
-						    ,@additional-capabilities))))
+			     :capabilities `((always-match .
+					      ((platform-name . "Linux")
+					       ,@additional-capabilities))
+					     (first-match .
+					      #( ((browser-name . "chrome"))
+						;;((browser-name . "firefox"))
+						)))
+			     ;; :desired-capabilities `((browser-name . ,browser-name)
+			     ;; 			    (browser-version . ,browser-version)
+			     ;; 			    (platform-name . ,platform-name)
+			     ;; 			    (platform-version . ,platform-version)
+			     ;; 			    (accept-ssl-certs . ,accept-ssl-certs)
+			     ;; 			     ,@additional-capabilities)
+
+			     )))
     ;; TODO: find/write json -> clos
     (make-instance 'session
-                   :id (assoc-value response :session-id))))
+                   :id (aget (aget response :value) :session-id))))
 
 (defun delete-session (session)
   "Delete the WebDriver SESSION.

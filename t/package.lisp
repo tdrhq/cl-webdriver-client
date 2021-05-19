@@ -6,5 +6,5 @@
 ;; slime detection
 (setf prove:*enable-colors* (interactive-stream-p *standard-input*))
 
-(defparameter *headless* '((:chrome-options . ((:args . #("--headless"))))))
+(defparameter *headless* '(("chrome:browserOptions" . ((:args . #("--headless"))))))
 (setf *timeout* 5)

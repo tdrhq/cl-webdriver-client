@@ -115,12 +115,12 @@
     (setf (url) (test-file-url "javascriptPage.html"))
     (is (element-text (find-element "Change" :by :partial-link-text)) "Change the page title!")))
 
-(subtest "element-location"
+(subtest "element-rect"
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
-    (let ((location (element-location (find-element "Change" :by :partial-link-text))))
-      (ok (assoc :x location))
-      (ok (assoc :y location)))))
+    (let ((rect (element-rect (find-element "Change" :by :partial-link-text))))
+      (ok (assoc :x rect))
+      (ok (assoc :y rect)))))
 
 (subtest "element-tagname"
   (with-test-session ()

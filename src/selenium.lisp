@@ -147,7 +147,7 @@ See: https://www.w3.org/TR/webdriver1/#element-send-keys ."
   (check-type keys (string))
   (http-post-check (session-path session "/element/~a/value"
                                  (element-id element))
-                   :value (coerce keys 'list)))
+                   :text keys))
 
 (defun element-click (element &key (session *session*))
   "The Element Click command scrolls into view the element if it is not already pointer-interactable, and clicks its in-view center point.
@@ -175,11 +175,22 @@ Category: Elements
 See: https://www.w3.org/TR/webdriver1/#element-displayedness ."
   (http-get-value (session-path session "/element/~a/displayed" (element-id element))))
 
-(defun element-location (element &key (session *session*))
-  "Return the ELEMENT's location.
+(defun element-rect (element &key (session *session*))
+  "
+
+The Get Element Rect command returns the dimensions and coordinates of the given web element. The returned value is a dictionary with the following members:
+
+x
+    X axis position of the top-left corner of the web element relative to the current browsing context’s document element in CSS pixels. 
+y
+    Y axis position of the top-left corner of the web element relative to the current browsing context’s document element in CSS pixels. 
+height
+    Height of the web element’s bounding rectangle in CSS pixels. 
+width
+    Width of the web element’s bounding rectangle in CSS pixels. 
 
 Category: Elements"
-  (http-get-value (session-path session "/element/~a/location" (element-id element))))
+  (http-get-value (session-path session "/element/~a/rect" (element-id element))))
 
 (defun element-tagname (element &key (session *session*))
   "Return the ELEMENT's tag name.

@@ -1,7 +1,7 @@
 ;;;; package.lisp
 
 (defpackage cl-selenium
-  (:use :cl)
+  (:use :cl :assoc-utils)
   (:export :selenium-status
 	   
            :make-session
@@ -25,7 +25,7 @@
            :element-clear
            :element-click
            :element-displayed
-           :element-location
+           :element-rect
            :element-send-keys
            :element-id
            :element-text
