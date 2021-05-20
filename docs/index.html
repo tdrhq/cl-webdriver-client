@@ -362,16 +362,6 @@ For documentation see:<br>
 Category: <var>Session</var>
 </p></dd></dl>
 
-<span id="index-CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION"></span>
-<span id="CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION-function"></span><dl>
-<dt id="index-START_002dINTERACTIVE_002dSESSION">CL-SELENIUM: <strong>START-INTERACTIVE-SESSION</strong> <em>(&amp;rest capabilities)</em></dt>
-<dd>
-<p>Start an interactive session. Use this to interact with Selenium driver from a REPL.<br>
-<br>
-Category: Session<br>
-See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
-</p></dd></dl>
-
 <span id="index-CL_002dSELENIUM_003aMAKE_002dSESSION"></span>
 <span id="CL_002dSELENIUM_003aMAKE_002dSESSION-function"></span><dl>
 <dt id="index-MAKE_002dSESSION">CL-SELENIUM: <strong>MAKE-SESSION</strong> <em>(&amp;key (browser-name :chrome) browser-version platform-name platform-version accept-ssl-certs additional-capabilities)</em></dt>
@@ -381,6 +371,16 @@ See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
 Category: Session<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#new-session">https://www.w3.org/TR/webdriver1/#new-session</a> .<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#capabilities">https://www.w3.org/TR/webdriver1/#capabilities</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION-function"></span><dl>
+<dt id="index-START_002dINTERACTIVE_002dSESSION">CL-SELENIUM: <strong>START-INTERACTIVE-SESSION</strong> <em>(&amp;rest capabilities)</em></dt>
+<dd>
+<p>Start an interactive session. Use this to interact with Selenium driver from a REPL.<br>
+<br>
+Category: Session<br>
+See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aSTOP_002dINTERACTIVE_002dSESSION"></span>
@@ -420,6 +420,13 @@ See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
 <p>Click any mouse <var>button</var> (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling <var>button</var> up (or any out-of-order interactions sequence) will yield undefined behaviour).<br>
 <br>
 See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick</a>
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aSELENIUM_002dSTATUS"></span>
+<span id="CL_002dSELENIUM_003aSELENIUM_002dSTATUS-function"></span><dl>
+<dt id="index-SELENIUM_002dSTATUS">CL-SELENIUM: <strong>SELENIUM-STATUS</strong> <em>nil</em></dt>
+<dd>
+<p>Get Selenium Webdriver status information
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aMOUSE_002dMOVE_002dTO"></span>
@@ -474,6 +481,42 @@ See: <a href="https://github.com/SeleniumHQ/selenium/wiki/Logging">https://githu
 <dt id="index-KEY">CL-SELENIUM: <strong>KEY</strong> <em>(key)</em></dt>
 <dd>
 <p>Returns a string with <var>KEY</var>&rsquo;s codepoint.
+</p></dd></dl>
+
+<span id="Element-interaction"></span><h4 class="subheading">Element interaction</h4>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS-function"></span><dl>
+<dt id="index-ELEMENT_002dSEND_002dKEYS">CL-SELENIUM: <strong>ELEMENT-SEND-KEYS</strong> <em>(element keys &amp;key (session *session*))</em></dt>
+<dd>
+<p>The <var>Element</var> Send <var>Keys</var> command scrolls into view the form control <var>element</var> and then sends the provided <var>keys</var> to the <var>element</var>. In case the <var>element</var> is not keyboard-interactable, an <var>element</var> not interactable error is returned.<br>
+<br>
+<var>KEYS</var> should be a string.<br>
+<br>
+Category: <var>Element</var> interaction<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#element-send-keys">https://www.w3.org/TR/webdriver1/#element-send-keys</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLEAR"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dCLEAR-function"></span><dl>
+<dt id="index-ELEMENT_002dCLEAR">CL-SELENIUM: <strong>ELEMENT-CLEAR</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Clear the contents of <var>ELEMENT</var> (for example, a form field <var>element</var>).<br>
+<br>
+Category: <var>Element</var> interaction<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#dfn-element-clear.">https://www.w3.org/TR/webdriver1/#dfn-element-clear.</a>
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLICK"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dCLICK-function"></span><dl>
+<dt id="index-ELEMENT_002dCLICK">CL-SELENIUM: <strong>ELEMENT-CLICK</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>The <var>Element</var> Click command scrolls into view the <var>element</var> if it is not already pointer-interactable, and clicks its in-view center point.<br>
+<br>
+If the <var>element</var>âs center point is obscured by another <var>element</var>, an <var>element</var> click intercepted error is returned. If the <var>element</var> is outside the viewport, an <var>element</var> not interactable error is returned.<br>
+<br>
+Category: <var>Element</var> interaction<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#element-click">https://www.w3.org/TR/webdriver1/#element-click</a> .
 </p></dd></dl>
 
 <span id="Elements"></span><h4 class="subheading">Elements</h4>
@@ -534,6 +577,26 @@ Category: Elements
 Category: Elements
 </p></dd></dl>
 
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dRECT"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dRECT-function"></span><dl>
+<dt id="index-ELEMENT_002dRECT">CL-SELENIUM: <strong>ELEMENT-RECT</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<br>
+<br>
+<p>The Get <var>Element</var> Rect command returns the dimensions and coordinates of the given web <var>element</var>. The returned value is a dictionary with the following members:<br>
+<br>
+x<br>
+    X axis position of the top-left corner of the web <var>element</var> relative to the current browsing contextâs document <var>element</var> in CSS pixels.<br>
+y<br>
+    Y axis position of the top-left corner of the web <var>element</var> relative to the current browsing contextâs document <var>element</var> in CSS pixels.<br>
+height<br>
+    Height of the web <var>element</var>âs bounding rectangle in CSS pixels.<br>
+width<br>
+    Width of the web <var>element</var>âs bounding rectangle in CSS pixels.<br>
+<br>
+Category: Elements
+</p></dd></dl>
+
 <span id="index-CL_002dSELENIUM_003aELEMENT_002dDISPLAYED"></span>
 <span id="CL_002dSELENIUM_003aELEMENT_002dDISPLAYED-function"></span><dl>
 <dt id="index-ELEMENT_002dDISPLAYED">CL-SELENIUM: <strong>ELEMENT-DISPLAYED</strong> <em>(element &amp;key (session *session*))</em></dt>
@@ -542,15 +605,6 @@ Category: Elements
 <br>
 Category: Elements<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#element-displayedness">https://www.w3.org/TR/webdriver1/#element-displayedness</a> .
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dLOCATION"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dLOCATION-function"></span><dl>
-<dt id="index-ELEMENT_002dLOCATION">CL-SELENIUM: <strong>ELEMENT-LOCATION</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>Return the <var>ELEMENT</var>&rsquo;s location.<br>
-<br>
-Category: Elements
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aFIND_002dELEMENTS"></span>
@@ -618,7 +672,7 @@ See: <a href="https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)">https://en.w
 <span id="CL_002dSELENIUM_003aPAGE_002dTITLE-function"></span><dl>
 <dt id="index-PAGE_002dTITLE">CL-SELENIUM: <strong>PAGE-TITLE</strong> <em>(&amp;key (session *session*))</em></dt>
 <dd>
-<p>This command returns the document title of the current top-level browsing context, equivalent to calling document.title. <br>
+<p>This command returns the document title of the current top-level browsing context, equivalent to calling document.title.<br>
 <br>
 Category: Navigation<br>
 See: <a href="https://www.w3.org/TR/webdriver2/#get-title">https://www.w3.org/TR/webdriver2/#get-title</a> .
@@ -649,7 +703,7 @@ See: <a href="https://www.w3.org/TR/webdriver1/#dfn-back">https://www.w3.org/TR/
 <span id="CL_002dSELENIUM_003aELEMENT_002dSCREENSHOT-function"></span><dl>
 <dt id="index-ELEMENT_002dSCREENSHOT">CL-SELENIUM: <strong>ELEMENT-SCREENSHOT</strong> <em>(element &amp;key (session *session*))</em></dt>
 <dd>
-<p>The Take <var>Element</var> Screenshot command takes a screenshot of the visible region encompassed by the bounding rectangle of an <var>element</var>. If given a parameter argument scroll that evaluates to false, the <var>element</var> will not be scrolled into view. <br>
+<p>The Take <var>Element</var> Screenshot command takes a screenshot of the visible region encompassed by the bounding rectangle of an <var>element</var>. If given a parameter argument scroll that evaluates to false, the <var>element</var> will not be scrolled into view.<br>
 <br>
 Category: Screen capture<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#take-element-screenshot">https://www.w3.org/TR/webdriver1/#take-element-screenshot</a> .
@@ -777,42 +831,6 @@ See: <a href="https://www.w3.org/TR/webdriver1/#dfn-accept-alert">https://www.w3
 <br>
 Category: User prompts<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#get-alert-text">https://www.w3.org/TR/webdriver1/#get-alert-text</a>
-</p></dd></dl>
-
-<span id="Element-interaction"></span><h4 class="subheading">Element interaction</h4>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS-function"></span><dl>
-<dt id="index-ELEMENT_002dSEND_002dKEYS">CL-SELENIUM: <strong>ELEMENT-SEND-KEYS</strong> <em>(element keys &amp;key (session *session*))</em></dt>
-<dd>
-<p>The <var>Element</var> Send <var>Keys</var> command scrolls into view the form control <var>element</var> and then sends the provided <var>keys</var> to the <var>element</var>. In case the <var>element</var> is not keyboard-interactable, an <var>element</var> not interactable error is returned.<br>
-<br>
-<var>KEYS</var> should be a string.<br>
-<br>
-Category: <var>Element</var> interaction<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#element-send-keys">https://www.w3.org/TR/webdriver1/#element-send-keys</a> .
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLEAR"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dCLEAR-function"></span><dl>
-<dt id="index-ELEMENT_002dCLEAR">CL-SELENIUM: <strong>ELEMENT-CLEAR</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>Clear the contents of <var>ELEMENT</var> (for example, a form field <var>element</var>).<br>
-<br>
-Category: <var>Element</var> interaction<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#dfn-element-clear.">https://www.w3.org/TR/webdriver1/#dfn-element-clear.</a>
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLICK"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dCLICK-function"></span><dl>
-<dt id="index-ELEMENT_002dCLICK">CL-SELENIUM: <strong>ELEMENT-CLICK</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>The <var>Element</var> Click command scrolls into view the <var>element</var> if it is not already pointer-interactable, and clicks its in-view center point.<br>
-<br>
-If the <var>element</var>âs center point is obscured by another <var>element</var>, an <var>element</var> click intercepted error is returned. If the <var>element</var> is outside the viewport, an <var>element</var> not interactable error is returned.<br>
-<br>
-Category: <var>Element</var> interaction<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#element-click">https://www.w3.org/TR/webdriver1/#element-click</a> .
 </p></dd></dl>
 
 <span id="Document-handling"></span><h4 class="subheading">Document handling</h4>
@@ -1074,7 +1092,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dCLICK"><code>CL-SELENIUM:ELEMENT-CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dDISPLAYED"><code>CL-SELENIUM:ELEMENT-DISPLAYED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dID"><code>CL-SELENIUM:ELEMENT-ID</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dLOCATION"><code>CL-SELENIUM:ELEMENT-LOCATION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dRECT"><code>CL-SELENIUM:ELEMENT-RECT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dSCREENSHOT"><code>CL-SELENIUM:ELEMENT-SCREENSHOT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS"><code>CL-SELENIUM:ELEMENT-SEND-KEYS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dTAGNAME"><code>CL-SELENIUM:ELEMENT-TAGNAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
@@ -1093,6 +1111,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aPAGE_002dTITLE"><code>CL-SELENIUM:PAGE-TITLE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aREFRESH"><code>CL-SELENIUM:REFRESH</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSCREENSHOT"><code>CL-SELENIUM:SCREENSHOT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSELENIUM_002dSTATUS"><code>CL-SELENIUM:SELENIUM-STATUS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION"><code>CL-SELENIUM:START-INTERACTIVE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSTOP_002dINTERACTIVE_002dSESSION"><code>CL-SELENIUM:STOP-INTERACTIVE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSWITCH_002dTO_002dFRAME"><code>CL-SELENIUM:SWITCH-TO-FRAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
@@ -1118,7 +1137,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dCLICK"><code>ELEMENT-CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dDISPLAYED"><code>ELEMENT-DISPLAYED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dID"><code>ELEMENT-ID</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dLOCATION"><code>ELEMENT-LOCATION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dRECT"><code>ELEMENT-RECT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dSCREENSHOT"><code>ELEMENT-SCREENSHOT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dSEND_002dKEYS"><code>ELEMENT-SEND-KEYS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dTAGNAME"><code>ELEMENT-TAGNAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
@@ -1158,6 +1177,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_fn_letter-S">S</th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-SCREENSHOT"><code>SCREENSHOT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-SELENIUM_002dSTATUS"><code>SELENIUM-STATUS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-SEND_002dKEY"><code>SEND-KEY</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM_002dUTILS-package">CL-SELENIUM-UTILS package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-SEND_002dKEYS"><code>SEND-KEYS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM_002dUTILS-package">CL-SELENIUM-UTILS package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-START_002dINTERACTIVE_002dSESSION"><code>START-INTERACTIVE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>

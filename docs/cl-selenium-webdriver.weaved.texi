@@ -227,14 +227,6 @@ Make @var{SESSION} the current @var{session}.@*
 Category: @var{Session}
 @endcldefun
 
-@cldefun {CL-SELENIUM, START-INTERACTIVE-SESSION, (&rest capabilities)}
-
-Start an interactive session. Use this to interact with Selenium driver from a REPL.@*
-@*
-Category: Session@*
-See: @clref{CL-SELENIUM, MAKE-SESSION, function}
-@endcldefun
-
 @cldefun {CL-SELENIUM, MAKE-SESSION, (&key (browser-name :chrome) browser-version platform-name platform-version accept-ssl-certs additional-capabilities)}
 
 Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.@*
@@ -242,6 +234,14 @@ Creates a new WebDriver session with the endpoint node. If the creation fails, a
 Category: Session@*
 See: @url{https://www.w3.org/TR/webdriver1/#new-session} .@*
 See: @url{https://www.w3.org/TR/webdriver1/#capabilities} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, START-INTERACTIVE-SESSION, (&rest capabilities)}
+
+Start an interactive session. Use this to interact with Selenium driver from a REPL.@*
+@*
+Category: Session@*
+See: @clref{CL-SELENIUM, MAKE-SESSION, function}
 @endcldefun
 
 @cldefun {CL-SELENIUM, STOP-INTERACTIVE-SESSION, nil}
@@ -273,6 +273,11 @@ See: @clref{CL-SELENIUM, MAKE-SESSION, function}
 Click any mouse @var{button} (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling @var{button} up (or any out-of-order interactions sequence) will yield undefined behaviour).@*
 @*
 See: @url{https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick}
+@endcldefun
+
+@cldefun {CL-SELENIUM, SELENIUM-STATUS, nil}
+
+Get Selenium Webdriver status information
 @endcldefun
 
 @cldefun {CL-SELENIUM, MOUSE-MOVE-TO, (x y &key element (session *session*))}
@@ -317,6 +322,36 @@ Class precedence list: @code{no-such-element-error, find-error, error, serious-c
 @cldefun {CL-SELENIUM, KEY, (key)}
 
 Returns a string with @var{KEY}'s codepoint.
+@endcldefun
+
+@subheading Element interaction
+
+@cldefun {CL-SELENIUM, ELEMENT-SEND-KEYS, (element keys &key (session *session*))}
+
+The @var{Element} Send @var{Keys} command scrolls into view the form control @var{element} and then sends the provided @var{keys} to the @var{element}. In case the @var{element} is not keyboard-interactable, an @var{element} not interactable error is returned.@*
+@*
+@var{KEYS} should be a string.@*
+@*
+Category: @var{Element} interaction@*
+See: @url{https://www.w3.org/TR/webdriver1/#element-send-keys} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-CLEAR, (element &key (session *session*))}
+
+Clear the contents of @var{ELEMENT} (for example, a form field @var{element}).@*
+@*
+Category: @var{Element} interaction@*
+See: @url{https://www.w3.org/TR/webdriver1/#dfn-element-clear.}
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-CLICK, (element &key (session *session*))}
+
+The @var{Element} Click command scrolls into view the @var{element} if it is not already pointer-interactable, and clicks its in-view center point.@*
+@*
+If the @var{element}’s center point is obscured by another @var{element}, an @var{element} click intercepted error is returned. If the @var{element} is outside the viewport, an @var{element} not interactable error is returned.@*
+@*
+Category: @var{Element} interaction@*
+See: @url{https://www.w3.org/TR/webdriver1/#element-click} .
 @endcldefun
 
 @subheading Elements
@@ -369,19 +404,30 @@ Return the @var{ELEMENT}'s attribute named @var{NAME}.@*
 Category: Elements
 @endcldefun
 
+@cldefun {CL-SELENIUM, ELEMENT-RECT, (element &key (session *session*))}
+
+@*
+@*
+The Get @var{Element} Rect command returns the dimensions and coordinates of the given web @var{element}. The returned value is a dictionary with the following members:@*
+@*
+x@*
+    X axis position of the top-left corner of the web @var{element} relative to the current browsing context’s document @var{element} in CSS pixels.@*
+y@*
+    Y axis position of the top-left corner of the web @var{element} relative to the current browsing context’s document @var{element} in CSS pixels.@*
+height@*
+    Height of the web @var{element}’s bounding rectangle in CSS pixels.@*
+width@*
+    Width of the web @var{element}’s bounding rectangle in CSS pixels.@*
+@*
+Category: Elements
+@endcldefun
+
 @cldefun {CL-SELENIUM, ELEMENT-DISPLAYED, (element &key (session *session*))}
 
 Returns  if @var{ELEMENT} is visible.@*
 @*
 Category: Elements@*
 See: @url{https://www.w3.org/TR/webdriver1/#element-displayedness} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, ELEMENT-LOCATION, (element &key (session *session*))}
-
-Return the @var{ELEMENT}'s location.@*
-@*
-Category: Elements
 @endcldefun
 
 @cldefun {CL-SELENIUM, FIND-ELEMENTS, (value &key (by :css-selector) (session *session*))}
@@ -437,7 +483,7 @@ See: @url{https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)} .
 
 @cldefun {CL-SELENIUM, PAGE-TITLE, (&key (session *session*))}
 
-This command returns the document title of the current top-level browsing context, equivalent to calling document.title. @*
+This command returns the document title of the current top-level browsing context, equivalent to calling document.title.@*
 @*
 Category: Navigation@*
 See: @url{https://www.w3.org/TR/webdriver2/#get-title} .
@@ -462,7 +508,7 @@ See: @url{https://www.w3.org/TR/webdriver1/#dfn-back} .
 
 @cldefun {CL-SELENIUM, ELEMENT-SCREENSHOT, (element &key (session *session*))}
 
-The Take @var{Element} Screenshot command takes a screenshot of the visible region encompassed by the bounding rectangle of an @var{element}. If given a parameter argument scroll that evaluates to false, the @var{element} will not be scrolled into view. @*
+The Take @var{Element} Screenshot command takes a screenshot of the visible region encompassed by the bounding rectangle of an @var{element}. If given a parameter argument scroll that evaluates to false, the @var{element} will not be scrolled into view.@*
 @*
 Category: Screen capture@*
 See: @url{https://www.w3.org/TR/webdriver1/#take-element-screenshot} .
@@ -570,36 +616,6 @@ Get Alert Text.@*
 @*
 Category: User prompts@*
 See: @url{https://www.w3.org/TR/webdriver1/#get-alert-text}
-@endcldefun
-
-@subheading Element interaction
-
-@cldefun {CL-SELENIUM, ELEMENT-SEND-KEYS, (element keys &key (session *session*))}
-
-The @var{Element} Send @var{Keys} command scrolls into view the form control @var{element} and then sends the provided @var{keys} to the @var{element}. In case the @var{element} is not keyboard-interactable, an @var{element} not interactable error is returned.@*
-@*
-@var{KEYS} should be a string.@*
-@*
-Category: @var{Element} interaction@*
-See: @url{https://www.w3.org/TR/webdriver1/#element-send-keys} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, ELEMENT-CLEAR, (element &key (session *session*))}
-
-Clear the contents of @var{ELEMENT} (for example, a form field @var{element}).@*
-@*
-Category: @var{Element} interaction@*
-See: @url{https://www.w3.org/TR/webdriver1/#dfn-element-clear.}
-@endcldefun
-
-@cldefun {CL-SELENIUM, ELEMENT-CLICK, (element &key (session *session*))}
-
-The @var{Element} Click command scrolls into view the @var{element} if it is not already pointer-interactable, and clicks its in-view center point.@*
-@*
-If the @var{element}’s center point is obscured by another @var{element}, an @var{element} click intercepted error is returned. If the @var{element} is outside the viewport, an @var{element} not interactable error is returned.@*
-@*
-Category: @var{Element} interaction@*
-See: @url{https://www.w3.org/TR/webdriver1/#element-click} .
 @endcldefun
 
 @subheading Document handling

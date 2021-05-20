@@ -1,10 +1,17 @@
 # CL Selenium WebDriver
-CL Selenium WebDriver is a binding library to the Selenium 2.0
+
+This is a fork of CL Selenium WebDriver, a binding library to the Selenium.
+
+This fork implements version 4.0 of Selenium Webdriver API.
+
+See: https://www.w3.org/TR/webdriver1 .
 
 ## Warning
+
 This software is in development. The APIs will be likely to change.
 
 ## Usage
+
 ```lisp
 ;; see examples/*.lisp and t/*.lisp
 (in-package :cl-user)
@@ -40,23 +47,25 @@ func main() {
      do (sleep 0.1)
      finally (print ouput)))
 ```
+
 ## Installation
+
 ```
 git clone https://github.com/TatriX/cl-selenium-webdriver ~/quicklisp/local-projects/
 (ql:quickload :cl-selenium)
 ```
 
-You need a running instance of selenium-server-standalone.
+You need a running instance of selenium-server-standalone version 4.0.0 or above.
 
 [Download](http://www.seleniumhq.org/download/) it and run:
 ```
-curl -L0 https://goo.gl/SP94ZB -o selenium-server-standalone.jar
-java -jar selenium-server-standalone.jar
+java -jar selenium-server-standalone.jar standalone
 ```
 
 ## Utils
 
 There is a `:cl-selenium-utils` package which should reduce boilerplate. For example:
+
 ```lisp
 (defpackage my-test
   (:use :cl :cl-selenium)
@@ -77,7 +86,9 @@ There is a `:cl-selenium-utils` package which should reduce boilerplate. For exa
 ```
 
 ### Interactive session
+
 You can just start the session and control it from your repl:
+
 ```lisp
 (in-package :my-test)
 
@@ -92,6 +103,7 @@ You can just start the session and control it from your repl:
 ```
 
 ### Utils API conventions
+
 If utility function needs an element to work on it defaults to `(active-element)`.
 ```lisp
 (click) ; click on the current active element.
@@ -110,6 +122,7 @@ To change default element you can:
 
 
 ### Waiting for the reaction
+
 Often you need to wait for some action to be done. For example if you
 do a `(click)` on the button to load search results, you need to wait
 them to load.
@@ -122,17 +135,18 @@ Timeout defaults to 30 seconds. You can globally change it:
 ```
 
 ## Running tests
+
 ### REPL
 ```lisp
 (ql:quickload '(:cl-selenium :prove))
 (setf prove:*enable-colors* nil)
 (prove:run :cl-selenium-test)
 ```
+
 ### Shell
 ```sh
 ./test.sh
 ```
-
 
 ## Copyright
 
