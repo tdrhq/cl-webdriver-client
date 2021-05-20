@@ -1,19 +1,16 @@
 (in-package :cl-selenium)
 
 (define-condition protocol-error (error)
-  ((body :initarg :body :reader protocol-error-body)))
-
-(defun protocol-error-status (error)
-  (with-slots (body) error
-    (assoc-value body :status)))
+  ((body :initarg :body :reader protocol-error-body)
+   (status :initarg :status :reader protocol-error-status)))
 
 (defmethod print-object ((error protocol-error) stream)
   (with-slots (body) error
     (format stream
             "[~a]~%error: ~a~%status: ~a~%state: ~a~%~%~a~%"
             (type-of error)
-	    (assoc-value (assoc-value body :value) :error)
-            (assoc-value body :status)
+            (assoc-value (assoc-value body :value) :error)
+            (protocol-error-status error)
             (assoc-value body :state)
             (assoc-value (assoc-value body :value) :message))))
 

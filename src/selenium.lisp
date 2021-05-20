@@ -45,11 +45,14 @@ See: https://www.w3.org/TR/webdriver2/#get-title ."
             (element-attribute element "id"))))
 
 (defun handle-find-error (err &key value by)
-  "Signal the correct type of error depending on PROTOCOL-ERROR-STATUS."
+  "Signal the correct type of error depending on PROTOCOL-ERROR-STATUS.
+
+See: https://www.w3.org/TR/webdriver1/#handling-errors"
   (error
    (case (protocol-error-status err)
-     (7 (make-instance 'no-such-element-error :value value :by by))
-     (10 (make-instance 'stale-element-reference :value value :by by))
+     (404 (make-instance 'no-such-element-error :value value :by by))
+     ;; TODO: we should look at JSON error code too
+     ;;(10 (make-instance 'stale-element-reference :value value :by by))
      (t err))))
 
 (defun find-element (value &key (by :css-selector) (session *session*))
@@ -76,13 +79,11 @@ If result is empty, a HANDLE-FIND-ERROR is signaled.
 Category: Elements
 See: https://www.w3.org/TR/webdriver1/#dfn-find-element ."
   (handler-case
-      (let ((response (http-post (session-path session "/element") :value value :using (by by))))
+      (let ((response (http-post (session-path session "/element")
+                                 :value value :using (by by))))
         ;; TODO: find/write json -> clos
-        (if (or (not (cdr (assoc :status response)))
-                (zerop (cdr (assoc :status response))))
-            (make-instance 'element
-                           :id (cdadr (assoc :value response)))
-            (error 'protocol-error :body response)))
+        (make-instance 'element
+                       :id (cdadr (assoc :value response))))
     (protocol-error (err) (handle-find-error err :value value :by by))))
 
 (defun find-elements (value &key (by :css-selector) (session *session*))
@@ -92,7 +93,8 @@ Category: Elements
 See FIND-ELEMENT.
 See https://www.w3.org/TR/webdriver1/#find-elements ."
   (handler-case
-      (let ((response (http-post (session-path session "/elements") :value value :using (by by))))
+      (let ((response (http-post (session-path session "/elements")
+                                 :value value :using (by by))))
         (loop for ((nil . id)) in (cdr (assoc :value response))
               collect (make-instance 'element :id id)))
     (protocol-error (err) (handle-find-error err :value value :by by))))
@@ -181,13 +183,13 @@ See: https://www.w3.org/TR/webdriver1/#element-displayedness ."
 The Get Element Rect command returns the dimensions and coordinates of the given web element. The returned value is a dictionary with the following members:
 
 x
-    X axis position of the top-left corner of the web element relative to the current browsing context’s document element in CSS pixels. 
+    X axis position of the top-left corner of the web element relative to the current browsing context’s document element in CSS pixels.
 y
-    Y axis position of the top-left corner of the web element relative to the current browsing context’s document element in CSS pixels. 
+    Y axis position of the top-left corner of the web element relative to the current browsing context’s document element in CSS pixels.
 height
-    Height of the web element’s bounding rectangle in CSS pixels. 
+    Height of the web element’s bounding rectangle in CSS pixels.
 width
-    Width of the web element’s bounding rectangle in CSS pixels. 
+    Width of the web element’s bounding rectangle in CSS pixels.
 
 Category: Elements"
   (http-get-value (session-path session "/element/~a/rect" (element-id element))))
