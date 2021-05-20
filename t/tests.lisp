@@ -146,7 +146,7 @@
 (subtest "cookie"
   (with-test-session ()
     (setf (url) "https://www.google.com?hl=en")
-    (ok (setf (cookie) (make-cookie "foo" "bar")))
+    (ok (null (setf (cookie) (make-cookie "foo" "bar"))))
     (is (get-cookie (cookie) "foo") "bar")))
 
 ;; alerts
