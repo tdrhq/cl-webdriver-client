@@ -128,7 +128,7 @@ Category: Elements
 See: https://www.w3.org/TR/webdriver2/#get-active-element.
 See: https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement."
   (make-instance 'element
-                 :id (cdadr (assoc :value (http-post (session-path session "/element/active"))))))
+                 :id (cdadr (assoc :value (http-get (session-path session "/element/active"))))))
 
 (defun element-clear (element &key (session *session*))
   "Clear the contents of ELEMENT (for example, a form field element).
