@@ -159,4 +159,21 @@
     (accept-alert)
     (is (page-title) "Testing Alerts")))
 
+;; actions
+
+(subtest "actions 1"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (perform-actions `((:none (:pause 5)))))
+  )
+
+(subtest "actions 2"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (perform-actions `((:pointer
+			(:move 22 33)
+			(:pause 2000)
+			(:move 23 54))
+		       )))) 
+
 (finalize)

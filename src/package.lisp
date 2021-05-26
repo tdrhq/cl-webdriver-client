@@ -55,6 +55,8 @@
            :accept-alert
            :alert-text
 
+	   :perform-actions
+
            :execute-script
 
            :no-such-element-error)
