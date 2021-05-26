@@ -177,6 +177,13 @@ Category: Elements
 See: https://www.w3.org/TR/webdriver1/#element-displayedness ."
   (http-get-value (session-path session "/element/~a/displayed" (element-id element))))
 
+(defun element-enabled (element &key (session *session*))
+  "Returns T if ELEMENT is enabled.
+
+Category: Elements
+See: https://www.w3.org/TR/webdriver1/#is-element-enabled ."
+  (http-get-value (session-path session "/element/~a/enabled" (element-id element))))
+
 (defun element-rect (element &key (session *session*))
   "
 
