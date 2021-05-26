@@ -14,7 +14,7 @@ See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsession
 
 See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick"
   (http-post-check (session-path session "/click")
-                   `(:button ,(ecase button
-                                     (:left 0)
-                                     (:middle 1)
-                                     (:right 2)))))
+                   :button (ecase button
+			     (:left 0)
+			     (:middle 1)
+			     (:right 2))))
