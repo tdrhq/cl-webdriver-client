@@ -25,6 +25,7 @@
            :element-clear
            :element-click
            :element-displayed
+           :element-enabled
            :element-rect
            :element-send-keys
            :element-id
