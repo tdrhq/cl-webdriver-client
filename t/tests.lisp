@@ -161,19 +161,53 @@
 
 ;; actions
 
-(subtest "actions 1"
+(subtest "actions: basics"
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
     (perform-actions `((:none (:pause 5)))))
   )
 
-(subtest "actions 2"
+(subtest "actions: move pointer"
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
     (perform-actions `((:pointer
-			(:move 22 33)
+			(:pointer-move 22 33)
 			(:pause 2000)
-			(:move 23 54))
-		       )))) 
+			(:pointer-move 23 54))
+		       ))
+    ))
+
+(subtest "actions: touch test"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (perform-actions `((:touch
+			(:pointer-move 22 33)
+			(:pause 2000)
+			(:pointer-move 23 54))
+		       ))
+    )
+  )
+
+(subtest "actions: mouse test"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (perform-actions `((:mouse
+			(:pointer-move 22 33)
+			(:pause 2000)
+			(:pointer-move 23 54))
+		       ))
+    )
+  )
+
+(subtest "actions: pen test"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (perform-actions `((:pen
+			(:pointer-move 22 33)
+			(:pause 2000)
+			(:pointer-move 23 54))
+		       ))
+    )
+  )
 
 (finalize)
