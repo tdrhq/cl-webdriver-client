@@ -210,4 +210,17 @@
     )
   )
 
+(subtest "actions: pointer up/down"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (perform-actions `((:mouse
+			(:pointer-move 22 33)
+			(:pause 2000)
+			(:pointer-down 0)
+			(:pointer-up 0)
+			(:pointer-move 23 54))
+		       ))
+    )
+  )
+
 (finalize)
