@@ -192,15 +192,15 @@ Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="#SEC_Cont
 <span id="Syntax_003a"></span><h4 class="subheading">Syntax:</h4>
 
 <pre class="verbatim">actions ::= ({actions-input-source}*)
-actions-input-source ::= ({input-source-type} {action}*)
+actions-input-source ::= (input-source-type {action}*)
 input-source-type ::= :none | :pointer | :mouse | :pen | :touch | :key
-action ::= {pause} | {pointer-move} | {pointer-down} | {pointer-up} | {key-down} | {key-up}
-{pause} ::= (:pause duration)
-{pointer-move} ::= (:pointer-move x y)
-{pointer-down} ::= (:pointer-down button-number)
-{pointer-up} ::= (:pointer-up button-number)
-{key-down} ::= (:key-down key)
-{key-up} ::= (:key-up key)
+action ::= pause | pointer-move | pointer-down | pointer-up | key-down | key-up
+pause ::= (:pause duration)
+pointer-move ::= (:pointer-move x y)
+pointer-down ::= (:pointer-down button-number)
+pointer-up ::= (:pointer-up button-number)
+key-down ::= (:key-down key)
+key-up ::= (:key-up key)
 </pre>
 <span id="Arguments-and-values_003a"></span><h4 class="subheading">Arguments and values:</h4>
 
