@@ -20,7 +20,7 @@ The server should maintain one browser per session. Commands sent to a session w
 (defun make-session (&key
                        (browser-name :chrome) ; TODO: autodetect?
                        browser-version
-                       platform-name
+                       (platform-name "Linux") ; TODO: autodetect?
                        platform-version
                        accept-ssl-certs
                        additional-capabilities)
@@ -32,11 +32,10 @@ See: https://www.w3.org/TR/webdriver1/#capabilities ."
   (let ((response (http-post "/session"
                              :session-id nil
 			     :capabilities `((always-match .
-					      ((platform-name . "Linux")
+					      ((platform-name . ,platform-name)
 					       ,@additional-capabilities))
 					     (first-match .
-					      #( ((browser-name . "chrome"))
-						;;((browser-name . "firefox"))
+					      #( ((browser-name . ,browser-name))
 						)))
 			     ;; :desired-capabilities `((browser-name . ,browser-name)
 			     ;; 			    (browser-version . ,browser-version)
