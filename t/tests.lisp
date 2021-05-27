@@ -223,4 +223,13 @@
     )
   )
 
+(subtest "actions: keys"
+  (with-test-session ()
+    (setf (url) (test-file-url "javascriptPage.html"))
+    (perform-actions `((:key
+			(:pause 1000)
+			(:key-down ,(key :shift))
+			(:key-down "a"))))
+  ))
+
 (finalize)

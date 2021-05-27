@@ -39,9 +39,13 @@
                   (:type . ,source-type)
                   (:actions . ,(expand-action-items action-items))))))))
 
-(expand-actions '((:pointer (:pointer-move 22 33))))
-(expand-actions '((:pointer (:pointer-move 22 33))
-                  (:none (:pause 22))))
+;; (expand-actions '((:pointer (:pointer-move 22 33))))
+;; (expand-actions '((:pointer (:pointer-move 22 33))
+;;                   (:none (:pause 22))))
+;; (expand-actions `((:key
+;; 		   (:pause 1000)
+;; 		   (:key-down ,(key :shift))
+;; 		   (:key-down "a"))))
 
 (defun perform-actions (actions &optional (session *session*))
   "The Actions API provides a low-level interface for providing virtualised device input to the web browser.
