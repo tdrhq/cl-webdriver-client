@@ -61,5 +61,8 @@
 
 ;; TODO: prepare all keys on compile
 (defun key (key)
-  "Returns a string with KEY's codepoint."
+  "Returns a string with KEY's codepoint.
+
+Category: Actions
+See: https://www.w3.org/TR/webdriver/#keyboard-actions"
   (make-string 1 :initial-element (getf *keymap* key)))

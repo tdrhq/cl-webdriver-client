@@ -97,7 +97,7 @@ Next: <a href="#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [
 <span id="index-cl_002dselenium_002dwebdriver"></span>
 <span id="index-cl_002dselenium_002dwebdriver-1"></span>
 
-<p>CL Selenium WebDriver is a binding library to the Selenium 2.0
+<p>CL Selenium WebDriver is a binding library to the Selenium 4.0 that implements the <a href="https://www.w3.org/TR/webdriver">W3C Webdriver spec</a>.
 </p>
 <table class="menu" border="0" cellspacing="0">
 <tr><td align="left" valign="top">&bull; <a href="#Introduction" accesskey="1">Introduction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
@@ -122,7 +122,7 @@ Next: <a href="#Usage" accesskey="n" rel="next">Usage</a>, Previous: <a href="#T
 </div>
 <span id="Introduction-1"></span><h2 class="chapter">1 Introduction</h2>
 
-<p>CL Selenium WebDriver is a binding library to the Selenium 2.0
+<p>CL Selenium WebDriver is a binding library to the Selenium 4.0 that implements the <a href="https://www.w3.org/TR/webdriver">W3C Webdriver spec</a>.
 </p>
 <p>This software is in development. The APIs will be likely to change.
 </p>
@@ -466,6 +466,29 @@ Category: Session<br>
 See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
 </p></dd></dl>
 
+<span id="Actions-2"></span><h4 class="subheading">Actions</h4>
+
+<span id="index-CL_002dSELENIUM_003aPERFORM_002dACTIONS"></span>
+<span id="CL_002dSELENIUM_003aPERFORM_002dACTIONS-function"></span><dl>
+<dt id="index-PERFORM_002dACTIONS">CL-SELENIUM: <strong>PERFORM-ACTIONS</strong> <em>(actions &amp;optional (session *session*))</em></dt>
+<dd>
+<p>The <var>Actions</var> API provides a low-level interface for providing virtualised device input to the web browser.<br>
+Conceptually, the <var>Actions</var> commands divide time into a series of ticks. The local end sends a series of <var>actions</var> which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of <var>actions</var> pointerDown, followed by pointerMove, and then pointerUp.<br>
+<br>
+Category: <var>Actions</var><br>
+See: <a href="https://www.w3.org/TR/webdriver/#">https://www.w3.org/TR/webdriver/#</a><var>actions</var> 
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aKEY"></span>
+<span id="CL_002dSELENIUM_003aKEY-function"></span><dl>
+<dt id="index-KEY">CL-SELENIUM: <strong>KEY</strong> <em>(key)</em></dt>
+<dd>
+<p>Returns a string with <var>KEY</var>&rsquo;s codepoint.<br>
+<br>
+Category: Actions<br>
+See: <a href="https://www.w3.org/TR/webdriver/#keyboard-actions">https://www.w3.org/TR/webdriver/#keyboard-actions</a>
+</p></dd></dl>
+
 <span id="Uncategorized"></span><h4 class="subheading">Uncategorized</h4>
 
 <span id="index-CL_002dSELENIUM_003aMOUSE_002dCLICK"></span>
@@ -530,13 +553,6 @@ See: <a href="https://github.com/SeleniumHQ/selenium/wiki/Logging">https://githu
 <p>Class precedence list: <code>no-such-element-error, find-error, error, serious-condition, condition, t</code>
 </p>
 </dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aKEY"></span>
-<span id="CL_002dSELENIUM_003aKEY-function"></span><dl>
-<dt id="index-KEY">CL-SELENIUM: <strong>KEY</strong> <em>(key)</em></dt>
-<dd>
-<p>Returns a string with <var>KEY</var>&rsquo;s codepoint.
-</p></dd></dl>
 
 <span id="Elements"></span><h4 class="subheading">Elements</h4>
 
@@ -705,19 +721,6 @@ See: <a href="https://www.w3.org/TR/webdriver1/#element-click">https://www.w3.or
 <p>Close the current window.<br>
 <br>
 Category: Windows
-</p></dd></dl>
-
-<span id="Actions-2"></span><h4 class="subheading">Actions</h4>
-
-<span id="index-CL_002dSELENIUM_003aPERFORM_002dACTIONS"></span>
-<span id="CL_002dSELENIUM_003aPERFORM_002dACTIONS-function"></span><dl>
-<dt id="index-PERFORM_002dACTIONS">CL-SELENIUM: <strong>PERFORM-ACTIONS</strong> <em>(actions &amp;optional (session *session*))</em></dt>
-<dd>
-<p>The <var>Actions</var> API provides a low-level interface for providing virtualised device input to the web browser.<br>
-Conceptually, the <var>Actions</var> commands divide time into a series of ticks. The local end sends a series of <var>actions</var> which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of <var>actions</var> pointerDown, followed by pointerMove, and then pointerUp.<br>
-<br>
-Category: <var>Actions</var><br>
-See: <a href="https://www.w3.org/TR/webdriver/#">https://www.w3.org/TR/webdriver/#</a><var>actions</var> 
 </p></dd></dl>
 
 <span id="Navigation"></span><h4 class="subheading">Navigation</h4>

@@ -27,7 +27,7 @@
 @cindex cl-selenium-webdriver
 @cindex cl-selenium-webdriver
 
-CL Selenium WebDriver is a binding library to the Selenium 2.0
+CL Selenium WebDriver is a binding library to the Selenium 4.0 that implements the @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
 
 @menu
 * Introduction::
@@ -42,7 +42,7 @@ CL Selenium WebDriver is a binding library to the Selenium 2.0
 @node Introduction
 @chapter Introduction
 
-CL Selenium WebDriver is a binding library to the Selenium 2.0
+CL Selenium WebDriver is a binding library to the Selenium 4.0 that implements the @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
 
 This software is in development. The APIs will be likely to change.
 

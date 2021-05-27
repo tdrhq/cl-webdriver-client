@@ -27,7 +27,7 @@
 @cindex cl-selenium-webdriver
 @cindex cl-selenium-webdriver
 
-CL Selenium WebDriver is a binding library to the Selenium 2.0
+CL Selenium WebDriver is a binding library to the Selenium 4.0 that implements the @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
 
 @menu
 * Introduction::
@@ -42,7 +42,7 @@ CL Selenium WebDriver is a binding library to the Selenium 2.0
 @node Introduction
 @chapter Introduction
 
-CL Selenium WebDriver is a binding library to the Selenium 2.0
+CL Selenium WebDriver is a binding library to the Selenium 4.0 that implements the @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
 
 This software is in development. The APIs will be likely to change.
 
@@ -315,6 +315,25 @@ Category: Session@*
 See: @clref{CL-SELENIUM, MAKE-SESSION, function}
 @endcldefmacro
 
+@subheading Actions
+
+@cldefun {CL-SELENIUM, PERFORM-ACTIONS, (actions &optional (session *session*))}
+
+The @var{Actions} API provides a low-level interface for providing virtualised device input to the web browser.@*
+Conceptually, the @var{Actions} commands divide time into a series of ticks. The local end sends a series of @var{actions} which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of @var{actions} pointerDown, followed by pointerMove, and then pointerUp.@*
+@*
+Category: @var{Actions}@*
+See: @url{https://www.w3.org/TR/webdriver/#}@var{actions} 
+@endcldefun
+
+@cldefun {CL-SELENIUM, KEY, (key)}
+
+Returns a string with @var{KEY}'s codepoint.@*
+@*
+Category: Actions@*
+See: @url{https://www.w3.org/TR/webdriver/#keyboard-actions}
+@endcldefun
+
 @subheading Uncategorized
 
 @cldefun {CL-SELENIUM, MOUSE-CLICK, (button &key (session *session*))}
@@ -367,11 +386,6 @@ Error signaled when no such element is found.
 Class precedence list: @code{no-such-element-error, find-error, error, serious-condition, condition, t}
 
 @endcldefclass
-
-@cldefun {CL-SELENIUM, KEY, (key)}
-
-Returns a string with @var{KEY}'s codepoint.
-@endcldefun
 
 @subheading Elements
 
@@ -514,17 +528,6 @@ See: @url{https://www.w3.org/TR/webdriver1/#element-click} .
 Close the current window.@*
 @*
 Category: Windows
-@endcldefun
-
-@subheading Actions
-
-@cldefun {CL-SELENIUM, PERFORM-ACTIONS, (actions &optional (session *session*))}
-
-The @var{Actions} API provides a low-level interface for providing virtualised device input to the web browser.@*
-Conceptually, the @var{Actions} commands divide time into a series of ticks. The local end sends a series of @var{actions} which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of @var{actions} pointerDown, followed by pointerMove, and then pointerUp.@*
-@*
-Category: @var{Actions}@*
-See: @url{https://www.w3.org/TR/webdriver/#}@var{actions} 
 @endcldefun
 
 @subheading Navigation
