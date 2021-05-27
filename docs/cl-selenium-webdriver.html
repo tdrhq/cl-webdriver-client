@@ -67,7 +67,10 @@ ul.no-bullet {list-style: none}
 
 <ul class="no-bullet">
   <li><a id="toc-Introduction-1" href="#Introduction">1 Introduction</a></li>
-  <li><a id="toc-Usage-1" href="#Usage">2 Usage</a></li>
+  <li><a id="toc-Usage-1" href="#Usage">2 Usage</a>
+  <ul class="no-bullet">
+    <li><a id="toc-Actions-1" href="#Actions">2.1 Actions</a></li>
+  </ul></li>
   <li><a id="toc-Installation-1" href="#Installation">3 Installation</a></li>
   <li><a id="toc-Utils-1" href="#Utils">4 Utils</a>
   <ul class="no-bullet">
@@ -130,6 +133,11 @@ Next: <a href="#Installation" accesskey="n" rel="next">Installation</a>, Previou
 </div>
 <span id="Usage-1"></span><h2 class="chapter">2 Usage</h2>
 
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#Actions" accesskey="1">Actions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
 <div class="lisp">
 <pre class="lisp">  <span class="comment">;; see examples/*.lisp and t/*.lisp
   </span><span class="paren1">(<span class="lisp-bg">in-package <span class="keyword">:cl-user</span></span>)</span>
@@ -164,6 +172,53 @@ Next: <a href="#Installation" accesskey="n" rel="next">Installation</a>, Previou
        while <span class="paren3">(<span class="lisp-bg">equal ouput <span class="string">&quot;Waiting for remote server...&quot;</span></span>)</span>
        do <span class="paren3">(<span class="lisp-bg">sleep 0.1</span>)</span>
        finally <span class="paren3">(<span class="lisp-bg">print ouput</span>)</span></span>)</span></span>)</span>
+</pre></div>
+
+<hr>
+<span id="Actions"></span><div class="header">
+<p>
+Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Actions-1"></span><h3 class="section">2.1 Actions</h3>
+
+<p><em>cl-selenium</em> implements a little language for performing actions.
+</p>
+<p>The Actions API provides a low-level interface for providing virtualised device input to the web browser. Conceptually, the Actions commands divide time into a series of ticks. The local end sends a series of actions which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of actions pointerDown, followed by pointerMove, and then pointerUp.
+</p>
+<p>See <a href="https://www.w3.org/TR/webdriver/#actions">https://www.w3.org/TR/webdriver/#actions</a> for the whole explanation.
+</p>
+<p>To perform actions in <em>cl-selenium</em> use <a href="#CL_002dSELENIUM_003aPERFORM_002dACTIONS-function">PERFORM-ACTIONS</a>. That function implements a little language, with the following syntax:
+</p>
+<span id="Syntax_003a"></span><h4 class="subheading">Syntax:</h4>
+
+<pre class="verbatim">actions ::= ({actions-input-source}*)
+actions-input-source ::= ({input-source-type} {action}*)
+input-source-type ::= :none | :pointer | :mouse | :pen | :touch | :key
+action ::= {pause} | {pointer-move} | {pointer-down} | {pointer-up} | {key-down} | {key-up}
+{pause} ::= (:pause duration)
+{pointer-move} ::= (:pointer-move x y)
+{pointer-down} ::= (:pointer-down button-number)
+{pointer-up} ::= (:pointer-up button-number)
+{key-down} ::= (:key-down key)
+{key-up} ::= (:key-up key)
+</pre>
+<span id="Arguments-and-values_003a"></span><h4 class="subheading">Arguments and values:</h4>
+
+<ul>
+<li> <em>actions</em>&mdash;a list of actions-input-sources. One list for each type of input source that wants to be used.
+</li><li> <em>actions-input-source</em>&mdash;a list. Specifies the list of actions to perform for a particular input source.
+</li><li> <em>duration</em>&mdash;an integer. The time to pause in milliseconds.
+</li><li> <em>key</em>&mdash;a string. A string with the character (e.g. &ldquo;a&rdquo;). Use <a href="#CL_002dSELENIUM_003aKEY-function">KEY</a> for entering special characters.
+</li><li> <em>button</em>&ndash; an integer greater than or equal to 0.
+</li></ul>
+
+<span id="Examples_003a"></span><h4 class="subheading">Examples:</h4>
+
+<div class="lisp">
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">perform-actions `<span class="paren2">(<span class="lisp-bg"><span class="paren3">(<span class="lisp-bg"><span class="keyword">:pen</span>
+  		     <span class="paren4">(<span class="lisp-bg"><span class="keyword">:pointer-move</span> 22 33</span>)</span>
+  		     <span class="paren4">(<span class="lisp-bg"><span class="keyword">:pause</span> 2000</span>)</span>
+  		     <span class="paren4">(<span class="lisp-bg"><span class="keyword">:pointer-move</span> 23 54</span>)</span></span>)</span></span>)</span></span>)</span>
 </pre></div>
 
 <hr>
@@ -373,6 +428,15 @@ See: <a href="https://www.w3.org/TR/webdriver1/#new-session">https://www.w3.org/
 See: <a href="https://www.w3.org/TR/webdriver1/#capabilities">https://www.w3.org/TR/webdriver1/#capabilities</a> .
 </p></dd></dl>
 
+<span id="index-CL_002dSELENIUM_003aDELETE_002dSESSION"></span>
+<span id="CL_002dSELENIUM_003aDELETE_002dSESSION-function"></span><dl>
+<dt id="index-DELETE_002dSESSION">CL-SELENIUM: <strong>DELETE-SESSION</strong> <em>(session)</em></dt>
+<dd>
+<p>Delete the WebDriver <var>SESSION</var>.<br>
+<br>
+Category: <var>Session</var>
+</p></dd></dl>
+
 <span id="index-CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION"></span>
 <span id="CL_002dSELENIUM_003aSTART_002dINTERACTIVE_002dSESSION-function"></span><dl>
 <dt id="index-START_002dINTERACTIVE_002dSESSION">CL-SELENIUM: <strong>START-INTERACTIVE-SESSION</strong> <em>(&amp;rest capabilities)</em></dt>
@@ -390,15 +454,6 @@ See: <a href="#CL_002dSELENIUM_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
 <p>Stop an interactive session.<br>
 <br>
 Category: Session
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aDELETE_002dSESSION"></span>
-<span id="CL_002dSELENIUM_003aDELETE_002dSESSION-function"></span><dl>
-<dt id="index-DELETE_002dSESSION">CL-SELENIUM: <strong>DELETE-SESSION</strong> <em>(session)</em></dt>
-<dd>
-<p>Delete the WebDriver <var>SESSION</var>.<br>
-<br>
-Category: <var>Session</var>
 </p></dd></dl>
 
 <span id="index-CL_002dSELENIUM_003aWITH_002dSESSION"></span>
@@ -481,42 +536,6 @@ See: <a href="https://github.com/SeleniumHQ/selenium/wiki/Logging">https://githu
 <dt id="index-KEY">CL-SELENIUM: <strong>KEY</strong> <em>(key)</em></dt>
 <dd>
 <p>Returns a string with <var>KEY</var>&rsquo;s codepoint.
-</p></dd></dl>
-
-<span id="Element-interaction"></span><h4 class="subheading">Element interaction</h4>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS-function"></span><dl>
-<dt id="index-ELEMENT_002dSEND_002dKEYS">CL-SELENIUM: <strong>ELEMENT-SEND-KEYS</strong> <em>(element keys &amp;key (session *session*))</em></dt>
-<dd>
-<p>The <var>Element</var> Send <var>Keys</var> command scrolls into view the form control <var>element</var> and then sends the provided <var>keys</var> to the <var>element</var>. In case the <var>element</var> is not keyboard-interactable, an <var>element</var> not interactable error is returned.<br>
-<br>
-<var>KEYS</var> should be a string.<br>
-<br>
-Category: <var>Element</var> interaction<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#element-send-keys">https://www.w3.org/TR/webdriver1/#element-send-keys</a> .
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLEAR"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dCLEAR-function"></span><dl>
-<dt id="index-ELEMENT_002dCLEAR">CL-SELENIUM: <strong>ELEMENT-CLEAR</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>Clear the contents of <var>ELEMENT</var> (for example, a form field <var>element</var>).<br>
-<br>
-Category: <var>Element</var> interaction<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#dfn-element-clear.">https://www.w3.org/TR/webdriver1/#dfn-element-clear.</a>
-</p></dd></dl>
-
-<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLICK"></span>
-<span id="CL_002dSELENIUM_003aELEMENT_002dCLICK-function"></span><dl>
-<dt id="index-ELEMENT_002dCLICK">CL-SELENIUM: <strong>ELEMENT-CLICK</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>The <var>Element</var> Click command scrolls into view the <var>element</var> if it is not already pointer-interactable, and clicks its in-view center point.<br>
-<br>
-If the <var>element</var>âs center point is obscured by another <var>element</var>, an <var>element</var> click intercepted error is returned. If the <var>element</var> is outside the viewport, an <var>element</var> not interactable error is returned.<br>
-<br>
-Category: <var>Element</var> interaction<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#element-click">https://www.w3.org/TR/webdriver1/#element-click</a> .
 </p></dd></dl>
 
 <span id="Elements"></span><h4 class="subheading">Elements</h4>
@@ -631,6 +650,52 @@ See: <a href="https://www.w3.org/TR/webdriver2/#get-active-element.">https://www
 See: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.">https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.</a>
 </p></dd></dl>
 
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dENABLED"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dENABLED-function"></span><dl>
+<dt id="index-ELEMENT_002dENABLED">CL-SELENIUM: <strong>ELEMENT-ENABLED</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Returns  if <var>ELEMENT</var> is enabled.<br>
+<br>
+Category: Elements<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#is-element-enabled">https://www.w3.org/TR/webdriver1/#is-element-enabled</a> .
+</p></dd></dl>
+
+<span id="Element-interaction"></span><h4 class="subheading">Element interaction</h4>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dSEND_002dKEYS-function"></span><dl>
+<dt id="index-ELEMENT_002dSEND_002dKEYS">CL-SELENIUM: <strong>ELEMENT-SEND-KEYS</strong> <em>(element keys &amp;key (session *session*))</em></dt>
+<dd>
+<p>The <var>Element</var> Send <var>Keys</var> command scrolls into view the form control <var>element</var> and then sends the provided <var>keys</var> to the <var>element</var>. In case the <var>element</var> is not keyboard-interactable, an <var>element</var> not interactable error is returned.<br>
+<br>
+<var>KEYS</var> should be a string.<br>
+<br>
+Category: <var>Element</var> interaction<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#element-send-keys">https://www.w3.org/TR/webdriver1/#element-send-keys</a> .
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLEAR"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dCLEAR-function"></span><dl>
+<dt id="index-ELEMENT_002dCLEAR">CL-SELENIUM: <strong>ELEMENT-CLEAR</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Clear the contents of <var>ELEMENT</var> (for example, a form field <var>element</var>).<br>
+<br>
+Category: <var>Element</var> interaction<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#dfn-element-clear.">https://www.w3.org/TR/webdriver1/#dfn-element-clear.</a>
+</p></dd></dl>
+
+<span id="index-CL_002dSELENIUM_003aELEMENT_002dCLICK"></span>
+<span id="CL_002dSELENIUM_003aELEMENT_002dCLICK-function"></span><dl>
+<dt id="index-ELEMENT_002dCLICK">CL-SELENIUM: <strong>ELEMENT-CLICK</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>The <var>Element</var> Click command scrolls into view the <var>element</var> if it is not already pointer-interactable, and clicks its in-view center point.<br>
+<br>
+If the <var>element</var>âs center point is obscured by another <var>element</var>, an <var>element</var> click intercepted error is returned. If the <var>element</var> is outside the viewport, an <var>element</var> not interactable error is returned.<br>
+<br>
+Category: <var>Element</var> interaction<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#element-click">https://www.w3.org/TR/webdriver1/#element-click</a> .
+</p></dd></dl>
+
 <span id="Windows"></span><h4 class="subheading">Windows</h4>
 
 <span id="index-CL_002dSELENIUM_003aCLOSE_002dCURRENT_002dWINDOW"></span>
@@ -640,6 +705,19 @@ See: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/activeEl
 <p>Close the current window.<br>
 <br>
 Category: Windows
+</p></dd></dl>
+
+<span id="Actions-2"></span><h4 class="subheading">Actions</h4>
+
+<span id="index-CL_002dSELENIUM_003aPERFORM_002dACTIONS"></span>
+<span id="CL_002dSELENIUM_003aPERFORM_002dACTIONS-function"></span><dl>
+<dt id="index-PERFORM_002dACTIONS">CL-SELENIUM: <strong>PERFORM-ACTIONS</strong> <em>(actions &amp;optional (session *session*))</em></dt>
+<dd>
+<p>The <var>Actions</var> API provides a low-level interface for providing virtualised device input to the web browser.<br>
+Conceptually, the <var>Actions</var> commands divide time into a series of ticks. The local end sends a series of <var>actions</var> which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of <var>actions</var> pointerDown, followed by pointerMove, and then pointerUp.<br>
+<br>
+Category: <var>Actions</var><br>
+See: <a href="https://www.w3.org/TR/webdriver/#">https://www.w3.org/TR/webdriver/#</a><var>actions</var> 
 </p></dd></dl>
 
 <span id="Navigation"></span><h4 class="subheading">Navigation</h4>
@@ -1091,6 +1169,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dCLEAR"><code>CL-SELENIUM:ELEMENT-CLEAR</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dCLICK"><code>CL-SELENIUM:ELEMENT-CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dDISPLAYED"><code>CL-SELENIUM:ELEMENT-DISPLAYED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dENABLED"><code>CL-SELENIUM:ELEMENT-ENABLED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dID"><code>CL-SELENIUM:ELEMENT-ID</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dRECT"><code>CL-SELENIUM:ELEMENT-RECT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aELEMENT_002dSCREENSHOT"><code>CL-SELENIUM:ELEMENT-SCREENSHOT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
@@ -1109,6 +1188,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aMOUSE_002dCLICK"><code>CL-SELENIUM:MOUSE-CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aMOUSE_002dMOVE_002dTO"><code>CL-SELENIUM:MOUSE-MOVE-TO</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aPAGE_002dTITLE"><code>CL-SELENIUM:PAGE-TITLE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aPERFORM_002dACTIONS"><code>CL-SELENIUM:PERFORM-ACTIONS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aREFRESH"><code>CL-SELENIUM:REFRESH</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSCREENSHOT"><code>CL-SELENIUM:SCREENSHOT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CL_002dSELENIUM_003aSELENIUM_002dSTATUS"><code>CL-SELENIUM:SELENIUM-STATUS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
@@ -1136,6 +1216,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dCLEAR"><code>ELEMENT-CLEAR</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dCLICK"><code>ELEMENT-CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dDISPLAYED"><code>ELEMENT-DISPLAYED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-ELEMENT_002dENABLED"><code>ELEMENT-ENABLED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dID"><code>ELEMENT-ID</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dRECT"><code>ELEMENT-RECT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-ELEMENT_002dSCREENSHOT"><code>ELEMENT-SCREENSHOT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
@@ -1171,6 +1252,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_fn_letter-P">P</th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-PAGE_002dTITLE"><code>PAGE-TITLE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-PERFORM_002dACTIONS"><code>PERFORM-ACTIONS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_fn_letter-R">R</th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-REFRESH"><code>REFRESH</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#CL_002dSELENIUM-package">CL-SELENIUM package</a></td></tr>

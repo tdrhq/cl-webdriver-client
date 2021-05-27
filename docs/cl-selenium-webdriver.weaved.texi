@@ -49,6 +49,10 @@ This software is in development. The APIs will be likely to change.
 @node Usage
 @chapter Usage
 
+@menu
+* Actions::
+@end menu
+
 @lisp
 ;; see examples/*.lisp and t/*.lisp
 (in-package :cl-user)
@@ -83,6 +87,51 @@ func main() @{
      while (equal ouput "Waiting for remote server...")
      do (sleep 0.1)
      finally (print ouput)))
+@end lisp
+
+@node Actions
+@section Actions
+
+@emph{cl-selenium} implements a little language for performing actions.
+
+The Actions API provides a low-level interface for providing virtualised device input to the web browser. Conceptually, the Actions commands divide time into a series of ticks. The local end sends a series of actions which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of actions pointerDown, followed by pointerMove, and then pointerUp.
+
+See @url{https://www.w3.org/TR/webdriver/#actions} for the whole explanation.
+
+To perform actions in @emph{cl-selenium} use @clref{CL-SELENIUM, PERFORM-ACTIONS, function}. That function implements a little language, with the following syntax:
+
+@subheading Syntax:
+
+@verbatim
+actions ::= ({actions-input-source}*)
+actions-input-source ::= ({input-source-type} {action}*)
+input-source-type ::= :none | :pointer | :mouse | :pen | :touch | :key
+action ::= {pause} | {pointer-move} | {pointer-down} | {pointer-up} | {key-down} | {key-up}
+{pause} ::= (:pause duration)
+{pointer-move} ::= (:pointer-move x y)
+{pointer-down} ::= (:pointer-down button-number)
+{pointer-up} ::= (:pointer-up button-number)
+{key-down} ::= (:key-down key)
+{key-up} ::= (:key-up key)
+@end verbatim
+
+@subheading Arguments and values:
+
+@itemize
+@item @emph{actions}---a list of actions-input-sources. One list for each type of input source that wants to be used.
+@item @emph{actions-input-source}---a list. Specifies the list of actions to perform for a particular input source.
+@item @emph{duration}---an integer. The time to pause in milliseconds.
+@item @emph{key}---a string. A string with the character (e.g. ``a''). Use @clref{CL-SELENIUM, KEY, function} for entering special characters.
+@item @emph{button}-- an integer greater than or equal to 0.
+@end itemize
+
+@subheading Examples:
+
+@lisp
+(perform-actions `((:pen
+		     (:pointer-move 22 33)
+		     (:pause 2000)
+		     (:pointer-move 23 54))))
 @end lisp
 
 @node Installation
@@ -236,6 +285,13 @@ See: @url{https://www.w3.org/TR/webdriver1/#new-session} .@*
 See: @url{https://www.w3.org/TR/webdriver1/#capabilities} .
 @endcldefun
 
+@cldefun {CL-SELENIUM, DELETE-SESSION, (session)}
+
+Delete the WebDriver @var{SESSION}.@*
+@*
+Category: @var{Session}
+@endcldefun
+
 @cldefun {CL-SELENIUM, START-INTERACTIVE-SESSION, (&rest capabilities)}
 
 Start an interactive session. Use this to interact with Selenium driver from a REPL.@*
@@ -249,13 +305,6 @@ See: @clref{CL-SELENIUM, MAKE-SESSION, function}
 Stop an interactive session.@*
 @*
 Category: Session
-@endcldefun
-
-@cldefun {CL-SELENIUM, DELETE-SESSION, (session)}
-
-Delete the WebDriver @var{SESSION}.@*
-@*
-Category: @var{Session}
 @endcldefun
 
 @cldefmacro {CL-SELENIUM, WITH-SESSION, ((&rest capabilities) &body body)}
@@ -322,36 +371,6 @@ Class precedence list: @code{no-such-element-error, find-error, error, serious-c
 @cldefun {CL-SELENIUM, KEY, (key)}
 
 Returns a string with @var{KEY}'s codepoint.
-@endcldefun
-
-@subheading Element interaction
-
-@cldefun {CL-SELENIUM, ELEMENT-SEND-KEYS, (element keys &key (session *session*))}
-
-The @var{Element} Send @var{Keys} command scrolls into view the form control @var{element} and then sends the provided @var{keys} to the @var{element}. In case the @var{element} is not keyboard-interactable, an @var{element} not interactable error is returned.@*
-@*
-@var{KEYS} should be a string.@*
-@*
-Category: @var{Element} interaction@*
-See: @url{https://www.w3.org/TR/webdriver1/#element-send-keys} .
-@endcldefun
-
-@cldefun {CL-SELENIUM, ELEMENT-CLEAR, (element &key (session *session*))}
-
-Clear the contents of @var{ELEMENT} (for example, a form field @var{element}).@*
-@*
-Category: @var{Element} interaction@*
-See: @url{https://www.w3.org/TR/webdriver1/#dfn-element-clear.}
-@endcldefun
-
-@cldefun {CL-SELENIUM, ELEMENT-CLICK, (element &key (session *session*))}
-
-The @var{Element} Click command scrolls into view the @var{element} if it is not already pointer-interactable, and clicks its in-view center point.@*
-@*
-If the @var{element}’s center point is obscured by another @var{element}, an @var{element} click intercepted error is returned. If the @var{element} is outside the viewport, an @var{element} not interactable error is returned.@*
-@*
-Category: @var{Element} interaction@*
-See: @url{https://www.w3.org/TR/webdriver1/#element-click} .
 @endcldefun
 
 @subheading Elements
@@ -450,6 +469,44 @@ See: @url{https://www.w3.org/TR/webdriver2/#get-active-element.}@*
 See: @url{https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.}
 @endcldefun
 
+@cldefun {CL-SELENIUM, ELEMENT-ENABLED, (element &key (session *session*))}
+
+Returns  if @var{ELEMENT} is enabled.@*
+@*
+Category: Elements@*
+See: @url{https://www.w3.org/TR/webdriver1/#is-element-enabled} .
+@endcldefun
+
+@subheading Element interaction
+
+@cldefun {CL-SELENIUM, ELEMENT-SEND-KEYS, (element keys &key (session *session*))}
+
+The @var{Element} Send @var{Keys} command scrolls into view the form control @var{element} and then sends the provided @var{keys} to the @var{element}. In case the @var{element} is not keyboard-interactable, an @var{element} not interactable error is returned.@*
+@*
+@var{KEYS} should be a string.@*
+@*
+Category: @var{Element} interaction@*
+See: @url{https://www.w3.org/TR/webdriver1/#element-send-keys} .
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-CLEAR, (element &key (session *session*))}
+
+Clear the contents of @var{ELEMENT} (for example, a form field @var{element}).@*
+@*
+Category: @var{Element} interaction@*
+See: @url{https://www.w3.org/TR/webdriver1/#dfn-element-clear.}
+@endcldefun
+
+@cldefun {CL-SELENIUM, ELEMENT-CLICK, (element &key (session *session*))}
+
+The @var{Element} Click command scrolls into view the @var{element} if it is not already pointer-interactable, and clicks its in-view center point.@*
+@*
+If the @var{element}’s center point is obscured by another @var{element}, an @var{element} click intercepted error is returned. If the @var{element} is outside the viewport, an @var{element} not interactable error is returned.@*
+@*
+Category: @var{Element} interaction@*
+See: @url{https://www.w3.org/TR/webdriver1/#element-click} .
+@endcldefun
+
 @subheading Windows
 
 @cldefun {CL-SELENIUM, CLOSE-CURRENT-WINDOW, (&key (session *session*))}
@@ -457,6 +514,17 @@ See: @url{https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElemen
 Close the current window.@*
 @*
 Category: Windows
+@endcldefun
+
+@subheading Actions
+
+@cldefun {CL-SELENIUM, PERFORM-ACTIONS, (actions &optional (session *session*))}
+
+The @var{Actions} API provides a low-level interface for providing virtualised device input to the web browser.@*
+Conceptually, the @var{Actions} commands divide time into a series of ticks. The local end sends a series of @var{actions} which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of @var{actions} pointerDown, followed by pointerMove, and then pointerUp.@*
+@*
+Category: @var{Actions}@*
+See: @url{https://www.w3.org/TR/webdriver/#}@var{actions} 
 @endcldefun
 
 @subheading Navigation

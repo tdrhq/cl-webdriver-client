@@ -49,6 +49,10 @@ This software is in development. The APIs will be likely to change.
 @node Usage
 @chapter Usage
 
+@menu
+* Actions::
+@end menu
+
 @lisp
 ;; see examples/*.lisp and t/*.lisp
 (in-package :cl-user)
@@ -83,6 +87,51 @@ func main() @{
      while (equal ouput "Waiting for remote server...")
      do (sleep 0.1)
      finally (print ouput)))
+@end lisp
+
+@node Actions
+@section Actions
+
+@emph{cl-selenium} implements a little language for performing actions.
+
+The Actions API provides a low-level interface for providing virtualised device input to the web browser. Conceptually, the Actions commands divide time into a series of ticks. The local end sends a series of actions which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of actions pointerDown, followed by pointerMove, and then pointerUp.
+
+See @url{https://www.w3.org/TR/webdriver/#actions} for the whole explanation.
+
+To perform actions in @emph{cl-selenium} use @clref{CL-SELENIUM, PERFORM-ACTIONS, function}. That function implements a little language, with the following syntax:
+
+@subheading Syntax:
+
+@verbatim
+actions ::= ({actions-input-source}*)
+actions-input-source ::= ({input-source-type} {action}*)
+input-source-type ::= :none | :pointer | :mouse | :pen | :touch | :key
+action ::= {pause} | {pointer-move} | {pointer-down} | {pointer-up} | {key-down} | {key-up}
+{pause} ::= (:pause duration)
+{pointer-move} ::= (:pointer-move x y)
+{pointer-down} ::= (:pointer-down button-number)
+{pointer-up} ::= (:pointer-up button-number)
+{key-down} ::= (:key-down key)
+{key-up} ::= (:key-up key)
+@end verbatim
+
+@subheading Arguments and values:
+
+@itemize
+@item @emph{actions}---a list of actions-input-sources. One list for each type of input source that wants to be used.
+@item @emph{actions-input-source}---a list. Specifies the list of actions to perform for a particular input source.
+@item @emph{duration}---an integer. The time to pause in milliseconds.
+@item @emph{key}---a string. A string with the character (e.g. ``a''). Use @clref{CL-SELENIUM, KEY, function} for entering special characters.
+@item @emph{button}-- an integer greater than or equal to 0.
+@end itemize
+
+@subheading Examples:
+
+@lisp
+(perform-actions `((:pen
+		     (:pointer-move 22 33)
+		     (:pause 2000)
+		     (:pointer-move 23 54))))
 @end lisp
 
 @node Installation
