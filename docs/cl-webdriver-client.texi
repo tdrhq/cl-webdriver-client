@@ -255,7 +255,7 @@ sh
 @node WEBDRIVER-CLIENT package
 @section WEBDRIVER-CLIENT package
 
-(@clpackage :webdriver-client-client :include-external-definitions t :categorized :by-docstring-category)
+(@clpackage :webdriver-client :include-external-definitions t :categorized :by-docstring-category)
 
 @node WEBDRIVER-CLIENT-UTILS package
 @section WEBDRIVER-CLIENT-UTILS package
