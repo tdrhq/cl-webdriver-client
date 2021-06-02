@@ -1,4 +1,4 @@
-(in-package :webdriver)
+(in-package :webdriver-client)
 
 (define-condition protocol-error (error)
   ((body :initarg :body :reader protocol-error-body)

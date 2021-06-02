@@ -1,4 +1,4 @@
-(in-package :webdriver-test)
+(in-package :webdriver-client-test)
 
 (defparameter +test-pages-filepath+ (asdf:system-relative-pathname :cl-webdriver-client-test "t/testpages.tar.gz"))
 

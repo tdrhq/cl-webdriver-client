@@ -1,4 +1,4 @@
-(in-package :webdriver)
+(in-package :webdriver-client)
 
 (defun webdriver-status ()
   "Get Selenium Webdriver status information"

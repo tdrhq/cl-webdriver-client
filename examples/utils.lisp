@@ -1,8 +1,9 @@
 (defpackage my-test
-  (:use :cl :webdriver)
-  (:import-from :webdriver-utils
+  (:use :cl :webdriver-client)
+  (:import-from
+   :webdriver-client-utils
    :send-keys
-                :click
+   :click
    :wait-for))
 
 (in-package :my-test)

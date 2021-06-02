@@ -61,7 +61,7 @@ This software is in development. The APIs will be likely to change.
   (ql:quickload :cl-webdriver-client))
 
 (defpackage go-test
-  (:use :cl :cl-webdriver-client))
+  (:use :cl :webdriver-client))
 
 (in-package :go-test)
 
@@ -96,7 +96,7 @@ The Actions API provides a low-level interface for providing virtualised device 
 
 See @url{https://www.w3.org/TR/webdriver/#actions} for the whole explanation.
 
-To perform actions in @emph{cl-webdriver-client} use @clref{WEBDRIVER, PERFORM-ACTIONS, function}. That function implements a little language, with the following syntax:
+To perform actions in @emph{cl-webdriver-client} use @clref{WEBDRIVER-CLIENT, PERFORM-ACTIONS, function}. That function implements a little language, with the following syntax:
 
 @subheading Syntax:
 
@@ -119,7 +119,7 @@ key-up ::= (:key-up key)
 @item @emph{actions}---a list of actions-input-sources. One list for each type of input source that wants to be used.
 @item @emph{actions-input-source}---a list. Specifies the list of actions to perform for a particular input source.
 @item @emph{duration}---an integer. The time to pause in milliseconds.
-@item @emph{key}---a string. A string with the character (e.g. ``a''). Use @clref{WEBDRIVER, KEY, function} for entering special characters.
+@item @emph{key}---a string. A string with the character (e.g. ``a''). Use @clref{WEBDRIVER-CLIENT, KEY, function} for entering special characters.
 @item @emph{button-number}---an integer greater than or equal to 0.
 @item @emph{x}---an integer. Horizontal screen coordinate.
 @item @emph{y}---an integer. Vertical screen coordinate.
@@ -154,12 +154,12 @@ java -jar selenium-server-standalone.jar
 @node Utils
 @chapter Utils
 
-There is a @code{:webdriver-utils} package which should reduce boilerplate. For example:
+There is a @code{:webdriver-client-utils} package which should reduce boilerplate. For example:
 
 @lisp
 (defpackage my-test
-  (:use :cl :webdriver)
-  (:import-from :webdriver-utils
+  (:use :cl :webdriver-client)
+  (:import-from :webdriver-client-utils
                 :send-keys
                 :click
                 :wait-for
@@ -212,7 +212,7 @@ You can also pass a css selector as a last parameter.
 To change default element you can:
 
 @lisp
-(setf webdriver-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
+(setf webdriver-client-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
 @end lisp
 
 @node Waiting for the reaction
@@ -228,7 +228,7 @@ them to load.
 
 Timeout defaults to 30 seconds. You can globally change it:
 @lisp
-(setf webdriver-utils:*timeout* 3)
+(setf webdriver-client-utils:*timeout* 3)
 @end lisp
 
 @node Running tests
@@ -252,15 +252,15 @@ sh
 @node API
 @chapter API
 
-@node WEBDRIVER package
-@section WEBDRIVER package
+@node WEBDRIVER-CLIENT package
+@section WEBDRIVER-CLIENT package
 
-(@clpackage :webdriver :include-external-definitions t :categorized :by-docstring-category)
+(@clpackage :webdriver-client-client :include-external-definitions t :categorized :by-docstring-category)
 
-@node WEBDRIVER-UTILS package
-@section WEBDRIVER-UTILS package
+@node WEBDRIVER-CLIENT-UTILS package
+@section WEBDRIVER-CLIENT-UTILS package
 
-(@clpackage :webdriver-utils :include-external-definitions t)
+(@clpackage :webdriver-client-utils :include-external-definitions t)
 
 @node Index
 @chapter Index

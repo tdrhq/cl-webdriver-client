@@ -1,0 +1,1102 @@
+This is cl-webdriver-client.info, produced by makeinfo version 6.7 from
+cl-webdriver-client.weaved.texi.
+
+INFO-DIR-SECTION Common Lisp
+START-INFO-DIR-ENTRY
+* cl-webdriver-client: (cl-webdriver-client)Common Lisp Webdriver Client.
+END-INFO-DIR-ENTRY
+
+
+File: cl-webdriver-client.info,  Node: Top,  Next: Introduction,  Up: (dir)
+
+Top
+***
+
+CL Webdriver Client is a binding library to the Selenium 4.0 that
+implements the W3C Webdriver spec (https://www.w3.org/TR/webdriver).
+
+* Menu:
+
+* Introduction::
+* Usage::
+* Installation::
+* Utils::
+* API::
+* Index::
+
+
+File: cl-webdriver-client.info,  Node: Introduction,  Next: Usage,  Prev: Top,  Up: Top
+
+1 Introduction
+**************
+
+Common Lisp Webdriver Client is a binding library to the Selenium 4.0
+that implements the W3C Webdriver spec
+(https://www.w3.org/TR/webdriver).
+
+   This software is in development.  The APIs will be likely to change.
+
+
+File: cl-webdriver-client.info,  Node: Usage,  Next: Installation,  Prev: Introduction,  Up: Top
+
+2 Usage
+*******
+
+* Menu:
+
+* Actions::
+
+     ;; see examples/*.lisp and t/*.lisp
+     (in-package :cl-user)
+
+     (eval-when (:compile-toplevel :load-toplevel :execute)
+       (ql:quickload :cl-webdriver-client))
+
+     (defpackage go-test
+       (:use :cl :cl-webdriver-client))
+
+     (in-package :go-test)
+
+     (defparameter *code* "
+     package main
+     import \"fmt\"
+
+     func main() {
+         fmt.Print(\"Hello WebDriver!\")
+     }")
+
+     (with-session ()
+       (setf (url) "http://play.golang.org/?simple=1")
+       (let ((elem (find-element "#code" :by :css-selector)))
+         (element-clear elem)
+         (element-send-keys elem *code*))
+       (let ((btn (find-element "#run")))
+         (element-click btn))
+
+       (loop
+          with div = (find-element "#output")
+          for ouput = (element-text div)
+          while (equal ouput "Waiting for remote server...")
+          do (sleep 0.1)
+          finally (print ouput)))
+
+
+File: cl-webdriver-client.info,  Node: Actions,  Up: Usage
+
+2.1 Actions
+===========
+
+The Actions API provides a low-level interface for providing virtualised
+device input to the web browser.  Conceptually, the Actions commands
+divide time into a series of ticks.  The local end sends a series of
+actions which correspond to the change in state, if any, of each input
+device during each tick.  For example, pressing a key is represented by
+an action sequence consisting of a single key input device and two
+ticks, the first containing a keyDown action, and the second a keyUp
+action, whereas a pinch-zoom input is represented by an action sequence
+consisting of three ticks and two pointer input devices of type touch,
+each performing a sequence of actions pointerDown, followed by
+pointerMove, and then pointerUp.
+
+   See <https://www.w3.org/TR/webdriver/#actions> for the whole
+explanation.
+
+   To perform actions in _cl-webdriver-client_ use *note
+PERFORM-ACTIONS: WEBDRIVER:PERFORM-ACTIONS function.  That function
+implements a little language, with the following syntax:
+
+Syntax:
+-------
+
+actions ::= ({actions-input-source}*)
+actions-input-source ::= (input-source-type {action}*)
+input-source-type ::= :none | :pointer | :mouse | :pen | :touch | :key
+action ::= pause | pointer-move | pointer-down | pointer-up | key-down | key-up
+pause ::= (:pause duration)
+pointer-move ::= (:pointer-move x y)
+pointer-down ::= (:pointer-down button-number)
+pointer-up ::= (:pointer-up button-number)
+key-down ::= (:key-down key)
+key-up ::= (:key-up key)
+
+Arguments and values:
+---------------------
+
+   * _actions_--a list of actions-input-sources.  One list for each type
+     of input source that wants to be used.
+   * _actions-input-source_--a list.  Specifies the list of actions to
+     perform for a particular input source.
+   * _duration_--an integer.  The time to pause in milliseconds.
+   * _key_--a string.  A string with the character (e.g.  "a").  Use
+     *note KEY: WEBDRIVER:KEY function. for entering special characters.
+   * _button-number_--an integer greater than or equal to 0.
+   * _x_--an integer.  Horizontal screen coordinate.
+   * _y_--an integer.  Vertical screen coordinate.
+
+Examples:
+---------
+
+     (perform-actions `((:pen
+     		     (:pointer-move 22 33)
+     		     (:pause 2000)
+     		     (:pointer-move 23 54))))
+
+
+File: cl-webdriver-client.info,  Node: Installation,  Next: Utils,  Prev: Usage,  Up: Top
+
+3 Installation
+**************
+
+     git clone https://github.com/TatriX/cl-webdriver-client ~/quicklisp/local-projects/
+     (ql:quickload :cl-webdriver-client)
+
+   You need a running instance of selenium-server-standalone.
+
+   [Download](http://www.seleniumhq.org/download/) it and run:
+
+     curl -L0 https://goo.gl/SP94ZB -o selenium-server-standalone.jar
+     java -jar selenium-server-standalone.jar
+
+
+File: cl-webdriver-client.info,  Node: Utils,  Next: API,  Prev: Installation,  Up: Top
+
+4 Utils
+*******
+
+There is a ':webdriver-utils' package which should reduce boilerplate.
+For example:
+
+     (defpackage my-test
+       (:use :cl :webdriver)
+       (:import-from :webdriver-utils
+                     :send-keys
+                     :click
+                     :wait-for
+                     :classlist))
+
+     (in-package :my-test)
+
+     (with-session ()
+       (setf (url) "http://google.com")
+       (send-keys "cl-webdriver-client")
+       (click "[name=btnK]")
+       (wait-for "#resultStats"))
+
+
+* Menu:
+
+* Interactive session::
+* Utils API conventions::
+* Waiting for the reaction::
+* Running tests::
+
+
+File: cl-webdriver-client.info,  Node: Interactive session,  Next: Utils API conventions,  Up: Utils
+
+4.1 Interactive session
+=======================
+
+You can just start the session and control it from your repl:
+
+     (in-package :my-test)
+
+     (start-interactive-session)
+
+     (setf (url) "http://google.com")
+     (send-keys "cl-webdriver-client")
+     (send-keys (key :enter))
+     (classlist "#slim_appbar") ; prints ("ab_tnav_wrp")
+
+     (stop-interactive-session)
+
+
+File: cl-webdriver-client.info,  Node: Utils API conventions,  Next: Waiting for the reaction,  Prev: Interactive session,  Up: Utils
+
+4.2 Utils API conventions
+=========================
+
+If utility function needs an element to work on it defaults to
+'(active-element)'.
+     (click) ; click on the current active element.
+
+   You can also pass a css selector as a last parameter.
+
+     (print (id "#submit")) ; print id the of matched element
+
+     (assert (= (first (classlist "div")) "first-div-ever"))
+
+   To change default element you can:
+
+     (setf webdriver-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
+
+
+File: cl-webdriver-client.info,  Node: Waiting for the reaction,  Next: Running tests,  Prev: Utils API conventions,  Up: Utils
+
+4.3 Waiting for the reaction
+============================
+
+Often you need to wait for some action to be done.  For example if you
+do a '(click)' on the button to load search results, you need to wait
+them to load.
+
+     (wait-for ".search-result" :timeout 10) ; wait 10 seconds
+
+   Timeout defaults to 30 seconds.  You can globally change it:
+     (setf webdriver-utils:*timeout* 3)
+
+
+File: cl-webdriver-client.info,  Node: Running tests,  Prev: Waiting for the reaction,  Up: Utils
+
+4.4 Running tests
+=================
+
+REPL
+====
+
+     (ql:quickload '(:cl-selenium :prove))
+     (setf prove:*enable-colors* nil)
+     (prove:run :cl-selenium-test)
+
+Shell
+=====
+
+     sh
+     ./test.sh
+
+
+File: cl-webdriver-client.info,  Node: API,  Next: Index,  Prev: Utils,  Up: Top
+
+5 API
+*****
+
+* Menu:
+
+* WEBDRIVER package::
+* WEBDRIVER-UTILS package::
+
+
+File: cl-webdriver-client.info,  Node: WEBDRIVER package,  Next: WEBDRIVER-UTILS package,  Up: API
+
+5.1 WEBDRIVER package
+=====================
+
+ -- PACKAGE: WEBDRIVER
+
+     This package exports functions for working with Selenium WebDriver.
+
+     For documentation see:
+     - <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol>
+     - <https://www.w3.org/TR/webdriver1>
+
+External definitions
+====================
+
+Session
+-------
+
+ -- WEBDRIVER: USE-SESSION (session)
+
+     Make SESSION the current SESSION.
+
+     Category: SESSION
+
+ -- WEBDRIVER: MAKE-SESSION (&key (browser-name :chrome) browser-version
+          (platform-name "Linux") platform-version accept-ssl-certs
+          additional-capabilities)
+
+     Creates a new WebDriver session with the endpoint node.  If the
+     creation fails, a session not created error is returned.
+
+     Category: Session
+     See: <https://www.w3.org/TR/webdriver1/#new-session> .
+     See: <https://www.w3.org/TR/webdriver1/#capabilities> .
+
+ -- WEBDRIVER: DELETE-SESSION (session)
+
+     Delete the WebDriver SESSION.
+
+     Category: SESSION
+
+ -- WEBDRIVER: START-INTERACTIVE-SESSION (&rest capabilities)
+
+     Start an interactive session.  Use this to interact with Selenium
+     driver from a REPL.
+
+     Category: Session
+     See: *note MAKE-SESSION: WEBDRIVER:MAKE-SESSION function.
+
+ -- WEBDRIVER: STOP-INTERACTIVE-SESSION nil
+
+     Stop an interactive session.
+
+     Category: Session
+
+ -- WEBDRIVER: WITH-SESSION ((&rest capabilities) &body body)
+
+     Execute BODY inside a Selenium session.
+
+     Category: Session
+     See: *note MAKE-SESSION: WEBDRIVER:MAKE-SESSION function.
+
+Actions
+-------
+
+ -- WEBDRIVER: PERFORM-ACTIONS (actions &optional (session *session*))
+
+     The ACTIONS API provides a low-level interface for providing
+     virtualised device input to the web browser.
+     Conceptually, the ACTIONS commands divide time into a series of
+     ticks.  The local end sends a series of ACTIONS which correspond to
+     the change in state, if any, of each input device during each tick.
+     For example, pressing a key is represented by an action sequence
+     consisting of a single key input device and two ticks, the first
+     containing a keyDown action, and the second a keyUp action, whereas
+     a pinch-zoom input is represented by an action sequence consisting
+     of three ticks and two pointer input devices of type touch, each
+     performing a sequence of ACTIONS pointerDown, followed by
+     pointerMove, and then pointerUp.
+
+     Category: ACTIONS
+     See: <https://www.w3.org/TR/webdriver/#>ACTIONS
+
+ -- WEBDRIVER: KEY (key)
+
+     Returns a string with KEY's codepoint.
+
+     Category: Actions
+     See: <https://www.w3.org/TR/webdriver/#keyboard-actions>
+
+Uncategorized
+-------------
+
+ -- WEBDRIVER: MOUSE-CLICK (button &key (session *session*))
+
+     Click any mouse BUTTON (at the coordinates set by the last moveto
+     command).  Note that calling this command after calling buttondown
+     and before calling BUTTON up (or any out-of-order interactions
+     sequence) will yield undefined behaviour).
+
+     See:
+     <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick>
+
+ -- WEBDRIVER: MOUSE-MOVE-TO (x y &key element (session *session*))
+
+     Move the mouse by an offset of the specificed ELEMENT.  If no
+     ELEMENT is specified, the move is relative to the current mouse
+     cursor.  If an ELEMENT is provided but no offset, the mouse will be
+     moved to the center of the ELEMENT.  If the ELEMENT is not visible,
+     it will be scrolled into view.
+
+     See:
+     <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto>
+
+ -- WEBDRIVER: LOGS (type &key (session *session*))
+
+     Return the logs of a particular TYPE.
+     See: *note LOG-TYPES: WEBDRIVER:LOG-TYPES function.
+
+ -- WEBDRIVER: LOG-TYPES (&key (session *session*))
+
+     Return the types of logs supported by the WebDriver.
+
+     - browser: Javascript console logs from the browser.
+     - client: Logs from the client side implementation of the WebDriver
+     protocol (e.g.  the Java bindings).
+     - driver: Logs from the internals of the driver (e.g.
+     FirefoxDriver internals).
+     - performance: Logs relating to the performance characteristics of
+     the page under test (e.g.  resource load timings).
+     - server: Logs from within the selenium server.
+
+     See: <https://github.com/SeleniumHQ/selenium/wiki/Logging> .
+
+ -- WEBDRIVER: ELEMENT-ID (sb-pcl::object)
+
+ -- WEBDRIVER: NO-SUCH-ELEMENT-ERROR
+
+     Error signaled when no such element is found.
+
+     Class precedence list: 'no-such-element-error, find-error, error,
+     serious-condition, condition, t'
+
+Elements
+--------
+
+ -- WEBDRIVER: FIND-ELEMENT (value &key (by :css-selector) (session
+          *session*))
+
+     The Find Element command is used to find an element in the current
+     browsing context that can be used as the web element context for
+     future element-centric commands.
+
+     For example, consider this pseudo code which retrieves an element
+     with the #toremove ID and uses this as the argument for a script it
+     injects to remove it from the HTML document:
+
+     let body *note =: COMMON-LISP:= function.
+     SESSION.find.css("#toremove");
+     SESSION.execute("arguments[0].remove()", [body]);
+
+     The BY parameter represents the element location strategy.
+
+     It can be one of:
+     - :ID : Finds element BY id.
+     - :CLASS-NAME : Finds element BY class name.
+     - :CSS-SELECTOR : Returns element that matches css selector.
+     - :LINK-TEXT : Returns element that matches <a> element text.
+     - :PARTIAL-LINK-TEXT: Returns element that matches <a> element text
+     partially.
+     - :TAG-NAME: Returns element that matches tag name.
+     - :XPATH: Returns element that matches the XPath expression.
+
+     If result is empty, a *note HANDLE-FIND-ERROR:
+     WEBDRIVER:HANDLE-FIND-ERROR function. is signaled.
+
+     Category: Elements
+     See: <https://www.w3.org/TR/webdriver1/#dfn-find-element> .
+
+ -- WEBDRIVER: ELEMENT-TEXT (element &key (session *session*))
+
+     The Get ELEMENT Text command intends to return an ELEMENT’s text
+     “as rendered”.  An ELEMENT’s rendered text is also used for
+     locating a elements by their link text and partial link text.
+
+     Category: Elements
+     See: <https://www.w3.org/TR/webdriver1/#get-element-text> .
+
+ -- WEBDRIVER: ELEMENT-TAGNAME (element &key (session *session*))
+
+     Return the ELEMENT's tag name.
+
+     Category: Elements
+
+ -- WEBDRIVER: ELEMENT-ATTRIBUTE (element name &key (session *session*))
+
+     Return the ELEMENT's attribute named NAME.
+
+     Category: Elements
+
+ -- WEBDRIVER: ELEMENT-RECT (element &key (session *session*))
+
+
+
+     The Get ELEMENT Rect command returns the dimensions and coordinates
+     of the given web ELEMENT.  The returned value is a dictionary with
+     the following members:
+
+     x
+     X axis position of the top-left corner of the web ELEMENT relative
+     to the current browsing context’s document ELEMENT in CSS pixels.
+     y
+     Y axis position of the top-left corner of the web ELEMENT relative
+     to the current browsing context’s document ELEMENT in CSS pixels.
+     height
+     Height of the web ELEMENT’s bounding rectangle in CSS pixels.
+     width
+     Width of the web ELEMENT’s bounding rectangle in CSS pixels.
+
+     Category: Elements
+
+ -- WEBDRIVER: ELEMENT-DISPLAYED (element &key (session *session*))
+
+     Returns if ELEMENT is visible.
+
+     Category: Elements
+     See: <https://www.w3.org/TR/webdriver1/#element-displayedness> .
+
+ -- WEBDRIVER: FIND-ELEMENTS (value &key (by :css-selector) (session
+          *session*))
+
+     Find elements that match VALUE using location strategy in BY.
+
+     Category: Elements
+     See *note FIND-ELEMENT: WEBDRIVER:FIND-ELEMENT function.
+     See <https://www.w3.org/TR/webdriver1/#find-elements> .
+
+ -- WEBDRIVER: ACTIVE-ELEMENT (&key (session *session*))
+
+     Return the active element of the current browsing context’s
+     document.
+     The active element is the Element within the DOM that currently has
+     focus.
+     If there's no active element, an error is signaled.
+
+     Category: Elements
+     See: <https://www.w3.org/TR/webdriver2/#get-active-element.>
+     See:
+     <https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.>
+
+ -- WEBDRIVER: ELEMENT-ENABLED (element &key (session *session*))
+
+     Returns if ELEMENT is enabled.
+
+     Category: Elements
+     See: <https://www.w3.org/TR/webdriver1/#is-element-enabled> .
+
+Element interaction
+-------------------
+
+ -- WEBDRIVER: ELEMENT-SEND-KEYS (element keys &key (session *session*))
+
+     The ELEMENT Send KEYS command scrolls into view the form control
+     ELEMENT and then sends the provided KEYS to the ELEMENT.  In case
+     the ELEMENT is not keyboard-interactable, an ELEMENT not
+     interactable error is returned.
+
+     KEYS should be a string.
+
+     Category: ELEMENT interaction
+     See: <https://www.w3.org/TR/webdriver1/#element-send-keys> .
+
+ -- WEBDRIVER: ELEMENT-CLEAR (element &key (session *session*))
+
+     Clear the contents of ELEMENT (for example, a form field ELEMENT).
+
+     Category: ELEMENT interaction
+     See: <https://www.w3.org/TR/webdriver1/#dfn-element-clear.>
+
+ -- WEBDRIVER: ELEMENT-CLICK (element &key (session *session*))
+
+     The ELEMENT Click command scrolls into view the ELEMENT if it is
+     not already pointer-interactable, and clicks its in-view center
+     point.
+
+     If the ELEMENT’s center point is obscured by another ELEMENT, an
+     ELEMENT click intercepted error is returned.  If the ELEMENT is
+     outside the viewport, an ELEMENT not interactable error is
+     returned.
+
+     Category: ELEMENT interaction
+     See: <https://www.w3.org/TR/webdriver1/#element-click> .
+
+Windows
+-------
+
+ -- WEBDRIVER: CLOSE-CURRENT-WINDOW (&key (session *session*))
+
+     Close the current window.
+
+     Category: Windows
+
+Navigation
+----------
+
+ -- WEBDRIVER: URL (&key (session *session*))
+
+     Get the current url in SESSION.
+
+     Category: Navigation
+     See: <https://www.w3.org/TR/webdriver1/#dfn-get-current-url> .
+
+ -- WEBDRIVER: SWITCH-TO-FRAME (id &key (session *session*))
+
+     Change focus to another frame on the page.  If the frame ID is
+     null, the server
+     should switch to the page's default content.
+
+     In the context of a web browser, a frame is a part of a web page or
+     browser window which displays content independent of its container,
+     with the ability to load content independently.
+
+     Category: Navigation
+     See:
+     <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe>
+     .
+     See: <https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)> .
+
+ -- WEBDRIVER: PAGE-TITLE (&key (session *session*))
+
+     This command returns the document title of the current top-level
+     browsing context, equivalent to calling document.title.
+
+     Category: Navigation
+     See: <https://www.w3.org/TR/webdriver2/#get-title> .
+
+ -- WEBDRIVER: REFRESH (&key (session *session*))
+
+     Refresh the current page.
+
+     Category: Navigation
+
+ -- WEBDRIVER: BACK (&key (session *session*))
+
+     This command causes the browser to traverse one step backward in
+     the joint SESSION history of the current top-level browsing
+     context.  This is equivalent to pressing the back button in the
+     browser chrome or invoking window.history.back.
+
+     Category: Navigation
+     See: <https://www.w3.org/TR/webdriver1/#dfn-back> .
+
+Screen capture
+--------------
+
+ -- WEBDRIVER: ELEMENT-SCREENSHOT (element &key (session *session*))
+
+     The Take ELEMENT Screenshot command takes a screenshot of the
+     visible region encompassed by the bounding rectangle of an ELEMENT.
+     If given a parameter argument scroll that evaluates to false, the
+     ELEMENT will not be scrolled into view.
+
+     Category: Screen capture
+     See: <https://www.w3.org/TR/webdriver1/#take-element-screenshot> .
+
+ -- WEBDRIVER: SCREENSHOT (&key (session *session*))
+
+     Screenshots are a mechanism for providing additional visual
+     diagnostic information.  They work by dumping a snapshot of the
+     initial viewport’s framebuffer as a lossless PNG image.  It is
+     returned to the local end as a Base64 encoded string.
+
+     Category: Screen capture
+     See: <https://www.w3.org/TR/webdriver2/#screen-capture> .
+
+Cookies
+-------
+
+ -- WEBDRIVER: COOKIE
+
+     A cookie is described in [RFC6265] by a name-value pair holding the
+     cookie’s data, followed by zero or more attribute-value pairs
+     describing its characteristics.
+
+     Category: Cookies
+
+     Class precedence list: 'cookie, standard-object, t'
+
+     Slots:
+        * 'name' -- initarg: ':name'
+
+          The name of the cookie
+        * 'value' -- initarg: ':value'
+
+          The cookie value
+        * 'path' -- initarg: ':path'
+
+          The cookie path.  Defaults to '/' if omitted when adding a
+          cookie.
+        * 'domain' -- initarg: ':domain'
+
+          The domain the cookie is visible to.  Defaults to the current
+          browsing context’s active document’s URL domain if omitted
+          when adding a cookie.
+        * 'secure' -- initarg: ':secure'
+
+          Whether the cookie is a secure cookie.  Defaults to false if
+          omitted when adding a cookie.
+        * 'http-only' -- initarg: ':http-only'
+
+          Whether the cookie is an HTTP only cookie.  Defaults to false
+          if omitted when adding a cookie.
+        * 'expiry' -- initarg: ':expiry'
+
+          When the cookie expires, specified in seconds since Unix
+          Epoch.  Must not be set if omitted when adding a cookie.
+
+ -- WEBDRIVER: COOKIE (&key (session *session*))
+
+     Retrieve all cookies visible to the current page.
+
+     Category: Cookies
+     See: <https://www.w3.org/TR/webdriver1/#get-all-cookies> .
+     See:
+     <https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie>
+     .
+
+ -- WEBDRIVER: DELETE-ALL-COOKIES (&key (session *session*))
+
+     Deletes all cookies
+
+     Category: Cookies
+     See: <https://www.w3.org/TR/webdriver1/#delete-all-cookies>
+
+ -- WEBDRIVER: MAKE-COOKIE (name value &key path domain secure expiry)
+
+     Create a cookie object.
+
+     Category: Cookies
+
+ -- WEBDRIVER: DELETE-COOKIE (cookie-name &key (session *session*))
+
+     Delete the cookie with name COOKIE-NAME.
+
+     Category: Cookies
+     See: <https://www.w3.org/TR/webdriver1/#delete-cookie>
+
+ -- WEBDRIVER: FIND-COOKIE (cookie-name &key (session *session*))
+
+     Retrieve the cookie with name COOKIE-NAME.
+
+     Category: Cookies
+     See: <https://www.w3.org/TR/webdriver1/#get-named-cookie>
+
+User prompts
+------------
+
+ -- WEBDRIVER: DISMISS-ALERT (&key (session *session*))
+
+     The Dismiss Alert command dismisses a simple dialog if present.  A
+     request to dismiss an alert user prompt, which may not necessarily
+     have a dismiss button, has the same effect as accepting it.
+
+     Category: User prompts
+     See: <https://www.w3.org/TR/webdriver1/#dismiss-alert>
+
+ -- WEBDRIVER: ACCEPT-ALERT (&key (session *session*))
+
+     Accept Alert.
+
+     Category: User prompts
+     See: <https://www.w3.org/TR/webdriver1/#dfn-accept-alert>
+
+ -- WEBDRIVER: ALERT-TEXT (&key (session *session*))
+
+     Get Alert Text.
+
+     Category: User prompts
+     See: <https://www.w3.org/TR/webdriver1/#get-alert-text>
+
+Document handling
+-----------------
+
+ -- WEBDRIVER: EXECUTE-SCRIPT (script args &key (session *session*))
+
+     Inject a snippet of JavaScript into the page for execution in the
+     context of the currently selected frame.  The executed SCRIPT is
+     assumed to be synchronous and the result of evaluating the SCRIPT
+     is returned to the client.
+
+     The SCRIPT argument defines the SCRIPT to execute in the form of a
+     function body.  The value returned by that function will be
+     returned to the client.  The function will be invoked with the
+     provided ARGS array and the values may be accessed via the
+     arguments object in the order specified.
+
+     Arguments may be any JSON-primitive, array, or JSON object.  JSON
+     objects that define a WebElement reference will be converted to the
+     corresponding DOM element.  Likewise, any WebElements in the SCRIPT
+     result will be returned to the client as WebElement JSON objects.
+
+     Category: Document handling
+     See: <https://www.w3.org/TR/webdriver1/#executing-script> .
+
+
+File: cl-webdriver-client.info,  Node: WEBDRIVER-UTILS package,  Prev: WEBDRIVER package,  Up: API
+
+5.2 WEBDRIVER-UTILS package
+===========================
+
+ -- PACKAGE: WEBDRIVER-UTILS
+
+     Package with the purpose of reducing boilerplate.
+
+External definitions
+====================
+
+Variables
+---------
+
+ -- WEBDRIVER-UTILS: *TIMEOUT*
+
+     Default timeout value to use in selenium-utils functions.
+
+ -- WEBDRIVER-UTILS: *DEFAULT-ELEMENT-FUNC*
+
+     Function used to get the 'default element' by selenium-utils
+     functions.
+     It is *note ACTIVE-ELEMENT: WEBDRIVER:ACTIVE-ELEMENT function.
+     function by default.
+
+Functions
+---------
+
+ -- WEBDRIVER-UTILS: ID (&optional selector)
+
+     Get active element id.
+
+ -- WEBDRIVER-UTILS: GET-COOKIE (cookie name)
+
+     Get value of COOKIE at NAME.
+
+ -- WEBDRIVER-UTILS: FIND-ELEM (selector &key (by :css-selector))
+
+     Find element BY SELECTOR.  Returns NIL if the element is not found.
+
+ -- WEBDRIVER-UTILS: WAIT-FOR (selector &key (timeout *timeout*))
+
+     Wait for an element that matches SELECTOR to appear on the screen.
+     TIMEOUT indicates how much time to wait (default is *TIMEOUT*).
+
+ -- WEBDRIVER-UTILS: CLASSNAME (&optional selector)
+
+     Get active element classname.
+
+ -- WEBDRIVER-UTILS: TEXT (&optional selector)
+
+     Get active element's text.
+
+ -- WEBDRIVER-UTILS: SEND-KEY (key &optional selector)
+
+     Send a KEY to active element.
+
+ -- WEBDRIVER-UTILS: CLASSLIST (&optional selector)
+
+     Get active element class list.
+
+ -- WEBDRIVER-UTILS: ATTR (name &optional selector)
+
+     Get acttive element attribute.
+
+ -- WEBDRIVER-UTILS: SEND-KEYS (keys &optional selector)
+
+     Send KEYS to active element.
+
+ -- WEBDRIVER-UTILS: ELEM (&optional selector)
+
+     If SELECTOR is given, wait for an element that matches the SELECTOR
+     to appear.
+     Otherwise, call *note *DEFAULT-ELEMENT-FUNC*:
+     WEBDRIVER-UTILS:*DEFAULT-ELEMENT-FUNC* variable. (the active
+     element is returned by default).
+
+ -- WEBDRIVER-UTILS: CLICK (&optional selector)
+
+     Click on active element.
+
+
+File: cl-webdriver-client.info,  Node: Index,  Prev: API,  Up: Top
+
+6 Index
+*******
+
+ [index ]
+* Menu:
+
+* cl-webdriver-client:                   Top.                   (line 6)
+* cl-webdriver-client <1>:               Top.                   (line 6)
+
+ [index ]
+* Menu:
+
+* *DEFAULT-ELEMENT-FUNC*:                WEBDRIVER-UTILS package.
+                                                               (line 20)
+* *TIMEOUT*:                             WEBDRIVER-UTILS package.
+                                                               (line 16)
+* WEBDRIVER-UTILS:*DEFAULT-ELEMENT-FUNC*: WEBDRIVER-UTILS package.
+                                                               (line 20)
+* WEBDRIVER-UTILS:*TIMEOUT*:             WEBDRIVER-UTILS package.
+                                                               (line 16)
+
+ [index ]
+* Menu:
+
+* ACCEPT-ALERT:                          WEBDRIVER package.   (line 468)
+* ACTIVE-ELEMENT:                        WEBDRIVER package.   (line 239)
+* ALERT-TEXT:                            WEBDRIVER package.   (line 475)
+* ATTR:                                  WEBDRIVER-UTILS package.
+                                                              (line  63)
+* BACK:                                  WEBDRIVER package.   (line 344)
+* CLASSLIST:                             WEBDRIVER-UTILS package.
+                                                              (line  59)
+* CLASSNAME:                             WEBDRIVER-UTILS package.
+                                                              (line  47)
+* CLICK:                                 WEBDRIVER-UTILS package.
+                                                              (line  79)
+* CLOSE-CURRENT-WINDOW:                  WEBDRIVER package.   (line 298)
+* COOKIE:                                WEBDRIVER package.   (line 419)
+* DELETE-ALL-COOKIES:                    WEBDRIVER package.   (line 429)
+* DELETE-COOKIE:                         WEBDRIVER package.   (line 442)
+* DELETE-SESSION:                        WEBDRIVER package.   (line  37)
+* DISMISS-ALERT:                         WEBDRIVER package.   (line 459)
+* ELEM:                                  WEBDRIVER-UTILS package.
+                                                              (line  71)
+* ELEMENT-ATTRIBUTE:                     WEBDRIVER package.   (line 196)
+* ELEMENT-CLEAR:                         WEBDRIVER package.   (line 274)
+* ELEMENT-CLICK:                         WEBDRIVER package.   (line 281)
+* ELEMENT-DISPLAYED:                     WEBDRIVER package.   (line 223)
+* ELEMENT-ENABLED:                       WEBDRIVER package.   (line 252)
+* ELEMENT-ID:                            WEBDRIVER package.   (line 136)
+* ELEMENT-RECT:                          WEBDRIVER package.   (line 202)
+* ELEMENT-SCREENSHOT:                    WEBDRIVER package.   (line 357)
+* ELEMENT-SEND-KEYS:                     WEBDRIVER package.   (line 262)
+* ELEMENT-TAGNAME:                       WEBDRIVER package.   (line 190)
+* ELEMENT-TEXT:                          WEBDRIVER package.   (line 181)
+* EXECUTE-SCRIPT:                        WEBDRIVER package.   (line 485)
+* FIND-COOKIE:                           WEBDRIVER package.   (line 449)
+* FIND-ELEM:                             WEBDRIVER-UTILS package.
+                                                              (line  38)
+* FIND-ELEMENT:                          WEBDRIVER package.   (line 148)
+* FIND-ELEMENTS:                         WEBDRIVER package.   (line 230)
+* GET-COOKIE:                            WEBDRIVER-UTILS package.
+                                                              (line  34)
+* ID:                                    WEBDRIVER-UTILS package.
+                                                              (line  30)
+* KEY:                                   WEBDRIVER package.   (line  85)
+* LOG-TYPES:                             WEBDRIVER package.   (line 121)
+* LOGS:                                  WEBDRIVER package.   (line 116)
+* MAKE-COOKIE:                           WEBDRIVER package.   (line 436)
+* MAKE-SESSION:                          WEBDRIVER package.   (line  26)
+* MOUSE-CLICK:                           WEBDRIVER package.   (line  95)
+* MOUSE-MOVE-TO:                         WEBDRIVER package.   (line 105)
+* PAGE-TITLE:                            WEBDRIVER package.   (line 330)
+* PERFORM-ACTIONS:                       WEBDRIVER package.   (line  67)
+* REFRESH:                               WEBDRIVER package.   (line 338)
+* SCREENSHOT:                            WEBDRIVER package.   (line 367)
+* SEND-KEY:                              WEBDRIVER-UTILS package.
+                                                              (line  55)
+* SEND-KEYS:                             WEBDRIVER-UTILS package.
+                                                              (line  67)
+* START-INTERACTIVE-SESSION:             WEBDRIVER package.   (line  43)
+* STOP-INTERACTIVE-SESSION:              WEBDRIVER package.   (line  51)
+* SWITCH-TO-FRAME:                       WEBDRIVER package.   (line 314)
+* TEXT:                                  WEBDRIVER-UTILS package.
+                                                              (line  51)
+* URL:                                   WEBDRIVER package.   (line 307)
+* USE-SESSION:                           WEBDRIVER package.   (line  20)
+* WAIT-FOR:                              WEBDRIVER-UTILS package.
+                                                              (line  42)
+* WEBDRIVER-UTILS:ATTR:                  WEBDRIVER-UTILS package.
+                                                              (line  63)
+* WEBDRIVER-UTILS:CLASSLIST:             WEBDRIVER-UTILS package.
+                                                              (line  59)
+* WEBDRIVER-UTILS:CLASSNAME:             WEBDRIVER-UTILS package.
+                                                              (line  47)
+* WEBDRIVER-UTILS:CLICK:                 WEBDRIVER-UTILS package.
+                                                              (line  79)
+* WEBDRIVER-UTILS:ELEM:                  WEBDRIVER-UTILS package.
+                                                              (line  71)
+* WEBDRIVER-UTILS:FIND-ELEM:             WEBDRIVER-UTILS package.
+                                                              (line  38)
+* WEBDRIVER-UTILS:GET-COOKIE:            WEBDRIVER-UTILS package.
+                                                              (line  34)
+* WEBDRIVER-UTILS:ID:                    WEBDRIVER-UTILS package.
+                                                              (line  30)
+* WEBDRIVER-UTILS:SEND-KEY:              WEBDRIVER-UTILS package.
+                                                              (line  55)
+* WEBDRIVER-UTILS:SEND-KEYS:             WEBDRIVER-UTILS package.
+                                                              (line  67)
+* WEBDRIVER-UTILS:TEXT:                  WEBDRIVER-UTILS package.
+                                                              (line  51)
+* WEBDRIVER-UTILS:WAIT-FOR:              WEBDRIVER-UTILS package.
+                                                              (line  42)
+* WEBDRIVER:ACCEPT-ALERT:                WEBDRIVER package.   (line 468)
+* WEBDRIVER:ACTIVE-ELEMENT:              WEBDRIVER package.   (line 239)
+* WEBDRIVER:ALERT-TEXT:                  WEBDRIVER package.   (line 475)
+* WEBDRIVER:BACK:                        WEBDRIVER package.   (line 344)
+* WEBDRIVER:CLOSE-CURRENT-WINDOW:        WEBDRIVER package.   (line 298)
+* WEBDRIVER:COOKIE:                      WEBDRIVER package.   (line 419)
+* WEBDRIVER:DELETE-ALL-COOKIES:          WEBDRIVER package.   (line 429)
+* WEBDRIVER:DELETE-COOKIE:               WEBDRIVER package.   (line 442)
+* WEBDRIVER:DELETE-SESSION:              WEBDRIVER package.   (line  37)
+* WEBDRIVER:DISMISS-ALERT:               WEBDRIVER package.   (line 459)
+* WEBDRIVER:ELEMENT-ATTRIBUTE:           WEBDRIVER package.   (line 196)
+* WEBDRIVER:ELEMENT-CLEAR:               WEBDRIVER package.   (line 274)
+* WEBDRIVER:ELEMENT-CLICK:               WEBDRIVER package.   (line 281)
+* WEBDRIVER:ELEMENT-DISPLAYED:           WEBDRIVER package.   (line 223)
+* WEBDRIVER:ELEMENT-ENABLED:             WEBDRIVER package.   (line 252)
+* WEBDRIVER:ELEMENT-ID:                  WEBDRIVER package.   (line 136)
+* WEBDRIVER:ELEMENT-RECT:                WEBDRIVER package.   (line 202)
+* WEBDRIVER:ELEMENT-SCREENSHOT:          WEBDRIVER package.   (line 357)
+* WEBDRIVER:ELEMENT-SEND-KEYS:           WEBDRIVER package.   (line 262)
+* WEBDRIVER:ELEMENT-TAGNAME:             WEBDRIVER package.   (line 190)
+* WEBDRIVER:ELEMENT-TEXT:                WEBDRIVER package.   (line 181)
+* WEBDRIVER:EXECUTE-SCRIPT:              WEBDRIVER package.   (line 485)
+* WEBDRIVER:FIND-COOKIE:                 WEBDRIVER package.   (line 449)
+* WEBDRIVER:FIND-ELEMENT:                WEBDRIVER package.   (line 148)
+* WEBDRIVER:FIND-ELEMENTS:               WEBDRIVER package.   (line 230)
+* WEBDRIVER:KEY:                         WEBDRIVER package.   (line  85)
+* WEBDRIVER:LOG-TYPES:                   WEBDRIVER package.   (line 121)
+* WEBDRIVER:LOGS:                        WEBDRIVER package.   (line 116)
+* WEBDRIVER:MAKE-COOKIE:                 WEBDRIVER package.   (line 436)
+* WEBDRIVER:MAKE-SESSION:                WEBDRIVER package.   (line  26)
+* WEBDRIVER:MOUSE-CLICK:                 WEBDRIVER package.   (line  95)
+* WEBDRIVER:MOUSE-MOVE-TO:               WEBDRIVER package.   (line 105)
+* WEBDRIVER:PAGE-TITLE:                  WEBDRIVER package.   (line 330)
+* WEBDRIVER:PERFORM-ACTIONS:             WEBDRIVER package.   (line  67)
+* WEBDRIVER:REFRESH:                     WEBDRIVER package.   (line 338)
+* WEBDRIVER:SCREENSHOT:                  WEBDRIVER package.   (line 367)
+* WEBDRIVER:START-INTERACTIVE-SESSION:   WEBDRIVER package.   (line  43)
+* WEBDRIVER:STOP-INTERACTIVE-SESSION:    WEBDRIVER package.   (line  51)
+* WEBDRIVER:SWITCH-TO-FRAME:             WEBDRIVER package.   (line 314)
+* WEBDRIVER:URL:                         WEBDRIVER package.   (line 307)
+* WEBDRIVER:USE-SESSION:                 WEBDRIVER package.   (line  20)
+* WEBDRIVER:WITH-SESSION:                WEBDRIVER package.   (line  57)
+* WITH-SESSION:                          WEBDRIVER package.   (line  57)
+
+
+
+Tag Table:
+Node: Top250
+Node: Introduction556
+Node: Usage896
+Node: Actions1945
+Node: Installation4293
+Node: Utils4792
+Node: Interactive session5506
+Node: Utils API conventions5982
+Node: Waiting for the reaction6629
+Node: Running tests7144
+Node: API7447
+Node: WEBDRIVER package7604
+Ref: WEBDRIVER:USE-SESSION function8050
+Ref: WEBDRIVER:MAKE-SESSION function8152
+Ref: WEBDRIVER:DELETE-SESSION function8606
+Ref: WEBDRIVER:START-INTERACTIVE-SESSION function8707
+Ref: WEBDRIVER:STOP-INTERACTIVE-SESSION function8954
+Ref: WEBDRIVER:WITH-SESSION macro9058
+Ref: WEBDRIVER:PERFORM-ACTIONS function9271
+Ref: WEBDRIVER:KEY function10208
+Ref: WEBDRIVER:MOUSE-CLICK function10394
+Ref: WEBDRIVER:MOUSE-MOVE-TO function10817
+Ref: WEBDRIVER:LOGS function11307
+Ref: WEBDRIVER:LOG-TYPES function11461
+Ref: WEBDRIVER:ELEMENT-ID function12084
+Ref: WEBDRIVER:NO-SUCH-ELEMENT-ERROR class12128
+Ref: WEBDRIVER:FIND-ELEMENT function12347
+Ref: WEBDRIVER:ELEMENT-TEXT function13670
+Ref: WEBDRIVER:ELEMENT-TAGNAME function14035
+Ref: WEBDRIVER:ELEMENT-ATTRIBUTE function14164
+Ref: WEBDRIVER:ELEMENT-RECT function14312
+Ref: WEBDRIVER:ELEMENT-DISPLAYED function15042
+Ref: WEBDRIVER:FIND-ELEMENTS function15243
+Ref: WEBDRIVER:ACTIVE-ELEMENT function15551
+Ref: WEBDRIVER:ELEMENT-ENABLED function16015
+Ref: WEBDRIVER:ELEMENT-SEND-KEYS function16252
+Ref: WEBDRIVER:ELEMENT-CLEAR function16700
+Ref: WEBDRIVER:ELEMENT-CLICK function16939
+Ref: WEBDRIVER:CLOSE-CURRENT-WINDOW function17492
+Ref: WEBDRIVER:URL function17635
+Ref: WEBDRIVER:SWITCH-TO-FRAME function17815
+Ref: WEBDRIVER:PAGE-TITLE function18419
+Ref: WEBDRIVER:REFRESH function18690
+Ref: WEBDRIVER:BACK function18800
+Ref: WEBDRIVER:ELEMENT-SCREENSHOT function19221
+Ref: WEBDRIVER:SCREENSHOT function19651
+Ref: WEBDRIVER:COOKIE class20080
+Ref: WEBDRIVER:COOKIE function21352
+Ref: WEBDRIVER:DELETE-ALL-COOKIES function21654
+Ref: WEBDRIVER:MAKE-COOKIE function21831
+Ref: WEBDRIVER:DELETE-COOKIE function21957
+Ref: WEBDRIVER:FIND-COOKIE function22157
+Ref: WEBDRIVER:DISMISS-ALERT function22387
+Ref: WEBDRIVER:ACCEPT-ALERT function22743
+Ref: WEBDRIVER:ALERT-TEXT function22911
+Ref: WEBDRIVER:EXECUTE-SCRIPT function23114
+Node: WEBDRIVER-UTILS package24133
+Ref: WEBDRIVER-UTILS:*TIMEOUT* variable24442
+Ref: WEBDRIVER-UTILS:*DEFAULT-ELEMENT-FUNC* variable24538
+Ref: WEBDRIVER-UTILS:ID function24781
+Ref: WEBDRIVER-UTILS:GET-COOKIE function24856
+Ref: WEBDRIVER-UTILS:FIND-ELEM function24938
+Ref: WEBDRIVER-UTILS:WAIT-FOR function25079
+Ref: WEBDRIVER-UTILS:CLASSNAME function25288
+Ref: WEBDRIVER-UTILS:TEXT function25377
+Ref: WEBDRIVER-UTILS:SEND-KEY function25458
+Ref: WEBDRIVER-UTILS:CLASSLIST function25550
+Ref: WEBDRIVER-UTILS:ATTR function25640
+Ref: WEBDRIVER-UTILS:SEND-KEYS function25730
+Ref: WEBDRIVER-UTILS:ELEM function25823
+Ref: WEBDRIVER-UTILS:CLICK function26116
+Node: Index26196
+
+End Tag Table

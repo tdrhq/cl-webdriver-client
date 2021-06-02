@@ -1,7 +1,8 @@
 ;;;; package.lisp
 
-(defpackage webdriver
+(defpackage webdriver-client
   (:use :cl :assoc-utils)
+  (:nicknames :webdriver)
   (:export :selenium-status
 	   
            :make-session
@@ -69,8 +70,8 @@ For documentation see:
 - https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol
 - https://www.w3.org/TR/webdriver1"))
 
-(defpackage webdriver-utils
-  (:use :cl :webdriver)
+(defpackage webdriver-client-utils
+  (:use :cl :webdriver-client)
   (:export :*timeout*
            :*default-element-func*
            :find-elem

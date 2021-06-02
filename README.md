@@ -20,7 +20,7 @@ This software is in development. The APIs will be likely to change.
   (ql:quickload :cl-webdriver-client))
 
 (defpackage go-test
-  (:use :cl :cl-webdriver-client))
+  (:use :cl :webdriver-client))
 
 (in-package :go-test)
 
@@ -51,7 +51,7 @@ func main() {
 ## Installation
 
 ```
-git clone https://github.com/TatriX/cl-webdriver-client ~/quicklisp/local-projects/
+git clone https://github.com/copyleft/cl-webdriver-client ~/quicklisp/local-projects/
 (ql:quickload :cl-webdriver-client)
 ```
 
@@ -64,12 +64,12 @@ java -jar selenium-server-standalone.jar standalone
 
 ## Utils
 
-There is a `:webdriver-utils` package which should reduce boilerplate. For example:
+There is a `:webdriver-client-utils` package which should reduce boilerplate. For example:
 
 ```lisp
 (defpackage my-test
-  (:use :cl :webdriver)
-  (:import-from :webdriver-utils
+  (:use :cl :webdriver-client)
+  (:import-from :webdriver-client-utils
                 :send-keys
                 :click
                 :wait-for
@@ -117,7 +117,7 @@ You can also pass a css selector as a last parameter.
 
 To change default element you can:
 ```lisp
-(setf webdriver-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
+(setf webdriver-client-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
 ```
 
 
@@ -131,7 +131,7 @@ them to load.
 ```
 Timeout defaults to 30 seconds. You can globally change it:
 ```lisp
-(setf webdriver-utils:*timeout* 3)
+(setf webdriver-client-utils:*timeout* 3)
 ```
 
 ## Running tests

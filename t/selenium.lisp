@@ -1,9 +1,9 @@
 (in-package :cl-user)
 
-(defpackage webdriver-test
-  (:use :cl :webdriver :webdriver-utils :prove))
+(defpackage webdriver-client-test
+  (:use :cl :webdriver-client :webdriver-client-utils :prove))
 
-(in-package :webdriver-test)
+(in-package :webdriver-client-test)
 
 (plan nil)
 

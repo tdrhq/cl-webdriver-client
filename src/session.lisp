@@ -1,4 +1,4 @@
-(in-package :webdriver)
+(in-package :webdriver-client)
 
 (defclass session ()
   ((id :initarg :id

@@ -1,9 +1,9 @@
 (in-package :cl-user)
 
-(defpackage webdriver-utils-test
-  (:use :cl :webdriver :webdriver-utils :prove))
+(defpackage webdriver-client-utils-test
+  (:use :cl :webdriver-client :webdriver-client-utils :prove))
 
-(in-package :webdriver-utils-test)
+(in-package :webdriver-client-utils-test)
 
 (defparameter *base-url* "https://www.google.com?hl=en")
 (defparameter *headless* '((:chrome-options . ((:args . #("--headless"))))))

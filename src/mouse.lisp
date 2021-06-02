@@ -1,4 +1,4 @@
-(in-package :webdriver)
+(in-package :webdriver-client)
 
 (defun mouse-move-to (x y &key element (session *session*))
   "Move the mouse by an offset of the specificed element. If no element is specified, the move is relative to the current mouse cursor. If an element is provided but no offset, the mouse will be moved to the center of the element. If the element is not visible, it will be scrolled into view.
