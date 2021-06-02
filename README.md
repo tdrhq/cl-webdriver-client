@@ -1,8 +1,8 @@
-# CL Selenium WebDriver
+# CL WebDriver Client
 
 This is a fork of CL Selenium WebDriver, a binding library to the Selenium.
 
-This fork implements version 4.0 of Selenium Webdriver API.
+This fork implements version 4.0 of W3C Webdriver API.
 
 See: https://www.w3.org/TR/webdriver1 .
 
@@ -138,9 +138,9 @@ Timeout defaults to 30 seconds. You can globally change it:
 
 ### REPL
 ```lisp
-(ql:quickload '(:cl-selenium :prove))
+(ql:quickload '(:cl-webdriver-client :prove))
 (setf prove:*enable-colors* nil)
-(prove:run :cl-selenium-test)
+(prove:run :cl-webdriver-client-test)
 ```
 
 ### Shell
