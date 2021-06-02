@@ -1,19 +1,19 @@
 \input texinfo   @c -*-texinfo-*-
 @comment $Id@w{$}
 @comment %**start of header
-@settitle Common Lisp Selenium Webdriver
+@settitle Common Lisp Webdriver Client
 @syncodeindex pg cp
-@setfilename cl-selenium-webdriver.info
+@setfilename cl-webdriver-client.info
 @comment %**end of header
 @include common-lisp.texi
 
 @dircategory Common Lisp
 @direntry
-* cl-selenium-webdriver: (cl-selenium-webdriver)Common Lisp Selenium Webdriver.
+* cl-webdriver-client: (cl-webdriver-client)Common Lisp Webdriver Client.
 @end direntry
 
 @titlepage
-@title Common Lisp Selenium Webdriver
+@title Common Lisp Webdriver Client
 
 @author A.U. Thor <@email{bug-sample@@gnu.org}>
 @page
@@ -24,10 +24,10 @@
 
 @node Top
 @top Top
-@cindex cl-selenium-webdriver
-@cindex cl-selenium-webdriver
+@cindex cl-webdriver-client
+@cindex cl-webdriver-client
 
-CL Selenium WebDriver is a binding library to the Selenium 4.0 that implements the @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
+CL Webdriver Client is a binding library to the Selenium 4.0 that implements the @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
 
 @menu
 * Introduction::
@@ -42,7 +42,7 @@ CL Selenium WebDriver is a binding library to the Selenium 4.0 that implements t
 @node Introduction
 @chapter Introduction
 
-CL Selenium WebDriver is a binding library to the Selenium 4.0 that implements the @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
+Common Lisp Webdriver Client is a binding library to the Selenium 4.0 that implements the @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
 
 This software is in development. The APIs will be likely to change.
 
@@ -58,10 +58,10 @@ This software is in development. The APIs will be likely to change.
 (in-package :cl-user)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (ql:quickload :cl-selenium))
+  (ql:quickload :cl-webdriver-client))
 
 (defpackage go-test
-  (:use :cl :cl-selenium))
+  (:use :cl :cl-webdriver-client))
 
 (in-package :go-test)
 
@@ -92,13 +92,11 @@ func main() @{
 @node Actions
 @section Actions
 
-@emph{cl-selenium} implements a little language for performing actions.
-
 The Actions API provides a low-level interface for providing virtualised device input to the web browser. Conceptually, the Actions commands divide time into a series of ticks. The local end sends a series of actions which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of actions pointerDown, followed by pointerMove, and then pointerUp.
 
 See @url{https://www.w3.org/TR/webdriver/#actions} for the whole explanation.
 
-To perform actions in @emph{cl-selenium} use @clref{CL-SELENIUM, PERFORM-ACTIONS, function}. That function implements a little language, with the following syntax:
+To perform actions in @emph{cl-webdriver-client} use @clref{WEBDRIVER, PERFORM-ACTIONS, function}. That function implements a little language, with the following syntax:
 
 @subheading Syntax:
 
@@ -121,8 +119,10 @@ key-up ::= (:key-up key)
 @item @emph{actions}---a list of actions-input-sources. One list for each type of input source that wants to be used.
 @item @emph{actions-input-source}---a list. Specifies the list of actions to perform for a particular input source.
 @item @emph{duration}---an integer. The time to pause in milliseconds.
-@item @emph{key}---a string. A string with the character (e.g. ``a''). Use @clref{CL-SELENIUM, KEY, function} for entering special characters.
-@item @emph{button}-- an integer greater than or equal to 0.
+@item @emph{key}---a string. A string with the character (e.g. ``a''). Use @clref{WEBDRIVER, KEY, function} for entering special characters.
+@item @emph{button-number}---an integer greater than or equal to 0.
+@item @emph{x}---an integer. Horizontal screen coordinate.
+@item @emph{y}---an integer. Vertical screen coordinate.
 @end itemize
 
 @subheading Examples:
@@ -138,8 +138,8 @@ key-up ::= (:key-up key)
 @chapter Installation
 
 @example
-git clone https://github.com/TatriX/cl-selenium-webdriver ~/quicklisp/local-projects/
-(ql:quickload :cl-selenium)
+git clone https://github.com/TatriX/cl-webdriver-client ~/quicklisp/local-projects/
+(ql:quickload :cl-webdriver-client)
 @end example
 
 You need a running instance of selenium-server-standalone.
@@ -154,12 +154,12 @@ java -jar selenium-server-standalone.jar
 @node Utils
 @chapter Utils
 
-There is a @code{:cl-selenium-utils} package which should reduce boilerplate. For example:
+There is a @code{:webdriver-utils} package which should reduce boilerplate. For example:
 
 @lisp
 (defpackage my-test
-  (:use :cl :cl-selenium)
-  (:import-from :cl-selenium-utils
+  (:use :cl :webdriver)
+  (:import-from :webdriver-utils
                 :send-keys
                 :click
                 :wait-for
@@ -169,7 +169,7 @@ There is a @code{:cl-selenium-utils} package which should reduce boilerplate. Fo
 
 (with-session ()
   (setf (url) "http://google.com")
-  (send-keys "cl-selenium-webdriver")
+  (send-keys "cl-webdriver-client")
   (click "[name=btnK]")
   (wait-for "#resultStats"))
 
@@ -186,7 +186,7 @@ You can just start the session and control it from your repl:
 (start-interactive-session)
 
 (setf (url) "http://google.com")
-(send-keys "cl-selenium-webdriver")
+(send-keys "cl-webdriver-client")
 (send-keys (key :enter))
 (classlist "#slim_appbar") ; prints ("ab_tnav_wrp")
 
@@ -212,7 +212,7 @@ You can also pass a css selector as a last parameter.
 To change default element you can:
 
 @lisp
-(setf cl-selenium-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
+(setf webdriver-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
 @end lisp
 
 @node Waiting for the reaction
@@ -228,7 +228,7 @@ them to load.
 
 Timeout defaults to 30 seconds. You can globally change it:
 @lisp
-(setf cl-selenium-utils:*timeout* 3)
+(setf webdriver-utils:*timeout* 3)
 @end lisp
 
 @node Running tests
@@ -252,15 +252,15 @@ sh
 @node API
 @chapter API
 
-@node CL-SELENIUM package
-@section CL-SELENIUM package
+@node WEBDRIVER package
+@section WEBDRIVER package
 
-(@clpackage :cl-selenium :include-external-definitions t :categorized :by-docstring-category)
+(@clpackage :webdriver :include-external-definitions t :categorized :by-docstring-category)
 
-@node CL-SELENIUM-UTILS package
-@section CL-SELENIUM-UTILS package
+@node WEBDRIVER-UTILS package
+@section WEBDRIVER-UTILS package
 
-(@clpackage :cl-selenium-utils :include-external-definitions t)
+(@clpackage :webdriver-utils :include-external-definitions t)
 
 @node Index
 @chapter Index

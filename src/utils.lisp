@@ -1,4 +1,4 @@
-(in-package :cl-selenium-utils)
+(in-package :webdriver-utils)
 
 (defparameter *timeout* 30
   "Default timeout value to use in selenium-utils functions.")

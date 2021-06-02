@@ -1,8 +1,7 @@
-(defsystem cl-selenium-test
-  :author "TatriX <tatrics@gmail.com>"
+(defsystem cl-webdriver-client-test
+  :author ("TatriX <tatrics@gmail.com>" "Mariano Montone <marianomontone@gmail.com>")
   :license "MIT"
-  :depends-on (:cl-selenium
-               :prove)
+  :depends-on (:cl-webdriver-client :prove)
   :defsystem-depends-on (:prove-asdf)
   :components
   ((module "t"

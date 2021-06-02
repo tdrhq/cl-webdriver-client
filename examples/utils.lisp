@@ -1,6 +1,6 @@
 (defpackage my-test
-  (:use :cl :cl-selenium)
-  (:import-from :cl-selenium-utils
+  (:use :cl :webdriver)
+  (:import-from :webdriver-utils
    :send-keys
                 :click
    :wait-for))
@@ -9,6 +9,6 @@
 
 (with-session ()
   (setf (url) "http://google.com")
-  (send-keys "cl-selenium-webdriver")
+  (send-keys "cl-webdriver-client")
   (click "[name=btnG]")
   (wait-for "#resultStats"))

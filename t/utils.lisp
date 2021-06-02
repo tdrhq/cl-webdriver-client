@@ -1,9 +1,9 @@
 (in-package :cl-user)
 
-(defpackage cl-selenium-utils-test
-  (:use :cl :cl-selenium :cl-selenium-utils :prove))
+(defpackage webdriver-utils-test
+  (:use :cl :webdriver :webdriver-utils :prove))
 
-(in-package :cl-selenium-utils-test)
+(in-package :webdriver-utils-test)
 
 (defparameter *base-url* "https://www.google.com?hl=en")
 (defparameter *headless* '((:chrome-options . ((:args . #("--headless"))))))
@@ -18,22 +18,22 @@
 
 (subtest "find-elem"
   (with-base-session
-    (is-type (find-elem "[name=q]") 'cl-selenium::element)
+    (is-type (find-elem "[name=q]") 'webdriver::element)
     (is (find-elem (gensym)) nil)))
 
 (subtest "wait-for"
   (with-base-session
     (let ((result-selector "#resultStats"))
       (is-error (find-element result-selector) 'no-such-element-error)
-      (element-send-keys (find-element "[name=q]") "cl-selenium-webdriver")
+      (element-send-keys (find-element "[name=q]") "cl-webdriver-client")
       (sleep 0.5)
       (element-click (find-element "[name=btnK]"))
       (ok (wait-for result-selector)))))
 
 (subtest "cookie-get"
   (with-base-session
-    (setf (cookie) (make-cookie "cl-selenium-webdriver" "common lisp"))
-    (is (get-cookie (cookie) "cl-selenium-webdriver") "common lisp")))
+    (setf (cookie) (make-cookie "cl-webdriver-client" "common lisp"))
+    (is (get-cookie (cookie) "cl-webdriver-client") "common lisp")))
 
 (subtest "elem"
   (with-base-session
@@ -68,12 +68,12 @@
 
 (subtest "send-keys"
   (with-base-session
-    (send-keys "cl-selenium-webdriver")
-    (is (attr "value") "cl-selenium-webdriver")))
+    (send-keys "cl-webdriver-client")
+    (is (attr "value") "cl-webdriver-client")))
 
 (subtest "click"
   (with-base-session
-    (send-keys "cl-selenium-webdriver")
+    (send-keys "cl-webdriver-client")
     (sleep 0.5)
     (click "[name=btnK]")
     (ok (wait-for "#resultStats"))))

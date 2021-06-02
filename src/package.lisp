@@ -1,6 +1,6 @@
 ;;;; package.lisp
 
-(defpackage cl-selenium
+(defpackage webdriver
   (:use :cl :assoc-utils)
   (:export :selenium-status
 	   
@@ -69,8 +69,8 @@ For documentation see:
 - https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol
 - https://www.w3.org/TR/webdriver1"))
 
-(defpackage cl-selenium-utils
-  (:use :cl :cl-selenium)
+(defpackage webdriver-utils
+  (:use :cl :webdriver)
   (:export :*timeout*
            :*default-element-func*
            :find-elem

@@ -1,4 +1,4 @@
-(in-package :cl-selenium)
+(in-package :webdriver)
 
 (defun expand-action-item (action-item)
   (destructuring-bind (action-type &rest args) action-item

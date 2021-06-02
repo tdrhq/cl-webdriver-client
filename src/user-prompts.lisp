@@ -1,4 +1,4 @@
-(in-package :cl-selenium)
+(in-package :webdriver)
 
 (defun dismiss-alert (&key (session *session*))
   "The Dismiss Alert command dismisses a simple dialog if present. A request to dismiss an alert user prompt, which may not necessarily have a dismiss button, has the same effect as accepting it.

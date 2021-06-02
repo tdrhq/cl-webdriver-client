@@ -1,23 +1,23 @@
 .PHONY: all clean
 
-all: cl-selenium-webdriver.info cl-selenium-webdriver.html cl-selenium-webdriver.pdf index.html
+all: cl-webdriver-client.info cl-webdriver-client.html cl-webdriver-client.pdf index.html
 
-cl-selenium-webdriver.info: cl-selenium-webdriver.weaved.texi
-	makeinfo --no-validate cl-selenium-webdriver.weaved.texi
+cl-webdriver-client.info: cl-webdriver-client.weaved.texi
+	makeinfo --no-validate cl-webdriver-client.weaved.texi
 
-cl-selenium-webdriver.pdf: cl-selenium-webdriver.weaved.texi
-	texi2any --force --no-validate --pdf cl-selenium-webdriver.weaved.texi -o cl-selenium-webdriver.pdf
+cl-webdriver-client.pdf: cl-webdriver-client.weaved.texi
+	texi2any --force --no-validate --pdf cl-webdriver-client.weaved.texi -o cl-webdriver-client.pdf
 
-cl-selenium-webdriver.html: cl-selenium-webdriver.weaved.texi
-	texi2any --no-validate --html cl-selenium-webdriver.weaved.texi --css-ref texinfo-klare.css --css-ref lisp-coloring.css --no-split -o cl-selenium-webdriver.html
-	sbcl --eval '(require :hyperspec)' --load colorize-lisp-examples.lisp cl-selenium-webdriver.html
+cl-webdriver-client.html: cl-webdriver-client.weaved.texi
+	texi2any --no-validate --html cl-webdriver-client.weaved.texi --css-ref texinfo-klare.css --css-ref lisp-coloring.css --no-split -o cl-webdriver-client.html
+	sbcl --eval '(require :hyperspec)' --load colorize-lisp-examples.lisp cl-webdriver-client.html
 
-index.html: cl-selenium-webdriver.weaved.texi
-	texi2any --no-validate --html cl-selenium-webdriver.weaved.texi --css-ref texinfo-klare.css --css-ref lisp-coloring.css --no-split -o index.html
+index.html: cl-webdriver-client.weaved.texi
+	texi2any --no-validate --html cl-webdriver-client.weaved.texi --css-ref texinfo-klare.css --css-ref lisp-coloring.css --no-split -o index.html
 	sbcl --eval '(require :hyperspec)' --load colorize-lisp-examples.lisp index.html
 
-cl-selenium-webdriver.weaved.texi:
-	sbcl --eval '(ql:quickload :docweaver)' --eval '(docweaver:weave-file "cl-selenium-webdriver.texi" "cl-selenium-webdriver.weaved.texi" :docsystem :texinfo :modules (list :cl-selenium))' --quit
+cl-webdriver-client.weaved.texi:
+	sbcl --eval '(ql:quickload :docweaver)' --eval '(docweaver:weave-file "cl-webdriver-client.texi" "cl-webdriver-client.weaved.texi" :docsystem :texinfo :modules (list :cl-webdriver-client))' --quit
 
 clean:
 	rm -f *.weaved*

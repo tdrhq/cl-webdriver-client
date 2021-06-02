@@ -1,6 +1,6 @@
-(in-package :cl-selenium)
+(in-package :webdriver)
 
-(defun selenium-status ()
+(defun webdriver-status ()
   "Get Selenium Webdriver status information"
   (http-get "/status"))
 
@@ -40,7 +40,7 @@ See: https://www.w3.org/TR/webdriver2/#get-title ."
 (defmethod print-object ((element element) stream)
   (with-slots (id) element
     (format stream
-            "#<cl-selenium::element {id:~a} id=~a>"
+            "#<webdriver::element {id:~a} id=~a>"
             id
             (element-attribute element "id"))))
 
@@ -276,8 +276,8 @@ The script argument defines the script to execute in the form of a function body
 Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the script result will be returned to the client as WebElement JSON objects.
 
 Category: Document handling
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidexecute ."
+See: https://www.w3.org/TR/webdriver1/#executing-script ."
   (check-type script string)
   (check-type args list)
-  (http-post-value (session-path session "/execute")
+  (http-post-value (session-path session "/execute/sync")
                    :script script :args (or args #())))

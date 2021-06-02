@@ -17,10 +17,10 @@ This software is in development. The APIs will be likely to change.
 (in-package :cl-user)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (ql:quickload :cl-selenium))
+  (ql:quickload :cl-webdriver-client))
 
 (defpackage go-test
-  (:use :cl :cl-selenium))
+  (:use :cl :cl-webdriver-client))
 
 (in-package :go-test)
 
@@ -51,8 +51,8 @@ func main() {
 ## Installation
 
 ```
-git clone https://github.com/TatriX/cl-selenium-webdriver ~/quicklisp/local-projects/
-(ql:quickload :cl-selenium)
+git clone https://github.com/TatriX/cl-webdriver-client ~/quicklisp/local-projects/
+(ql:quickload :cl-webdriver-client)
 ```
 
 You need a running instance of selenium-server-standalone version 4.0.0 or above.
@@ -64,12 +64,12 @@ java -jar selenium-server-standalone.jar standalone
 
 ## Utils
 
-There is a `:cl-selenium-utils` package which should reduce boilerplate. For example:
+There is a `:webdriver-utils` package which should reduce boilerplate. For example:
 
 ```lisp
 (defpackage my-test
-  (:use :cl :cl-selenium)
-  (:import-from :cl-selenium-utils
+  (:use :cl :webdriver)
+  (:import-from :webdriver-utils
                 :send-keys
                 :click
                 :wait-for
@@ -79,7 +79,7 @@ There is a `:cl-selenium-utils` package which should reduce boilerplate. For exa
 
 (with-session ()
   (setf (url) "http://google.com")
-  (send-keys "cl-selenium-webdriver")
+  (send-keys "cl-webdriver-client")
   (click "[name=btnK]")
   (wait-for "#resultStats"))
 
@@ -95,7 +95,7 @@ You can just start the session and control it from your repl:
 (start-interactive-session)
 
 (setf (url) "http://google.com")
-(send-keys "cl-selenium-webdriver")
+(send-keys "cl-webdriver-client")
 (send-keys (key :enter))
 (classlist "#slim_appbar") ; prints ("ab_tnav_wrp")
 
@@ -117,7 +117,7 @@ You can also pass a css selector as a last parameter.
 
 To change default element you can:
 ```lisp
-(setf cl-selenium-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
+(setf webdriver-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
 ```
 
 
@@ -131,7 +131,7 @@ them to load.
 ```
 Timeout defaults to 30 seconds. You can globally change it:
 ```lisp
-(setf cl-selenium-utils:*timeout* 3)
+(setf webdriver-utils:*timeout* 3)
 ```
 
 ## Running tests

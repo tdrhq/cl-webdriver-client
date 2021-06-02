@@ -1,13 +1,13 @@
-This is cl-selenium-webdriver.info, produced by makeinfo version 6.7
-from cl-selenium-webdriver.weaved.texi.
+This is cl-webdriver-client.info, produced by makeinfo version 6.7
+from cl-webdriver-client.weaved.texi.
 
 INFO-DIR-SECTION Common Lisp
 START-INFO-DIR-ENTRY
-* cl-selenium-webdriver: (cl-selenium-webdriver)Common Lisp Selenium Webdriver.
+* cl-webdriver-client: (cl-webdriver-client)Common Lisp Selenium Webdriver.
 END-INFO-DIR-ENTRY
 
 
-File: cl-selenium-webdriver.info,  Node: Top,  Next: Introduction,  Up: (dir)
+File: cl-webdriver-client.info,  Node: Top,  Next: Introduction,  Up: (dir)
 
 Top
 ***
@@ -25,7 +25,7 @@ implements the W3C Webdriver spec (https://www.w3.org/TR/webdriver).
 * Index::
 
 
-File: cl-selenium-webdriver.info,  Node: Introduction,  Next: Usage,  Prev: Top,  Up: Top
+File: cl-webdriver-client.info,  Node: Introduction,  Next: Usage,  Prev: Top,  Up: Top
 
 1 Introduction
 **************
@@ -36,7 +36,7 @@ implements the W3C Webdriver spec (https://www.w3.org/TR/webdriver).
    This software is in development.  The APIs will be likely to change.
 
 
-File: cl-selenium-webdriver.info,  Node: Usage,  Next: Installation,  Prev: Introduction,  Up: Top
+File: cl-webdriver-client.info,  Node: Usage,  Next: Installation,  Prev: Introduction,  Up: Top
 
 2 Usage
 *******
@@ -80,7 +80,7 @@ File: cl-selenium-webdriver.info,  Node: Usage,  Next: Installation,  Prev: Intr
           finally (print ouput)))
 
 
-File: cl-selenium-webdriver.info,  Node: Actions,  Up: Usage
+File: cl-webdriver-client.info,  Node: Actions,  Up: Usage
 
 2.1 Actions
 ===========
@@ -142,12 +142,12 @@ Examples:
      		     (:pointer-move 23 54))))
 
 
-File: cl-selenium-webdriver.info,  Node: Installation,  Next: Utils,  Prev: Usage,  Up: Top
+File: cl-webdriver-client.info,  Node: Installation,  Next: Utils,  Prev: Usage,  Up: Top
 
 3 Installation
 **************
 
-     git clone https://github.com/TatriX/cl-selenium-webdriver ~/quicklisp/local-projects/
+     git clone https://github.com/TatriX/cl-webdriver-client ~/quicklisp/local-projects/
      (ql:quickload :cl-selenium)
 
    You need a running instance of selenium-server-standalone.
@@ -158,7 +158,7 @@ File: cl-selenium-webdriver.info,  Node: Installation,  Next: Utils,  Prev: Usag
      java -jar selenium-server-standalone.jar
 
 
-File: cl-selenium-webdriver.info,  Node: Utils,  Next: API,  Prev: Installation,  Up: Top
+File: cl-webdriver-client.info,  Node: Utils,  Next: API,  Prev: Installation,  Up: Top
 
 4 Utils
 *******
@@ -178,7 +178,7 @@ For example:
 
      (with-session ()
        (setf (url) "http://google.com")
-       (send-keys "cl-selenium-webdriver")
+       (send-keys "cl-webdriver-client")
        (click "[name=btnK]")
        (wait-for "#resultStats"))
 
@@ -191,7 +191,7 @@ For example:
 * Running tests::
 
 
-File: cl-selenium-webdriver.info,  Node: Interactive session,  Next: Utils API conventions,  Up: Utils
+File: cl-webdriver-client.info,  Node: Interactive session,  Next: Utils API conventions,  Up: Utils
 
 4.1 Interactive session
 =======================
@@ -203,14 +203,14 @@ You can just start the session and control it from your repl:
      (start-interactive-session)
 
      (setf (url) "http://google.com")
-     (send-keys "cl-selenium-webdriver")
+     (send-keys "cl-webdriver-client")
      (send-keys (key :enter))
      (classlist "#slim_appbar") ; prints ("ab_tnav_wrp")
 
      (stop-interactive-session)
 
 
-File: cl-selenium-webdriver.info,  Node: Utils API conventions,  Next: Waiting for the reaction,  Prev: Interactive session,  Up: Utils
+File: cl-webdriver-client.info,  Node: Utils API conventions,  Next: Waiting for the reaction,  Prev: Interactive session,  Up: Utils
 
 4.2 Utils API conventions
 =========================
@@ -230,7 +230,7 @@ If utility function needs an element to work on it defaults to
      (setf cl-selenium-utils:*default-element-func* (lambda () (find-element "input[type=submit]"))
 
 
-File: cl-selenium-webdriver.info,  Node: Waiting for the reaction,  Next: Running tests,  Prev: Utils API conventions,  Up: Utils
+File: cl-webdriver-client.info,  Node: Waiting for the reaction,  Next: Running tests,  Prev: Utils API conventions,  Up: Utils
 
 4.3 Waiting for the reaction
 ============================
@@ -245,7 +245,7 @@ them to load.
      (setf cl-selenium-utils:*timeout* 3)
 
 
-File: cl-selenium-webdriver.info,  Node: Running tests,  Prev: Waiting for the reaction,  Up: Utils
+File: cl-webdriver-client.info,  Node: Running tests,  Prev: Waiting for the reaction,  Up: Utils
 
 4.4 Running tests
 =================
@@ -264,7 +264,7 @@ Shell
      ./test.sh
 
 
-File: cl-selenium-webdriver.info,  Node: API,  Next: Index,  Prev: Utils,  Up: Top
+File: cl-webdriver-client.info,  Node: API,  Next: Index,  Prev: Utils,  Up: Top
 
 5 API
 *****
@@ -275,7 +275,7 @@ File: cl-selenium-webdriver.info,  Node: API,  Next: Index,  Prev: Utils,  Up: T
 * CL-SELENIUM-UTILS package::
 
 
-File: cl-selenium-webdriver.info,  Node: CL-SELENIUM package,  Next: CL-SELENIUM-UTILS package,  Up: API
+File: cl-webdriver-client.info,  Node: CL-SELENIUM package,  Next: CL-SELENIUM-UTILS package,  Up: API
 
 5.1 CL-SELENIUM package
 =======================
@@ -789,7 +789,7 @@ Document handling
      .
 
 
-File: cl-selenium-webdriver.info,  Node: CL-SELENIUM-UTILS package,  Prev: CL-SELENIUM package,  Up: API
+File: cl-webdriver-client.info,  Node: CL-SELENIUM-UTILS package,  Prev: CL-SELENIUM package,  Up: API
 
 5.2 CL-SELENIUM-UTILS package
 =============================
@@ -872,7 +872,7 @@ Functions
      Click on active element.
 
 
-File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
+File: cl-webdriver-client.info,  Node: Index,  Prev: API,  Up: Top
 
 6 Index
 *******
@@ -880,8 +880,8 @@ File: cl-selenium-webdriver.info,  Node: Index,  Prev: API,  Up: Top
  [index ]
 * Menu:
 
-* cl-selenium-webdriver:                 Top.                   (line 6)
-* cl-selenium-webdriver <1>:             Top.                   (line 6)
+* cl-webdriver-client:                 Top.                   (line 6)
+* cl-webdriver-client <1>:             Top.                   (line 6)
 
  [index ]
 * Menu:

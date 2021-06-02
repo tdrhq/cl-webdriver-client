@@ -1,4 +1,4 @@
-(in-package :cl-selenium)
+(in-package :webdriver)
 
 (defclass session ()
   ((id :initarg :id

@@ -1,4 +1,4 @@
-(in-package :cl-selenium)
+(in-package :webdriver)
 
 (defclass cookie ()
   ((name :initarg :name

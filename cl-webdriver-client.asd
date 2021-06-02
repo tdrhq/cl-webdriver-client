@@ -1,6 +1,6 @@
-(asdf:defsystem #:cl-selenium
-  :description "cl-selenim-webdriver is a binding library to the Selenium 4.0"
-  :author "TatriX <tatrics@gmail.com>"
+(asdf:defsystem #:cl-webdriver-client
+  :description "cl-webdriver-client is a binding library to the Selenium 4.0"
+  :author ("TatriX <tatrics@gmail.com>" "Mariano Montone <marianomontone@gmail.com>")
   :license "MIT"
   :depends-on (:dexador :quri :cl-json :alexandria :split-sequence :assoc-utils)
   :serial t
@@ -17,4 +17,4 @@
                  (:file "http")
                  (:file "selenium")
 		 (:file "utils"))))
-  :in-order-to ((test-op (test-op cl-selenium-test))))
+  :in-order-to ((test-op (test-op cl-webdriver-client-test))))

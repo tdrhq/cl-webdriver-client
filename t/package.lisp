@@ -1,7 +1,7 @@
-(defpackage cl-selenium-test
-  (:use :cl :cl-selenium :cl-selenium-utils :prove))
+(defpackage webdriver-test
+  (:use :cl :webdriver :webdriver-utils :prove))
 
-(in-package :cl-selenium-test)
+(in-package :webdriver-test)
 
 ;; slime detection
 (setf prove:*enable-colors* (interactive-stream-p *standard-input*))

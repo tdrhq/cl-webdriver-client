@@ -1,6 +1,6 @@
-;;;; cl-selenium-webdriver.lisp
+;;;; cl-webdriver-client.lisp
 
-(in-package #:cl-selenium-webdriver)
+(in-package #:cl-webdriver-client)
 
-;;; "cl-selenium-webdriver" goes here. Hacks and glory await!
+;;; "cl-webdriver-client" goes here. Hacks and glory await!
 

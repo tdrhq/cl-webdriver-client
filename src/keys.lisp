@@ -1,4 +1,4 @@
-(in-package :cl-selenium)
+(in-package :webdriver)
 
 ;; TODO: make constant?
 (defvar *keymap*

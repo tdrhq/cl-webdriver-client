@@ -1,10 +1,10 @@
-(in-package :cl-selenium-test)
+(in-package :webdriver-test)
 
-(defparameter +test-pages-filepath+ (asdf:system-relative-pathname :cl-selenium-test "t/testpages.tar.gz"))
+(defparameter +test-pages-filepath+ (asdf:system-relative-pathname :cl-webdriver-client-test "t/testpages.tar.gz"))
 
 (defun download-test-pages ()
   (format t "Downloading test pages...~%")
-  (uiop:run-program (list "curl" "-L" "https://github.com/copyleft/cl-selenium-webdriver/files/6430883/testpages.tar.gz"
+  (uiop:run-program (list "curl" "-L" "https://github.com/copyleft/cl-webdriver-client/files/6430883/testpages.tar.gz"
 		    "--output"
 		    (princ-to-string +test-pages-filepath+))))
 
@@ -13,16 +13,16 @@
   (uiop:run-program
    (format nil "tar xzf ~a -C ~a"
 	   +test-pages-filepath+
-	   (asdf:system-relative-pathname :cl-selenium-test "t/"))))  
+	   (asdf:system-relative-pathname :cl-webdriver-client-test "t/"))))  
 
 (defun test-file-url (name)
-  (format nil "file://~a" (asdf:system-relative-pathname :cl-selenium-test (format nil "t/web/~a" name))))
+  (format nil "file://~a" (asdf:system-relative-pathname :cl-webdriver-client-test (format nil "t/web/~a" name))))
 
 (defmacro with-test-session (&body body)
   `(with-session (:additional-capabilities *headless*)
      ,@body))
 
-(unless (probe-file (asdf:system-relative-pathname :cl-selenium-test (format nil "t/web/")))
+(unless (probe-file (asdf:system-relative-pathname :cl-webdriver-client-test (format nil "t/web/")))
   (unless (probe-file +test-pages-filepath+)
     (download-test-pages))
   (uncompress-test-pages))
@@ -106,7 +106,7 @@
     ;; find-elements does not error
     (ok (null (find-elements "foo")))
     ;; find-element errors
-    (is-error (find-element "foo") 'cl-selenium:no-such-element-error)
+    (is-error (find-element "foo") 'webdriver:no-such-element-error)
     (ok (find-element "body"))
     ))
 
@@ -132,8 +132,8 @@
     (setf (url) (test-file-url "formPage.html"))
     (let ((input (find-element "[name=id-name1]")))
       (element-clear input)
-      (element-send-keys input "cl-cl-selenium-webdriver")
-      (is (element-attribute input "value") "cl-cl-selenium-webdriver"))))
+      (element-send-keys input "cl-cl-webdriver-client")
+      (is (element-attribute input "value") "cl-cl-webdriver-client"))))
 
 (subtest "active-element"
   (with-test-session ()
