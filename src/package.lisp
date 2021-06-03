@@ -18,7 +18,8 @@
            :url
            :back
            :refresh
-	   :page-title
+           :page-title
+           :page-source
 	   
            :find-element
            :find-elements

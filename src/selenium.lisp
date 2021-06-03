@@ -32,6 +32,13 @@ Category: Navigation
 See: https://www.w3.org/TR/webdriver2/#get-title ."
   (http-get-value (session-path session "/title")))
 
+(defun page-source (&key (session *session*))
+  "Returns a string serialization of the DOM of the current browsing context active document. 
+
+Category: Navigation
+See: https://www.w3.org/TR/webdriver1/#get-page-source"
+  (http-get-value (session-path session "/source")))
+
 (defclass element ()
   ((id :initarg :id
        :initform (error "Must supply :id")
