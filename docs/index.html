@@ -69,7 +69,16 @@ ul.no-bullet {list-style: none}
   <li><a id="toc-Introduction-1" href="#Introduction">1 Introduction</a></li>
   <li><a id="toc-Usage-1" href="#Usage">2 Usage</a>
   <ul class="no-bullet">
-    <li><a id="toc-Actions-1" href="#Actions">2.1 Actions</a></li>
+    <li><a id="toc-Sessions-1" href="#Sessions">2.1 Sessions</a></li>
+    <li><a id="toc-Capabilities-1" href="#Capabilities">2.2 Capabilities</a>
+    <ul class="no-bullet">
+      <li><a id="toc-alwaysMatch-1" href="#alwaysMatch">2.2.1 alwaysMatch</a></li>
+      <li><a id="toc-firstMatch-1" href="#firstMatch">2.2.2 firstMatch</a></li>
+      <li><a id="toc-Combining-alwaysMatch-and-firstMatch-1" href="#Combining-alwaysMatch-and-firstMatch">2.2.3 Combining alwaysMatch and firstMatch</a></li>
+      <li><a id="toc-List-of-capabilities-1" href="#List-of-capabilities">2.2.4 List of capabilities</a></li>
+      <li><a id="toc-Vendor_002dspecific-capabilities-1" href="#Vendor_002dspecific-capabilities">2.2.5 Vendor-specific capabilities</a></li>
+    </ul></li>
+    <li><a id="toc-Actions-1" href="#Actions">2.3 Actions</a></li>
   </ul></li>
   <li><a id="toc-Installation-1" href="#Installation">3 Installation</a></li>
   <li><a id="toc-Utils-1" href="#Utils">4 Utils</a>
@@ -144,7 +153,11 @@ Next: <a href="#Installation" accesskey="n" rel="next">Installation</a>, Previou
 <span id="Usage-1"></span><h2 class="chapter">2 Usage</h2>
 
 <table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="#Actions" accesskey="1">Actions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#Sessions" accesskey="1">Sessions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Capabilities" accesskey="2">Capabilities</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Actions" accesskey="3">Actions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
 </table>
 
@@ -185,11 +198,195 @@ Next: <a href="#Installation" accesskey="n" rel="next">Installation</a>, Previou
 </pre></div>
 
 <hr>
+<span id="Sessions"></span><div class="header">
+<p>
+Next: <a href="#Capabilities" accesskey="n" rel="next">Capabilities</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Sessions-1"></span><h3 class="section">2.1 Sessions</h3>
+
+<p>A session is equivalent to a single instantiation of a particular user agent, including all its child browsers. WebDriver gives each session a unique session ID that can be used to differentiate one session from another, allowing multiple user agents to be controlled from a single HTTP server, and allowing sessions to be routed via a multiplexer (known as an intermediary node).
+</p>
+<p>A WebDriver session represents the connection between a local end and a specific remote end.
+</p>
+<p>A session is started when a New Session is invoked. It is an error to send any commands before starting a session, or to continue to send commands after the session has been closed. Maintaining session continuity between commands to the remote end requires passing a session ID.
+</p>
+<p>A session is torn down at some later point; either explicitly by invoking Delete Session, or implicitly when Close Window is called at the last remaining top-level browsing context.
+</p>
+<p>An intermediary node will maintain an associated session for each active session. This is the session on the upstream neighbor that is created when the intermediary node executes the New Session command. Closing a session on an intermediary node will also close the session of the associated session.
+</p>
+<p>All commands, except New Session and Status, have an associated current session, which is the session in which that command will run.
+</p>
+<hr>
+<span id="Capabilities"></span><div class="header">
+<p>
+Next: <a href="#Actions" accesskey="n" rel="next">Actions</a>, Previous: <a href="#Sessions" accesskey="p" rel="prev">Sessions</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Capabilities-1"></span><h3 class="section">2.2 Capabilities</h3>
+
+<p>WebDriver capabilities are used to communicate the features supported by a session. A client may also use capabilities to define which features it requires the driver to satisfy when creating a new session.
+</p>
+<p>When a WebDriver session is created it returns a set of capabilities describing the negotiated, effective capabilities of the session. Some of the capabilities included in this set are standard and shared between all browsers, but the set may also contain browser-specific capabilities and these are always prefixed.
+Capabilities negotiation
+</p>
+<p>Capabilities can be used to require a driver that supports a certain subset of features. This can be used to require certain browser features, such as the ability to resize the window dimensions, but is also used in distributed environments to select a particular browser configuration from a matrix of choices.
+</p>
+<p>Selecting a particular web browser or platform only makes sense when you use a remote WebDriver. In this case the client makes contact with WebDriver through one or more intermediary nodes which negotiates which driver to return to you based on the capabilities it receives.
+</p>
+<p>The capabilities object is a selection mechanism that limits which driver configurations the server will return. If you request a Firefox instance using browserName and Firefox is not installed on the remote, or macOS from a remote that only supports Linux, you may be out of luck. But occasionally you may not care which specific operating system or web browser your session has: you just want a session that has some capability.
+</p>
+<p>The selection process, or the capabilities negotiation, is done through alwaysMatch and firstMatch.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#alwaysMatch" accesskey="1">alwaysMatch</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#firstMatch" accesskey="2">firstMatch</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Combining-alwaysMatch-and-firstMatch" accesskey="3">Combining alwaysMatch and firstMatch</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#List-of-capabilities" accesskey="4">List of capabilities</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Vendor_002dspecific-capabilities" accesskey="5">Vendor-specific capabilities</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+<hr>
+<span id="alwaysMatch"></span><div class="header">
+<p>
+Next: <a href="#firstMatch" accesskey="n" rel="next">firstMatch</a>, Up: <a href="#Capabilities" accesskey="u" rel="up">Capabilities</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="alwaysMatch-1"></span><h4 class="subsection">2.2.1 alwaysMatch</h4>
+
+<p>As the name suggests, capabilities described inside the alwaysMatch capabilities object are features you require the session to have. If the server can not provide what features you require, it will fail.
+</p>
+<p>If for example you ask for Firefox version 62 on a system that only has 60 installed, the session creation will fail:
+</p>
+<pre class="verbatim">{
+  &quot;capabilities&quot;: {
+    &quot;alwaysMatch&quot;: {
+      &quot;browserName&quot;: &quot;firefox&quot;,
+      &quot;browserVersion&quot;: &quot;60&quot;
+    }
+  }
+}
+</pre>
+<hr>
+<span id="firstMatch"></span><div class="header">
+<p>
+Next: <a href="#Combining-alwaysMatch-and-firstMatch" accesskey="n" rel="next">Combining alwaysMatch and firstMatch</a>, Previous: <a href="#alwaysMatch" accesskey="p" rel="prev">alwaysMatch</a>, Up: <a href="#Capabilities" accesskey="u" rel="up">Capabilities</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="firstMatch-1"></span><h4 class="subsection">2.2.2 firstMatch</h4>
+
+<p>The firstMatch field accepts an array of capabilities objects which will be matched in turn until one matches what the server can provide, or it will fail.
+</p>
+<p>This can be useful when you want a driver that runs on macOS or Linux, but not Windows:
+</p>
+<pre class="verbatim">{
+  &quot;capabilities&quot;: {
+    &quot;firstMatch&quot;: [
+      {&quot;platformName&quot;: &quot;macos&quot;},
+      {&quot;platformName&quot;: &quot;linux&quot;}
+    ]
+  }
+}
+
+</pre>
+
+<hr>
+<span id="Combining-alwaysMatch-and-firstMatch"></span><div class="header">
+<p>
+Next: <a href="#List-of-capabilities" accesskey="n" rel="next">List of capabilities</a>, Previous: <a href="#firstMatch" accesskey="p" rel="prev">firstMatch</a>, Up: <a href="#Capabilities" accesskey="u" rel="up">Capabilities</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Combining-alwaysMatch-and-firstMatch-1"></span><h4 class="subsection">2.2.3 Combining alwaysMatch and firstMatch</h4>
+
+<p>firstMatch can of course be combined with alwaysMatch to narrow down the selection. If for example you a driver that runs on macOS or Linux but it has to be Firefox:
+</p>
+<pre class="verbatim">{
+  &quot;capabilities&quot;: {
+    &quot;alwaysMatch&quot;: {
+      &quot;browserName&quot;: &quot;firefox&quot;
+    },
+    &quot;firstMatch&quot;: [
+      {&quot;platformName&quot;: &quot;macos&quot;},
+      {&quot;platformName&quot;: &quot;linux&quot;}
+    ]
+  }
+}
+</pre>
+<p>The previous example is exactly equivalent to putting the Firefox requirement in each firstMatch arm:
+</p>
+<pre class="verbatim">
+{
+  &quot;capabilities&quot;:{
+    &quot;firstMatch&quot;:[
+      {&quot;browserName&quot;: &quot;firefox&quot;, &quot;platformName&quot;:&quot;macos&quot;},
+      {&quot;browserName&quot;: &quot;firefox&quot;, &quot;platformName&quot;:&quot;linux&quot;}
+    ]
+  }
+}
+
+</pre>
+<p>Which you choose of the two preceding examples is not important, but it can matter when pass along browser configuration. To avoid unnecessarily repeating data, such as profiles, it is advisable to make use of alwaysMatch so that this data is only transmitted across the wire once:
+</p>
+<pre class="verbatim">
+{
+  &quot;capabilities&quot;: {
+    &quot;alwaysMatch&quot;: {
+      &quot;browserName&quot;: &quot;firefox&quot;,
+      &quot;moz:firefoxOptions&quot;: {
+        &quot;profile&quot;: &quot;&lt;base64 encoded profile&gt;&quot;,
+        &quot;args&quot;: [&quot;-headless&quot;],
+        &quot;prefs&quot;: {&quot;dom.ipc.processCount&quot;: 8},
+        &quot;log&quot;:{&quot;level&quot;: &quot;trace&quot;}
+      }
+    },
+    &quot;firstMatch&quot;: [
+      {&quot;platformName&quot;: &quot;macos&quot;},
+      {&quot;platformName&quot;: &quot;linux&quot;}
+    ]
+  }
+}
+
+</pre>
+
+<hr>
+<span id="List-of-capabilities"></span><div class="header">
+<p>
+Next: <a href="#Vendor_002dspecific-capabilities" accesskey="n" rel="next">Vendor-specific capabilities</a>, Previous: <a href="#Combining-alwaysMatch-and-firstMatch" accesskey="p" rel="prev">Combining alwaysMatch and firstMatch</a>, Up: <a href="#Capabilities" accesskey="u" rel="up">Capabilities</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="List-of-capabilities-1"></span><h4 class="subsection">2.2.4 List of capabilities</h4>
+
+<ul>
+<li> <em>browserName</em>
+</li><li> <em>browserVersion</em>
+</li><li> <em>platformName</em>
+</li><li> <em>acceptInsecureCerts</em>
+    The acceptInsecureCerts capability communicates whether expired or invalid TLS certificates are checked when navigating. If the capability is false, an insecure certificate error will be returned as navigation encounters domains with certificate problems. Otherwise, self-signed or otherwise invalid certificates will be implicitly trusted by the browser on navigation. The capability has effect for the lifetime of the session.
+</li><li> <em>pageLoadStrategy</em>
+</li><li> <em>proxy</em>
+</li><li> <em>setWindowRect</em>
+</li><li> <em>timeouts</em>
+</li><li> <em>unhandledPromptBehavior</em>
+</li></ul>
+
+<hr>
+<span id="Vendor_002dspecific-capabilities"></span><div class="header">
+<p>
+Previous: <a href="#List-of-capabilities" accesskey="p" rel="prev">List of capabilities</a>, Up: <a href="#Capabilities" accesskey="u" rel="up">Capabilities</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Vendor_002dspecific-capabilities-1"></span><h4 class="subsection">2.2.5 Vendor-specific capabilities</h4>
+
+<p>In addition to the standard capabilities WebDriver allows third-parties to extend the set of capabilities to match their needs. Browser vendors and suppliers of drivers typically use extension capabilities to provide configuration to the browser, but they can also be used by intermediaries for arbitrary blobs of information.
+</p>
+<p>Firefox capabilities (moz:firefoxOptions)
+    Chrome capabilities (goog:chromeOptions)
+</p>
+
+<hr>
 <span id="Actions"></span><div class="header">
 <p>
-Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="#Capabilities" accesskey="p" rel="prev">Capabilities</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Actions-1"></span><h3 class="section">2.1 Actions</h3>
+<span id="Actions-1"></span><h3 class="section">2.3 Actions</h3>
 
 <p>The Actions API provides a low-level interface for providing virtualised device input to the web browser. Conceptually, the Actions commands divide time into a series of ticks. The local end sends a series of actions which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of actions pointerDown, followed by pointerMove, and then pointerUp.
 </p>
@@ -485,7 +682,7 @@ See: <a href="https://www.w3.org/TR/webdriver1/#dfn-get-current-url">https://www
 
 <span id="index-WEBDRIVER_002dCLIENT_003aSTART_002dINTERACTIVE_002dSESSION"></span>
 <span id="WEBDRIVER_002dCLIENT_003aSTART_002dINTERACTIVE_002dSESSION-function"></span><dl>
-<dt id="index-START_002dINTERACTIVE_002dSESSION">WEBDRIVER-CLIENT: <strong>START-INTERACTIVE-SESSION</strong> <em>(capabilities)</em></dt>
+<dt id="index-START_002dINTERACTIVE_002dSESSION">WEBDRIVER-CLIENT: <strong>START-INTERACTIVE-SESSION</strong> <em>(&amp;optional capabilities)</em></dt>
 <dd>
 <p>Start an interactive session. Use this to interact with Selenium driver from a REPL.<br>
 <br>
@@ -541,7 +738,7 @@ See: <a href="https://www.w3.org/TR/webdriver1/#">https://www.w3.org/TR/webdrive
 Category: <var>Session</var>
 </p></dd></dl>
 
-<span id="Capabilities"></span><h4 class="subheading">Capabilities</h4>
+<span id="Capabilities-2"></span><h4 class="subheading">Capabilities</h4>
 
 <span id="index-WEBDRIVER_002dCLIENT_003aMERGE_002dCAPABILITIES"></span>
 <span id="WEBDRIVER_002dCLIENT_003aMERGE_002dCAPABILITIES-function"></span><dl>

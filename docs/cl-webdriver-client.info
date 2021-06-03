@@ -67,6 +67,8 @@ File: cl-webdriver-client.info,  Node: Usage,  Next: Installation,  Prev: Introd
 
 * Menu:
 
+* Sessions::
+* Capabilities::
 * Actions::
 
      ;; see examples/*.lisp and t/*.lisp
@@ -104,9 +106,235 @@ File: cl-webdriver-client.info,  Node: Usage,  Next: Installation,  Prev: Introd
           finally (print ouput)))
 
 
-File: cl-webdriver-client.info,  Node: Actions,  Up: Usage
+File: cl-webdriver-client.info,  Node: Sessions,  Next: Capabilities,  Up: Usage
 
-2.1 Actions
+2.1 Sessions
+============
+
+A session is equivalent to a single instantiation of a particular user
+agent, including all its child browsers.  WebDriver gives each session a
+unique session ID that can be used to differentiate one session from
+another, allowing multiple user agents to be controlled from a single
+HTTP server, and allowing sessions to be routed via a multiplexer (known
+as an intermediary node).
+
+   A WebDriver session represents the connection between a local end and
+a specific remote end.
+
+   A session is started when a New Session is invoked.  It is an error
+to send any commands before starting a session, or to continue to send
+commands after the session has been closed.  Maintaining session
+continuity between commands to the remote end requires passing a session
+ID.
+
+   A session is torn down at some later point; either explicitly by
+invoking Delete Session, or implicitly when Close Window is called at
+the last remaining top-level browsing context.
+
+   An intermediary node will maintain an associated session for each
+active session.  This is the session on the upstream neighbor that is
+created when the intermediary node executes the New Session command.
+Closing a session on an intermediary node will also close the session of
+the associated session.
+
+   All commands, except New Session and Status, have an associated
+current session, which is the session in which that command will run.
+
+
+File: cl-webdriver-client.info,  Node: Capabilities,  Next: Actions,  Prev: Sessions,  Up: Usage
+
+2.2 Capabilities
+================
+
+WebDriver capabilities are used to communicate the features supported by
+a session.  A client may also use capabilities to define which features
+it requires the driver to satisfy when creating a new session.
+
+   When a WebDriver session is created it returns a set of capabilities
+describing the negotiated, effective capabilities of the session.  Some
+of the capabilities included in this set are standard and shared between
+all browsers, but the set may also contain browser-specific capabilities
+and these are always prefixed.  Capabilities negotiation
+
+   Capabilities can be used to require a driver that supports a certain
+subset of features.  This can be used to require certain browser
+features, such as the ability to resize the window dimensions, but is
+also used in distributed environments to select a particular browser
+configuration from a matrix of choices.
+
+   Selecting a particular web browser or platform only makes sense when
+you use a remote WebDriver.  In this case the client makes contact with
+WebDriver through one or more intermediary nodes which negotiates which
+driver to return to you based on the capabilities it receives.
+
+   The capabilities object is a selection mechanism that limits which
+driver configurations the server will return.  If you request a Firefox
+instance using browserName and Firefox is not installed on the remote,
+or macOS from a remote that only supports Linux, you may be out of luck.
+But occasionally you may not care which specific operating system or web
+browser your session has: you just want a session that has some
+capability.
+
+   The selection process, or the capabilities negotiation, is done
+through alwaysMatch and firstMatch.
+
+* Menu:
+
+* alwaysMatch::
+* firstMatch::
+* Combining alwaysMatch and firstMatch::
+* List of capabilities::
+* Vendor-specific capabilities::
+
+
+File: cl-webdriver-client.info,  Node: alwaysMatch,  Next: firstMatch,  Up: Capabilities
+
+2.2.1 alwaysMatch
+-----------------
+
+As the name suggests, capabilities described inside the alwaysMatch
+capabilities object are features you require the session to have.  If
+the server can not provide what features you require, it will fail.
+
+   If for example you ask for Firefox version 62 on a system that only
+has 60 installed, the session creation will fail:
+
+{
+  "capabilities": {
+    "alwaysMatch": {
+      "browserName": "firefox",
+      "browserVersion": "60"
+    }
+  }
+}
+
+
+File: cl-webdriver-client.info,  Node: firstMatch,  Next: Combining alwaysMatch and firstMatch,  Prev: alwaysMatch,  Up: Capabilities
+
+2.2.2 firstMatch
+----------------
+
+The firstMatch field accepts an array of capabilities objects which will
+be matched in turn until one matches what the server can provide, or it
+will fail.
+
+   This can be useful when you want a driver that runs on macOS or
+Linux, but not Windows:
+
+{
+  "capabilities": {
+    "firstMatch": [
+      {"platformName": "macos"},
+      {"platformName": "linux"}
+    ]
+  }
+}
+
+
+
+File: cl-webdriver-client.info,  Node: Combining alwaysMatch and firstMatch,  Next: List of capabilities,  Prev: firstMatch,  Up: Capabilities
+
+2.2.3 Combining alwaysMatch and firstMatch
+------------------------------------------
+
+firstMatch can of course be combined with alwaysMatch to narrow down the
+selection.  If for example you a driver that runs on macOS or Linux but
+it has to be Firefox:
+
+{
+  "capabilities": {
+    "alwaysMatch": {
+      "browserName": "firefox"
+    },
+    "firstMatch": [
+      {"platformName": "macos"},
+      {"platformName": "linux"}
+    ]
+  }
+}
+
+   The previous example is exactly equivalent to putting the Firefox
+requirement in each firstMatch arm:
+
+
+{
+  "capabilities":{
+    "firstMatch":[
+      {"browserName": "firefox", "platformName":"macos"},
+      {"browserName": "firefox", "platformName":"linux"}
+    ]
+  }
+}
+
+
+   Which you choose of the two preceding examples is not important, but
+it can matter when pass along browser configuration.  To avoid
+unnecessarily repeating data, such as profiles, it is advisable to make
+use of alwaysMatch so that this data is only transmitted across the wire
+once:
+
+
+{
+  "capabilities": {
+    "alwaysMatch": {
+      "browserName": "firefox",
+      "moz:firefoxOptions": {
+        "profile": "<base64 encoded profile>",
+        "args": ["-headless"],
+        "prefs": {"dom.ipc.processCount": 8},
+        "log":{"level": "trace"}
+      }
+    },
+    "firstMatch": [
+      {"platformName": "macos"},
+      {"platformName": "linux"}
+    ]
+  }
+}
+
+
+
+File: cl-webdriver-client.info,  Node: List of capabilities,  Next: Vendor-specific capabilities,  Prev: Combining alwaysMatch and firstMatch,  Up: Capabilities
+
+2.2.4 List of capabilities
+--------------------------
+
+   * _browserName_
+   * _browserVersion_
+   * _platformName_
+   * _acceptInsecureCerts_ The acceptInsecureCerts capability
+     communicates whether expired or invalid TLS certificates are
+     checked when navigating.  If the capability is false, an insecure
+     certificate error will be returned as navigation encounters domains
+     with certificate problems.  Otherwise, self-signed or otherwise
+     invalid certificates will be implicitly trusted by the browser on
+     navigation.  The capability has effect for the lifetime of the
+     session.
+   * _pageLoadStrategy_
+   * _proxy_
+   * _setWindowRect_
+   * _timeouts_
+   * _unhandledPromptBehavior_
+
+
+File: cl-webdriver-client.info,  Node: Vendor-specific capabilities,  Prev: List of capabilities,  Up: Capabilities
+
+2.2.5 Vendor-specific capabilities
+----------------------------------
+
+In addition to the standard capabilities WebDriver allows third-parties
+to extend the set of capabilities to match their needs.  Browser vendors
+and suppliers of drivers typically use extension capabilities to provide
+configuration to the browser, but they can also be used by
+intermediaries for arbitrary blobs of information.
+
+   Firefox capabilities (moz:firefoxOptions) Chrome capabilities
+(goog:chromeOptions)
+
+
+File: cl-webdriver-client.info,  Node: Actions,  Prev: Capabilities,  Up: Usage
+
+2.3 Actions
 ===========
 
 The Actions API provides a low-level interface for providing virtualised
@@ -376,7 +604,7 @@ Navigation
 Session
 -------
 
- -- WEBDRIVER-CLIENT: START-INTERACTIVE-SESSION (capabilities)
+ -- WEBDRIVER-CLIENT: START-INTERACTIVE-SESSION (&optional capabilities)
 
      Start an interactive session.  Use this to interact with Selenium
      driver from a REPL.
@@ -1194,78 +1422,85 @@ Tag Table:
 Node: Top250
 Node: Introduction1160
 Node: Usage2022
-Node: Actions3068
-Node: Installation5435
-Node: Utils5936
-Node: Interactive session6672
-Node: Utils API conventions7148
-Node: Waiting for the reaction7802
-Node: Running tests8324
-Node: API8635
-Node: WEBDRIVER-CLIENT package8806
-Ref: WEBDRIVER-CLIENT:BACK function9293
-Ref: WEBDRIVER-CLIENT:PAGE-SOURCE function9690
-Ref: WEBDRIVER-CLIENT:PAGE-TITLE function9943
-Ref: WEBDRIVER-CLIENT:REFRESH function10221
-Ref: WEBDRIVER-CLIENT:SWITCH-TO-FRAME function10338
-Ref: WEBDRIVER-CLIENT:URL function10949
-Ref: WEBDRIVER-CLIENT:START-INTERACTIVE-SESSION function11153
-Ref: WEBDRIVER-CLIENT:WITH-SESSION macro11408
-Ref: WEBDRIVER-CLIENT:USE-SESSION function11610
-Ref: WEBDRIVER-CLIENT:STOP-INTERACTIVE-SESSION function11719
-Ref: WEBDRIVER-CLIENT:MAKE-SESSION function11830
-Ref: WEBDRIVER-CLIENT:DELETE-SESSION function12158
-Ref: WEBDRIVER-CLIENT:MERGE-CAPABILITIES function12293
-Ref: WEBDRIVER-CLIENT:*DEFAULT-CAPABILITIES* variable12405
-Ref: WEBDRIVER-CLIENT:MAKE-CAPABILITIES function12512
-Ref: WEBDRIVER-CLIENT:SCREENSHOT function12695
-Ref: WEBDRIVER-CLIENT:ELEMENT-SCREENSHOT function13114
-Ref: WEBDRIVER-CLIENT:KEY function13578
-Ref: WEBDRIVER-CLIENT:PERFORM-ACTIONS function13742
-Ref: WEBDRIVER-CLIENT:ACCEPT-ALERT function14723
-Ref: WEBDRIVER-CLIENT:ALERT-TEXT function14898
-Ref: WEBDRIVER-CLIENT:DISMISS-ALERT function15071
-Ref: WEBDRIVER-CLIENT:LOGS function15463
-Ref: WEBDRIVER-CLIENT:NO-SUCH-ELEMENT-ERROR class15631
-Ref: WEBDRIVER-CLIENT:MOUSE-MOVE-TO function15838
-Ref: WEBDRIVER-CLIENT:ELEMENT-ID function16345
-Ref: WEBDRIVER-CLIENT:MOUSE-CLICK function16396
-Ref: WEBDRIVER-CLIENT:LOG-TYPES function16826
-Ref: WEBDRIVER-CLIENT:EXECUTE-SCRIPT function17493
-Ref: WEBDRIVER-CLIENT:DELETE-ALL-COOKIES function18546
-Ref: WEBDRIVER-CLIENT:MAKE-COOKIE function18730
-Ref: WEBDRIVER-CLIENT:DELETE-COOKIE function18873
-Ref: WEBDRIVER-CLIENT:FIND-COOKIE function19090
-Ref: WEBDRIVER-CLIENT:COOKIE class19300
-Ref: WEBDRIVER-CLIENT:COOKIE function20579
-Ref: WEBDRIVER-CLIENT:ACTIVE-ELEMENT function20907
-Ref: WEBDRIVER-CLIENT:FIND-ELEMENTS function21378
-Ref: WEBDRIVER-CLIENT:ELEMENT-DISPLAYED function21700
-Ref: WEBDRIVER-CLIENT:ELEMENT-ATTRIBUTE function21918
-Ref: WEBDRIVER-CLIENT:ELEMENT-ENABLED function22083
-Ref: WEBDRIVER-CLIENT:ELEMENT-RECT function22286
-Ref: WEBDRIVER-CLIENT:ELEMENT-TEXT function23023
-Ref: WEBDRIVER-CLIENT:ELEMENT-TAGNAME function23395
-Ref: WEBDRIVER-CLIENT:FIND-ELEMENT function23531
-Ref: WEBDRIVER-CLIENT:ELEMENT-CLEAR function24909
-Ref: WEBDRIVER-CLIENT:ELEMENT-CLICK function25155
-Ref: WEBDRIVER-CLIENT:ELEMENT-SEND-KEYS function25698
-Ref: WEBDRIVER-CLIENT:CLOSE-CURRENT-WINDOW function26180
-Node: WEBDRIVER-CLIENT-UTILS package26307
-Ref: WEBDRIVER-CLIENT-UTILS:*TIMEOUT* variable26880
-Ref: WEBDRIVER-CLIENT-UTILS:*DEFAULT-ELEMENT-FUNC* variable26983
-Ref: WEBDRIVER-CLIENT-UTILS:ID function27240
-Ref: WEBDRIVER-CLIENT-UTILS:GET-COOKIE function27322
-Ref: WEBDRIVER-CLIENT-UTILS:FIND-ELEM function27411
-Ref: WEBDRIVER-CLIENT-UTILS:WAIT-FOR function27559
-Ref: WEBDRIVER-CLIENT-UTILS:CLASSNAME function27775
-Ref: WEBDRIVER-CLIENT-UTILS:TEXT function27871
-Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEY function27959
-Ref: WEBDRIVER-CLIENT-UTILS:CLASSLIST function28058
-Ref: WEBDRIVER-CLIENT-UTILS:ATTR function28155
-Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEYS function28252
-Ref: WEBDRIVER-CLIENT-UTILS:ELEM function28352
-Ref: WEBDRIVER-CLIENT-UTILS:CLICK function28659
-Node: Index28746
+Node: Sessions3098
+Node: Capabilities4604
+Node: alwaysMatch6573
+Node: firstMatch7148
+Node: Combining alwaysMatch and firstMatch7690
+Node: List of capabilities9210
+Node: Vendor-specific capabilities10090
+Node: Actions10696
+Node: Installation13084
+Node: Utils13585
+Node: Interactive session14321
+Node: Utils API conventions14797
+Node: Waiting for the reaction15451
+Node: Running tests15973
+Node: API16284
+Node: WEBDRIVER-CLIENT package16455
+Ref: WEBDRIVER-CLIENT:BACK function16942
+Ref: WEBDRIVER-CLIENT:PAGE-SOURCE function17339
+Ref: WEBDRIVER-CLIENT:PAGE-TITLE function17592
+Ref: WEBDRIVER-CLIENT:REFRESH function17870
+Ref: WEBDRIVER-CLIENT:SWITCH-TO-FRAME function17987
+Ref: WEBDRIVER-CLIENT:URL function18598
+Ref: WEBDRIVER-CLIENT:START-INTERACTIVE-SESSION function18802
+Ref: WEBDRIVER-CLIENT:WITH-SESSION macro19067
+Ref: WEBDRIVER-CLIENT:USE-SESSION function19269
+Ref: WEBDRIVER-CLIENT:STOP-INTERACTIVE-SESSION function19378
+Ref: WEBDRIVER-CLIENT:MAKE-SESSION function19489
+Ref: WEBDRIVER-CLIENT:DELETE-SESSION function19817
+Ref: WEBDRIVER-CLIENT:MERGE-CAPABILITIES function19952
+Ref: WEBDRIVER-CLIENT:*DEFAULT-CAPABILITIES* variable20064
+Ref: WEBDRIVER-CLIENT:MAKE-CAPABILITIES function20171
+Ref: WEBDRIVER-CLIENT:SCREENSHOT function20354
+Ref: WEBDRIVER-CLIENT:ELEMENT-SCREENSHOT function20773
+Ref: WEBDRIVER-CLIENT:KEY function21237
+Ref: WEBDRIVER-CLIENT:PERFORM-ACTIONS function21401
+Ref: WEBDRIVER-CLIENT:ACCEPT-ALERT function22382
+Ref: WEBDRIVER-CLIENT:ALERT-TEXT function22557
+Ref: WEBDRIVER-CLIENT:DISMISS-ALERT function22730
+Ref: WEBDRIVER-CLIENT:LOGS function23122
+Ref: WEBDRIVER-CLIENT:NO-SUCH-ELEMENT-ERROR class23290
+Ref: WEBDRIVER-CLIENT:MOUSE-MOVE-TO function23497
+Ref: WEBDRIVER-CLIENT:ELEMENT-ID function24004
+Ref: WEBDRIVER-CLIENT:MOUSE-CLICK function24055
+Ref: WEBDRIVER-CLIENT:LOG-TYPES function24485
+Ref: WEBDRIVER-CLIENT:EXECUTE-SCRIPT function25152
+Ref: WEBDRIVER-CLIENT:DELETE-ALL-COOKIES function26205
+Ref: WEBDRIVER-CLIENT:MAKE-COOKIE function26389
+Ref: WEBDRIVER-CLIENT:DELETE-COOKIE function26532
+Ref: WEBDRIVER-CLIENT:FIND-COOKIE function26749
+Ref: WEBDRIVER-CLIENT:COOKIE class26959
+Ref: WEBDRIVER-CLIENT:COOKIE function28238
+Ref: WEBDRIVER-CLIENT:ACTIVE-ELEMENT function28566
+Ref: WEBDRIVER-CLIENT:FIND-ELEMENTS function29037
+Ref: WEBDRIVER-CLIENT:ELEMENT-DISPLAYED function29359
+Ref: WEBDRIVER-CLIENT:ELEMENT-ATTRIBUTE function29577
+Ref: WEBDRIVER-CLIENT:ELEMENT-ENABLED function29742
+Ref: WEBDRIVER-CLIENT:ELEMENT-RECT function29945
+Ref: WEBDRIVER-CLIENT:ELEMENT-TEXT function30682
+Ref: WEBDRIVER-CLIENT:ELEMENT-TAGNAME function31054
+Ref: WEBDRIVER-CLIENT:FIND-ELEMENT function31190
+Ref: WEBDRIVER-CLIENT:ELEMENT-CLEAR function32568
+Ref: WEBDRIVER-CLIENT:ELEMENT-CLICK function32814
+Ref: WEBDRIVER-CLIENT:ELEMENT-SEND-KEYS function33357
+Ref: WEBDRIVER-CLIENT:CLOSE-CURRENT-WINDOW function33839
+Node: WEBDRIVER-CLIENT-UTILS package33966
+Ref: WEBDRIVER-CLIENT-UTILS:*TIMEOUT* variable34539
+Ref: WEBDRIVER-CLIENT-UTILS:*DEFAULT-ELEMENT-FUNC* variable34642
+Ref: WEBDRIVER-CLIENT-UTILS:ID function34899
+Ref: WEBDRIVER-CLIENT-UTILS:GET-COOKIE function34981
+Ref: WEBDRIVER-CLIENT-UTILS:FIND-ELEM function35070
+Ref: WEBDRIVER-CLIENT-UTILS:WAIT-FOR function35218
+Ref: WEBDRIVER-CLIENT-UTILS:CLASSNAME function35434
+Ref: WEBDRIVER-CLIENT-UTILS:TEXT function35530
+Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEY function35618
+Ref: WEBDRIVER-CLIENT-UTILS:CLASSLIST function35717
+Ref: WEBDRIVER-CLIENT-UTILS:ATTR function35814
+Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEYS function35911
+Ref: WEBDRIVER-CLIENT-UTILS:ELEM function36011
+Ref: WEBDRIVER-CLIENT-UTILS:CLICK function36318
+Node: Index36405
 
 End Tag Table
