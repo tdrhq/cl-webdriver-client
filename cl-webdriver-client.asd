@@ -15,6 +15,6 @@
 		 (:file "user-prompts")
 		 (:file "actions")
                  (:file "http")
-                 (:file "selenium")
+                 (:file "webdriver")
 		 (:file "utils"))))
   :in-order-to ((test-op (test-op cl-webdriver-client-test))))
