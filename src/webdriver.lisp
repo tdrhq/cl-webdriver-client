@@ -33,7 +33,7 @@ See: https://www.w3.org/TR/webdriver2/#get-title ."
   (http-get-value (session-path session "/title")))
 
 (defun page-source (&key (session *session*))
-  "Returns a string serialization of the DOM of the current browsing context active document. 
+  "Returns a string serialization of the DOM of the current browsing context active document.
 
 Category: Navigation
 See: https://www.w3.org/TR/webdriver1/#get-page-source"
@@ -48,12 +48,12 @@ See: https://www.w3.org/TR/webdriver1/#get-page-source"
   (print-unreadable-object (element stream :type t :identity nil)
     (with-slots (id) element
       (format stream
-            "{id:~a}~a"
-            id
-            (let ((html-id (element-attribute element "id")))
-	      (or (and (not (alexandria:emptyp html-id))
-		       (format nil " id=~a" html-id))
-		  ""))))))
+              "{id:~a}~a"
+              id
+              (let ((html-id (element-attribute element "id")))
+                (or (and (not (alexandria:emptyp html-id))
+                         (format nil " id=~a" html-id))
+                    ""))))))
 
 (defun handle-find-error (err &key value by)
   "Signal the correct type of error depending on PROTOCOL-ERROR-STATUS.
