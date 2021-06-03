@@ -27,7 +27,13 @@
 @cindex cl-webdriver-client
 @cindex cl-webdriver-client
 
-CL Webdriver Client is a binding library to the Selenium 4.0 that implements the @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
+CL Webdriver Client is client library for WebDriver.
+
+WebDriver is a remote control interface that enables introspection and control of user agents. It provides a platform- and language-neutral wire protocol as a way for out-of-process programs to remotely instruct the behavior of web browsers.
+
+Provided is a set of interfaces to discover and manipulate DOM elements in web documents and to control the behavior of a user agent. It is primarily intended to allow web authors to write tests that automate a user agent from a separate controlling process, but may also be used in such a way as to allow in-browser scripts to control a — possibly separate — browser.
+
+See @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
 
 @menu
 * Introduction::
@@ -42,9 +48,13 @@ CL Webdriver Client is a binding library to the Selenium 4.0 that implements the
 @node Introduction
 @chapter Introduction
 
-Common Lisp Webdriver Client is a binding library to the Selenium 4.0 that implements the @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
+CL Webdriver Client is client library for WebDriver.
 
-This software is in development. The APIs will be likely to change.
+WebDriver is a remote control interface that enables introspection and control of user agents. It provides a platform- and language-neutral wire protocol as a way for out-of-process programs to remotely instruct the behavior of web browsers.
+
+Provided is a set of interfaces to discover and manipulate DOM elements in web documents and to control the behavior of a user agent. It is primarily intended to allow web authors to write tests that automate a user agent from a separate controlling process, but may also be used in such a way as to allow in-browser scripts to control a — possibly separate — browser.
+
+See @url{https://www.w3.org/TR/webdriver, W3C Webdriver spec}.
 
 @node Usage
 @chapter Usage
@@ -239,7 +249,7 @@ Timeout defaults to 30 seconds. You can globally change it:
 @lisp
 (ql:quickload '(:cl-selenium :prove))
 (setf prove:*enable-colors* nil)
-(prove:run :cl-selenium-test)
+(prove:run :cl-webdriver-client-test)
 @end lisp
 
 @heading Shell

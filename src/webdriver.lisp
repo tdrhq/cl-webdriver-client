@@ -1,7 +1,7 @@
 (in-package :webdriver-client)
 
 (defun webdriver-status ()
-  "Get Selenium Webdriver status information"
+  "Get WebDriver status information"
   (http-get "/status"))
 
 (defun (setf url) (url &key (session *session*))

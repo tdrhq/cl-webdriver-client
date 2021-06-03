@@ -97,7 +97,13 @@ Next: <a href="#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [
 <span id="index-cl_002dwebdriver_002dclient"></span>
 <span id="index-cl_002dwebdriver_002dclient-1"></span>
 
-<p>CL Webdriver Client is a binding library to the Selenium 4.0 that implements the <a href="https://www.w3.org/TR/webdriver">W3C Webdriver spec</a>.
+<p>CL Webdriver Client is client library for WebDriver.
+</p>
+<p>WebDriver is a remote control interface that enables introspection and control of user agents. It provides a platform- and language-neutral wire protocol as a way for out-of-process programs to remotely instruct the behavior of web browsers.
+</p>
+<p>Provided is a set of interfaces to discover and manipulate DOM elements in web documents and to control the behavior of a user agent. It is primarily intended to allow web authors to write tests that automate a user agent from a separate controlling process, but may also be used in such a way as to allow in-browser scripts to control a â possibly separate â browser.
+</p>
+<p>See <a href="https://www.w3.org/TR/webdriver">W3C Webdriver spec</a>.
 </p>
 <table class="menu" border="0" cellspacing="0">
 <tr><td align="left" valign="top">&bull; <a href="#Introduction" accesskey="1">Introduction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
@@ -122,9 +128,13 @@ Next: <a href="#Usage" accesskey="n" rel="next">Usage</a>, Previous: <a href="#T
 </div>
 <span id="Introduction-1"></span><h2 class="chapter">1 Introduction</h2>
 
-<p>Common Lisp Webdriver Client is a binding library to the Selenium 4.0 that implements the <a href="https://www.w3.org/TR/webdriver">W3C Webdriver spec</a>.
+<p>CL Webdriver Client is client library for WebDriver.
 </p>
-<p>This software is in development. The APIs will be likely to change.
+<p>WebDriver is a remote control interface that enables introspection and control of user agents. It provides a platform- and language-neutral wire protocol as a way for out-of-process programs to remotely instruct the behavior of web browsers.
+</p>
+<p>Provided is a set of interfaces to discover and manipulate DOM elements in web documents and to control the behavior of a user agent. It is primarily intended to allow web authors to write tests that automate a user agent from a separate controlling process, but may also be used in such a way as to allow in-browser scripts to control a â possibly separate â browser.
+</p>
+<p>See <a href="https://www.w3.org/TR/webdriver">W3C Webdriver spec</a>.
 </p>
 <hr>
 <span id="Usage"></span><div class="header">
@@ -229,7 +239,7 @@ Next: <a href="#Utils" accesskey="n" rel="next">Utils</a>, Previous: <a href="#U
 <span id="Installation-1"></span><h2 class="chapter">3 Installation</h2>
 
 <div class="example">
-<pre class="example">git clone https://github.com/TatriX/cl-webdriver-client ~/quicklisp/local-projects/
+<pre class="example">git clone https://github.com/copyleft/cl-webdriver-client ~/quicklisp/local-projects/
 (ql:quickload :cl-webdriver-client)
 </pre></div>
 
@@ -362,7 +372,7 @@ Previous: <a href="#Waiting-for-the-reaction" accesskey="p" rel="prev">Waiting f
 <div class="lisp">
 <pre class="lisp">  <span class="paren1">(<span class="lisp-bg">ql:quickload '<span class="paren2">(<span class="lisp-bg"><span class="keyword">:cl-selenium</span> <span class="keyword">:prove</span></span>)</span></span>)</span>
   <span class="paren1">(<span class="lisp-bg">setf <span class="special">prove:*enable-colors*</span> nil</span>)</span>
-  <span class="paren1">(<span class="lisp-bg">prove:run <span class="keyword">:cl-selenium-test</span></span>)</span>
+  <span class="paren1">(<span class="lisp-bg">prove:run <span class="keyword">:cl-webdriver-client-test</span></span>)</span>
 </pre></div>
 
 <span id="Shell"></span><h3 class="heading">Shell</h3>

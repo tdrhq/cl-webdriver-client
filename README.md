@@ -1,14 +1,14 @@
 # CL WebDriver Client
 
-This is a fork of CL Selenium WebDriver, a binding library to the Selenium.
+CL Webdriver Client is client library for WebDriver.
 
-This fork implements version 4.0 of W3C Webdriver API.
+WebDriver is a remote control interface that enables introspection and control of user agents. It provides a platform- and language-neutral wire protocol as a way for out-of-process programs to remotely instruct the behavior of web browsers.
 
-See: https://www.w3.org/TR/webdriver1 .
+Provided is a set of interfaces to discover and manipulate DOM elements in web documents and to control the behavior of a user agent. It is primarily intended to allow web authors to write tests that automate a user agent from a separate controlling process, but may also be used in such a way as to allow in-browser scripts to control a — possibly separate — browser.
 
-## Warning
+See [W3C WebDriver spec](https://www.w3.org/TR/webdriver "W3C WebDriver spec"), W3C Webdriver spec}.
 
-This software is in development. The APIs will be likely to change.
+NOTE: This is a fork of CL Selenium WebDriver, a binding library to the Selenium.
 
 ## Usage
 
@@ -16,8 +16,7 @@ This software is in development. The APIs will be likely to change.
 ;; see examples/*.lisp and t/*.lisp
 (in-package :cl-user)
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (ql:quickload :cl-webdriver-client))
+(ql:quickload :cl-webdriver-client)
 
 (defpackage go-test
   (:use :cl :webdriver-client))

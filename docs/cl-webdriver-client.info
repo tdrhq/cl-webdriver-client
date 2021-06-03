@@ -12,8 +12,21 @@ File: cl-webdriver-client.info,  Node: Top,  Next: Introduction,  Up: (dir)
 Top
 ***
 
-CL Webdriver Client is a binding library to the Selenium 4.0 that
-implements the W3C Webdriver spec (https://www.w3.org/TR/webdriver).
+CL Webdriver Client is client library for WebDriver.
+
+   WebDriver is a remote control interface that enables introspection
+and control of user agents.  It provides a platform- and
+language-neutral wire protocol as a way for out-of-process programs to
+remotely instruct the behavior of web browsers.
+
+   Provided is a set of interfaces to discover and manipulate DOM
+elements in web documents and to control the behavior of a user agent.
+It is primarily intended to allow web authors to write tests that
+automate a user agent from a separate controlling process, but may also
+be used in such a way as to allow in-browser scripts to control a —
+possibly separate — browser.
+
+   See W3C Webdriver spec (https://www.w3.org/TR/webdriver).
 
 * Menu:
 
@@ -30,11 +43,21 @@ File: cl-webdriver-client.info,  Node: Introduction,  Next: Usage,  Prev: Top,  
 1 Introduction
 **************
 
-Common Lisp Webdriver Client is a binding library to the Selenium 4.0
-that implements the W3C Webdriver spec
-(https://www.w3.org/TR/webdriver).
+CL Webdriver Client is client library for WebDriver.
 
-   This software is in development.  The APIs will be likely to change.
+   WebDriver is a remote control interface that enables introspection
+and control of user agents.  It provides a platform- and
+language-neutral wire protocol as a way for out-of-process programs to
+remotely instruct the behavior of web browsers.
+
+   Provided is a set of interfaces to discover and manipulate DOM
+elements in web documents and to control the behavior of a user agent.
+It is primarily intended to allow web authors to write tests that
+automate a user agent from a separate controlling process, but may also
+be used in such a way as to allow in-browser scripts to control a —
+possibly separate — browser.
+
+   See W3C Webdriver spec (https://www.w3.org/TR/webdriver).
 
 
 File: cl-webdriver-client.info,  Node: Usage,  Next: Installation,  Prev: Introduction,  Up: Top
@@ -148,7 +171,7 @@ File: cl-webdriver-client.info,  Node: Installation,  Next: Utils,  Prev: Usage,
 3 Installation
 **************
 
-     git clone https://github.com/TatriX/cl-webdriver-client ~/quicklisp/local-projects/
+     git clone https://github.com/copyleft/cl-webdriver-client ~/quicklisp/local-projects/
      (ql:quickload :cl-webdriver-client)
 
    You need a running instance of selenium-server-standalone.
@@ -256,7 +279,7 @@ REPL
 
      (ql:quickload '(:cl-selenium :prove))
      (setf prove:*enable-colors* nil)
-     (prove:run :cl-selenium-test)
+     (prove:run :cl-webdriver-client-test)
 
 Shell
 =====
@@ -1138,77 +1161,77 @@ File: cl-webdriver-client.info,  Node: Index,  Prev: API,  Up: Top
 
 Tag Table:
 Node: Top250
-Node: Introduction556
-Node: Usage896
-Node: Actions1942
-Node: Installation4309
-Node: Utils4808
-Node: Interactive session5544
-Node: Utils API conventions6020
-Node: Waiting for the reaction6674
-Node: Running tests7196
-Node: API7499
-Node: WEBDRIVER-CLIENT package7670
-Ref: WEBDRIVER-CLIENT:ELEMENT-ID function8163
-Ref: WEBDRIVER-CLIENT:NO-SUCH-ELEMENT-ERROR class8214
-Ref: WEBDRIVER-CLIENT:LOG-TYPES function8421
-Ref: WEBDRIVER-CLIENT:MOUSE-CLICK function9051
-Ref: WEBDRIVER-CLIENT:MOUSE-MOVE-TO function9481
-Ref: WEBDRIVER-CLIENT:LOGS function9988
-Ref: WEBDRIVER-CLIENT:ELEMENT-TEXT function10175
-Ref: WEBDRIVER-CLIENT:ELEMENT-ENABLED function10547
-Ref: WEBDRIVER-CLIENT:ELEMENT-RECT function10750
-Ref: WEBDRIVER-CLIENT:ELEMENT-TAGNAME function11487
-Ref: WEBDRIVER-CLIENT:ACTIVE-ELEMENT function11623
-Ref: WEBDRIVER-CLIENT:FIND-ELEMENT function12094
-Ref: WEBDRIVER-CLIENT:FIND-ELEMENTS function13431
-Ref: WEBDRIVER-CLIENT:ELEMENT-DISPLAYED function13753
-Ref: WEBDRIVER-CLIENT:ELEMENT-ATTRIBUTE function13971
-Ref: WEBDRIVER-CLIENT:DELETE-SESSION function14153
-Ref: WEBDRIVER-CLIENT:START-INTERACTIVE-SESSION function14261
-Ref: WEBDRIVER-CLIENT:STOP-INTERACTIVE-SESSION function14522
-Ref: WEBDRIVER-CLIENT:USE-SESSION function14633
-Ref: WEBDRIVER-CLIENT:WITH-SESSION macro14742
-Ref: WEBDRIVER-CLIENT:MAKE-SESSION function14952
-Ref: WEBDRIVER-CLIENT:ELEMENT-SEND-KEYS function15454
-Ref: WEBDRIVER-CLIENT:ELEMENT-CLICK function15919
-Ref: WEBDRIVER-CLIENT:ELEMENT-CLEAR function16462
-Ref: WEBDRIVER-CLIENT:PAGE-TITLE function16731
-Ref: WEBDRIVER-CLIENT:PAGE-SOURCE function17009
-Ref: WEBDRIVER-CLIENT:SWITCH-TO-FRAME function17262
-Ref: WEBDRIVER-CLIENT:BACK function17873
-Ref: WEBDRIVER-CLIENT:REFRESH function18270
-Ref: WEBDRIVER-CLIENT:URL function18387
-Ref: WEBDRIVER-CLIENT:COOKIE class18591
-Ref: WEBDRIVER-CLIENT:COOKIE function19870
-Ref: WEBDRIVER-CLIENT:DELETE-COOKIE function20179
-Ref: WEBDRIVER-CLIENT:DELETE-ALL-COOKIES function20396
-Ref: WEBDRIVER-CLIENT:MAKE-COOKIE function20580
-Ref: WEBDRIVER-CLIENT:FIND-COOKIE function20723
-Ref: WEBDRIVER-CLIENT:EXECUTE-SCRIPT function20970
-Ref: WEBDRIVER-CLIENT:SCREENSHOT function22037
-Ref: WEBDRIVER-CLIENT:ELEMENT-SCREENSHOT function22456
-Ref: WEBDRIVER-CLIENT:DISMISS-ALERT function22930
-Ref: WEBDRIVER-CLIENT:ACCEPT-ALERT function23293
-Ref: WEBDRIVER-CLIENT:ALERT-TEXT function23468
-Ref: WEBDRIVER-CLIENT:KEY function23658
-Ref: WEBDRIVER-CLIENT:PERFORM-ACTIONS function23822
-Ref: WEBDRIVER-CLIENT:CLOSE-CURRENT-WINDOW function24793
-Node: WEBDRIVER-CLIENT-UTILS package24920
-Ref: WEBDRIVER-CLIENT-UTILS:*TIMEOUT* variable25493
-Ref: WEBDRIVER-CLIENT-UTILS:*DEFAULT-ELEMENT-FUNC* variable25596
-Ref: WEBDRIVER-CLIENT-UTILS:ID function25853
-Ref: WEBDRIVER-CLIENT-UTILS:GET-COOKIE function25935
-Ref: WEBDRIVER-CLIENT-UTILS:FIND-ELEM function26024
-Ref: WEBDRIVER-CLIENT-UTILS:WAIT-FOR function26172
-Ref: WEBDRIVER-CLIENT-UTILS:CLASSNAME function26388
-Ref: WEBDRIVER-CLIENT-UTILS:TEXT function26484
-Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEY function26572
-Ref: WEBDRIVER-CLIENT-UTILS:CLASSLIST function26671
-Ref: WEBDRIVER-CLIENT-UTILS:ATTR function26768
-Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEYS function26865
-Ref: WEBDRIVER-CLIENT-UTILS:ELEM function26965
-Ref: WEBDRIVER-CLIENT-UTILS:CLICK function27272
-Node: Index27359
+Node: Introduction1160
+Node: Usage2022
+Node: Actions3068
+Node: Installation5435
+Node: Utils5936
+Node: Interactive session6672
+Node: Utils API conventions7148
+Node: Waiting for the reaction7802
+Node: Running tests8324
+Node: API8635
+Node: WEBDRIVER-CLIENT package8806
+Ref: WEBDRIVER-CLIENT:ELEMENT-ID function9299
+Ref: WEBDRIVER-CLIENT:NO-SUCH-ELEMENT-ERROR class9350
+Ref: WEBDRIVER-CLIENT:LOG-TYPES function9557
+Ref: WEBDRIVER-CLIENT:MOUSE-CLICK function10187
+Ref: WEBDRIVER-CLIENT:MOUSE-MOVE-TO function10617
+Ref: WEBDRIVER-CLIENT:LOGS function11124
+Ref: WEBDRIVER-CLIENT:ELEMENT-TEXT function11311
+Ref: WEBDRIVER-CLIENT:ELEMENT-ENABLED function11683
+Ref: WEBDRIVER-CLIENT:ELEMENT-RECT function11886
+Ref: WEBDRIVER-CLIENT:ELEMENT-TAGNAME function12623
+Ref: WEBDRIVER-CLIENT:ACTIVE-ELEMENT function12759
+Ref: WEBDRIVER-CLIENT:FIND-ELEMENT function13230
+Ref: WEBDRIVER-CLIENT:FIND-ELEMENTS function14567
+Ref: WEBDRIVER-CLIENT:ELEMENT-DISPLAYED function14889
+Ref: WEBDRIVER-CLIENT:ELEMENT-ATTRIBUTE function15107
+Ref: WEBDRIVER-CLIENT:DELETE-SESSION function15289
+Ref: WEBDRIVER-CLIENT:START-INTERACTIVE-SESSION function15397
+Ref: WEBDRIVER-CLIENT:STOP-INTERACTIVE-SESSION function15658
+Ref: WEBDRIVER-CLIENT:USE-SESSION function15769
+Ref: WEBDRIVER-CLIENT:WITH-SESSION macro15878
+Ref: WEBDRIVER-CLIENT:MAKE-SESSION function16088
+Ref: WEBDRIVER-CLIENT:ELEMENT-SEND-KEYS function16590
+Ref: WEBDRIVER-CLIENT:ELEMENT-CLICK function17055
+Ref: WEBDRIVER-CLIENT:ELEMENT-CLEAR function17598
+Ref: WEBDRIVER-CLIENT:PAGE-TITLE function17867
+Ref: WEBDRIVER-CLIENT:PAGE-SOURCE function18145
+Ref: WEBDRIVER-CLIENT:SWITCH-TO-FRAME function18398
+Ref: WEBDRIVER-CLIENT:BACK function19009
+Ref: WEBDRIVER-CLIENT:REFRESH function19406
+Ref: WEBDRIVER-CLIENT:URL function19523
+Ref: WEBDRIVER-CLIENT:COOKIE class19727
+Ref: WEBDRIVER-CLIENT:COOKIE function21006
+Ref: WEBDRIVER-CLIENT:DELETE-COOKIE function21315
+Ref: WEBDRIVER-CLIENT:DELETE-ALL-COOKIES function21532
+Ref: WEBDRIVER-CLIENT:MAKE-COOKIE function21716
+Ref: WEBDRIVER-CLIENT:FIND-COOKIE function21859
+Ref: WEBDRIVER-CLIENT:EXECUTE-SCRIPT function22106
+Ref: WEBDRIVER-CLIENT:SCREENSHOT function23173
+Ref: WEBDRIVER-CLIENT:ELEMENT-SCREENSHOT function23592
+Ref: WEBDRIVER-CLIENT:DISMISS-ALERT function24066
+Ref: WEBDRIVER-CLIENT:ACCEPT-ALERT function24429
+Ref: WEBDRIVER-CLIENT:ALERT-TEXT function24604
+Ref: WEBDRIVER-CLIENT:KEY function24794
+Ref: WEBDRIVER-CLIENT:PERFORM-ACTIONS function24958
+Ref: WEBDRIVER-CLIENT:CLOSE-CURRENT-WINDOW function25929
+Node: WEBDRIVER-CLIENT-UTILS package26056
+Ref: WEBDRIVER-CLIENT-UTILS:*TIMEOUT* variable26629
+Ref: WEBDRIVER-CLIENT-UTILS:*DEFAULT-ELEMENT-FUNC* variable26732
+Ref: WEBDRIVER-CLIENT-UTILS:ID function26989
+Ref: WEBDRIVER-CLIENT-UTILS:GET-COOKIE function27071
+Ref: WEBDRIVER-CLIENT-UTILS:FIND-ELEM function27160
+Ref: WEBDRIVER-CLIENT-UTILS:WAIT-FOR function27308
+Ref: WEBDRIVER-CLIENT-UTILS:CLASSNAME function27524
+Ref: WEBDRIVER-CLIENT-UTILS:TEXT function27620
+Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEY function27708
+Ref: WEBDRIVER-CLIENT-UTILS:CLASSLIST function27807
+Ref: WEBDRIVER-CLIENT-UTILS:ATTR function27904
+Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEYS function28001
+Ref: WEBDRIVER-CLIENT-UTILS:ELEM function28101
+Ref: WEBDRIVER-CLIENT-UTILS:CLICK function28408
+Node: Index28495
 
 End Tag Table
