@@ -3,7 +3,11 @@
 (defpackage webdriver-client
   (:use :cl :assoc-utils)
   (:nicknames :webdriver)
-  (:export :selenium-status
+  (:export :*default-capabilities*
+           :make-capabilities
+           :merge-capabilities
+   
+           :selenium-status
 	   
            :make-session
            :delete-session

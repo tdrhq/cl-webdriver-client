@@ -8,6 +8,7 @@
                 :components
                 ((:file "package")
                  (:file "errors")
+		 (:file "capabilities")
                  (:file "session")
 		 (:file "cookie")
                  (:file "keys")

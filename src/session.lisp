@@ -1,5 +1,7 @@
 (in-package :webdriver-client)
 
+(defvar *session* nil "The current Selenium WebDriver session.")
+
 (defclass session ()
   ((id :initarg :id
        :initform (error "Must supply an id")
@@ -8,8 +10,6 @@
 
 The server should maintain one browser per session. Commands sent to a session will be directed to the corresponding browser."))
 
-(defvar *session* nil "The current Selenium WebDriver session.")
-
 (defmethod print-object ((session session) stream)
   (print-unreadable-object (session stream :type t :identity t)
     (write-string (session-id session) stream)))
@@ -17,13 +17,7 @@ The server should maintain one browser per session. Commands sent to a session w
 (defun session-path (session fmt &rest args)
   (format nil "/session/~a~a" (session-id session) (apply #'format nil fmt args)))
 
-(defun make-session (&key
-                       (browser-name :chrome) ; TODO: autodetect?
-                       browser-version
-                       (platform-name "Linux") ; TODO: autodetect?
-                       platform-version
-                       accept-ssl-certs
-                       additional-capabilities)
+(defun make-session (capabilities)
   "Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.
 
 Category: Session
@@ -31,21 +25,7 @@ See: https://www.w3.org/TR/webdriver1/#new-session .
 See: https://www.w3.org/TR/webdriver1/#capabilities ."
   (let ((response (http-post "/session"
                              :session-id nil
-			     :capabilities `((always-match .
-					      ((platform-name . ,platform-name)
-					       ,@additional-capabilities))
-					     (first-match .
-					      #( ((browser-name . ,browser-name))
-						)))
-			     ;; :desired-capabilities `((browser-name . ,browser-name)
-			     ;; 			    (browser-version . ,browser-version)
-			     ;; 			    (platform-name . ,platform-name)
-			     ;; 			    (platform-version . ,platform-version)
-			     ;; 			    (accept-ssl-certs . ,accept-ssl-certs)
-			     ;; 			     ,@additional-capabilities)
-
-			     )))
-    ;; TODO: find/write json -> clos
+			     :capabilities (or capabilities *default-capabilities*))))
     (make-instance 'session
                    :id (aget (aget response :value) :session-id))))
 
@@ -61,7 +41,7 @@ Category: Session"
 Category: Session"
   (setf *session* session))
 
-(defmacro with-session ((&rest capabilities) &body body)
+(defmacro with-session (capabilities &body body)
   "Execute BODY inside a Selenium session.
 
 Category: Session
@@ -70,20 +50,20 @@ See: MAKE-SESSION"
     `(let (,session)
        (unwind-protect
             (progn
-              (setf ,session (make-session ,@capabilities))
+              (setf ,session (make-session ,capabilities))
               (let ((*session* ,session))
                 ,@body))
          (when ,session
            (delete-session ,session))))))
 
-(defun start-interactive-session (&rest capabilities)
+(defun start-interactive-session (capabilities)
   "Start an interactive session. Use this to interact with Selenium driver from a REPL.
 
 Category: Session
 See: MAKE-SESSION"
   (when *session*
     (delete-session *session*))
-  (setf *session* (apply #'make-session  capabilities)))
+  (setf *session* (make-session capabilities)))
 
 (defun stop-interactive-session ()
   "Stop an interactive session.

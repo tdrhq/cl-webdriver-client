@@ -19,8 +19,9 @@
   (format nil "file://~a" (asdf:system-relative-pathname :cl-webdriver-client-test (format nil "t/web/~a" name))))
 
 (defmacro with-test-session (&body body)
-  `(with-session (:additional-capabilities *headless*)
-     ,@body))
+  `(with-session ',(merge-capabilities *default-capabilities*
+		    (make-capabilities (list (webdriver::chrome-args "--headless"))))
+       ,@body))
 
 (unless (probe-file (asdf:system-relative-pathname :cl-webdriver-client-test (format nil "t/web/")))
   (unless (probe-file +test-pages-filepath+)
