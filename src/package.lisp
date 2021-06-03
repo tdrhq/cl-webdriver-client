@@ -90,4 +90,7 @@ For documentation see:
   (:import-from :alexandria
                 :assoc-value
                 :rcurry)
-  (:documentation "Package with the purpose of reducing boilerplate."))
+  (:documentation "Package with the purpose of reducing boilerplate.
+
+The exported definitions work with an implicit element. The default implicit element is the current active element. So, it is not neccesary to pass the element you are working with around most of the time.
+"))

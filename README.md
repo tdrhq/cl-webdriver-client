@@ -64,7 +64,11 @@ java -jar selenium-server-standalone.jar standalone
 
 ## Utils
 
-There is a `:webdriver-client-utils` package which should reduce boilerplate. For example:
+There's a `webdriver-client-utils` package which should reduce boilerplate. 
+
+The exported definitions work with an implicit element. The default implicit element is the current active element. So, it is not neccesary to pass the element you are working with around most of the time.
+
+For example:
 
 ```lisp
 (defpackage my-test

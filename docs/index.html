@@ -406,90 +406,37 @@ For documentation see:<br>
 
 <span id="External-definitions"></span><h3 class="heading">External definitions</h3>
 
-<span id="Session"></span><h4 class="subheading">Session</h4>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aUSE_002dSESSION"></span>
-<span id="WEBDRIVER_002dCLIENT_003aUSE_002dSESSION-function"></span><dl>
-<dt id="index-USE_002dSESSION">WEBDRIVER-CLIENT: <strong>USE-SESSION</strong> <em>(session)</em></dt>
-<dd>
-<p>Make <var>SESSION</var> the current <var>session</var>.<br>
-<br>
-Category: <var>Session</var>
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION"></span>
-<span id="WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function"></span><dl>
-<dt id="index-MAKE_002dSESSION">WEBDRIVER-CLIENT: <strong>MAKE-SESSION</strong> <em>(&amp;key (browser-name :chrome) browser-version (platform-name &quot;Linux&quot;) platform-version accept-ssl-certs additional-capabilities)</em></dt>
-<dd>
-<p>Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.<br>
-<br>
-Category: Session<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#new-session">https://www.w3.org/TR/webdriver1/#new-session</a> .<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#capabilities">https://www.w3.org/TR/webdriver1/#capabilities</a> .
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aDELETE_002dSESSION"></span>
-<span id="WEBDRIVER_002dCLIENT_003aDELETE_002dSESSION-function"></span><dl>
-<dt id="index-DELETE_002dSESSION">WEBDRIVER-CLIENT: <strong>DELETE-SESSION</strong> <em>(session)</em></dt>
-<dd>
-<p>Delete the WebDriver <var>SESSION</var>.<br>
-<br>
-Category: <var>Session</var>
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aSTART_002dINTERACTIVE_002dSESSION"></span>
-<span id="WEBDRIVER_002dCLIENT_003aSTART_002dINTERACTIVE_002dSESSION-function"></span><dl>
-<dt id="index-START_002dINTERACTIVE_002dSESSION">WEBDRIVER-CLIENT: <strong>START-INTERACTIVE-SESSION</strong> <em>(&amp;rest capabilities)</em></dt>
-<dd>
-<p>Start an interactive session. Use this to interact with Selenium driver from a REPL.<br>
-<br>
-Category: Session<br>
-See: <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aSTOP_002dINTERACTIVE_002dSESSION"></span>
-<span id="WEBDRIVER_002dCLIENT_003aSTOP_002dINTERACTIVE_002dSESSION-function"></span><dl>
-<dt id="index-STOP_002dINTERACTIVE_002dSESSION">WEBDRIVER-CLIENT: <strong>STOP-INTERACTIVE-SESSION</strong> <em>nil</em></dt>
-<dd>
-<p>Stop an interactive session.<br>
-<br>
-Category: Session
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aWITH_002dSESSION"></span>
-<span id="WEBDRIVER_002dCLIENT_003aWITH_002dSESSION-macro"></span><dl>
-<dt id="index-WITH_002dSESSION">WEBDRIVER-CLIENT: <strong>WITH-SESSION</strong> <em>((&amp;rest capabilities) &amp;body body)</em></dt>
-<dd>
-<p>Execute <var>BODY</var> inside a Selenium session.<br>
-<br>
-Category: Session<br>
-See: <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
-</p></dd></dl>
-
-<span id="Actions-2"></span><h4 class="subheading">Actions</h4>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aPERFORM_002dACTIONS"></span>
-<span id="WEBDRIVER_002dCLIENT_003aPERFORM_002dACTIONS-function"></span><dl>
-<dt id="index-PERFORM_002dACTIONS">WEBDRIVER-CLIENT: <strong>PERFORM-ACTIONS</strong> <em>(actions &amp;optional (session *session*))</em></dt>
-<dd>
-<p>The <var>Actions</var> API provides a low-level interface for providing virtualised device input to the web browser.<br>
-Conceptually, the <var>Actions</var> commands divide time into a series of ticks. The local end sends a series of <var>actions</var> which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of <var>actions</var> pointerDown, followed by pointerMove, and then pointerUp.<br>
-<br>
-Category: <var>Actions</var><br>
-See: <a href="https://www.w3.org/TR/webdriver/#">https://www.w3.org/TR/webdriver/#</a><var>actions</var> 
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aKEY"></span>
-<span id="WEBDRIVER_002dCLIENT_003aKEY-function"></span><dl>
-<dt id="index-KEY">WEBDRIVER-CLIENT: <strong>KEY</strong> <em>(key)</em></dt>
-<dd>
-<p>Returns a string with <var>KEY</var>&rsquo;s codepoint.<br>
-<br>
-Category: Actions<br>
-See: <a href="https://www.w3.org/TR/webdriver/#keyboard-actions">https://www.w3.org/TR/webdriver/#keyboard-actions</a>
-</p></dd></dl>
-
 <span id="Uncategorized"></span><h4 class="subheading">Uncategorized</h4>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dID"></span>
+<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dID-function"></span><dl>
+<dt id="index-ELEMENT_002dID">WEBDRIVER-CLIENT: <strong>ELEMENT-ID</strong> <em>(sb-pcl::object)</em></dt>
+</dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aNO_002dSUCH_002dELEMENT_002dERROR"></span>
+<span id="WEBDRIVER_002dCLIENT_003aNO_002dSUCH_002dELEMENT_002dERROR-class"></span><dl>
+<dt id="index-NO_002dSUCH_002dELEMENT_002dERROR">WEBDRIVER-CLIENT: <strong>NO-SUCH-ELEMENT-ERROR</strong></dt>
+<dd>
+<p>Error signaled when no such element is found.
+</p>
+<p>Class precedence list: <code>no-such-element-error, find-error, error, serious-condition, condition, t</code>
+</p>
+</dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aLOG_002dTYPES"></span>
+<span id="WEBDRIVER_002dCLIENT_003aLOG_002dTYPES-function"></span><dl>
+<dt id="index-LOG_002dTYPES">WEBDRIVER-CLIENT: <strong>LOG-TYPES</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the types of logs supported by the WebDriver.<br>
+<br>
+- browser: Javascript console logs from the browser.<br>
+- client: Logs from the client side implementation of the WebDriver protocol (e.g. the Java bindings).<br>
+- driver: Logs from the internals of the driver (e.g. FirefoxDriver internals).<br>
+- performance: Logs relating to the performance characteristics of the page under test (e.g. resource load timings).<br>
+- server: Logs from within the selenium server.<br>
+<br>
+See: <a href="https://github.com/SeleniumHQ/selenium/wiki/Logging">https://github.com/SeleniumHQ/selenium/wiki/Logging</a> .
+</p></dd></dl>
 
 <span id="index-WEBDRIVER_002dCLIENT_003aMOUSE_002dCLICK"></span>
 <span id="WEBDRIVER_002dCLIENT_003aMOUSE_002dCLICK-function"></span><dl>
@@ -517,37 +464,69 @@ See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessi
 See: <a href="#WEBDRIVER_002dCLIENT_003aLOG_002dTYPES-function">LOG-TYPES</a>.
 </p></dd></dl>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aLOG_002dTYPES"></span>
-<span id="WEBDRIVER_002dCLIENT_003aLOG_002dTYPES-function"></span><dl>
-<dt id="index-LOG_002dTYPES">WEBDRIVER-CLIENT: <strong>LOG-TYPES</strong> <em>(&amp;key (session *session*))</em></dt>
+<span id="Elements"></span><h4 class="subheading">Elements</h4>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dTEXT"></span>
+<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dTEXT-function"></span><dl>
+<dt id="index-ELEMENT_002dTEXT">WEBDRIVER-CLIENT: <strong>ELEMENT-TEXT</strong> <em>(element &amp;key (session *session*))</em></dt>
 <dd>
-<p>Return the types of logs supported by the WebDriver.<br>
+<p>The Get <var>Element</var> Text command intends to return an <var>element</var>âs text âas renderedâ. An <var>element</var>âs rendered text is also used for locating a elements by their link text and partial link text.<br>
 <br>
-- browser: Javascript console logs from the browser.<br>
-- client: Logs from the client side implementation of the WebDriver protocol (e.g. the Java bindings).<br>
-- driver: Logs from the internals of the driver (e.g. FirefoxDriver internals).<br>
-- performance: Logs relating to the performance characteristics of the page under test (e.g. resource load timings).<br>
-- server: Logs from within the selenium server.<br>
-<br>
-See: <a href="https://github.com/SeleniumHQ/selenium/wiki/Logging">https://github.com/SeleniumHQ/selenium/wiki/Logging</a> .
+Category: Elements<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#get-element-text">https://www.w3.org/TR/webdriver1/#get-element-text</a> .
 </p></dd></dl>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dID"></span>
-<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dID-function"></span><dl>
-<dt id="index-ELEMENT_002dID">WEBDRIVER-CLIENT: <strong>ELEMENT-ID</strong> <em>(sb-pcl::object)</em></dt>
-</dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aNO_002dSUCH_002dELEMENT_002dERROR"></span>
-<span id="WEBDRIVER_002dCLIENT_003aNO_002dSUCH_002dELEMENT_002dERROR-class"></span><dl>
-<dt id="index-NO_002dSUCH_002dELEMENT_002dERROR">WEBDRIVER-CLIENT: <strong>NO-SUCH-ELEMENT-ERROR</strong></dt>
+<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dENABLED"></span>
+<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dENABLED-function"></span><dl>
+<dt id="index-ELEMENT_002dENABLED">WEBDRIVER-CLIENT: <strong>ELEMENT-ENABLED</strong> <em>(element &amp;key (session *session*))</em></dt>
 <dd>
-<p>Error signaled when no such element is found.
-</p>
-<p>Class precedence list: <code>no-such-element-error, find-error, error, serious-condition, condition, t</code>
-</p>
-</dd></dl>
+<p>Returns  if <var>ELEMENT</var> is enabled.<br>
+<br>
+Category: Elements<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#is-element-enabled">https://www.w3.org/TR/webdriver1/#is-element-enabled</a> .
+</p></dd></dl>
 
-<span id="Elements"></span><h4 class="subheading">Elements</h4>
+<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dRECT"></span>
+<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dRECT-function"></span><dl>
+<dt id="index-ELEMENT_002dRECT">WEBDRIVER-CLIENT: <strong>ELEMENT-RECT</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<br>
+<br>
+<p>The Get <var>Element</var> Rect command returns the dimensions and coordinates of the given web <var>element</var>. The returned value is a dictionary with the following members:<br>
+<br>
+x<br>
+    X axis position of the top-left corner of the web <var>element</var> relative to the current browsing contextâs document <var>element</var> in CSS pixels.<br>
+y<br>
+    Y axis position of the top-left corner of the web <var>element</var> relative to the current browsing contextâs document <var>element</var> in CSS pixels.<br>
+height<br>
+    Height of the web <var>element</var>âs bounding rectangle in CSS pixels.<br>
+width<br>
+    Width of the web <var>element</var>âs bounding rectangle in CSS pixels.<br>
+<br>
+Category: Elements
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dTAGNAME"></span>
+<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dTAGNAME-function"></span><dl>
+<dt id="index-ELEMENT_002dTAGNAME">WEBDRIVER-CLIENT: <strong>ELEMENT-TAGNAME</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the <var>ELEMENT</var>&rsquo;s tag name.<br>
+<br>
+Category: Elements
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aACTIVE_002dELEMENT"></span>
+<span id="WEBDRIVER_002dCLIENT_003aACTIVE_002dELEMENT-function"></span><dl>
+<dt id="index-ACTIVE_002dELEMENT">WEBDRIVER-CLIENT: <strong>ACTIVE-ELEMENT</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the active element of the current browsing contextâs document.<br>
+The active element is the Element within the DOM that currently has focus.<br>
+If there&rsquo;s no active element, an error is signaled.<br>
+<br>
+Category: Elements<br>
+See: <a href="https://www.w3.org/TR/webdriver2/#get-active-element.">https://www.w3.org/TR/webdriver2/#get-active-element.</a><br>
+See: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.">https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.</a>
+</p></dd></dl>
 
 <span id="index-WEBDRIVER_002dCLIENT_003aFIND_002dELEMENT"></span>
 <span id="WEBDRIVER_002dCLIENT_003aFIND_002dELEMENT-function"></span><dl>
@@ -577,52 +556,15 @@ Category: Elements<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#dfn-find-element">https://www.w3.org/TR/webdriver1/#dfn-find-element</a> .
 </p></dd></dl>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dTEXT"></span>
-<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dTEXT-function"></span><dl>
-<dt id="index-ELEMENT_002dTEXT">WEBDRIVER-CLIENT: <strong>ELEMENT-TEXT</strong> <em>(element &amp;key (session *session*))</em></dt>
+<span id="index-WEBDRIVER_002dCLIENT_003aFIND_002dELEMENTS"></span>
+<span id="WEBDRIVER_002dCLIENT_003aFIND_002dELEMENTS-function"></span><dl>
+<dt id="index-FIND_002dELEMENTS">WEBDRIVER-CLIENT: <strong>FIND-ELEMENTS</strong> <em>(value &amp;key (by :css-selector) (session *session*))</em></dt>
 <dd>
-<p>The Get <var>Element</var> Text command intends to return an <var>element</var>âs text âas renderedâ. An <var>element</var>âs rendered text is also used for locating a elements by their link text and partial link text.<br>
+<p>Find elements that match <var>VALUE</var> using location strategy in <var>BY</var>.<br>
 <br>
 Category: Elements<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#get-element-text">https://www.w3.org/TR/webdriver1/#get-element-text</a> .
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dTAGNAME"></span>
-<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dTAGNAME-function"></span><dl>
-<dt id="index-ELEMENT_002dTAGNAME">WEBDRIVER-CLIENT: <strong>ELEMENT-TAGNAME</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>Return the <var>ELEMENT</var>&rsquo;s tag name.<br>
-<br>
-Category: Elements
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dATTRIBUTE"></span>
-<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dATTRIBUTE-function"></span><dl>
-<dt id="index-ELEMENT_002dATTRIBUTE">WEBDRIVER-CLIENT: <strong>ELEMENT-ATTRIBUTE</strong> <em>(element name &amp;key (session *session*))</em></dt>
-<dd>
-<p>Return the <var>ELEMENT</var>&rsquo;s attribute named <var>NAME</var>.<br>
-<br>
-Category: Elements
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dRECT"></span>
-<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dRECT-function"></span><dl>
-<dt id="index-ELEMENT_002dRECT">WEBDRIVER-CLIENT: <strong>ELEMENT-RECT</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<br>
-<br>
-<p>The Get <var>Element</var> Rect command returns the dimensions and coordinates of the given web <var>element</var>. The returned value is a dictionary with the following members:<br>
-<br>
-x<br>
-    X axis position of the top-left corner of the web <var>element</var> relative to the current browsing contextâs document <var>element</var> in CSS pixels.<br>
-y<br>
-    Y axis position of the top-left corner of the web <var>element</var> relative to the current browsing contextâs document <var>element</var> in CSS pixels.<br>
-height<br>
-    Height of the web <var>element</var>âs bounding rectangle in CSS pixels.<br>
-width<br>
-    Width of the web <var>element</var>âs bounding rectangle in CSS pixels.<br>
-<br>
-Category: Elements
+See <a href="#WEBDRIVER_002dCLIENT_003aFIND_002dELEMENT-function">FIND-ELEMENT</a>.<br>
+See <a href="https://www.w3.org/TR/webdriver1/#find-elements">https://www.w3.org/TR/webdriver1/#find-elements</a> .
 </p></dd></dl>
 
 <span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dDISPLAYED"></span>
@@ -635,38 +577,73 @@ Category: Elements<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#element-displayedness">https://www.w3.org/TR/webdriver1/#element-displayedness</a> .
 </p></dd></dl>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aFIND_002dELEMENTS"></span>
-<span id="WEBDRIVER_002dCLIENT_003aFIND_002dELEMENTS-function"></span><dl>
-<dt id="index-FIND_002dELEMENTS">WEBDRIVER-CLIENT: <strong>FIND-ELEMENTS</strong> <em>(value &amp;key (by :css-selector) (session *session*))</em></dt>
+<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dATTRIBUTE"></span>
+<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dATTRIBUTE-function"></span><dl>
+<dt id="index-ELEMENT_002dATTRIBUTE">WEBDRIVER-CLIENT: <strong>ELEMENT-ATTRIBUTE</strong> <em>(element name &amp;key (session *session*))</em></dt>
 <dd>
-<p>Find elements that match <var>VALUE</var> using location strategy in <var>BY</var>.<br>
+<p>Return the <var>ELEMENT</var>&rsquo;s attribute named <var>NAME</var>.<br>
 <br>
-Category: Elements<br>
-See <a href="#WEBDRIVER_002dCLIENT_003aFIND_002dELEMENT-function">FIND-ELEMENT</a>.<br>
-See <a href="https://www.w3.org/TR/webdriver1/#find-elements">https://www.w3.org/TR/webdriver1/#find-elements</a> .
+Category: Elements
 </p></dd></dl>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aACTIVE_002dELEMENT"></span>
-<span id="WEBDRIVER_002dCLIENT_003aACTIVE_002dELEMENT-function"></span><dl>
-<dt id="index-ACTIVE_002dELEMENT">WEBDRIVER-CLIENT: <strong>ACTIVE-ELEMENT</strong> <em>(&amp;key (session *session*))</em></dt>
+<span id="Session"></span><h4 class="subheading">Session</h4>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aDELETE_002dSESSION"></span>
+<span id="WEBDRIVER_002dCLIENT_003aDELETE_002dSESSION-function"></span><dl>
+<dt id="index-DELETE_002dSESSION">WEBDRIVER-CLIENT: <strong>DELETE-SESSION</strong> <em>(session)</em></dt>
 <dd>
-<p>Return the active element of the current browsing contextâs document.<br>
-The active element is the Element within the DOM that currently has focus.<br>
-If there&rsquo;s no active element, an error is signaled.<br>
+<p>Delete the WebDriver <var>SESSION</var>.<br>
 <br>
-Category: Elements<br>
-See: <a href="https://www.w3.org/TR/webdriver2/#get-active-element.">https://www.w3.org/TR/webdriver2/#get-active-element.</a><br>
-See: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.">https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement.</a>
+Category: <var>Session</var>
 </p></dd></dl>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dENABLED"></span>
-<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dENABLED-function"></span><dl>
-<dt id="index-ELEMENT_002dENABLED">WEBDRIVER-CLIENT: <strong>ELEMENT-ENABLED</strong> <em>(element &amp;key (session *session*))</em></dt>
+<span id="index-WEBDRIVER_002dCLIENT_003aSTART_002dINTERACTIVE_002dSESSION"></span>
+<span id="WEBDRIVER_002dCLIENT_003aSTART_002dINTERACTIVE_002dSESSION-function"></span><dl>
+<dt id="index-START_002dINTERACTIVE_002dSESSION">WEBDRIVER-CLIENT: <strong>START-INTERACTIVE-SESSION</strong> <em>(&amp;rest capabilities)</em></dt>
 <dd>
-<p>Returns  if <var>ELEMENT</var> is enabled.<br>
+<p>Start an interactive session. Use this to interact with Selenium driver from a REPL.<br>
 <br>
-Category: Elements<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#is-element-enabled">https://www.w3.org/TR/webdriver1/#is-element-enabled</a> .
+Category: Session<br>
+See: <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aSTOP_002dINTERACTIVE_002dSESSION"></span>
+<span id="WEBDRIVER_002dCLIENT_003aSTOP_002dINTERACTIVE_002dSESSION-function"></span><dl>
+<dt id="index-STOP_002dINTERACTIVE_002dSESSION">WEBDRIVER-CLIENT: <strong>STOP-INTERACTIVE-SESSION</strong> <em>nil</em></dt>
+<dd>
+<p>Stop an interactive session.<br>
+<br>
+Category: Session
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aUSE_002dSESSION"></span>
+<span id="WEBDRIVER_002dCLIENT_003aUSE_002dSESSION-function"></span><dl>
+<dt id="index-USE_002dSESSION">WEBDRIVER-CLIENT: <strong>USE-SESSION</strong> <em>(session)</em></dt>
+<dd>
+<p>Make <var>SESSION</var> the current <var>session</var>.<br>
+<br>
+Category: <var>Session</var>
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aWITH_002dSESSION"></span>
+<span id="WEBDRIVER_002dCLIENT_003aWITH_002dSESSION-macro"></span><dl>
+<dt id="index-WITH_002dSESSION">WEBDRIVER-CLIENT: <strong>WITH-SESSION</strong> <em>((&amp;rest capabilities) &amp;body body)</em></dt>
+<dd>
+<p>Execute <var>BODY</var> inside a Selenium session.<br>
+<br>
+Category: Session<br>
+See: <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION"></span>
+<span id="WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function"></span><dl>
+<dt id="index-MAKE_002dSESSION">WEBDRIVER-CLIENT: <strong>MAKE-SESSION</strong> <em>(&amp;key (browser-name :chrome) browser-version (platform-name &quot;Linux&quot;) platform-version accept-ssl-certs additional-capabilities)</em></dt>
+<dd>
+<p>Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.<br>
+<br>
+Category: Session<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#new-session">https://www.w3.org/TR/webdriver1/#new-session</a> .<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#capabilities">https://www.w3.org/TR/webdriver1/#capabilities</a> .
 </p></dd></dl>
 
 <span id="Element-interaction"></span><h4 class="subheading">Element interaction</h4>
@@ -683,16 +660,6 @@ Category: <var>Element</var> interaction<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#element-send-keys">https://www.w3.org/TR/webdriver1/#element-send-keys</a> .
 </p></dd></dl>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dCLEAR"></span>
-<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dCLEAR-function"></span><dl>
-<dt id="index-ELEMENT_002dCLEAR">WEBDRIVER-CLIENT: <strong>ELEMENT-CLEAR</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>Clear the contents of <var>ELEMENT</var> (for example, a form field <var>element</var>).<br>
-<br>
-Category: <var>Element</var> interaction<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#dfn-element-clear.">https://www.w3.org/TR/webdriver1/#dfn-element-clear.</a>
-</p></dd></dl>
-
 <span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dCLICK"></span>
 <span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dCLICK-function"></span><dl>
 <dt id="index-ELEMENT_002dCLICK">WEBDRIVER-CLIENT: <strong>ELEMENT-CLICK</strong> <em>(element &amp;key (session *session*))</em></dt>
@@ -705,27 +672,36 @@ Category: <var>Element</var> interaction<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#element-click">https://www.w3.org/TR/webdriver1/#element-click</a> .
 </p></dd></dl>
 
-<span id="Windows"></span><h4 class="subheading">Windows</h4>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aCLOSE_002dCURRENT_002dWINDOW"></span>
-<span id="WEBDRIVER_002dCLIENT_003aCLOSE_002dCURRENT_002dWINDOW-function"></span><dl>
-<dt id="index-CLOSE_002dCURRENT_002dWINDOW">WEBDRIVER-CLIENT: <strong>CLOSE-CURRENT-WINDOW</strong> <em>(&amp;key (session *session*))</em></dt>
+<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dCLEAR"></span>
+<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dCLEAR-function"></span><dl>
+<dt id="index-ELEMENT_002dCLEAR">WEBDRIVER-CLIENT: <strong>ELEMENT-CLEAR</strong> <em>(element &amp;key (session *session*))</em></dt>
 <dd>
-<p>Close the current window.<br>
+<p>Clear the contents of <var>ELEMENT</var> (for example, a form field <var>element</var>).<br>
 <br>
-Category: Windows
+Category: <var>Element</var> interaction<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#dfn-element-clear.">https://www.w3.org/TR/webdriver1/#dfn-element-clear.</a>
 </p></dd></dl>
 
 <span id="Navigation"></span><h4 class="subheading">Navigation</h4>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aURL"></span>
-<span id="WEBDRIVER_002dCLIENT_003aURL-function"></span><dl>
-<dt id="index-URL">WEBDRIVER-CLIENT: <strong>URL</strong> <em>(&amp;key (session *session*))</em></dt>
+<span id="index-WEBDRIVER_002dCLIENT_003aPAGE_002dTITLE"></span>
+<span id="WEBDRIVER_002dCLIENT_003aPAGE_002dTITLE-function"></span><dl>
+<dt id="index-PAGE_002dTITLE">WEBDRIVER-CLIENT: <strong>PAGE-TITLE</strong> <em>(&amp;key (session *session*))</em></dt>
 <dd>
-<p>Get the current url in <var>session</var>.<br>
+<p>This command returns the document title of the current top-level browsing context, equivalent to calling document.title.<br>
 <br>
 Category: Navigation<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#dfn-get-current-url">https://www.w3.org/TR/webdriver1/#dfn-get-current-url</a> .
+See: <a href="https://www.w3.org/TR/webdriver2/#get-title">https://www.w3.org/TR/webdriver2/#get-title</a> .
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aPAGE_002dSOURCE"></span>
+<span id="WEBDRIVER_002dCLIENT_003aPAGE_002dSOURCE-function"></span><dl>
+<dt id="index-PAGE_002dSOURCE">WEBDRIVER-CLIENT: <strong>PAGE-SOURCE</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Returns a string serialization of the DOM of the current browsing context active document.<br>
+<br>
+Category: Navigation<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#get-page-source">https://www.w3.org/TR/webdriver1/#get-page-source</a>
 </p></dd></dl>
 
 <span id="index-WEBDRIVER_002dCLIENT_003aSWITCH_002dTO_002dFRAME"></span>
@@ -742,14 +718,14 @@ See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessi
 See: <a href="https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)">https://en.wikipedia.org/wiki/Frame_(World_Wide_Web)</a> .
 </p></dd></dl>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aPAGE_002dTITLE"></span>
-<span id="WEBDRIVER_002dCLIENT_003aPAGE_002dTITLE-function"></span><dl>
-<dt id="index-PAGE_002dTITLE">WEBDRIVER-CLIENT: <strong>PAGE-TITLE</strong> <em>(&amp;key (session *session*))</em></dt>
+<span id="index-WEBDRIVER_002dCLIENT_003aBACK"></span>
+<span id="WEBDRIVER_002dCLIENT_003aBACK-function"></span><dl>
+<dt id="index-BACK">WEBDRIVER-CLIENT: <strong>BACK</strong> <em>(&amp;key (session *session*))</em></dt>
 <dd>
-<p>This command returns the document title of the current top-level browsing context, equivalent to calling document.title.<br>
+<p>This command causes the browser to traverse one step backward in the joint <var>session</var> history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.<br>
 <br>
 Category: Navigation<br>
-See: <a href="https://www.w3.org/TR/webdriver2/#get-title">https://www.w3.org/TR/webdriver2/#get-title</a> .
+See: <a href="https://www.w3.org/TR/webdriver1/#dfn-back">https://www.w3.org/TR/webdriver1/#dfn-back</a> .
 </p></dd></dl>
 
 <span id="index-WEBDRIVER_002dCLIENT_003aREFRESH"></span>
@@ -761,36 +737,14 @@ See: <a href="https://www.w3.org/TR/webdriver2/#get-title">https://www.w3.org/TR
 Category: Navigation
 </p></dd></dl>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aBACK"></span>
-<span id="WEBDRIVER_002dCLIENT_003aBACK-function"></span><dl>
-<dt id="index-BACK">WEBDRIVER-CLIENT: <strong>BACK</strong> <em>(&amp;key (session *session*))</em></dt>
+<span id="index-WEBDRIVER_002dCLIENT_003aURL"></span>
+<span id="WEBDRIVER_002dCLIENT_003aURL-function"></span><dl>
+<dt id="index-URL">WEBDRIVER-CLIENT: <strong>URL</strong> <em>(&amp;key (session *session*))</em></dt>
 <dd>
-<p>This command causes the browser to traverse one step backward in the joint <var>session</var> history of the current top-level browsing context. This is equivalent to pressing the back button in the browser chrome or invoking window.history.back.<br>
+<p>Get the current url in <var>session</var>.<br>
 <br>
 Category: Navigation<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#dfn-back">https://www.w3.org/TR/webdriver1/#dfn-back</a> .
-</p></dd></dl>
-
-<span id="Screen-capture"></span><h4 class="subheading">Screen capture</h4>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dSCREENSHOT"></span>
-<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dSCREENSHOT-function"></span><dl>
-<dt id="index-ELEMENT_002dSCREENSHOT">WEBDRIVER-CLIENT: <strong>ELEMENT-SCREENSHOT</strong> <em>(element &amp;key (session *session*))</em></dt>
-<dd>
-<p>The Take <var>Element</var> Screenshot command takes a screenshot of the visible region encompassed by the bounding rectangle of an <var>element</var>. If given a parameter argument scroll that evaluates to false, the <var>element</var> will not be scrolled into view.<br>
-<br>
-Category: Screen capture<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#take-element-screenshot">https://www.w3.org/TR/webdriver1/#take-element-screenshot</a> .
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aSCREENSHOT"></span>
-<span id="WEBDRIVER_002dCLIENT_003aSCREENSHOT-function"></span><dl>
-<dt id="index-SCREENSHOT">WEBDRIVER-CLIENT: <strong>SCREENSHOT</strong> <em>(&amp;key (session *session*))</em></dt>
-<dd>
-<p>Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewportâs framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.<br>
-<br>
-Category: Screen capture<br>
-See: <a href="https://www.w3.org/TR/webdriver2/#screen-capture">https://www.w3.org/TR/webdriver2/#screen-capture</a> .
+See: <a href="https://www.w3.org/TR/webdriver1/#dfn-get-current-url">https://www.w3.org/TR/webdriver1/#dfn-get-current-url</a> .
 </p></dd></dl>
 
 <span id="Cookies"></span><h4 class="subheading">Cookies</h4>
@@ -836,6 +790,16 @@ See: <a href="https://www.w3.org/TR/webdriver1/#get-all-cookies">https://www.w3.
 See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidcookie</a> .
 </p></dd></dl>
 
+<span id="index-WEBDRIVER_002dCLIENT_003aDELETE_002dCOOKIE"></span>
+<span id="WEBDRIVER_002dCLIENT_003aDELETE_002dCOOKIE-function"></span><dl>
+<dt id="index-DELETE_002dCOOKIE">WEBDRIVER-CLIENT: <strong>DELETE-COOKIE</strong> <em>(cookie-name &amp;key (session *session*))</em></dt>
+<dd>
+<p>Delete the cookie with name <var>COOKIE-NAME</var>.<br>
+<br>
+Category: Cookies<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#delete-cookie">https://www.w3.org/TR/webdriver1/#delete-cookie</a>
+</p></dd></dl>
+
 <span id="index-WEBDRIVER_002dCLIENT_003aDELETE_002dALL_002dCOOKIES"></span>
 <span id="WEBDRIVER_002dCLIENT_003aDELETE_002dALL_002dCOOKIES-function"></span><dl>
 <dt id="index-DELETE_002dALL_002dCOOKIES">WEBDRIVER-CLIENT: <strong>DELETE-ALL-COOKIES</strong> <em>(&amp;key (session *session*))</em></dt>
@@ -855,16 +819,6 @@ See: <a href="https://www.w3.org/TR/webdriver1/#delete-all-cookies">https://www.
 Category: Cookies
 </p></dd></dl>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aDELETE_002dCOOKIE"></span>
-<span id="WEBDRIVER_002dCLIENT_003aDELETE_002dCOOKIE-function"></span><dl>
-<dt id="index-DELETE_002dCOOKIE">WEBDRIVER-CLIENT: <strong>DELETE-COOKIE</strong> <em>(cookie-name &amp;key (session *session*))</em></dt>
-<dd>
-<p>Delete the cookie with name <var>COOKIE-NAME</var>.<br>
-<br>
-Category: Cookies<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#delete-cookie">https://www.w3.org/TR/webdriver1/#delete-cookie</a>
-</p></dd></dl>
-
 <span id="index-WEBDRIVER_002dCLIENT_003aFIND_002dCOOKIE"></span>
 <span id="WEBDRIVER_002dCLIENT_003aFIND_002dCOOKIE-function"></span><dl>
 <dt id="index-FIND_002dCOOKIE">WEBDRIVER-CLIENT: <strong>FIND-COOKIE</strong> <em>(cookie-name &amp;key (session *session*))</em></dt>
@@ -873,6 +827,44 @@ See: <a href="https://www.w3.org/TR/webdriver1/#delete-cookie">https://www.w3.or
 <br>
 Category: Cookies<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#get-named-cookie">https://www.w3.org/TR/webdriver1/#get-named-cookie</a>
+</p></dd></dl>
+
+<span id="Document-handling"></span><h4 class="subheading">Document handling</h4>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aEXECUTE_002dSCRIPT"></span>
+<span id="WEBDRIVER_002dCLIENT_003aEXECUTE_002dSCRIPT-function"></span><dl>
+<dt id="index-EXECUTE_002dSCRIPT">WEBDRIVER-CLIENT: <strong>EXECUTE-SCRIPT</strong> <em>(script args &amp;key (session *session*))</em></dt>
+<dd>
+<p>Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed <var>script</var> is assumed to be synchronous and the result of evaluating the <var>script</var> is returned to the client.<br>
+<br>
+The <var>script</var> argument defines the <var>script</var> to execute in the form of a function body. The value returned by that function will be returned to the client. The function will be invoked with the provided <var>args</var> array and the values may be accessed via the arguments object in the order specified.<br>
+<br>
+Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the <var>script</var> result will be returned to the client as WebElement JSON objects.<br>
+<br>
+Category: Document handling<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#executing-script">https://www.w3.org/TR/webdriver1/#executing-script</a> .
+</p></dd></dl>
+
+<span id="Screen-capture"></span><h4 class="subheading">Screen capture</h4>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aSCREENSHOT"></span>
+<span id="WEBDRIVER_002dCLIENT_003aSCREENSHOT-function"></span><dl>
+<dt id="index-SCREENSHOT">WEBDRIVER-CLIENT: <strong>SCREENSHOT</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Screenshots are a mechanism for providing additional visual diagnostic information. They work by dumping a snapshot of the initial viewportâs framebuffer as a lossless PNG image. It is returned to the local end as a Base64 encoded string.<br>
+<br>
+Category: Screen capture<br>
+See: <a href="https://www.w3.org/TR/webdriver2/#screen-capture">https://www.w3.org/TR/webdriver2/#screen-capture</a> .
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dSCREENSHOT"></span>
+<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dSCREENSHOT-function"></span><dl>
+<dt id="index-ELEMENT_002dSCREENSHOT">WEBDRIVER-CLIENT: <strong>ELEMENT-SCREENSHOT</strong> <em>(element &amp;key (session *session*))</em></dt>
+<dd>
+<p>The Take <var>Element</var> Screenshot command takes a screenshot of the visible region encompassed by the bounding rectangle of an <var>element</var>. If given a parameter argument scroll that evaluates to false, the <var>element</var> will not be scrolled into view.<br>
+<br>
+Category: Screen capture<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#take-element-screenshot">https://www.w3.org/TR/webdriver1/#take-element-screenshot</a> .
 </p></dd></dl>
 
 <span id="User-prompts"></span><h4 class="subheading">User prompts</h4>
@@ -907,20 +899,38 @@ Category: User prompts<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#get-alert-text">https://www.w3.org/TR/webdriver1/#get-alert-text</a>
 </p></dd></dl>
 
-<span id="Document-handling"></span><h4 class="subheading">Document handling</h4>
+<span id="Actions-2"></span><h4 class="subheading">Actions</h4>
 
-<span id="index-WEBDRIVER_002dCLIENT_003aEXECUTE_002dSCRIPT"></span>
-<span id="WEBDRIVER_002dCLIENT_003aEXECUTE_002dSCRIPT-function"></span><dl>
-<dt id="index-EXECUTE_002dSCRIPT">WEBDRIVER-CLIENT: <strong>EXECUTE-SCRIPT</strong> <em>(script args &amp;key (session *session*))</em></dt>
+<span id="index-WEBDRIVER_002dCLIENT_003aKEY"></span>
+<span id="WEBDRIVER_002dCLIENT_003aKEY-function"></span><dl>
+<dt id="index-KEY">WEBDRIVER-CLIENT: <strong>KEY</strong> <em>(key)</em></dt>
 <dd>
-<p>Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed <var>script</var> is assumed to be synchronous and the result of evaluating the <var>script</var> is returned to the client.<br>
+<p>Returns a string with <var>KEY</var>&rsquo;s codepoint.<br>
 <br>
-The <var>script</var> argument defines the <var>script</var> to execute in the form of a function body. The value returned by that function will be returned to the client. The function will be invoked with the provided <var>args</var> array and the values may be accessed via the arguments object in the order specified.<br>
+Category: Actions<br>
+See: <a href="https://www.w3.org/TR/webdriver/#keyboard-actions">https://www.w3.org/TR/webdriver/#keyboard-actions</a>
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aPERFORM_002dACTIONS"></span>
+<span id="WEBDRIVER_002dCLIENT_003aPERFORM_002dACTIONS-function"></span><dl>
+<dt id="index-PERFORM_002dACTIONS">WEBDRIVER-CLIENT: <strong>PERFORM-ACTIONS</strong> <em>(actions &amp;optional (session *session*))</em></dt>
+<dd>
+<p>The <var>Actions</var> API provides a low-level interface for providing virtualised device input to the web browser.<br>
+Conceptually, the <var>Actions</var> commands divide time into a series of ticks. The local end sends a series of <var>actions</var> which correspond to the change in state, if any, of each input device during each tick. For example, pressing a key is represented by an action sequence consisting of a single key input device and two ticks, the first containing a keyDown action, and the second a keyUp action, whereas a pinch-zoom input is represented by an action sequence consisting of three ticks and two pointer input devices of type touch, each performing a sequence of <var>actions</var> pointerDown, followed by pointerMove, and then pointerUp.<br>
 <br>
-Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the <var>script</var> result will be returned to the client as WebElement JSON objects.<br>
+Category: <var>Actions</var><br>
+See: <a href="https://www.w3.org/TR/webdriver/#">https://www.w3.org/TR/webdriver/#</a><var>actions</var> 
+</p></dd></dl>
+
+<span id="Windows"></span><h4 class="subheading">Windows</h4>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aCLOSE_002dCURRENT_002dWINDOW"></span>
+<span id="WEBDRIVER_002dCLIENT_003aCLOSE_002dCURRENT_002dWINDOW-function"></span><dl>
+<dt id="index-CLOSE_002dCURRENT_002dWINDOW">WEBDRIVER-CLIENT: <strong>CLOSE-CURRENT-WINDOW</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Close the current window.<br>
 <br>
-Category: Document handling<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#executing-script">https://www.w3.org/TR/webdriver1/#executing-script</a> .
+Category: Windows
 </p></dd></dl>
 
 
@@ -935,8 +945,11 @@ Previous: <a href="#WEBDRIVER_002dCLIENT-package" accesskey="p" rel="prev">WEBDR
 <dl>
 <dt id="index-WEBDRIVER_002dCLIENT_002dUTILS">PACKAGE: <strong>WEBDRIVER-CLIENT-UTILS</strong></dt>
 <dd>
-<p>Package with the purpose of reducing boilerplate.
+<p>Package with the purpose of reducing boilerplate.<br>
+<br>
+The exported definitions work with an implicit element. The default implicit element is the current active element. So, it is not neccesary to pass the element you are working with around most of the time.<br>
 </p>
+
 </dd></dl>
 
 <span id="External-definitions-1"></span><h3 class="heading">External definitions</h3>
@@ -1192,6 +1205,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-MOUSE_002dMOVE_002dTO"><code>MOUSE-MOVE-TO</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_fn_letter-P">P</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-PAGE_002dSOURCE"><code>PAGE-SOURCE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-PAGE_002dTITLE"><code>PAGE-TITLE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-PERFORM_002dACTIONS"><code>PERFORM-ACTIONS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
@@ -1259,6 +1273,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION"><code>WEBDRIVER-CLIENT:MAKE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aMOUSE_002dCLICK"><code>WEBDRIVER-CLIENT:MOUSE-CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aMOUSE_002dMOVE_002dTO"><code>WEBDRIVER-CLIENT:MOUSE-MOVE-TO</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aPAGE_002dSOURCE"><code>WEBDRIVER-CLIENT:PAGE-SOURCE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aPAGE_002dTITLE"><code>WEBDRIVER-CLIENT:PAGE-TITLE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aPERFORM_002dACTIONS"><code>WEBDRIVER-CLIENT:PERFORM-ACTIONS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aREFRESH"><code>WEBDRIVER-CLIENT:REFRESH</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
