@@ -138,7 +138,7 @@ key-up ::= (:key-up key)
 @chapter Installation
 
 @example
-git clone https://github.com/TatriX/cl-webdriver-client ~/quicklisp/local-projects/
+git clone https://github.com/copyleft/cl-webdriver-client ~/quicklisp/local-projects/
 (ql:quickload :cl-webdriver-client)
 @end example
 

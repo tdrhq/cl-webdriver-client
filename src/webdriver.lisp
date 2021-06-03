@@ -61,9 +61,13 @@ See: https://www.w3.org/TR/webdriver1/#get-page-source"
 See: https://www.w3.org/TR/webdriver1/#handling-errors"
   (error
    (case (protocol-error-status err)
-     (404 (make-instance 'no-such-element-error :value value :by by))
-     ;; TODO: we should look at JSON error code too
-     ;;(10 (make-instance 'stale-element-reference :value value :by by))
+     (404
+      (cond
+	((equalp (protocol-error-error err) "no such element")
+	 (make-instance 'no-such-element-error :value value :by by))
+	((equalp (protocol-error-error err) "stale element reference")
+	 (make-instance 'stale-element-reference :value value :by by))
+	(t err)))
      (t err))))
 
 (defun find-element (value &key (by :css-selector) (session *session*))

@@ -4,12 +4,15 @@
   ((body :initarg :body :reader protocol-error-body)
    (status :initarg :status :reader protocol-error-status)))
 
+(defun protocol-error-error (error)
+  (assoc-value (assoc-value (protocol-error-body error) :value) :error))
+
 (defmethod print-object ((error protocol-error) stream)
   (with-slots (body) error
     (format stream
             "[~a]~%error: ~a~%status: ~a~%state: ~a~%~%~a~%"
             (type-of error)
-            (assoc-value (assoc-value body :value) :error)
+            (protocol-error-error error)
             (protocol-error-status error)
             (assoc-value body :state)
             (assoc-value (assoc-value body :value) :message))))
