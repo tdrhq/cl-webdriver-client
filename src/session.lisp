@@ -56,7 +56,7 @@ See: MAKE-SESSION"
          (when ,session
            (delete-session ,session))))))
 
-(defun start-interactive-session (capabilities)
+(defun start-interactive-session (&optional capabilities)
   "Start an interactive session. Use this to interact with Selenium driver from a REPL.
 
 Category: Session
