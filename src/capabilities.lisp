@@ -31,7 +31,8 @@ Category: Capabilities")
 (defun chrome-capabilities (&rest options)
   "Specifies Chrome specific capabilities.
 
-Category: Capabilities"
+Category: Capabilities
+https://chromedriver.chromium.org/capabilities#h.p_ID_102"
   `("goog:chromeOptions" . ,(alexandria:plist-alist options)))
 
 (defun firefox-capabilities (&rest options)
