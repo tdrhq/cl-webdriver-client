@@ -208,6 +208,12 @@ has 60 installed, the session creation will fail:
   }
 }
 
+   In _CL-WEBDRIVER-CLIENT_ capabilities are created using *note
+MAKE-CAPABILITIES: WEBDRIVER-CLIENT:MAKE-CAPABILITIES function.  The
+first argument takes the _alwaysMatch_ capabilities, as an association
+list.  The rest of the arguments to the function are FIRST-MATCH
+capabilities, and should be association lists.
+
 
 File: cl-webdriver-client.info,  Node: firstMatch,  Next: Combining alwaysMatch and firstMatch,  Prev: alwaysMatch,  Up: Capabilities
 
@@ -299,22 +305,24 @@ File: cl-webdriver-client.info,  Node: List of capabilities,  Next: Vendor-speci
 2.2.4 List of capabilities
 --------------------------
 
-   * _browserName_
-   * _browserVersion_
-   * _platformName_
-   * _acceptInsecureCerts_ The acceptInsecureCerts capability
-     communicates whether expired or invalid TLS certificates are
-     checked when navigating.  If the capability is false, an insecure
-     certificate error will be returned as navigation encounters domains
-     with certificate problems.  Otherwise, self-signed or otherwise
-     invalid certificates will be implicitly trusted by the browser on
-     navigation.  The capability has effect for the lifetime of the
-     session.
-   * _pageLoadStrategy_
-   * _proxy_
-   * _setWindowRect_
-   * _timeouts_
-   * _unhandledPromptBehavior_
+   * _:browser-name_ - a string.  The name of the browser to use.  e.g.
+     "chrome", "firefox".
+   * _:browser-version_ - a string.  The browser version required.
+   * _:platform-name_ - a string.  Identifies the operating system of
+     the endpoint node.  e.g.  'Linux', 'Windows'.
+   * _:accept-insecure-certs_ - a boolean.  The acceptInsecureCerts
+     capability communicates whether expired or invalid TLS certificates
+     are checked when navigating.  If the capability is false, an
+     insecure certificate error will be returned as navigation
+     encounters domains with certificate problems.  Otherwise,
+     self-signed or otherwise invalid certificates will be implicitly
+     trusted by the browser on navigation.  The capability has effect
+     for the lifetime of the session.
+   * _:page-load-strategy_ - a string.
+   * _:proxy_
+   * _:set-window-rect_
+   * _:timeouts_
+   * _:unhandled-prompt-behaviour_
 
 
 File: cl-webdriver-client.info,  Node: Vendor-specific capabilities,  Prev: List of capabilities,  Up: Capabilities
@@ -328,8 +336,10 @@ and suppliers of drivers typically use extension capabilities to provide
 configuration to the browser, but they can also be used by
 intermediaries for arbitrary blobs of information.
 
-   Firefox capabilities (moz:firefoxOptions) Chrome capabilities
-(goog:chromeOptions)
+   You can use *note CHROME-CAPABILITIES:
+WEBDRIVER-CLIENT:CHROME-CAPABILITIES function. and *note
+FIREFOX-CAPABILITIES: WEBDRIVER-CLIENT:FIREFOX-CAPABILITIES function.
+for these.
 
 
 File: cl-webdriver-client.info,  Node: Actions,  Prev: Capabilities,  Up: Usage
@@ -718,6 +728,7 @@ Capabilities
      Specifies Chrome specific capabilities.
 
      Category: Capabilities
+     <https://chromedriver.chromium.org/capabilities#h.p_ID_102>
 
  -- WEBDRIVER-CLIENT: FIREFOX-CAPABILITIES (&rest options)
 
@@ -741,6 +752,24 @@ Capabilities
 
      Helper function for creating capabilities.
 
+     ALWAYS-MATCH is an alist with capabilities parameters:
+
+     - :BROWSER-NAME - a string.  The name of the browser to use.
+     - :BROWSER-VERSION - a string.  The browser version required.
+     - :PLATFORM-NAME - a string.  Identifies the operating system of
+     the endpoint node.  e.g.  'Linux', 'Windows'.
+     - :PAGE-LOAD-STRATEGY - a string.  The page load strategy.
+     - :ACCEPT-INSECURE-CERTS - a boolean.  Whether expired or invalid
+     TLS certificates are checked when navigating.
+     - :TIMEOUTS - an alist.  Describes the timeouts imposed on certain
+     session operations.
+
+     FIRST-MATCH is a list of alists, with the alists being the
+     capabilities to try as 'firstMatch'.
+
+     See: <https://www.w3.org/TR/webdriver1/#capabilities>
+     See:
+     <https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities#capabilities_negotiation>
      Category: Capabilities
 
 Screen capture
@@ -1194,7 +1223,7 @@ File: cl-webdriver-client.info,  Node: Index,  Prev: API,  Up: Top
 * Menu:
 
 * *DEFAULT-CAPABILITIES*:                WEBDRIVER-CLIENT package.
-                                                              (line 205)
+                                                              (line 206)
 * *DEFAULT-ELEMENT-FUNC*:                WEBDRIVER-CLIENT-UTILS package.
                                                               (line  25)
 * *TIMEOUT*:                             WEBDRIVER-CLIENT-UTILS package.
@@ -1204,17 +1233,17 @@ File: cl-webdriver-client.info,  Node: Index,  Prev: API,  Up: Top
 * WEBDRIVER-CLIENT-UTILS:*TIMEOUT*:      WEBDRIVER-CLIENT-UTILS package.
                                                               (line  21)
 * WEBDRIVER-CLIENT:*DEFAULT-CAPABILITIES*: WEBDRIVER-CLIENT package.
-                                                              (line 205)
+                                                              (line 206)
 
  [index ]
 * Menu:
 
 * ACCEPT-ALERT:                          WEBDRIVER-CLIENT package.
-                                                              (line 273)
+                                                              (line 292)
 * ACTIVE-ELEMENT:                        WEBDRIVER-CLIENT package.
-                                                              (line 405)
+                                                              (line 424)
 * ALERT-TEXT:                            WEBDRIVER-CLIENT package.
-                                                              (line 280)
+                                                              (line 299)
 * ATTR:                                  WEBDRIVER-CLIENT-UTILS package.
                                                               (line  68)
 * BACK:                                  WEBDRIVER-CLIENT package.
@@ -1228,67 +1257,67 @@ File: cl-webdriver-client.info,  Node: Index,  Prev: API,  Up: Top
 * CLICK:                                 WEBDRIVER-CLIENT-UTILS package.
                                                               (line  84)
 * CLOSE-CURRENT-WINDOW:                  WEBDRIVER-CLIENT package.
-                                                              (line 558)
+                                                              (line 577)
 * COOKIE:                                WEBDRIVER-CLIENT package.
-                                                              (line 392)
+                                                              (line 411)
 * DELETE-ALL-COOKIES:                    WEBDRIVER-CLIENT package.
-                                                              (line 324)
+                                                              (line 343)
 * DELETE-COOKIE:                         WEBDRIVER-CLIENT package.
-                                                              (line 338)
+                                                              (line 357)
 * DELETE-SESSION:                        WEBDRIVER-CLIENT package.
                                                               (line 172)
 * DISMISS-ALERT:                         WEBDRIVER-CLIENT package.
-                                                              (line 287)
+                                                              (line 306)
 * ELEM:                                  WEBDRIVER-CLIENT-UTILS package.
                                                               (line  76)
 * ELEMENT-ATTRIBUTE:                     WEBDRIVER-CLIENT package.
-                                                              (line 435)
+                                                              (line 454)
 * ELEMENT-CLEAR:                         WEBDRIVER-CLIENT package.
-                                                              (line 521)
+                                                              (line 540)
 * ELEMENT-CLICK:                         WEBDRIVER-CLIENT package.
-                                                              (line 528)
+                                                              (line 547)
 * ELEMENT-DISPLAYED:                     WEBDRIVER-CLIENT package.
-                                                              (line 427)
+                                                              (line 446)
 * ELEMENT-ENABLED:                       WEBDRIVER-CLIENT package.
-                                                              (line 442)
+                                                              (line 461)
 * ELEMENT-ID:                            WEBDRIVER-CLIENT package.
                                                               (line  44)
 * ELEMENT-RECT:                          WEBDRIVER-CLIENT package.
-                                                              (line 449)
+                                                              (line 468)
 * ELEMENT-SCREENSHOT:                    WEBDRIVER-CLIENT package.
-                                                              (line 230)
+                                                              (line 249)
 * ELEMENT-SEND-KEYS:                     WEBDRIVER-CLIENT package.
-                                                              (line 542)
+                                                              (line 561)
 * ELEMENT-TAGNAME:                       WEBDRIVER-CLIENT package.
-                                                              (line 479)
+                                                              (line 498)
 * ELEMENT-TEXT:                          WEBDRIVER-CLIENT package.
-                                                              (line 470)
+                                                              (line 489)
 * EXECUTE-SCRIPT:                        WEBDRIVER-CLIENT package.
-                                                              (line 299)
+                                                              (line 318)
 * FIND-COOKIE:                           WEBDRIVER-CLIENT package.
-                                                              (line 346)
+                                                              (line 365)
 * FIND-ELEM:                             WEBDRIVER-CLIENT-UTILS package.
                                                               (line  43)
 * FIND-ELEMENT:                          WEBDRIVER-CLIENT package.
-                                                              (line 485)
+                                                              (line 504)
 * FIND-ELEMENTS:                         WEBDRIVER-CLIENT package.
-                                                              (line 418)
+                                                              (line 437)
 * FIREFOX-CAPABILITIES:                  WEBDRIVER-CLIENT package.
-                                                              (line 193)
+                                                              (line 194)
 * GET-COOKIE:                            WEBDRIVER-CLIENT-UTILS package.
                                                               (line  39)
 * ID:                                    WEBDRIVER-CLIENT-UTILS package.
                                                               (line  35)
 * KEY:                                   WEBDRIVER-CLIENT package.
-                                                              (line 244)
+                                                              (line 263)
 * LOG-TYPES:                             WEBDRIVER-CLIENT package.
                                                               (line  56)
 * LOGS:                                  WEBDRIVER-CLIENT package.
                                                               (line  20)
 * MAKE-CAPABILITIES:                     WEBDRIVER-CLIENT package.
-                                                              (line 211)
+                                                              (line 212)
 * MAKE-COOKIE:                           WEBDRIVER-CLIENT package.
-                                                              (line 331)
+                                                              (line 350)
 * MAKE-SESSION:                          WEBDRIVER-CLIENT package.
                                                               (line 163)
 * MERGE-CAPABILITIES:                    WEBDRIVER-CLIENT package.
@@ -1302,11 +1331,11 @@ File: cl-webdriver-client.info,  Node: Index,  Prev: API,  Up: Top
 * PAGE-TITLE:                            WEBDRIVER-CLIENT package.
                                                               (line  96)
 * PERFORM-ACTIONS:                       WEBDRIVER-CLIENT package.
-                                                              (line 251)
+                                                              (line 270)
 * REFRESH:                               WEBDRIVER-CLIENT package.
                                                               (line 104)
 * SCREENSHOT:                            WEBDRIVER-CLIENT package.
-                                                              (line 220)
+                                                              (line 239)
 * SEND-KEY:                              WEBDRIVER-CLIENT-UTILS package.
                                                               (line  60)
 * SEND-KEYS:                             WEBDRIVER-CLIENT-UTILS package.
@@ -1350,69 +1379,69 @@ File: cl-webdriver-client.info,  Node: Index,  Prev: API,  Up: Top
 * WEBDRIVER-CLIENT-UTILS:WAIT-FOR:       WEBDRIVER-CLIENT-UTILS package.
                                                               (line  47)
 * WEBDRIVER-CLIENT:ACCEPT-ALERT:         WEBDRIVER-CLIENT package.
-                                                              (line 273)
+                                                              (line 292)
 * WEBDRIVER-CLIENT:ACTIVE-ELEMENT:       WEBDRIVER-CLIENT package.
-                                                              (line 405)
+                                                              (line 424)
 * WEBDRIVER-CLIENT:ALERT-TEXT:           WEBDRIVER-CLIENT package.
-                                                              (line 280)
+                                                              (line 299)
 * WEBDRIVER-CLIENT:BACK:                 WEBDRIVER-CLIENT package.
                                                               (line  78)
 * WEBDRIVER-CLIENT:CHROME-CAPABILITIES:  WEBDRIVER-CLIENT package.
                                                               (line 187)
 * WEBDRIVER-CLIENT:CLOSE-CURRENT-WINDOW: WEBDRIVER-CLIENT package.
-                                                              (line 558)
+                                                              (line 577)
 * WEBDRIVER-CLIENT:COOKIE:               WEBDRIVER-CLIENT package.
-                                                              (line 392)
+                                                              (line 411)
 * WEBDRIVER-CLIENT:DELETE-ALL-COOKIES:   WEBDRIVER-CLIENT package.
-                                                              (line 324)
+                                                              (line 343)
 * WEBDRIVER-CLIENT:DELETE-COOKIE:        WEBDRIVER-CLIENT package.
-                                                              (line 338)
+                                                              (line 357)
 * WEBDRIVER-CLIENT:DELETE-SESSION:       WEBDRIVER-CLIENT package.
                                                               (line 172)
 * WEBDRIVER-CLIENT:DISMISS-ALERT:        WEBDRIVER-CLIENT package.
-                                                              (line 287)
+                                                              (line 306)
 * WEBDRIVER-CLIENT:ELEMENT-ATTRIBUTE:    WEBDRIVER-CLIENT package.
-                                                              (line 435)
+                                                              (line 454)
 * WEBDRIVER-CLIENT:ELEMENT-CLEAR:        WEBDRIVER-CLIENT package.
-                                                              (line 521)
+                                                              (line 540)
 * WEBDRIVER-CLIENT:ELEMENT-CLICK:        WEBDRIVER-CLIENT package.
-                                                              (line 528)
+                                                              (line 547)
 * WEBDRIVER-CLIENT:ELEMENT-DISPLAYED:    WEBDRIVER-CLIENT package.
-                                                              (line 427)
+                                                              (line 446)
 * WEBDRIVER-CLIENT:ELEMENT-ENABLED:      WEBDRIVER-CLIENT package.
-                                                              (line 442)
+                                                              (line 461)
 * WEBDRIVER-CLIENT:ELEMENT-ID:           WEBDRIVER-CLIENT package.
                                                               (line  44)
 * WEBDRIVER-CLIENT:ELEMENT-RECT:         WEBDRIVER-CLIENT package.
-                                                              (line 449)
+                                                              (line 468)
 * WEBDRIVER-CLIENT:ELEMENT-SCREENSHOT:   WEBDRIVER-CLIENT package.
-                                                              (line 230)
+                                                              (line 249)
 * WEBDRIVER-CLIENT:ELEMENT-SEND-KEYS:    WEBDRIVER-CLIENT package.
-                                                              (line 542)
+                                                              (line 561)
 * WEBDRIVER-CLIENT:ELEMENT-TAGNAME:      WEBDRIVER-CLIENT package.
-                                                              (line 479)
+                                                              (line 498)
 * WEBDRIVER-CLIENT:ELEMENT-TEXT:         WEBDRIVER-CLIENT package.
-                                                              (line 470)
+                                                              (line 489)
 * WEBDRIVER-CLIENT:EXECUTE-SCRIPT:       WEBDRIVER-CLIENT package.
-                                                              (line 299)
+                                                              (line 318)
 * WEBDRIVER-CLIENT:FIND-COOKIE:          WEBDRIVER-CLIENT package.
-                                                              (line 346)
+                                                              (line 365)
 * WEBDRIVER-CLIENT:FIND-ELEMENT:         WEBDRIVER-CLIENT package.
-                                                              (line 485)
+                                                              (line 504)
 * WEBDRIVER-CLIENT:FIND-ELEMENTS:        WEBDRIVER-CLIENT package.
-                                                              (line 418)
+                                                              (line 437)
 * WEBDRIVER-CLIENT:FIREFOX-CAPABILITIES: WEBDRIVER-CLIENT package.
-                                                              (line 193)
+                                                              (line 194)
 * WEBDRIVER-CLIENT:KEY:                  WEBDRIVER-CLIENT package.
-                                                              (line 244)
+                                                              (line 263)
 * WEBDRIVER-CLIENT:LOG-TYPES:            WEBDRIVER-CLIENT package.
                                                               (line  56)
 * WEBDRIVER-CLIENT:LOGS:                 WEBDRIVER-CLIENT package.
                                                               (line  20)
 * WEBDRIVER-CLIENT:MAKE-CAPABILITIES:    WEBDRIVER-CLIENT package.
-                                                              (line 211)
+                                                              (line 212)
 * WEBDRIVER-CLIENT:MAKE-COOKIE:          WEBDRIVER-CLIENT package.
-                                                              (line 331)
+                                                              (line 350)
 * WEBDRIVER-CLIENT:MAKE-SESSION:         WEBDRIVER-CLIENT package.
                                                               (line 163)
 * WEBDRIVER-CLIENT:MERGE-CAPABILITIES:   WEBDRIVER-CLIENT package.
@@ -1426,11 +1455,11 @@ File: cl-webdriver-client.info,  Node: Index,  Prev: API,  Up: Top
 * WEBDRIVER-CLIENT:PAGE-TITLE:           WEBDRIVER-CLIENT package.
                                                               (line  96)
 * WEBDRIVER-CLIENT:PERFORM-ACTIONS:      WEBDRIVER-CLIENT package.
-                                                              (line 251)
+                                                              (line 270)
 * WEBDRIVER-CLIENT:REFRESH:              WEBDRIVER-CLIENT package.
                                                               (line 104)
 * WEBDRIVER-CLIENT:SCREENSHOT:           WEBDRIVER-CLIENT package.
-                                                              (line 220)
+                                                              (line 239)
 * WEBDRIVER-CLIENT:START-INTERACTIVE-SESSION: WEBDRIVER-CLIENT package.
                                                               (line 136)
 * WEBDRIVER-CLIENT:STOP-INTERACTIVE-SESSION: WEBDRIVER-CLIENT package.
@@ -1459,85 +1488,85 @@ Node: Usage2022
 Node: Sessions3098
 Node: Capabilities4604
 Node: alwaysMatch6573
-Node: firstMatch7148
-Node: Combining alwaysMatch and firstMatch7690
-Node: List of capabilities9210
-Node: Vendor-specific capabilities10090
-Node: Actions10696
-Node: Installation13084
-Node: Utils13585
-Node: Interactive session14321
-Node: Utils API conventions14797
-Node: Waiting for the reaction15451
-Node: Running tests15973
-Node: API16284
-Node: WEBDRIVER-CLIENT package16455
-Ref: WEBDRIVER-CLIENT:LOGS function16948
-Ref: WEBDRIVER-CLIENT:NO-SUCH-ELEMENT-ERROR class17116
-Ref: WEBDRIVER-CLIENT:MOUSE-MOVE-TO function17323
-Ref: WEBDRIVER-CLIENT:ELEMENT-ID function17830
-Ref: WEBDRIVER-CLIENT:MOUSE-CLICK function17881
-Ref: WEBDRIVER-CLIENT:LOG-TYPES function18311
-Ref: WEBDRIVER-CLIENT:WEBDRIVER-STATUS function18941
-Ref: WEBDRIVER-CLIENT:BACK function19047
-Ref: WEBDRIVER-CLIENT:PAGE-SOURCE function19444
-Ref: WEBDRIVER-CLIENT:PAGE-TITLE function19697
-Ref: WEBDRIVER-CLIENT:REFRESH function19975
-Ref: WEBDRIVER-CLIENT:SWITCH-TO-FRAME function20092
-Ref: WEBDRIVER-CLIENT:URL function20703
-Ref: WEBDRIVER-CLIENT:START-INTERACTIVE-SESSION function20907
-Ref: WEBDRIVER-CLIENT:WITH-SESSION macro21172
-Ref: WEBDRIVER-CLIENT:USE-SESSION function21374
-Ref: WEBDRIVER-CLIENT:STOP-INTERACTIVE-SESSION function21483
-Ref: WEBDRIVER-CLIENT:MAKE-SESSION function21594
-Ref: WEBDRIVER-CLIENT:DELETE-SESSION function21922
-Ref: WEBDRIVER-CLIENT:MERGE-CAPABILITIES function22057
-Ref: WEBDRIVER-CLIENT:CHROME-CAPABILITIES function22169
-Ref: WEBDRIVER-CLIENT:FIREFOX-CAPABILITIES function22303
-Ref: WEBDRIVER-CLIENT:*DEFAULT-CAPABILITIES* variable22615
-Ref: WEBDRIVER-CLIENT:MAKE-CAPABILITIES function22722
-Ref: WEBDRIVER-CLIENT:SCREENSHOT function22905
-Ref: WEBDRIVER-CLIENT:ELEMENT-SCREENSHOT function23324
-Ref: WEBDRIVER-CLIENT:KEY function23788
-Ref: WEBDRIVER-CLIENT:PERFORM-ACTIONS function23952
-Ref: WEBDRIVER-CLIENT:ACCEPT-ALERT function24933
-Ref: WEBDRIVER-CLIENT:ALERT-TEXT function25108
-Ref: WEBDRIVER-CLIENT:DISMISS-ALERT function25281
-Ref: WEBDRIVER-CLIENT:EXECUTE-SCRIPT function25681
-Ref: WEBDRIVER-CLIENT:DELETE-ALL-COOKIES function26734
-Ref: WEBDRIVER-CLIENT:MAKE-COOKIE function26918
-Ref: WEBDRIVER-CLIENT:DELETE-COOKIE function27061
-Ref: WEBDRIVER-CLIENT:FIND-COOKIE function27278
-Ref: WEBDRIVER-CLIENT:COOKIE class27488
-Ref: WEBDRIVER-CLIENT:COOKIE function28767
-Ref: WEBDRIVER-CLIENT:ACTIVE-ELEMENT function29095
-Ref: WEBDRIVER-CLIENT:FIND-ELEMENTS function29566
-Ref: WEBDRIVER-CLIENT:ELEMENT-DISPLAYED function29888
-Ref: WEBDRIVER-CLIENT:ELEMENT-ATTRIBUTE function30106
-Ref: WEBDRIVER-CLIENT:ELEMENT-ENABLED function30271
-Ref: WEBDRIVER-CLIENT:ELEMENT-RECT function30474
-Ref: WEBDRIVER-CLIENT:ELEMENT-TEXT function31211
-Ref: WEBDRIVER-CLIENT:ELEMENT-TAGNAME function31583
-Ref: WEBDRIVER-CLIENT:FIND-ELEMENT function31719
-Ref: WEBDRIVER-CLIENT:ELEMENT-CLEAR function33097
-Ref: WEBDRIVER-CLIENT:ELEMENT-CLICK function33343
-Ref: WEBDRIVER-CLIENT:ELEMENT-SEND-KEYS function33886
-Ref: WEBDRIVER-CLIENT:CLOSE-CURRENT-WINDOW function34368
-Node: WEBDRIVER-CLIENT-UTILS package34495
-Ref: WEBDRIVER-CLIENT-UTILS:*TIMEOUT* variable35068
-Ref: WEBDRIVER-CLIENT-UTILS:*DEFAULT-ELEMENT-FUNC* variable35171
-Ref: WEBDRIVER-CLIENT-UTILS:ID function35428
-Ref: WEBDRIVER-CLIENT-UTILS:GET-COOKIE function35510
-Ref: WEBDRIVER-CLIENT-UTILS:FIND-ELEM function35599
-Ref: WEBDRIVER-CLIENT-UTILS:WAIT-FOR function35747
-Ref: WEBDRIVER-CLIENT-UTILS:CLASSNAME function35963
-Ref: WEBDRIVER-CLIENT-UTILS:TEXT function36059
-Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEY function36147
-Ref: WEBDRIVER-CLIENT-UTILS:CLASSLIST function36246
-Ref: WEBDRIVER-CLIENT-UTILS:ATTR function36343
-Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEYS function36440
-Ref: WEBDRIVER-CLIENT-UTILS:ELEM function36540
-Ref: WEBDRIVER-CLIENT-UTILS:CLICK function36847
-Node: Index36934
+Node: firstMatch7466
+Node: Combining alwaysMatch and firstMatch8008
+Node: List of capabilities9528
+Node: Vendor-specific capabilities10674
+Node: Actions11374
+Node: Installation13762
+Node: Utils14263
+Node: Interactive session14999
+Node: Utils API conventions15475
+Node: Waiting for the reaction16129
+Node: Running tests16651
+Node: API16962
+Node: WEBDRIVER-CLIENT package17133
+Ref: WEBDRIVER-CLIENT:LOGS function17626
+Ref: WEBDRIVER-CLIENT:NO-SUCH-ELEMENT-ERROR class17794
+Ref: WEBDRIVER-CLIENT:MOUSE-MOVE-TO function18001
+Ref: WEBDRIVER-CLIENT:ELEMENT-ID function18508
+Ref: WEBDRIVER-CLIENT:MOUSE-CLICK function18559
+Ref: WEBDRIVER-CLIENT:LOG-TYPES function18989
+Ref: WEBDRIVER-CLIENT:WEBDRIVER-STATUS function19619
+Ref: WEBDRIVER-CLIENT:BACK function19725
+Ref: WEBDRIVER-CLIENT:PAGE-SOURCE function20122
+Ref: WEBDRIVER-CLIENT:PAGE-TITLE function20375
+Ref: WEBDRIVER-CLIENT:REFRESH function20653
+Ref: WEBDRIVER-CLIENT:SWITCH-TO-FRAME function20770
+Ref: WEBDRIVER-CLIENT:URL function21381
+Ref: WEBDRIVER-CLIENT:START-INTERACTIVE-SESSION function21585
+Ref: WEBDRIVER-CLIENT:WITH-SESSION macro21850
+Ref: WEBDRIVER-CLIENT:USE-SESSION function22052
+Ref: WEBDRIVER-CLIENT:STOP-INTERACTIVE-SESSION function22161
+Ref: WEBDRIVER-CLIENT:MAKE-SESSION function22272
+Ref: WEBDRIVER-CLIENT:DELETE-SESSION function22600
+Ref: WEBDRIVER-CLIENT:MERGE-CAPABILITIES function22735
+Ref: WEBDRIVER-CLIENT:CHROME-CAPABILITIES function22847
+Ref: WEBDRIVER-CLIENT:FIREFOX-CAPABILITIES function23046
+Ref: WEBDRIVER-CLIENT:*DEFAULT-CAPABILITIES* variable23358
+Ref: WEBDRIVER-CLIENT:MAKE-CAPABILITIES function23465
+Ref: WEBDRIVER-CLIENT:SCREENSHOT function24523
+Ref: WEBDRIVER-CLIENT:ELEMENT-SCREENSHOT function24942
+Ref: WEBDRIVER-CLIENT:KEY function25406
+Ref: WEBDRIVER-CLIENT:PERFORM-ACTIONS function25570
+Ref: WEBDRIVER-CLIENT:ACCEPT-ALERT function26551
+Ref: WEBDRIVER-CLIENT:ALERT-TEXT function26726
+Ref: WEBDRIVER-CLIENT:DISMISS-ALERT function26899
+Ref: WEBDRIVER-CLIENT:EXECUTE-SCRIPT function27299
+Ref: WEBDRIVER-CLIENT:DELETE-ALL-COOKIES function28352
+Ref: WEBDRIVER-CLIENT:MAKE-COOKIE function28536
+Ref: WEBDRIVER-CLIENT:DELETE-COOKIE function28679
+Ref: WEBDRIVER-CLIENT:FIND-COOKIE function28896
+Ref: WEBDRIVER-CLIENT:COOKIE class29106
+Ref: WEBDRIVER-CLIENT:COOKIE function30385
+Ref: WEBDRIVER-CLIENT:ACTIVE-ELEMENT function30713
+Ref: WEBDRIVER-CLIENT:FIND-ELEMENTS function31184
+Ref: WEBDRIVER-CLIENT:ELEMENT-DISPLAYED function31506
+Ref: WEBDRIVER-CLIENT:ELEMENT-ATTRIBUTE function31724
+Ref: WEBDRIVER-CLIENT:ELEMENT-ENABLED function31889
+Ref: WEBDRIVER-CLIENT:ELEMENT-RECT function32092
+Ref: WEBDRIVER-CLIENT:ELEMENT-TEXT function32829
+Ref: WEBDRIVER-CLIENT:ELEMENT-TAGNAME function33201
+Ref: WEBDRIVER-CLIENT:FIND-ELEMENT function33337
+Ref: WEBDRIVER-CLIENT:ELEMENT-CLEAR function34715
+Ref: WEBDRIVER-CLIENT:ELEMENT-CLICK function34961
+Ref: WEBDRIVER-CLIENT:ELEMENT-SEND-KEYS function35504
+Ref: WEBDRIVER-CLIENT:CLOSE-CURRENT-WINDOW function35986
+Node: WEBDRIVER-CLIENT-UTILS package36113
+Ref: WEBDRIVER-CLIENT-UTILS:*TIMEOUT* variable36686
+Ref: WEBDRIVER-CLIENT-UTILS:*DEFAULT-ELEMENT-FUNC* variable36789
+Ref: WEBDRIVER-CLIENT-UTILS:ID function37046
+Ref: WEBDRIVER-CLIENT-UTILS:GET-COOKIE function37128
+Ref: WEBDRIVER-CLIENT-UTILS:FIND-ELEM function37217
+Ref: WEBDRIVER-CLIENT-UTILS:WAIT-FOR function37365
+Ref: WEBDRIVER-CLIENT-UTILS:CLASSNAME function37581
+Ref: WEBDRIVER-CLIENT-UTILS:TEXT function37677
+Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEY function37765
+Ref: WEBDRIVER-CLIENT-UTILS:CLASSLIST function37864
+Ref: WEBDRIVER-CLIENT-UTILS:ATTR function37961
+Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEYS function38058
+Ref: WEBDRIVER-CLIENT-UTILS:ELEM function38158
+Ref: WEBDRIVER-CLIENT-UTILS:CLICK function38465
+Node: Index38552
 
 End Tag Table

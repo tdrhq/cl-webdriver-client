@@ -150,6 +150,8 @@ If for example you ask for Firefox version 62 on a system that only has 60 insta
 }
 @end verbatim
 
+In @emph{CL-WEBDRIVER-CLIENT} capabilities are created using @clref{WEBDRIVER-CLIENT, MAKE-CAPABILITIES, function}. The first argument takes the @emph{alwaysMatch} capabilities, as an association list. The rest of the arguments to the function are FIRST-MATCH capabilities, and should be association lists.
+
 @node firstMatch
 @subsection firstMatch
 
@@ -233,16 +235,16 @@ Which you choose of the two preceding examples is not important, but it can matt
 @subsection List of capabilities
 
 @itemize
-@item @emph{browserName}
-@item @emph{browserVersion}
-@item @emph{platformName}
-@item @emph{acceptInsecureCerts}
+@item @emph{:browser-name} -- a string. The name of the browser to use. e.g. ``chrome'', ``firefox''.
+@item @emph{:browser-version} -- a string. The browser version required.
+@item @emph{:platform-name} -- a string. Identifies the operating system of the endpoint node. e.g. 'Linux', 'Windows'.
+@item @emph{:accept-insecure-certs} -- a boolean.
     The acceptInsecureCerts capability communicates whether expired or invalid TLS certificates are checked when navigating. If the capability is false, an insecure certificate error will be returned as navigation encounters domains with certificate problems. Otherwise, self-signed or otherwise invalid certificates will be implicitly trusted by the browser on navigation. The capability has effect for the lifetime of the session.
-@item @emph{pageLoadStrategy}
-@item @emph{proxy}
-@item @emph{setWindowRect}
-@item @emph{timeouts}
-@item @emph{unhandledPromptBehavior}
+@item @emph{:page-load-strategy} -- a string.
+@item @emph{:proxy}
+@item @emph{:set-window-rect}
+@item @emph{:timeouts}
+@item @emph{:unhandled-prompt-behaviour}
 @end itemize
 
 @node Vendor-specific capabilities
@@ -250,9 +252,7 @@ Which you choose of the two preceding examples is not important, but it can matt
 
 In addition to the standard capabilities WebDriver allows third-parties to extend the set of capabilities to match their needs. Browser vendors and suppliers of drivers typically use extension capabilities to provide configuration to the browser, but they can also be used by intermediaries for arbitrary blobs of information.
 
-    Firefox capabilities (moz:firefoxOptions)
-    Chrome capabilities (goog:chromeOptions)
-
+You can use @clref{WEBDRIVER-CLIENT, CHROME-CAPABILITIES, function} and @clref{WEBDRIVER-CLIENT, FIREFOX-CAPABILITIES, function} for these.
 
 @node Actions
 @section Actions

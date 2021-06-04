@@ -6,6 +6,19 @@
 (defun make-capabilities (always-match &rest first-match)
   "Helper function for creating capabilities.
 
+ALWAYS-MATCH is an alist with capabilities parameters:
+
+- :browser-name -- a string. The name of the browser to use.
+- :browser-version -- a string. The browser version required.
+- :platform-name -- a string. Identifies the operating system of the endpoint node. e.g. 'Linux', 'Windows'.
+- :page-load-strategy -- a string. The page load strategy. 
+- :accept-insecure-certs -- a boolean. Whether expired or invalid TLS certificates are checked when navigating.
+- :timeouts -- an alist. Describes the timeouts imposed on certain session operations. 
+
+FIRST-MATCH is a list of alists, with the alists being the capabilities to try as 'firstMatch'.
+
+See: https://www.w3.org/TR/webdriver1/#capabilities
+See: https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities#capabilities_negotiation
 Category: Capabilities"
   `((:always-match . ,always-match)
     (:first-match . ,first-match)))

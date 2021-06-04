@@ -269,6 +269,8 @@ Next: <a href="#firstMatch" accesskey="n" rel="next">firstMatch</a>, Up: <a href
   }
 }
 </pre>
+<p>In <em>CL-WEBDRIVER-CLIENT</em> capabilities are created using <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dCAPABILITIES-function">MAKE-CAPABILITIES</a>. The first argument takes the <em>alwaysMatch</em> capabilities, as an association list. The rest of the arguments to the function are FIRST-MATCH capabilities, and should be association lists.
+</p>
 <hr>
 <span id="firstMatch"></span><div class="header">
 <p>
@@ -356,16 +358,16 @@ Next: <a href="#Vendor_002dspecific-capabilities" accesskey="n" rel="next">Vendo
 <span id="List-of-capabilities-1"></span><h4 class="subsection">2.2.4 List of capabilities</h4>
 
 <ul>
-<li> <em>browserName</em>
-</li><li> <em>browserVersion</em>
-</li><li> <em>platformName</em>
-</li><li> <em>acceptInsecureCerts</em>
+<li> <em>:browser-name</em> &ndash; a string. The name of the browser to use. e.g. &ldquo;chrome&rdquo;, &ldquo;firefox&rdquo;.
+</li><li> <em>:browser-version</em> &ndash; a string. The browser version required.
+</li><li> <em>:platform-name</em> &ndash; a string. Identifies the operating system of the endpoint node. e.g. &rsquo;Linux&rsquo;, &rsquo;Windows&rsquo;.
+</li><li> <em>:accept-insecure-certs</em> &ndash; a boolean.
     The acceptInsecureCerts capability communicates whether expired or invalid TLS certificates are checked when navigating. If the capability is false, an insecure certificate error will be returned as navigation encounters domains with certificate problems. Otherwise, self-signed or otherwise invalid certificates will be implicitly trusted by the browser on navigation. The capability has effect for the lifetime of the session.
-</li><li> <em>pageLoadStrategy</em>
-</li><li> <em>proxy</em>
-</li><li> <em>setWindowRect</em>
-</li><li> <em>timeouts</em>
-</li><li> <em>unhandledPromptBehavior</em>
+</li><li> <em>:page-load-strategy</em> &ndash; a string.
+</li><li> <em>:proxy</em>
+</li><li> <em>:set-window-rect</em>
+</li><li> <em>:timeouts</em>
+</li><li> <em>:unhandled-prompt-behaviour</em>
 </li></ul>
 
 <hr>
@@ -377,10 +379,8 @@ Previous: <a href="#List-of-capabilities" accesskey="p" rel="prev">List of capab
 
 <p>In addition to the standard capabilities WebDriver allows third-parties to extend the set of capabilities to match their needs. Browser vendors and suppliers of drivers typically use extension capabilities to provide configuration to the browser, but they can also be used by intermediaries for arbitrary blobs of information.
 </p>
-<p>Firefox capabilities (moz:firefoxOptions)
-    Chrome capabilities (goog:chromeOptions)
+<p>You can use <a href="#WEBDRIVER_002dCLIENT_003aCHROME_002dCAPABILITIES-function">CHROME-CAPABILITIES</a> and <a href="#WEBDRIVER_002dCLIENT_003aFIREFOX_002dCAPABILITIES-function">FIREFOX-CAPABILITIES</a> for these.
 </p>
-
 <hr>
 <span id="Actions"></span><div class="header">
 <p>
@@ -820,7 +820,8 @@ Category: Capabilities
 <dd>
 <p>Specifies Chrome specific capabilities.<br>
 <br>
-Category: Capabilities
+Category: Capabilities<br>
+<a href="https://chromedriver.chromium.org/capabilities#h.p_ID_102">https://chromedriver.chromium.org/capabilities#h.p_ID_102</a>
 </p></dd></dl>
 
 <span id="index-WEBDRIVER_002dCLIENT_003aFIREFOX_002dCAPABILITIES"></span>
@@ -852,6 +853,19 @@ Category: Capabilities
 <dd>
 <p>Helper function for creating capabilities.<br>
 <br>
+<var>ALWAYS-MATCH</var> is an alist with capabilities parameters:<br>
+<br>
+- <var>:browser-name</var> &ndash; a string. The name of the browser to use.<br>
+- <var>:browser-version</var> &ndash; a string. The browser version required.<br>
+- <var>:platform-name</var> &ndash; a string. Identifies the operating system of the endpoint node. e.g. &rsquo;Linux&rsquo;, &rsquo;Windows&rsquo;.<br>
+- <var>:page-load-strategy</var> &ndash; a string. The page load strategy. <br>
+- <var>:accept-insecure-certs</var> &ndash; a boolean. Whether expired or invalid TLS certificates are checked when navigating.<br>
+- <var>:timeouts</var> &ndash; an alist. Describes the timeouts imposed on certain session operations. <br>
+<br>
+<var>FIRST-MATCH</var> is a list of alists, with the alists being the capabilities to try as &rsquo;firstMatch&rsquo;.<br>
+<br>
+See: <a href="https://www.w3.org/TR/webdriver1/#capabilities">https://www.w3.org/TR/webdriver1/#capabilities</a><br>
+See: <a href="https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities#capabilities_negotiation">https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities#capabilities_negotiation</a><br>
 Category: Capabilities
 </p></dd></dl>
 
