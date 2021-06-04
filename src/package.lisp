@@ -6,8 +6,10 @@
   (:export :*default-capabilities*
            :make-capabilities
            :merge-capabilities
-   
-           :selenium-status
+	   :chrome-capabilities
+           :firefox-capabilities
+	   
+           :webdriver-status
 	   
            :make-session
            :delete-session

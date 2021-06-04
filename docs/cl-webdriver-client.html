@@ -613,6 +613,71 @@ For documentation see:<br>
 
 <span id="External-definitions"></span><h3 class="heading">External definitions</h3>
 
+<span id="Uncategorized"></span><h4 class="subheading">Uncategorized</h4>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aLOGS"></span>
+<span id="WEBDRIVER_002dCLIENT_003aLOGS-function"></span><dl>
+<dt id="index-LOGS">WEBDRIVER-CLIENT: <strong>LOGS</strong> <em>(type &amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the logs of a particular <var>TYPE</var>.<br>
+See: <a href="#WEBDRIVER_002dCLIENT_003aLOG_002dTYPES-function">LOG-TYPES</a>.
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aNO_002dSUCH_002dELEMENT_002dERROR"></span>
+<span id="WEBDRIVER_002dCLIENT_003aNO_002dSUCH_002dELEMENT_002dERROR-class"></span><dl>
+<dt id="index-NO_002dSUCH_002dELEMENT_002dERROR">WEBDRIVER-CLIENT: <strong>NO-SUCH-ELEMENT-ERROR</strong></dt>
+<dd>
+<p>Error signaled when no such element is found.
+</p>
+<p>Class precedence list: <code>no-such-element-error, find-error, error, serious-condition, condition, t</code>
+</p>
+</dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aMOUSE_002dMOVE_002dTO"></span>
+<span id="WEBDRIVER_002dCLIENT_003aMOUSE_002dMOVE_002dTO-function"></span><dl>
+<dt id="index-MOUSE_002dMOVE_002dTO">WEBDRIVER-CLIENT: <strong>MOUSE-MOVE-TO</strong> <em>(x y &amp;key element (session *session*))</em></dt>
+<dd>
+<p>Move the mouse by an offset of the specificed <var>element</var>. If no <var>element</var> is specified, the move is relative to the current mouse cursor. If an <var>element</var> is provided but no offset, the mouse will be moved to the center of the <var>element</var>. If the <var>element</var> is not visible, it will be scrolled into view.<br>
+<br>
+See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto</a>
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dID"></span>
+<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dID-function"></span><dl>
+<dt id="index-ELEMENT_002dID">WEBDRIVER-CLIENT: <strong>ELEMENT-ID</strong> <em>(sb-pcl::object)</em></dt>
+</dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aMOUSE_002dCLICK"></span>
+<span id="WEBDRIVER_002dCLIENT_003aMOUSE_002dCLICK-function"></span><dl>
+<dt id="index-MOUSE_002dCLICK">WEBDRIVER-CLIENT: <strong>MOUSE-CLICK</strong> <em>(button &amp;key (session *session*))</em></dt>
+<dd>
+<p>Click any mouse <var>button</var> (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling <var>button</var> up (or any out-of-order interactions sequence) will yield undefined behaviour).<br>
+<br>
+See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick</a>
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aLOG_002dTYPES"></span>
+<span id="WEBDRIVER_002dCLIENT_003aLOG_002dTYPES-function"></span><dl>
+<dt id="index-LOG_002dTYPES">WEBDRIVER-CLIENT: <strong>LOG-TYPES</strong> <em>(&amp;key (session *session*))</em></dt>
+<dd>
+<p>Return the types of logs supported by the WebDriver.<br>
+<br>
+- browser: Javascript console logs from the browser.<br>
+- client: Logs from the client side implementation of the WebDriver protocol (e.g. the Java bindings).<br>
+- driver: Logs from the internals of the driver (e.g. FirefoxDriver internals).<br>
+- performance: Logs relating to the performance characteristics of the page under test (e.g. resource load timings).<br>
+- server: Logs from within the selenium server.<br>
+<br>
+See: <a href="https://github.com/SeleniumHQ/selenium/wiki/Logging">https://github.com/SeleniumHQ/selenium/wiki/Logging</a> .
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aWEBDRIVER_002dSTATUS"></span>
+<span id="WEBDRIVER_002dCLIENT_003aWEBDRIVER_002dSTATUS-function"></span><dl>
+<dt id="index-WEBDRIVER_002dSTATUS">WEBDRIVER-CLIENT: <strong>WEBDRIVER-STATUS</strong> <em>nil</em></dt>
+<dd>
+<p>Get WebDriver status information
+</p></dd></dl>
+
 <span id="Navigation"></span><h4 class="subheading">Navigation</h4>
 
 <span id="index-WEBDRIVER_002dCLIENT_003aBACK"></span>
@@ -749,6 +814,29 @@ Category: <var>Session</var>
 Category: Capabilities
 </p></dd></dl>
 
+<span id="index-WEBDRIVER_002dCLIENT_003aCHROME_002dCAPABILITIES"></span>
+<span id="WEBDRIVER_002dCLIENT_003aCHROME_002dCAPABILITIES-function"></span><dl>
+<dt id="index-CHROME_002dCAPABILITIES">WEBDRIVER-CLIENT: <strong>CHROME-CAPABILITIES</strong> <em>(&amp;rest options)</em></dt>
+<dd>
+<p>Specifies Chrome specific capabilities.<br>
+<br>
+Category: Capabilities
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aFIREFOX_002dCAPABILITIES"></span>
+<span id="WEBDRIVER_002dCLIENT_003aFIREFOX_002dCAPABILITIES-function"></span><dl>
+<dt id="index-FIREFOX_002dCAPABILITIES">WEBDRIVER-CLIENT: <strong>FIREFOX-CAPABILITIES</strong> <em>(&amp;rest options)</em></dt>
+<dd>
+<p>Specify capabilities for Firefox browser.<br>
+<br>
+Example usage:<br>
+<br>
+(firefox-capabilities <var>:args</var> (list &quot;&ndash;headless&quot;))<br>
+<br>
+Category: Capabilities<br>
+See: <a href="https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities/firefoxOptions">https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities/firefoxOptions</a>
+</p></dd></dl>
+
 <span id="index-WEBDRIVER_002dCLIENT_003a_002aDEFAULT_002dCAPABILITIES_002a"></span>
 <span id="WEBDRIVER_002dCLIENT_003a_002aDEFAULT_002dCAPABILITIES_002a-variable"></span><dl>
 <dt id="index-_002aDEFAULT_002dCAPABILITIES_002a">WEBDRIVER-CLIENT: <strong>*DEFAULT-CAPABILITIES*</strong></dt>
@@ -842,64 +930,6 @@ See: <a href="https://www.w3.org/TR/webdriver1/#get-alert-text">https://www.w3.o
 <br>
 Category: User prompts<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#dismiss-alert">https://www.w3.org/TR/webdriver1/#dismiss-alert</a>
-</p></dd></dl>
-
-<span id="Uncategorized"></span><h4 class="subheading">Uncategorized</h4>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aLOGS"></span>
-<span id="WEBDRIVER_002dCLIENT_003aLOGS-function"></span><dl>
-<dt id="index-LOGS">WEBDRIVER-CLIENT: <strong>LOGS</strong> <em>(type &amp;key (session *session*))</em></dt>
-<dd>
-<p>Return the logs of a particular <var>TYPE</var>.<br>
-See: <a href="#WEBDRIVER_002dCLIENT_003aLOG_002dTYPES-function">LOG-TYPES</a>.
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aNO_002dSUCH_002dELEMENT_002dERROR"></span>
-<span id="WEBDRIVER_002dCLIENT_003aNO_002dSUCH_002dELEMENT_002dERROR-class"></span><dl>
-<dt id="index-NO_002dSUCH_002dELEMENT_002dERROR">WEBDRIVER-CLIENT: <strong>NO-SUCH-ELEMENT-ERROR</strong></dt>
-<dd>
-<p>Error signaled when no such element is found.
-</p>
-<p>Class precedence list: <code>no-such-element-error, find-error, error, serious-condition, condition, t</code>
-</p>
-</dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aMOUSE_002dMOVE_002dTO"></span>
-<span id="WEBDRIVER_002dCLIENT_003aMOUSE_002dMOVE_002dTO-function"></span><dl>
-<dt id="index-MOUSE_002dMOVE_002dTO">WEBDRIVER-CLIENT: <strong>MOUSE-MOVE-TO</strong> <em>(x y &amp;key element (session *session*))</em></dt>
-<dd>
-<p>Move the mouse by an offset of the specificed <var>element</var>. If no <var>element</var> is specified, the move is relative to the current mouse cursor. If an <var>element</var> is provided but no offset, the mouse will be moved to the center of the <var>element</var>. If the <var>element</var> is not visible, it will be scrolled into view.<br>
-<br>
-See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto</a>
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aELEMENT_002dID"></span>
-<span id="WEBDRIVER_002dCLIENT_003aELEMENT_002dID-function"></span><dl>
-<dt id="index-ELEMENT_002dID">WEBDRIVER-CLIENT: <strong>ELEMENT-ID</strong> <em>(sb-pcl::object)</em></dt>
-</dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aMOUSE_002dCLICK"></span>
-<span id="WEBDRIVER_002dCLIENT_003aMOUSE_002dCLICK-function"></span><dl>
-<dt id="index-MOUSE_002dCLICK">WEBDRIVER-CLIENT: <strong>MOUSE-CLICK</strong> <em>(button &amp;key (session *session*))</em></dt>
-<dd>
-<p>Click any mouse <var>button</var> (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling <var>button</var> up (or any out-of-order interactions sequence) will yield undefined behaviour).<br>
-<br>
-See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick">https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidclick</a>
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aLOG_002dTYPES"></span>
-<span id="WEBDRIVER_002dCLIENT_003aLOG_002dTYPES-function"></span><dl>
-<dt id="index-LOG_002dTYPES">WEBDRIVER-CLIENT: <strong>LOG-TYPES</strong> <em>(&amp;key (session *session*))</em></dt>
-<dd>
-<p>Return the types of logs supported by the WebDriver.<br>
-<br>
-- browser: Javascript console logs from the browser.<br>
-- client: Logs from the client side implementation of the WebDriver protocol (e.g. the Java bindings).<br>
-- driver: Logs from the internals of the driver (e.g. FirefoxDriver internals).<br>
-- performance: Logs relating to the performance characteristics of the page under test (e.g. resource load timings).<br>
-- server: Logs from within the selenium server.<br>
-<br>
-See: <a href="https://github.com/SeleniumHQ/selenium/wiki/Logging">https://github.com/SeleniumHQ/selenium/wiki/Logging</a> .
 </p></dd></dl>
 
 <span id="Document-handling"></span><h4 class="subheading">Document handling</h4>
@@ -1390,6 +1420,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-BACK"><code>BACK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_fn_letter-C">C</th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#index-CHROME_002dCAPABILITIES"><code>CHROME-CAPABILITIES</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CLASSLIST"><code>CLASSLIST</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT_002dUTILS-package">WEBDRIVER-CLIENT-UTILS package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CLASSNAME"><code>CLASSNAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT_002dUTILS-package">WEBDRIVER-CLIENT-UTILS package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-CLICK"><code>CLICK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT_002dUTILS-package">WEBDRIVER-CLIENT-UTILS package</a></td></tr>
@@ -1422,6 +1453,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-FIND_002dELEM"><code>FIND-ELEM</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT_002dUTILS-package">WEBDRIVER-CLIENT-UTILS package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-FIND_002dELEMENT"><code>FIND-ELEMENT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-FIND_002dELEMENTS"><code>FIND-ELEMENTS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-FIREFOX_002dCAPABILITIES"><code>FIREFOX-CAPABILITIES</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_fn_letter-G">G</th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-GET_002dCOOKIE"><code>GET-COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT_002dUTILS-package">WEBDRIVER-CLIENT-UTILS package</a></td></tr>
@@ -1485,6 +1517,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aACTIVE_002dELEMENT"><code>WEBDRIVER-CLIENT:ACTIVE-ELEMENT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aALERT_002dTEXT"><code>WEBDRIVER-CLIENT:ALERT-TEXT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aBACK"><code>WEBDRIVER-CLIENT:BACK</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aCHROME_002dCAPABILITIES"><code>WEBDRIVER-CLIENT:CHROME-CAPABILITIES</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aCLOSE_002dCURRENT_002dWINDOW"><code>WEBDRIVER-CLIENT:CLOSE-CURRENT-WINDOW</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aCOOKIE"><code>WEBDRIVER-CLIENT:COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aDELETE_002dALL_002dCOOKIES"><code>WEBDRIVER-CLIENT:DELETE-ALL-COOKIES</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
@@ -1506,6 +1539,7 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aFIND_002dCOOKIE"><code>WEBDRIVER-CLIENT:FIND-COOKIE</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aFIND_002dELEMENT"><code>WEBDRIVER-CLIENT:FIND-ELEMENT</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aFIND_002dELEMENTS"><code>WEBDRIVER-CLIENT:FIND-ELEMENTS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aFIREFOX_002dCAPABILITIES"><code>WEBDRIVER-CLIENT:FIREFOX-CAPABILITIES</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aKEY"><code>WEBDRIVER-CLIENT:KEY</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aLOG_002dTYPES"><code>WEBDRIVER-CLIENT:LOG-TYPES</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aLOGS"><code>WEBDRIVER-CLIENT:LOGS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
@@ -1525,7 +1559,9 @@ Previous: <a href="#API" accesskey="p" rel="prev">API</a>, Up: <a href="#Top" ac
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aSWITCH_002dTO_002dFRAME"><code>WEBDRIVER-CLIENT:SWITCH-TO-FRAME</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aURL"><code>WEBDRIVER-CLIENT:URL</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aUSE_002dSESSION"><code>WEBDRIVER-CLIENT:USE-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aWEBDRIVER_002dSTATUS"><code>WEBDRIVER-CLIENT:WEBDRIVER-STATUS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dCLIENT_003aWITH_002dSESSION"><code>WEBDRIVER-CLIENT:WITH-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-WEBDRIVER_002dSTATUS"><code>WEBDRIVER-STATUS</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-WITH_002dSESSION"><code>WITH-SESSION</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#WEBDRIVER_002dCLIENT-package">WEBDRIVER-CLIENT package</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 </table>

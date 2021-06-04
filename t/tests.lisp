@@ -22,9 +22,11 @@
   (webdriver:make-capabilities
    `((platform-name . ,(webdriver::detect-platform-name)))
    `((browser-name . "chrome")
-     ,(webdriver::chrome-args "--headless"))
+     ,(webdriver:chrome-capabilities
+       :args #("--headless")))
    `((browser-name . "firefox")
-     ,(webdriver::firefox-args "--headless")))
+     ,(webdriver:firefox-capabilities
+       :args #("--headless"))))
   "Capabilities used for test sessions")
 
 (defmacro with-test-session (&body body)
