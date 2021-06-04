@@ -31,8 +31,9 @@ Category: Capabilities"
 
 (defparameter *default-capabilities*
   (make-capabilities
-   `((platform-name . ,(detect-platform-name))
-     (browser-name . "chrome")))
+   `((platform-name . ,(detect-platform-name)))
+   '((browser-name . "chrome"))
+   '((browser-name . "firefox")))
   "The default capabilities.
 
 Category: Capabilities")
@@ -40,6 +41,10 @@ Category: Capabilities")
 (defun chrome-args (&rest args)
   "Specifies Chrome args"
   `("goog:chromeOptions" . ((:args . ,(coerce args 'vector)))))
+
+(defun firefox-args (&rest args)
+  "Specifies args for Firefox."
+  `("moz:firefoxOptions" . ((:args . ,(coerce args 'vector)))))
 
 ;; (defun make-capabilities-for-chrome (&key
 ;; 				       (headlessp nil)

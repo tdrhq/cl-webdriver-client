@@ -18,9 +18,17 @@
 (defun test-file-url (name)
   (format nil "file://~a" (asdf:system-relative-pathname :cl-webdriver-client-test (format nil "t/web/~a" name))))
 
+(defparameter *test-capabilities*
+  (webdriver:make-capabilities
+   `((platform-name . ,(webdriver::detect-platform-name)))
+   `((browser-name . "chrome")
+     ,(webdriver::chrome-args "--headless"))
+   `((browser-name . "firefox")
+     ,(webdriver::firefox-args "--headless")))
+  "Capabilities used for test sessions")
+
 (defmacro with-test-session (&body body)
-  `(with-session ',(merge-capabilities *default-capabilities*
-		    (make-capabilities (list (webdriver::chrome-args "--headless"))))
+  `(with-session *test-capabilities*
        ,@body))
 
 (unless (probe-file (asdf:system-relative-pathname :cl-webdriver-client-test (format nil "t/web/")))
