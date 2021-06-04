@@ -100,3 +100,13 @@ For documentation see:
 
 The exported definitions work with an implicit element. The default implicit element is the current active element. So, it is not neccesary to pass the element you are working with around most of the time.
 "))
+
+(defpackage webdriver-client-user
+  (:nicknames :webdriver-user)
+  (:use :cl :webdriver-client)
+  (:import-from
+   :webdriver-client-utils
+   :send-keys
+   :click
+   :wait-for)
+  (:documentation "User package for interacting with WebDriver (interactive session)."))
