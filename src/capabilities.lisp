@@ -3,40 +3,24 @@
 (defun detect-platform-name ()
   (string-downcase (symbol-name (uiop/os:operating-system))))
 
-(defun make-capabilities (always-match &rest first-match)
-  "Helper function for creating capabilities.
-
-ALWAYS-MATCH is an alist with capabilities parameters:
-
-- :browser-name -- a string. The name of the browser to use.
-- :browser-version -- a string. The browser version required.
-- :platform-name -- a string. Identifies the operating system of the endpoint node. e.g. 'Linux', 'Windows'.
-- :page-load-strategy -- a string. The page load strategy. 
-- :accept-insecure-certs -- a boolean. Whether expired or invalid TLS certificates are checked when navigating.
-- :timeouts -- an alist. Describes the timeouts imposed on certain session operations. 
-
-FIRST-MATCH is a list of alists, with the alists being the capabilities to try as 'firstMatch'.
-
-See: https://www.w3.org/TR/webdriver1/#capabilities
-See: https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities#capabilities_negotiation
-Category: Capabilities"
-  `((:always-match . ,always-match)
-    (:first-match . ,first-match)))
+(defstruct capabilities
+  always-match first-match)
 
 (defun merge-capabilities (cap1 cap2)
   "Merge two capabilities
 
 Category: Capabilities"
-  `((:always-match . ,(append (aget cap1 :always-match)
-                              (aget cap2 :always-match)))
-    (:first-match . ,(append (aget cap1 :first-match)
-                             (aget cap2 :first-match)))))
+  (make-capabilities
+   :always-match (append (capabilities-always-match cap1)
+                         (capabilities-always-match cap2))
+   :first-match (append (capabilities-first-match cap1)
+			(capabilities-first-match cap2))))
 
 (defparameter *default-capabilities*
   (make-capabilities
-   `((platform-name . ,(detect-platform-name)))
-   '((browser-name . "chrome"))
-   '((browser-name . "firefox")))
+   :always-match `((platform-name . ,(detect-platform-name)))
+   :first-match (list '((browser-name . "chrome"))
+                      '((browser-name . "firefox"))))
   "The default capabilities.
 
 Category: Capabilities")
@@ -53,8 +37,13 @@ https://chromedriver.chromium.org/capabilities#h.p_ID_102"
 
 Example usage:
 
-(firefox-capabilities :args (list \"--headless\"))
+(firefox-capabilities :args #(\"--headless\"))
 
 Category: Capabilities
 See: https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities/firefoxOptions"
   `("moz:firefoxOptions" . ,(alexandria:plist-alist options)))
+
+(defun serialize-capabilities (capabilities)
+  `(,@(when (capabilities-always-match capabilities)
+	`((:always-match . ,(capabilities-always-match capabilities))))
+    (:first-match . ,(capabilities-first-match capabilities))))

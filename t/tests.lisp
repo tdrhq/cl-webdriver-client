@@ -20,13 +20,13 @@
 
 (defparameter *test-capabilities*
   (webdriver:make-capabilities
-   `((platform-name . ,(webdriver::detect-platform-name)))
-   `((browser-name . "chrome")
-     ,(webdriver:chrome-capabilities
-       :args #("--headless")))
-   `((browser-name . "firefox")
-     ,(webdriver:firefox-capabilities
-       :args #("--headless"))))
+   :always-match `((platform-name . ,(webdriver::detect-platform-name)))
+   :first-match (list `((browser-name . "chrome")
+			,(webdriver:chrome-capabilities
+			  :args #("--headless")))
+		      `((browser-name . "firefox")
+			,(webdriver:firefox-capabilities
+			  :args #("--headless")))))
   "Capabilities used for test sessions")
 
 (defmacro with-test-session (&body body)

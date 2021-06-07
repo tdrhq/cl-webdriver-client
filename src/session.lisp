@@ -20,14 +20,23 @@ The server should maintain one browser per session. Commands sent to a session w
 (defun make-session (capabilities)
   "Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.
 
+CAPABILITIES are the capabilities to negotate for the new session. If it is NIL, then *DEFAULT-CAPABILITIES* are used. If it is a list, then it is use as parameters for MAKE-CAPABILITIES to build a new CAPABILITIES object. Otherwise, it is assumed to be a CAPABILITIES object.
+
 Category: Session
 See: https://www.w3.org/TR/webdriver1/#new-session .
 See: https://www.w3.org/TR/webdriver1/#capabilities ."
-  (let ((response (http-post "/session"
-                             :session-id nil
-			     :capabilities (or capabilities *default-capabilities*))))
-    (make-instance 'session
-                   :id (aget (aget response :value) :session-id))))
+  (let ((caps (cond
+		((null capabilities)
+		 *default-capabilities*)
+		((listp capabilities)
+		 (apply #'make-capabilities capabilities))
+		(t capabilities))))
+    (check-type caps capabilities)
+    (let ((response (http-post "/session"
+                               :session-id nil
+			       :capabilities (serialize-capabilities caps))))
+      (make-instance 'session
+                     :id (aget (aget response :value) :session-id)))))
 
 (defun delete-session (session)
   "Delete the WebDriver SESSION.
