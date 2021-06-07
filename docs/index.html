@@ -236,6 +236,10 @@ Capabilities negotiation
 </p>
 <p>The selection process, or the capabilities negotiation, is done through alwaysMatch and firstMatch.
 </p>
+<p>In <em>CL-WEBDRIVER-CLIENT</em> capabilities are created using <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dCAPABILITIES-function">MAKE-CAPABILITIES</a>. The key argument <var>:always-match</var> should be the &rsquo;alwaysMatch&rsquo; capabilities as an association list. The key argument <var>:first-match</var> are the &rsquo;firstMatch&rsquo; capabilities, a list of association lists.
+</p>
+<p>Also, capabilities are constructed from arguments in <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function">MAKE-SESSION</a> and <a href="#WEBDRIVER_002dCLIENT_003aWITH_002dSESSION-macro">WITH-SESSION</a>.
+</p>
 <table class="menu" border="0" cellspacing="0">
 <tr><td align="left" valign="top">&bull; <a href="#alwaysMatch" accesskey="1">alwaysMatch</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
@@ -260,17 +264,20 @@ Next: <a href="#firstMatch" accesskey="n" rel="next">firstMatch</a>, Up: <a href
 </p>
 <p>If for example you ask for Firefox version 62 on a system that only has 60 installed, the session creation will fail:
 </p>
-<pre class="verbatim">{
-  &quot;capabilities&quot;: {
-    &quot;alwaysMatch&quot;: {
-      &quot;browserName&quot;: &quot;firefox&quot;,
-      &quot;browserVersion&quot;: &quot;60&quot;
-    }
-  }
-}
-</pre>
-<p>In <em>CL-WEBDRIVER-CLIENT</em> capabilities are created using <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dCAPABILITIES-function">MAKE-CAPABILITIES</a>. The first argument takes the <em>alwaysMatch</em> capabilities, as an association list. The rest of the arguments to the function are FIRST-MATCH capabilities, and should be association lists.
+<div class="lisp">
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">make-capabilities
+     <span class="keyword">:always-match</span> '<span class="paren2">(<span class="lisp-bg"><span class="paren3">(<span class="lisp-bg"><span class="keyword">:browser-name</span> . <span class="string">&quot;firefox&quot;</span></span>)</span>
+                     <span class="paren3">(<span class="lisp-bg"><span class="keyword">:browser-version</span> . <span class="string">&quot;60&quot;</span></span>)</span></span>)</span></span>)</span>
+</pre></div>
+
+<p>or:
 </p>
+<div class="lisp">
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg"><i><span class="symbol">with-session</span></i> '<span class="paren2">(<span class="lisp-bg"><span class="keyword">:always-match</span> <span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:browser-name</span> . <span class="string">&quot;firefox&quot;</span></span>)</span>
+                                 <span class="paren4">(<span class="lisp-bg"><span class="keyword">:browser-version</span> . <span class="string">&quot;60&quot;</span></span>)</span></span>)</span></span>)</span>
+     ... </span>)</span>
+</pre></div>
+
 <hr>
 <span id="firstMatch"></span><div class="header">
 <p>
@@ -282,16 +289,12 @@ Next: <a href="#Combining-alwaysMatch-and-firstMatch" accesskey="n" rel="next">C
 </p>
 <p>This can be useful when you want a driver that runs on macOS or Linux, but not Windows:
 </p>
-<pre class="verbatim">{
-  &quot;capabilities&quot;: {
-    &quot;firstMatch&quot;: [
-      {&quot;platformName&quot;: &quot;macos&quot;},
-      {&quot;platformName&quot;: &quot;linux&quot;}
-    ]
-  }
-}
-
-</pre>
+<div class="lisp">
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">make-capabilities
+    <span class="keyword">:first-match</span> <span class="paren2">(<span class="lisp-bg">list 
+        '<span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;macos&quot;</span></span>)</span></span>)</span>
+        '<span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;linux&quot;</span></span>)</span></span>)</span></span>)</span></span>)</span>
+</pre></div>
 
 <hr>
 <span id="Combining-alwaysMatch-and-firstMatch"></span><div class="header">
@@ -302,53 +305,37 @@ Next: <a href="#List-of-capabilities" accesskey="n" rel="next">List of capabilit
 
 <p>firstMatch can of course be combined with alwaysMatch to narrow down the selection. If for example you a driver that runs on macOS or Linux but it has to be Firefox:
 </p>
-<pre class="verbatim">{
-  &quot;capabilities&quot;: {
-    &quot;alwaysMatch&quot;: {
-      &quot;browserName&quot;: &quot;firefox&quot;
-    },
-    &quot;firstMatch&quot;: [
-      {&quot;platformName&quot;: &quot;macos&quot;},
-      {&quot;platformName&quot;: &quot;linux&quot;}
-    ]
-  }
-}
-</pre>
+<div class="lisp">
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">make-capabilities
+      <span class="keyword">:always-match</span> '<span class="paren2">(<span class="lisp-bg"><span class="paren3">(<span class="lisp-bg"><span class="keyword">:browser-name</span> . <span class="string">&quot;firefox&quot;</span></span>)</span></span>)</span>
+      <span class="keyword">:first-match</span> <span class="paren2">(<span class="lisp-bg">list 
+        '<span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;macos&quot;</span></span>)</span></span>)</span>
+        '<span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;linux&quot;</span></span>)</span></span>)</span></span>)</span></span>)</span>
+</pre></div>
+
 <p>The previous example is exactly equivalent to putting the Firefox requirement in each firstMatch arm:
 </p>
-<pre class="verbatim">
-{
-  &quot;capabilities&quot;:{
-    &quot;firstMatch&quot;:[
-      {&quot;browserName&quot;: &quot;firefox&quot;, &quot;platformName&quot;:&quot;macos&quot;},
-      {&quot;browserName&quot;: &quot;firefox&quot;, &quot;platformName&quot;:&quot;linux&quot;}
-    ]
-  }
-}
+<div class="lisp">
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">make-capabilities
+      <span class="keyword">:first-match</span> <span class="paren2">(<span class="lisp-bg">list
+          '<span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:browser-name</span> . <span class="string">&quot;firefox&quot;</span></span>)</span> <span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;macos&quot;</span></span>)</span></span>)</span>
+          '<span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:browser-name</span> . <span class="string">&quot;firefox&quot;</span></span>)</span> <span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;linux&quot;</span></span>)</span></span>)</span></span>)</span></span>)</span>
+</pre></div>
 
-</pre>
 <p>Which you choose of the two preceding examples is not important, but it can matter when pass along browser configuration. To avoid unnecessarily repeating data, such as profiles, it is advisable to make use of alwaysMatch so that this data is only transmitted across the wire once:
 </p>
-<pre class="verbatim">
-{
-  &quot;capabilities&quot;: {
-    &quot;alwaysMatch&quot;: {
-      &quot;browserName&quot;: &quot;firefox&quot;,
-      &quot;moz:firefoxOptions&quot;: {
-        &quot;profile&quot;: &quot;&lt;base64 encoded profile&gt;&quot;,
-        &quot;args&quot;: [&quot;-headless&quot;],
-        &quot;prefs&quot;: {&quot;dom.ipc.processCount&quot;: 8},
-        &quot;log&quot;:{&quot;level&quot;: &quot;trace&quot;}
-      }
-    },
-    &quot;firstMatch&quot;: [
-      {&quot;platformName&quot;: &quot;macos&quot;},
-      {&quot;platformName&quot;: &quot;linux&quot;}
-    ]
-  }
-}
-
-</pre>
+<div class="lisp">
+<pre class="lisp">  <span class="paren1">(<span class="lisp-bg">make-capabilities
+     <span class="keyword">:always-match</span> `<span class="paren2">(<span class="lisp-bg"><span class="paren3">(<span class="lisp-bg"><span class="keyword">:browser-name</span> . <span class="string">&quot;firefox&quot;</span></span>)</span>
+                     ,<span class="paren3">(<span class="lisp-bg">firefox-capabilities
+                          <span class="keyword">:profile</span> <span class="string">&quot;&lt;base64 encoded profile&gt;&quot;</span>
+                          <span class="keyword">:args</span> #<span class="paren4">(<span class="lisp-bg"><span class="string">&quot;--headless&quot;</span></span>)</span>
+                          <span class="keyword">:prefs</span> '<span class="paren4">(<span class="lisp-bg"><span class="paren5">(<span class="lisp-bg"><span class="string">&quot;dom.ipc.processCount&quot;</span> . 8</span>)</span></span>)</span>
+                          <span class="keyword">:log</span> '<span class="paren4">(<span class="lisp-bg"><span class="paren5">(<span class="lisp-bg"><span class="keyword">:level</span> . <span class="string">&quot;trace&quot;</span></span>)</span></span>)</span></span>)</span></span>)</span>
+     <span class="keyword">:first-match</span> <span class="paren2">(<span class="lisp-bg">list
+         '<span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;macos&quot;</span></span>)</span>
+           <span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;linux&quot;</span></span>)</span></span>)</span></span>)</span></span>)</span>
+</pre></div>
 
 <hr>
 <span id="List-of-capabilities"></span><div class="header">
@@ -671,6 +658,11 @@ See: <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessi
 See: <a href="https://github.com/SeleniumHQ/selenium/wiki/Logging">https://github.com/SeleniumHQ/selenium/wiki/Logging</a> .
 </p></dd></dl>
 
+<span id="index-WEBDRIVER_002dCLIENT_003aMAKE_002dCAPABILITIES"></span>
+<span id="WEBDRIVER_002dCLIENT_003aMAKE_002dCAPABILITIES-function"></span><dl>
+<dt id="index-MAKE_002dCAPABILITIES">WEBDRIVER-CLIENT: <strong>MAKE-CAPABILITIES</strong> <em>(&amp;key ((:always-match #:always-match) nil) ((:first-match #:first-match) nil))</em></dt>
+</dl>
+
 <span id="index-WEBDRIVER_002dCLIENT_003aWEBDRIVER_002dSTATUS"></span>
 <span id="WEBDRIVER_002dCLIENT_003aWEBDRIVER_002dSTATUS-function"></span><dl>
 <dt id="index-WEBDRIVER_002dSTATUS">WEBDRIVER-CLIENT: <strong>WEBDRIVER-STATUS</strong> <em>nil</em></dt>
@@ -789,6 +781,8 @@ Category: Session
 <dd>
 <p>Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.<br>
 <br>
+<var>CAPABILITIES</var> are the <var>capabilities</var> to negotate for the new session. If it is NIL, then <a href="#WEBDRIVER_002dCLIENT_003a_002aDEFAULT_002dCAPABILITIES_002a-variable">*DEFAULT-CAPABILITIES*</a> are used. If it is a list, then it is use as parameters for <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dCAPABILITIES-function">MAKE-CAPABILITIES</a> to build a new <var>CAPABILITIES</var> object. Otherwise, it is assumed to be a <var>CAPABILITIES</var> object.<br>
+<br>
 Category: Session<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#new-session">https://www.w3.org/TR/webdriver1/#new-session</a> .<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#">https://www.w3.org/TR/webdriver1/#</a><var>capabilities</var> .
@@ -801,72 +795,6 @@ See: <a href="https://www.w3.org/TR/webdriver1/#">https://www.w3.org/TR/webdrive
 <p>Delete the WebDriver <var>SESSION</var>.<br>
 <br>
 Category: <var>Session</var>
-</p></dd></dl>
-
-<span id="Capabilities-2"></span><h4 class="subheading">Capabilities</h4>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aMERGE_002dCAPABILITIES"></span>
-<span id="WEBDRIVER_002dCLIENT_003aMERGE_002dCAPABILITIES-function"></span><dl>
-<dt id="index-MERGE_002dCAPABILITIES">WEBDRIVER-CLIENT: <strong>MERGE-CAPABILITIES</strong> <em>(cap1 cap2)</em></dt>
-<dd>
-<p>Merge two capabilities<br>
-<br>
-Category: Capabilities
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aCHROME_002dCAPABILITIES"></span>
-<span id="WEBDRIVER_002dCLIENT_003aCHROME_002dCAPABILITIES-function"></span><dl>
-<dt id="index-CHROME_002dCAPABILITIES">WEBDRIVER-CLIENT: <strong>CHROME-CAPABILITIES</strong> <em>(&amp;rest options)</em></dt>
-<dd>
-<p>Specifies Chrome specific capabilities.<br>
-<br>
-Category: Capabilities<br>
-<a href="https://chromedriver.chromium.org/capabilities#h.p_ID_102">https://chromedriver.chromium.org/capabilities#h.p_ID_102</a>
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aFIREFOX_002dCAPABILITIES"></span>
-<span id="WEBDRIVER_002dCLIENT_003aFIREFOX_002dCAPABILITIES-function"></span><dl>
-<dt id="index-FIREFOX_002dCAPABILITIES">WEBDRIVER-CLIENT: <strong>FIREFOX-CAPABILITIES</strong> <em>(&amp;rest options)</em></dt>
-<dd>
-<p>Specify capabilities for Firefox browser.<br>
-<br>
-Example usage:<br>
-<br>
-(firefox-capabilities <var>:args</var> (list &quot;&ndash;headless&quot;))<br>
-<br>
-Category: Capabilities<br>
-See: <a href="https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities/firefoxOptions">https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities/firefoxOptions</a>
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003a_002aDEFAULT_002dCAPABILITIES_002a"></span>
-<span id="WEBDRIVER_002dCLIENT_003a_002aDEFAULT_002dCAPABILITIES_002a-variable"></span><dl>
-<dt id="index-_002aDEFAULT_002dCAPABILITIES_002a">WEBDRIVER-CLIENT: <strong>*DEFAULT-CAPABILITIES*</strong></dt>
-<dd>
-<p>The default capabilities.<br>
-<br>
-Category: Capabilities
-</p></dd></dl>
-
-<span id="index-WEBDRIVER_002dCLIENT_003aMAKE_002dCAPABILITIES"></span>
-<span id="WEBDRIVER_002dCLIENT_003aMAKE_002dCAPABILITIES-function"></span><dl>
-<dt id="index-MAKE_002dCAPABILITIES">WEBDRIVER-CLIENT: <strong>MAKE-CAPABILITIES</strong> <em>(always-match &amp;rest first-match)</em></dt>
-<dd>
-<p>Helper function for creating capabilities.<br>
-<br>
-<var>ALWAYS-MATCH</var> is an alist with capabilities parameters:<br>
-<br>
-- <var>:browser-name</var> &ndash; a string. The name of the browser to use.<br>
-- <var>:browser-version</var> &ndash; a string. The browser version required.<br>
-- <var>:platform-name</var> &ndash; a string. Identifies the operating system of the endpoint node. e.g. &rsquo;Linux&rsquo;, &rsquo;Windows&rsquo;.<br>
-- <var>:page-load-strategy</var> &ndash; a string. The page load strategy. <br>
-- <var>:accept-insecure-certs</var> &ndash; a boolean. Whether expired or invalid TLS certificates are checked when navigating.<br>
-- <var>:timeouts</var> &ndash; an alist. Describes the timeouts imposed on certain session operations. <br>
-<br>
-<var>FIRST-MATCH</var> is a list of alists, with the alists being the capabilities to try as &rsquo;firstMatch&rsquo;.<br>
-<br>
-See: <a href="https://www.w3.org/TR/webdriver1/#capabilities">https://www.w3.org/TR/webdriver1/#capabilities</a><br>
-See: <a href="https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities#capabilities_negotiation">https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities#capabilities_negotiation</a><br>
-Category: Capabilities
 </p></dd></dl>
 
 <span id="Screen-capture"></span><h4 class="subheading">Screen capture</h4>
@@ -960,6 +888,50 @@ Arguments may be any JSON-primitive, array, or JSON object. JSON objects that de
 <br>
 Category: Document handling<br>
 See: <a href="https://www.w3.org/TR/webdriver1/#executing-script">https://www.w3.org/TR/webdriver1/#executing-script</a> .
+</p></dd></dl>
+
+<span id="Capabilities-2"></span><h4 class="subheading">Capabilities</h4>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aMERGE_002dCAPABILITIES"></span>
+<span id="WEBDRIVER_002dCLIENT_003aMERGE_002dCAPABILITIES-function"></span><dl>
+<dt id="index-MERGE_002dCAPABILITIES">WEBDRIVER-CLIENT: <strong>MERGE-CAPABILITIES</strong> <em>(cap1 cap2)</em></dt>
+<dd>
+<p>Merge two capabilities<br>
+<br>
+Category: Capabilities
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aCHROME_002dCAPABILITIES"></span>
+<span id="WEBDRIVER_002dCLIENT_003aCHROME_002dCAPABILITIES-function"></span><dl>
+<dt id="index-CHROME_002dCAPABILITIES">WEBDRIVER-CLIENT: <strong>CHROME-CAPABILITIES</strong> <em>(&amp;rest options)</em></dt>
+<dd>
+<p>Specifies Chrome specific capabilities.<br>
+<br>
+Category: Capabilities<br>
+<a href="https://chromedriver.chromium.org/capabilities#h.p_ID_102">https://chromedriver.chromium.org/capabilities#h.p_ID_102</a>
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003aFIREFOX_002dCAPABILITIES"></span>
+<span id="WEBDRIVER_002dCLIENT_003aFIREFOX_002dCAPABILITIES-function"></span><dl>
+<dt id="index-FIREFOX_002dCAPABILITIES">WEBDRIVER-CLIENT: <strong>FIREFOX-CAPABILITIES</strong> <em>(&amp;rest options)</em></dt>
+<dd>
+<p>Specify capabilities for Firefox browser.<br>
+<br>
+Example usage:<br>
+<br>
+(firefox-capabilities <var>:args</var> #(&quot;&ndash;headless&quot;))<br>
+<br>
+Category: Capabilities<br>
+See: <a href="https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities/firefoxOptions">https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities/firefoxOptions</a>
+</p></dd></dl>
+
+<span id="index-WEBDRIVER_002dCLIENT_003a_002aDEFAULT_002dCAPABILITIES_002a"></span>
+<span id="WEBDRIVER_002dCLIENT_003a_002aDEFAULT_002dCAPABILITIES_002a-variable"></span><dl>
+<dt id="index-_002aDEFAULT_002dCAPABILITIES_002a">WEBDRIVER-CLIENT: <strong>*DEFAULT-CAPABILITIES*</strong></dt>
+<dd>
+<p>The default capabilities.<br>
+<br>
+Category: Capabilities
 </p></dd></dl>
 
 <span id="Cookies"></span><h4 class="subheading">Cookies</h4>
