@@ -116,6 +116,8 @@ An intermediary node will maintain an associated session for each active session
 
 All commands, except New Session and Status, have an associated current session, which is the session in which that command will run.
 
+Use @clref{WEBDRIVER-CLIENT, START-INTERACTIVE-SESSION, function} function to start an interactive session, and @clref{WEBDRIVER-CLIENT, WITH-SESSION, macro} macro to evaluate WebDriver code in the context of a session.
+
 @node Capabilities
 @section Capabilities
 
