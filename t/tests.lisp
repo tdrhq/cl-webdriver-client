@@ -5,15 +5,15 @@
 (defun download-test-pages ()
   (format t "Downloading test pages...~%")
   (uiop:run-program (list "curl" "-L" "https://github.com/copyleft/cl-webdriver-client/files/6430883/testpages.tar.gz"
-		    "--output"
-		    (princ-to-string +test-pages-filepath+))))
+                          "--output"
+                          (princ-to-string +test-pages-filepath+))))
 
 (defun uncompress-test-pages ()
   (format t "Uncompressing test pages...~%")
   (uiop:run-program
    (format nil "tar xzf ~a -C ~a"
-	   +test-pages-filepath+
-	   (asdf:system-relative-pathname :cl-webdriver-client-test "t/"))))  
+           +test-pages-filepath+
+           (asdf:system-relative-pathname :cl-webdriver-client-test "t/"))))
 
 (defun test-file-url (name)
   (format nil "file://~a" (asdf:system-relative-pathname :cl-webdriver-client-test (format nil "t/web/~a" name))))
@@ -22,16 +22,16 @@
   (webdriver:make-capabilities
    :always-match `((platform-name . ,(webdriver::detect-platform-name)))
    :first-match (list `((browser-name . "chrome")
-			,(webdriver:chrome-capabilities
-			  :args #("--headless")))
-		      `((browser-name . "firefox")
-			,(webdriver:firefox-capabilities
-			  :args #("--headless")))))
+                        ,(webdriver:chrome-capabilities
+                          :args #("--headless")))
+                      `((browser-name . "firefox")
+                        ,(webdriver:firefox-capabilities
+                          :args #("--headless")))))
   "Capabilities used for test sessions")
 
 (defmacro with-test-session (&body body)
   `(with-session *test-capabilities*
-       ,@body))
+     ,@body))
 
 (unless (probe-file (asdf:system-relative-pathname :cl-webdriver-client-test (format nil "t/web/")))
   (unless (probe-file +test-pages-filepath+)
@@ -62,7 +62,7 @@
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
     (let ((child-div (find-element "hiddenchild" :by :id))
-	  (hidden-link (find-element "hiddenlink" :by :id)))
+          (hidden-link (find-element "hiddenlink" :by :id)))
       (ok (not (element-displayed child-div)))
       (ok (not (element-displayed hidden-link)))
       )))
@@ -75,7 +75,7 @@
     (let ((key-reporter (find-element "keyReporter" :by :id)))
       (element-send-keys key-reporter "a")
       (let ((result (find-element "result" :by :id)))
-	(ok (search "press:" (element-text result) :test 'string=))))))
+        (ok (search "press:" (element-text result) :test 'string=))))))
 
 
 (subtest "Writable text input should clear"
@@ -182,65 +182,65 @@
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
     (perform-actions `((:pointer
-			(:pointer-move 22 33)
-			(:pause 2000)
-			(:pointer-move 23 54))
-		       ))
+                        (:pointer-move 22 33)
+                        (:pause 2000)
+                        (:pointer-move 23 54))
+                       ))
     ))
 
 (subtest "actions: touch test"
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
     (perform-actions `((:touch
-			(:pointer-move 22 33)
-			(:pause 2000)
-			(:pointer-move 23 54))
-		       ))
+                        (:pointer-move 22 33)
+                        (:pause 2000)
+                        (:pointer-move 23 54))
+                       ))
     )
   )
 
 (subtest "actions: mouse test"
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
-    (perform-actions `((:mouse
-			(:pointer-move 22 33)
-			(:pause 2000)
-			(:pointer-move 23 54))
-		       ))
+    (ok (null (perform-actions `((:mouse
+                                  (:pointer-move 22 33)
+                                  (:pause 2000)
+                                  (:pointer-move 23 54))
+                                 ))))
     )
   )
 
 (subtest "actions: pen test"
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
-    (perform-actions `((:pen
-			(:pointer-move 22 33)
-			(:pause 2000)
-			(:pointer-move 23 54))
-		       ))
+    (ok (null (perform-actions `((:pen
+                                  (:pointer-move 22 33)
+                                  (:pause 2000)
+                                  (:pointer-move 23 54))
+                                 ))))
     )
   )
 
 (subtest "actions: pointer up/down"
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
-    (perform-actions `((:mouse
-			(:pointer-move 22 33)
-			(:pause 2000)
-			(:pointer-down 0)
-			(:pointer-up 0)
-			(:pointer-move 23 54))
-		       ))
+    (ok (null (perform-actions `((:mouse
+                                  (:pointer-move 22 33)
+                                  (:pause 2000)
+                                  (:pointer-down 0)
+                                  (:pointer-up 0)
+                                  (:pointer-move 23 54))
+                                 ))))
     )
   )
 
 (subtest "actions: keys"
   (with-test-session ()
     (setf (url) (test-file-url "javascriptPage.html"))
-    (perform-actions `((:key
-			(:pause 1000)
-			(:key-down ,(key :shift))
-			(:key-down "a"))))
-  ))
+    (ok (null (perform-actions `((:key
+                                  (:pause 1000)
+                                  (:key-down ,(key :shift))
+                                  (:key-down "a"))))))
+    ))
 
 (finalize)

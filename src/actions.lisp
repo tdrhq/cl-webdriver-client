@@ -53,5 +53,5 @@ Conceptually, the Actions commands divide time into a series of ticks. The local
 
 Category: Actions
 See: https://www.w3.org/TR/webdriver/#actions "
-  (http-post-check (session-path session "/actions")
+  (http-post-value (session-path session "/actions")
                    :actions (expand-actions actions)))
