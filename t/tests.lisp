@@ -243,4 +243,32 @@
                                   (:key-down "a"))))))
     ))
 
+(subtest "take-screenshot"
+  (with-test-session ()
+    (with-open-file (stream "/tmp/test.html" :direction :output :if-exists :supersede)
+      (format stream "<img src='data:image/png;base64,~a'>" (screenshot))))
+  (ok (probe-file #p"/tmp/test.html")))
+
+(subtest "execute-script"
+  (with-test-session ()
+    (is (execute-script "return arguments[0] + arguments[1];" '(2 3)) 5)
+    (is (execute-script "return 42" nil) 42)))
+
+(subtest "special-keys"
+  (with-test-session ()
+    (setf (url) (test-file-url "formPage.html"))
+    (let ((input (find-element "[name=id-name1]")))
+      (element-clear input)
+      (element-send-keys input "client")
+      (element-send-keys input (key :home))
+      (element-send-keys input "cl-webdriver-")
+      (is (element-attribute input "value") "cl-webdriver-client"))))
+
+(subtest "refresh"
+  (with-test-session ()
+    (setf (url) (test-file-url "formPage.html"))
+    (element-send-keys (find-element "[name=id-name1]") "cl-webdriver-client")
+    (refresh)
+    (is (element-text (find-element "[name=id-name1]")) "")))
+
 (finalize)
