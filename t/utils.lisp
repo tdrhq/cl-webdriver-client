@@ -1,81 +1,102 @@
-(in-package :cl-user)
-
 (defpackage webdriver-client-utils-test
   (:use :cl :webdriver-client :webdriver-client-utils :prove))
 
 (in-package :webdriver-client-utils-test)
 
-(defparameter *base-url* "https://www.google.com?hl=en")
-(defparameter *headless* '((:chrome-options . ((:args . #("--headless"))))))
-(setf *timeout* 5)
+(defparameter *test-capabilities*
+  (webdriver:make-capabilities
+   :always-match `((platform-name . ,(webdriver::detect-platform-name)))
+   :first-match (list `((browser-name . "chrome")
+                        ,(webdriver:chrome-capabilities
+                          :args #("--headless")))
+                      `((browser-name . "firefox")
+                        ,(webdriver:firefox-capabilities
+                          :args #("--headless")))))
+  "Capabilities used for test sessions")
 
-(defmacro with-base-session (&body body)
-  `(with-session (:additional-capabilities *headless*)
-     (setf (url) *base-url*)
+(defun test-file-url (name)
+  (format nil "file://~a" (asdf:system-relative-pathname :cl-webdriver-client-test (format nil "t/web/~a" name))))
+
+(defmacro with-test-session (&body body)
+  `(with-session *test-capabilities*
      ,@body))
 
 (plan nil)
 
 (subtest "find-elem"
-  (with-base-session
+  (with-test-session
+    (setf (url) "http://google.com")
     (is-type (find-elem "[name=q]") 'webdriver::element)
     (is (find-elem (gensym)) nil)))
 
 (subtest "wait-for"
-  (with-base-session
-    (let ((result-selector "#resultStats"))
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
+    (let ((result-selector "#links"))
       (is-error (find-element result-selector) 'no-such-element-error)
       (element-send-keys (find-element "[name=q]") "cl-webdriver-client")
       (sleep 0.5)
-      (element-click (find-element "[name=btnK]"))
+      (element-click (find-element "#search_button_homepage"))
       (ok (wait-for result-selector)))))
 
 (subtest "cookie-get"
-  (with-base-session
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
     (setf (cookie) (make-cookie "cl-webdriver-client" "common lisp"))
     (is (get-cookie (cookie) "cl-webdriver-client") "common lisp")))
 
 (subtest "elem"
-  (with-base-session
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
     (is (element-id (elem)) (element-id (active-element)))
-    (is (element-id (elem "[name=btnK]")) (element-id (find-element "[name=btnK]")))))
+    (is (element-id (elem "#search_button_homepage"))
+	(element-id (find-element "#search_button_homepage")))))
 
 (subtest "attr"
-  (with-base-session
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
     (is (attr "name") "q")
-    (is (attr "id" "[name=q]") "lst-ib")))
+    (is (id) "search_form_input_homepage")))
 
 (subtest "id"
-  (with-base-session
-    (is (id) "lst-ib")))
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
+    (is (id) "search_form_input_homepage")))
 
 (subtest "classname"
-  (with-base-session
-    (is (classname) "gsfi lst-d-f")))
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
+    (is (classname) "js-search-input search__input--adv")))
 
 (subtest "classlist"
-  (with-base-session
-    (is (classlist) '("gsfi" "lst-d-f"))))
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
+    (is (classlist) '("js-search-input" "search__input--adv"))))
 
 (subtest "text"
-  (with-base-session
-    (is (text ".gb_P") "Gmail")))
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
+    (is (text "#logo_homepage_link") "About DuckDuckGo")))
 
 (subtest "send-key"
-  (with-base-session
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
     (send-key :tab)
-    (is (attr "name") "btnK")))
+    (is (id) "search_button_homepage")))
 
 (subtest "send-keys"
-  (with-base-session
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
     (send-keys "cl-webdriver-client")
     (is (attr "value") "cl-webdriver-client")))
 
 (subtest "click"
-  (with-base-session
+  (with-test-session
+    (setf (url) "http://duckduckgo.com")
+    (page-source)
     (send-keys "cl-webdriver-client")
-    (sleep 0.5)
-    (click "[name=btnK]")
-    (ok (wait-for "#resultStats"))))
+    (sleep 2)
+    (click "#search_button_homepage")
+    (ok (wait-for "#links"))))
 
 (finalize)
