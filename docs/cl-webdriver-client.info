@@ -275,8 +275,8 @@ once:
                              :prefs '(("dom.ipc.processCount" . 8))
                              :log '((:level . "trace"))))
         :first-match (list
-            '((:platform-name . "macos")
-              (:platform-name . "linux"))))
+            '((:platform-name . "macos"))
+            '((:platform-name . "linux"))))
 
 
 File: cl-webdriver-client.info,  Node: List of capabilities,  Next: Vendor-specific capabilities,  Prev: Combining alwaysMatch and firstMatch,  Up: Capabilities
@@ -298,10 +298,19 @@ File: cl-webdriver-client.info,  Node: List of capabilities,  Next: Vendor-speci
      trusted by the browser on navigation.  The capability has effect
      for the lifetime of the session.
    * _:page-load-strategy_ - a string.
-   * _:proxy_
-   * _:set-window-rect_
-   * _:timeouts_
-   * _:unhandled-prompt-behaviour_
+   * _:proxy_ - object.  Defines the current session’s proxy
+     configuration
+     (https://www.w3.org/TR/webdriver1/#dfn-proxy-configuration).
+   * _:set-window-rect_ - boolean.  Indicates whether the remote end
+     supports all of the commands in Resizing and Positioning Windows
+     (https://www.w3.org/TR/webdriver1/#resizing-and-positioning-windows).
+   * _:timeouts_ - object.  Describes the timeouts
+     (https://www.w3.org/TR/webdriver1/#dfn-timeouts) imposed on certain
+     session operations.
+   * _:unhandled-prompt-behaviour_ - string.  Describes the current
+     session’s user prompt handler.
+
+   Reference: <https://www.w3.org/TR/webdriver1/#capabilities>.
 
 
 File: cl-webdriver-client.info,  Node: Vendor-specific capabilities,  Prev: List of capabilities,  Up: Capabilities
@@ -1456,83 +1465,83 @@ Node: Capabilities4604
 Node: alwaysMatch7073
 Node: firstMatch7811
 Node: Combining alwaysMatch and firstMatch8367
-Node: List of capabilities10027
-Node: Vendor-specific capabilities11173
-Node: Actions11873
-Node: Installation14261
-Node: Utils14762
-Node: Interactive session15498
-Node: Utils API conventions15974
-Node: Waiting for the reaction16628
-Node: Running tests17150
-Node: API17461
-Node: WEBDRIVER-CLIENT package17632
-Ref: WEBDRIVER-CLIENT:LOGS function18125
-Ref: WEBDRIVER-CLIENT:NO-SUCH-ELEMENT-ERROR class18293
-Ref: WEBDRIVER-CLIENT:MOUSE-MOVE-TO function18500
-Ref: WEBDRIVER-CLIENT:ELEMENT-ID function19007
-Ref: WEBDRIVER-CLIENT:MOUSE-CLICK function19058
-Ref: WEBDRIVER-CLIENT:LOG-TYPES function19488
-Ref: WEBDRIVER-CLIENT:MAKE-CAPABILITIES function20118
-Ref: WEBDRIVER-CLIENT:WEBDRIVER-STATUS function20248
-Ref: WEBDRIVER-CLIENT:BACK function20354
-Ref: WEBDRIVER-CLIENT:PAGE-SOURCE function20751
-Ref: WEBDRIVER-CLIENT:PAGE-TITLE function21004
-Ref: WEBDRIVER-CLIENT:REFRESH function21282
-Ref: WEBDRIVER-CLIENT:SWITCH-TO-FRAME function21399
-Ref: WEBDRIVER-CLIENT:URL function22010
-Ref: WEBDRIVER-CLIENT:START-INTERACTIVE-SESSION function22214
-Ref: WEBDRIVER-CLIENT:WITH-SESSION macro22479
-Ref: WEBDRIVER-CLIENT:USE-SESSION function22681
-Ref: WEBDRIVER-CLIENT:STOP-INTERACTIVE-SESSION function22790
-Ref: WEBDRIVER-CLIENT:MAKE-SESSION function22901
-Ref: WEBDRIVER-CLIENT:DELETE-SESSION function23653
-Ref: WEBDRIVER-CLIENT:SCREENSHOT function23792
-Ref: WEBDRIVER-CLIENT:ELEMENT-SCREENSHOT function24211
-Ref: WEBDRIVER-CLIENT:KEY function24675
-Ref: WEBDRIVER-CLIENT:PERFORM-ACTIONS function24839
-Ref: WEBDRIVER-CLIENT:ACCEPT-ALERT function25820
-Ref: WEBDRIVER-CLIENT:ALERT-TEXT function25995
-Ref: WEBDRIVER-CLIENT:DISMISS-ALERT function26168
-Ref: WEBDRIVER-CLIENT:EXECUTE-SCRIPT function26568
-Ref: WEBDRIVER-CLIENT:MERGE-CAPABILITIES function27631
-Ref: WEBDRIVER-CLIENT:CHROME-CAPABILITIES function27743
-Ref: WEBDRIVER-CLIENT:FIREFOX-CAPABILITIES function27942
-Ref: WEBDRIVER-CLIENT:*DEFAULT-CAPABILITIES* variable28250
-Ref: WEBDRIVER-CLIENT:DELETE-ALL-COOKIES function28374
-Ref: WEBDRIVER-CLIENT:MAKE-COOKIE function28558
-Ref: WEBDRIVER-CLIENT:DELETE-COOKIE function28701
-Ref: WEBDRIVER-CLIENT:FIND-COOKIE function28918
-Ref: WEBDRIVER-CLIENT:COOKIE class29128
-Ref: WEBDRIVER-CLIENT:COOKIE function30407
-Ref: WEBDRIVER-CLIENT:ACTIVE-ELEMENT function30735
-Ref: WEBDRIVER-CLIENT:FIND-ELEMENTS function31206
-Ref: WEBDRIVER-CLIENT:ELEMENT-DISPLAYED function31528
-Ref: WEBDRIVER-CLIENT:ELEMENT-ATTRIBUTE function31746
-Ref: WEBDRIVER-CLIENT:ELEMENT-ENABLED function31911
-Ref: WEBDRIVER-CLIENT:ELEMENT-RECT function32114
-Ref: WEBDRIVER-CLIENT:ELEMENT-TEXT function32851
-Ref: WEBDRIVER-CLIENT:ELEMENT-TAGNAME function33223
-Ref: WEBDRIVER-CLIENT:FIND-ELEMENT function33359
-Ref: WEBDRIVER-CLIENT:ELEMENT-CLEAR function34737
-Ref: WEBDRIVER-CLIENT:ELEMENT-CLICK function34983
-Ref: WEBDRIVER-CLIENT:ELEMENT-SEND-KEYS function35526
-Ref: WEBDRIVER-CLIENT:CLOSE-CURRENT-WINDOW function36008
-Node: WEBDRIVER-CLIENT-UTILS package36135
-Ref: WEBDRIVER-CLIENT-UTILS:*TIMEOUT* variable36708
-Ref: WEBDRIVER-CLIENT-UTILS:*DEFAULT-ELEMENT-FUNC* variable36811
-Ref: WEBDRIVER-CLIENT-UTILS:ID function37068
-Ref: WEBDRIVER-CLIENT-UTILS:GET-COOKIE function37150
-Ref: WEBDRIVER-CLIENT-UTILS:FIND-ELEM function37239
-Ref: WEBDRIVER-CLIENT-UTILS:WAIT-FOR function37387
-Ref: WEBDRIVER-CLIENT-UTILS:CLASSNAME function37603
-Ref: WEBDRIVER-CLIENT-UTILS:TEXT function37699
-Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEY function37787
-Ref: WEBDRIVER-CLIENT-UTILS:CLASSLIST function37886
-Ref: WEBDRIVER-CLIENT-UTILS:ATTR function37983
-Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEYS function38080
-Ref: WEBDRIVER-CLIENT-UTILS:ELEM function38180
-Ref: WEBDRIVER-CLIENT-UTILS:CLICK function38487
-Node: Index38574
+Node: List of capabilities10028
+Node: Vendor-specific capabilities11766
+Node: Actions12466
+Node: Installation14854
+Node: Utils15355
+Node: Interactive session16091
+Node: Utils API conventions16567
+Node: Waiting for the reaction17221
+Node: Running tests17743
+Node: API18054
+Node: WEBDRIVER-CLIENT package18225
+Ref: WEBDRIVER-CLIENT:LOGS function18718
+Ref: WEBDRIVER-CLIENT:NO-SUCH-ELEMENT-ERROR class18886
+Ref: WEBDRIVER-CLIENT:MOUSE-MOVE-TO function19093
+Ref: WEBDRIVER-CLIENT:ELEMENT-ID function19600
+Ref: WEBDRIVER-CLIENT:MOUSE-CLICK function19651
+Ref: WEBDRIVER-CLIENT:LOG-TYPES function20081
+Ref: WEBDRIVER-CLIENT:MAKE-CAPABILITIES function20711
+Ref: WEBDRIVER-CLIENT:WEBDRIVER-STATUS function20841
+Ref: WEBDRIVER-CLIENT:BACK function20947
+Ref: WEBDRIVER-CLIENT:PAGE-SOURCE function21344
+Ref: WEBDRIVER-CLIENT:PAGE-TITLE function21597
+Ref: WEBDRIVER-CLIENT:REFRESH function21875
+Ref: WEBDRIVER-CLIENT:SWITCH-TO-FRAME function21992
+Ref: WEBDRIVER-CLIENT:URL function22603
+Ref: WEBDRIVER-CLIENT:START-INTERACTIVE-SESSION function22807
+Ref: WEBDRIVER-CLIENT:WITH-SESSION macro23072
+Ref: WEBDRIVER-CLIENT:USE-SESSION function23274
+Ref: WEBDRIVER-CLIENT:STOP-INTERACTIVE-SESSION function23383
+Ref: WEBDRIVER-CLIENT:MAKE-SESSION function23494
+Ref: WEBDRIVER-CLIENT:DELETE-SESSION function24246
+Ref: WEBDRIVER-CLIENT:SCREENSHOT function24385
+Ref: WEBDRIVER-CLIENT:ELEMENT-SCREENSHOT function24804
+Ref: WEBDRIVER-CLIENT:KEY function25268
+Ref: WEBDRIVER-CLIENT:PERFORM-ACTIONS function25432
+Ref: WEBDRIVER-CLIENT:ACCEPT-ALERT function26413
+Ref: WEBDRIVER-CLIENT:ALERT-TEXT function26588
+Ref: WEBDRIVER-CLIENT:DISMISS-ALERT function26761
+Ref: WEBDRIVER-CLIENT:EXECUTE-SCRIPT function27161
+Ref: WEBDRIVER-CLIENT:MERGE-CAPABILITIES function28224
+Ref: WEBDRIVER-CLIENT:CHROME-CAPABILITIES function28336
+Ref: WEBDRIVER-CLIENT:FIREFOX-CAPABILITIES function28535
+Ref: WEBDRIVER-CLIENT:*DEFAULT-CAPABILITIES* variable28843
+Ref: WEBDRIVER-CLIENT:DELETE-ALL-COOKIES function28967
+Ref: WEBDRIVER-CLIENT:MAKE-COOKIE function29151
+Ref: WEBDRIVER-CLIENT:DELETE-COOKIE function29294
+Ref: WEBDRIVER-CLIENT:FIND-COOKIE function29511
+Ref: WEBDRIVER-CLIENT:COOKIE class29721
+Ref: WEBDRIVER-CLIENT:COOKIE function31000
+Ref: WEBDRIVER-CLIENT:ACTIVE-ELEMENT function31328
+Ref: WEBDRIVER-CLIENT:FIND-ELEMENTS function31799
+Ref: WEBDRIVER-CLIENT:ELEMENT-DISPLAYED function32121
+Ref: WEBDRIVER-CLIENT:ELEMENT-ATTRIBUTE function32339
+Ref: WEBDRIVER-CLIENT:ELEMENT-ENABLED function32504
+Ref: WEBDRIVER-CLIENT:ELEMENT-RECT function32707
+Ref: WEBDRIVER-CLIENT:ELEMENT-TEXT function33444
+Ref: WEBDRIVER-CLIENT:ELEMENT-TAGNAME function33816
+Ref: WEBDRIVER-CLIENT:FIND-ELEMENT function33952
+Ref: WEBDRIVER-CLIENT:ELEMENT-CLEAR function35330
+Ref: WEBDRIVER-CLIENT:ELEMENT-CLICK function35576
+Ref: WEBDRIVER-CLIENT:ELEMENT-SEND-KEYS function36119
+Ref: WEBDRIVER-CLIENT:CLOSE-CURRENT-WINDOW function36601
+Node: WEBDRIVER-CLIENT-UTILS package36728
+Ref: WEBDRIVER-CLIENT-UTILS:*TIMEOUT* variable37301
+Ref: WEBDRIVER-CLIENT-UTILS:*DEFAULT-ELEMENT-FUNC* variable37404
+Ref: WEBDRIVER-CLIENT-UTILS:ID function37661
+Ref: WEBDRIVER-CLIENT-UTILS:GET-COOKIE function37743
+Ref: WEBDRIVER-CLIENT-UTILS:FIND-ELEM function37832
+Ref: WEBDRIVER-CLIENT-UTILS:WAIT-FOR function37980
+Ref: WEBDRIVER-CLIENT-UTILS:CLASSNAME function38196
+Ref: WEBDRIVER-CLIENT-UTILS:TEXT function38292
+Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEY function38380
+Ref: WEBDRIVER-CLIENT-UTILS:CLASSLIST function38479
+Ref: WEBDRIVER-CLIENT-UTILS:ATTR function38576
+Ref: WEBDRIVER-CLIENT-UTILS:SEND-KEYS function38673
+Ref: WEBDRIVER-CLIENT-UTILS:ELEM function38773
+Ref: WEBDRIVER-CLIENT-UTILS:CLICK function39080
+Node: Index39167
 
 End Tag Table

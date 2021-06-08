@@ -333,8 +333,8 @@ Next: <a href="#List-of-capabilities" accesskey="n" rel="next">List of capabilit
                           <span class="keyword">:prefs</span> '<span class="paren4">(<span class="lisp-bg"><span class="paren5">(<span class="lisp-bg"><span class="string">&quot;dom.ipc.processCount&quot;</span> . 8</span>)</span></span>)</span>
                           <span class="keyword">:log</span> '<span class="paren4">(<span class="lisp-bg"><span class="paren5">(<span class="lisp-bg"><span class="keyword">:level</span> . <span class="string">&quot;trace&quot;</span></span>)</span></span>)</span></span>)</span></span>)</span>
      <span class="keyword">:first-match</span> <span class="paren2">(<span class="lisp-bg">list
-         '<span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;macos&quot;</span></span>)</span>
-           <span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;linux&quot;</span></span>)</span></span>)</span></span>)</span></span>)</span>
+         '<span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;macos&quot;</span></span>)</span></span>)</span>
+         '<span class="paren3">(<span class="lisp-bg"><span class="paren4">(<span class="lisp-bg"><span class="keyword">:platform-name</span> . <span class="string">&quot;linux&quot;</span></span>)</span></span>)</span></span>)</span></span>)</span>
 </pre></div>
 
 <hr>
@@ -351,12 +351,14 @@ Next: <a href="#Vendor_002dspecific-capabilities" accesskey="n" rel="next">Vendo
 </li><li> <em>:accept-insecure-certs</em> &ndash; a boolean.
     The acceptInsecureCerts capability communicates whether expired or invalid TLS certificates are checked when navigating. If the capability is false, an insecure certificate error will be returned as navigation encounters domains with certificate problems. Otherwise, self-signed or otherwise invalid certificates will be implicitly trusted by the browser on navigation. The capability has effect for the lifetime of the session.
 </li><li> <em>:page-load-strategy</em> &ndash; a string.
-</li><li> <em>:proxy</em>
-</li><li> <em>:set-window-rect</em>
-</li><li> <em>:timeouts</em>
-</li><li> <em>:unhandled-prompt-behaviour</em>
+</li><li> <em>:proxy</em> &ndash; object. Defines the current sessionâs <a href="https://www.w3.org/TR/webdriver1/#dfn-proxy-configuration">proxy configuration</a>.
+</li><li> <em>:set-window-rect</em> &ndash; boolean. Indicates whether the remote end supports all of the commands in <a href="https://www.w3.org/TR/webdriver1/#resizing-and-positioning-windows">Resizing and Positioning Windows</a>. 
+</li><li> <em>:timeouts</em> &ndash; object. Describes the <a href="https://www.w3.org/TR/webdriver1/#dfn-timeouts">timeouts</a> imposed on certain session operations.
+</li><li> <em>:unhandled-prompt-behaviour</em> &ndash; string. Describes the current sessionâs user prompt handler. 
 </li></ul>
 
+<p>Reference: <a href="https://www.w3.org/TR/webdriver1/#capabilities">https://www.w3.org/TR/webdriver1/#capabilities</a>.
+</p>
 <hr>
 <span id="Vendor_002dspecific-capabilities"></span><div class="header">
 <p>

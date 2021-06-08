@@ -204,8 +204,8 @@ Which you choose of the two preceding examples is not important, but it can matt
                         :prefs '(("dom.ipc.processCount" . 8))
                         :log '((:level . "trace"))))
    :first-match (list
-       '((:platform-name . "macos")
-         (:platform-name . "linux"))))
+       '((:platform-name . "macos"))
+       '((:platform-name . "linux"))))
 @end lisp
 
 @node List of capabilities
@@ -218,11 +218,13 @@ Which you choose of the two preceding examples is not important, but it can matt
 @item @emph{:accept-insecure-certs} -- a boolean.
     The acceptInsecureCerts capability communicates whether expired or invalid TLS certificates are checked when navigating. If the capability is false, an insecure certificate error will be returned as navigation encounters domains with certificate problems. Otherwise, self-signed or otherwise invalid certificates will be implicitly trusted by the browser on navigation. The capability has effect for the lifetime of the session.
 @item @emph{:page-load-strategy} -- a string.
-@item @emph{:proxy}
-@item @emph{:set-window-rect}
-@item @emph{:timeouts}
-@item @emph{:unhandled-prompt-behaviour}
+@item @emph{:proxy} -- object. Defines the current session’s @url{https://www.w3.org/TR/webdriver1/#dfn-proxy-configuration, proxy configuration}.
+@item @emph{:set-window-rect} -- boolean. Indicates whether the remote end supports all of the commands in @url{https://www.w3.org/TR/webdriver1/#resizing-and-positioning-windows, Resizing and Positioning Windows}. 
+@item @emph{:timeouts} -- object. Describes the @url{https://www.w3.org/TR/webdriver1/#dfn-timeouts, timeouts} imposed on certain session operations.
+@item @emph{:unhandled-prompt-behaviour} -- string. Describes the current session’s user prompt handler. 
 @end itemize
+
+Reference: @url{https://www.w3.org/TR/webdriver1/#capabilities}.
 
 @node Vendor-specific capabilities
 @subsection Vendor-specific capabilities
