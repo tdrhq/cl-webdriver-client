@@ -17,7 +17,7 @@ The server should maintain one browser per session. Commands sent to a session w
 (defun session-path (session fmt &rest args)
   (format nil "/session/~a~a" (session-id session) (apply #'format nil fmt args)))
 
-(defun make-session (capabilities)
+(defun make-session (&optional capabilities)
   "Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.
 
 CAPABILITIES are the capabilities to negotate for the new session. If it is NIL, then *DEFAULT-CAPABILITIES* are used. If it is a list, then it is use as parameters for MAKE-CAPABILITIES to build a new CAPABILITIES object. Otherwise, it is assumed to be a CAPABILITIES object.
