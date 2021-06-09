@@ -755,7 +755,8 @@ See: <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function">MAKE-SESSION<
 <span id="WEBDRIVER_002dCLIENT_003aWITH_002dSESSION-macro"></span><dl>
 <dt id="index-WITH_002dSESSION">WEBDRIVER-CLIENT: <strong>WITH-SESSION</strong> <em>(capabilities &amp;body body)</em></dt>
 <dd>
-<p>Execute <var>BODY</var> inside a Selenium session.<br>
+<p>Starts a new session, and evaluates <var>BODY</var> in the context of that session.<br>
+The session is deleted when finished.<br>
 <br>
 Category: Session<br>
 See: <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function">MAKE-SESSION</a>
@@ -781,7 +782,7 @@ Category: Session
 
 <span id="index-WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION"></span>
 <span id="WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function"></span><dl>
-<dt id="index-MAKE_002dSESSION">WEBDRIVER-CLIENT: <strong>MAKE-SESSION</strong> <em>(capabilities)</em></dt>
+<dt id="index-MAKE_002dSESSION">WEBDRIVER-CLIENT: <strong>MAKE-SESSION</strong> <em>(&amp;optional capabilities)</em></dt>
 <dd>
 <p>Creates a new WebDriver session with the endpoint node. If the creation fails, a session not created error is returned.<br>
 <br>

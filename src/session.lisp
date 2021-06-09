@@ -26,15 +26,15 @@ Category: Session
 See: https://www.w3.org/TR/webdriver1/#new-session .
 See: https://www.w3.org/TR/webdriver1/#capabilities ."
   (let ((caps (cond
-		((null capabilities)
-		 *default-capabilities*)
-		((listp capabilities)
-		 (apply #'make-capabilities capabilities))
-		(t capabilities))))
+                ((null capabilities)
+                 *default-capabilities*)
+                ((listp capabilities)
+                 (apply #'make-capabilities capabilities))
+                (t capabilities))))
     (check-type caps capabilities)
     (let ((response (http-post "/session"
                                :session-id nil
-			       :capabilities (serialize-capabilities caps))))
+                               :capabilities (serialize-capabilities caps))))
       (make-instance 'session
                      :id (aget (aget response :value) :session-id)))))
 
@@ -50,8 +50,23 @@ Category: Session"
 Category: Session"
   (setf *session* session))
 
+(defun plist-p (list)
+  "Check if LIST is a property list."
+  (and (listp list)
+       (every 'symbolp
+              (loop for key in list by #'cddr
+                    collect key))))
+
+(defun keyword-plist-p (list)
+  "Check if LIST is a property list with keyword keys."
+  (and (listp list)
+       (every 'keywordp
+              (loop for key in list by #'cddr
+                    collect key))))
+
 (defmacro with-session (capabilities &body body)
-  "Execute BODY inside a Selenium session.
+  "Starts a new session, and evaluates BODY in the context of that session.
+The session is deleted when finished.
 
 Category: Session
 See: MAKE-SESSION"
@@ -59,7 +74,10 @@ See: MAKE-SESSION"
     `(let (,session)
        (unwind-protect
             (progn
-              (setf ,session (make-session ,capabilities))
+              (setf ,session (make-session
+			      ,(if (keyword-plist-p capabilities)
+				   `(quote ,capabilities)
+				   capabilities)))
               (let ((*session* ,session))
                 ,@body))
          (when ,session
