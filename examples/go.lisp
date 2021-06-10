@@ -4,7 +4,7 @@
   (ql:quickload :cl-webdriver-client))
 
 (defpackage go-test
-  (:use :cl :cl-webdriver-client))
+  (:use :cl :webdriver-client))
 
 (in-package :go-test)
 
