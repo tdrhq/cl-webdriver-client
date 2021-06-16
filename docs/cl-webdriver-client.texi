@@ -1,3 +1,4 @@
+(@setup :modules (cl-webdriver-client))
 \input texinfo   @c -*-texinfo-*-
 @comment $Id@w{$}
 @comment %**start of header

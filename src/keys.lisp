@@ -65,4 +65,16 @@
 
 Category: Actions
 See: https://www.w3.org/TR/webdriver/#keyboard-actions"
-  (make-string 1 :initial-element (getf *keymap* key)))
+  (make-string 1 :initial-element (or (getf *keymap* key)
+				      (coerce key 'character))))
+
+(defun keys (&rest keys)
+  "Returns a string with characters and control keyword charcters in KEYS list.
+
+Example:
+
+(keys :control #\t)
+
+Category: Actions
+See: https://www.w3.org/TR/webdriver/#keyboard-actions"
+  (apply #'concatenate 'string (mapcar 'key keys)))

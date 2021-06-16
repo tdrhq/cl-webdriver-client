@@ -20,6 +20,7 @@
            :stop-interactive-session
 
            :key
+	   :keys
 
            :url
            :back

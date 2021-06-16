@@ -157,14 +157,21 @@ See: https://www.w3.org/TR/webdriver1/#dfn-element-clear."
 (defun element-send-keys (element keys &key (session *session*))
   "The Element Send Keys command scrolls into view the form control element and then sends the provided keys to the element. In case the element is not keyboard-interactable, an element not interactable error is returned.
 
-KEYS should be a string.
+KEYS should be a string or a list of characters or control character keywords. 
+
+For example: 
+
+(element-send-keys el (list :control #\t))
+
+See KEY and KEYS functions.
 
 Category: Element interaction
 See: https://www.w3.org/TR/webdriver1/#element-send-keys ."
-  (check-type keys (string))
   (http-post-check (session-path session "/element/~a/value"
                                  (element-id element))
-                   :text keys))
+                   :text (if (listp keys)
+			     (apply 'keys keys)
+			     (coerce keys 'string))))
 
 (defun element-click (element &key (session *session*))
   "The Element Click command scrolls into view the element if it is not already pointer-interactable, and clicks its in-view center point.
