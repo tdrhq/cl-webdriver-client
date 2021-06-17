@@ -42,9 +42,14 @@
            :element-tagname
            :element-attribute
 
-           :switch-to-frame
-           :close-current-window
-
+	   ;; contexts
+	   :get-window-handle
+	   :get-window-handles
+           :close-window
+           :switch-to-window
+           :switch-to-frame   
+           :new-window
+   
            :mouse-move-to
            :mouse-click
 

@@ -10,6 +10,7 @@
                  (:file "errors")
 		 (:file "capabilities")
                  (:file "session")
+		 (:file "contexts")
 		 (:file "cookie")
                  (:file "keys")
                  (:file "mouse")

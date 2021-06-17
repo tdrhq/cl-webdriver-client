@@ -272,24 +272,6 @@ See: https://www.w3.org/TR/webdriver1/#take-element-screenshot ."
 Category: Navigation"
   (http-post (session-path session "/refresh")))
 
-(defun switch-to-frame (id &key (session *session*))
-  "Change focus to another frame on the page. If the frame id is null, the server
-should switch to the page's default content.
-
-In the context of a web browser, a frame is a part of a web page or browser window which displays content independent of its container, with the ability to load content independently.
-
-Category: Navigation
-See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidframe .
-See: https://en.wikipedia.org/wiki/Frame_(World_Wide_Web) ."
-  (http-post-check (session-path session "/frame")
-                   :id id))
-
-(defun close-current-window (&key (session *session*))
-  "Close the current window.
-
-Category: Windows"
-  (http-delete (session-path session "/window")))
-
 (defun execute-script (script args &key (session *session*))
   "Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed script is assumed to be synchronous and the result of evaluating the script is returned to the client.
 
