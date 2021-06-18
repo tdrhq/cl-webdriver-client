@@ -1087,9 +1087,11 @@ See: <a href="#WEBDRIVER_002dCLIENT_003aMAKE_002dSESSION-function">MAKE-SESSION<
 
 <span id="index-WEBDRIVER_002dCLIENT_003aSTOP_002dINTERACTIVE_002dSESSION"></span>
 <span id="WEBDRIVER_002dCLIENT_003aSTOP_002dINTERACTIVE_002dSESSION-function"></span><dl>
-<dt id="index-STOP_002dINTERACTIVE_002dSESSION">WEBDRIVER-CLIENT: <strong>STOP-INTERACTIVE-SESSION</strong> <em>nil</em></dt>
+<dt id="index-STOP_002dINTERACTIVE_002dSESSION">WEBDRIVER-CLIENT: <strong>STOP-INTERACTIVE-SESSION</strong> <em>(&amp;optional (ignore-errors t))</em></dt>
 <dd>
 <p>Stop an interactive session.<br>
+<br>
+Sometimes &lsquo;*SESSION*&rsquo; could be out of sync with Webdriver instance. In that case we may want to ignore errors when trying to delete the session. <var>IGNORE-ERRORS</var> argument controls that.<br>
 <br>
 Category: Session
 </p></dd></dl>

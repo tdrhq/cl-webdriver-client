@@ -88,14 +88,17 @@ See: MAKE-SESSION"
 
 Category: Session
 See: MAKE-SESSION"
-  (when *session*
-    (delete-session *session*))
+  (stop-interactive-session)
   (setf *session* (make-session capabilities)))
 
-(defun stop-interactive-session ()
+(defun stop-interactive-session (&optional (ignore-errors t))
   "Stop an interactive session.
+
+Sometimes *SESSION* could be out of sync with Webdriver instance. In that case we may want to ignore errors when trying to delete the session. IGNORE-ERRORS argument controls that.
 
 Category: Session"
   (when *session*
-    (delete-session *session*)
+    (if ignore-errors
+	(ignore-errors (delete-session *session*))
+	(delete-session *session*))
     (setf *session* nil)))
