@@ -8,7 +8,7 @@ WebDriver is a remote control interface that enables introspection and control o
 
 Provided is a set of interfaces to discover and manipulate DOM elements in web documents and to control the behavior of a user agent. It is primarily intended to allow web authors to write tests that automate a user agent from a separate controlling process, but may also be used in such a way as to allow in-browser scripts to control a — possibly separate — browser.
 
-See [W3C WebDriver spec](https://www.w3.org/TR/webdriver), W3C Webdriver spec}.
+See [W3C WebDriver spec](https://www.w3.org/TR/webdriver).
 
 NOTE: This is a fork of CL Selenium WebDriver, a binding library to the Selenium.
 
