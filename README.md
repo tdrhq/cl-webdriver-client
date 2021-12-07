@@ -1,5 +1,7 @@
 # CL WebDriver Client
 
+[![Quicklisp](http://quickdocs.org/badge/cl-webdriver-client.svg)](http://quickdocs.org/cl-webdriver-client/)
+
 CL Webdriver Client is client library for WebDriver.
 
 WebDriver is a remote control interface that enables introspection and control of user agents. It provides a platform- and language-neutral wire protocol as a way for out-of-process programs to remotely instruct the behavior of web browsers.
@@ -49,12 +51,13 @@ func main() {
 
 ## Installation
 
+Available on Quicklisp:
+
 ```
-git clone https://github.com/copyleft/cl-webdriver-client ~/quicklisp/local-projects/
 (ql:quickload :cl-webdriver-client)
 ```
 
-You need a running instance of selenium-server-standalone version 4.0.0 or above.
+You also need a running instance of selenium-server-standalone version 4.0.0 or above.
 
 [Download](http://www.seleniumhq.org/download/) it and run:
 ```
