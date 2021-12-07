@@ -64,7 +64,7 @@ You also need a running instance of selenium-server-standalone version 4.0.0 or 
 java -jar selenium-server-standalone.jar standalone
 ```
 
-## Usage
+## Documentation
 
 [Read the manual](https://copyleft.github.io/cl-webdriver-client/)
 
