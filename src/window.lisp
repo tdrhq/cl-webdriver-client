@@ -18,7 +18,7 @@
      (assoc-value alist :height))))
 
 (defun window-resize (&key width height (session *session*))
-  (destructuring-bind (x y old-width old-height) (get-window-rect :key session)
+  (destructuring-bind (x y old-width old-height) (get-window-rect :session session)
     (set-window-rect
      x y
      (or width old-width)
