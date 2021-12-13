@@ -14,6 +14,7 @@
 		 (:file "cookie")
                  (:file "keys")
                  (:file "mouse")
+                 (:file "window")
 		 (:file "user-prompts")
 		 (:file "actions")
                  (:file "http")

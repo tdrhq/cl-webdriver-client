@@ -8,9 +8,9 @@
            :merge-capabilities
 	   :chrome-capabilities
            :firefox-capabilities
-	   
+
            :webdriver-status
-	   
+
            :make-session
            :delete-session
            :with-session
@@ -27,7 +27,7 @@
            :refresh
            :page-title
            :page-source
-	   
+
            :find-element
            :find-elements
            :active-element
@@ -47,9 +47,9 @@
 	   :get-window-handles
            :close-window
            :switch-to-window
-           :switch-to-frame   
+           :switch-to-frame
            :new-window
-   
+
            :mouse-move-to
            :mouse-click
 
@@ -58,7 +58,7 @@
            :delete-cookie
            :delete-all-cookies
            :find-cookie
-   
+
            :log-types
            :logs
 
@@ -73,7 +73,9 @@
 
            :execute-script
 
-           :no-such-element-error)
+           :no-such-element-error
+
+           :window-resize)
   (:import-from :alexandria
                 :with-gensyms
                 :assoc-value)
