@@ -20,6 +20,7 @@
 (defun window-resize (&key width height (session *session*))
   (destructuring-bind (x y old-width old-height) (get-window-rect :session session)
     (set-window-rect
-     x y
-     (or width old-width)
-     (or height old-height))))
+     :x x
+     :y y
+     :width (or width old-width)
+     :height (or height old-height))))
