@@ -5,9 +5,9 @@
 
 See: https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol#sessionsessionidmoveto"
   (http-post-check (session-path session "/moveto")
-                   (list :element (when element (element-id element))
-                         :xoffset x
-                         :yoffset y)))
+                   :element (when element (element-id element))
+                   :xoffset x
+                   :yoffset y))
 
 (defun mouse-click (button &key (session *session*))
   "Click any mouse button (at the coordinates set by the last moveto command). Note that calling this command after calling buttondown and before calling button up (or any out-of-order interactions sequence) will yield undefined behaviour).
